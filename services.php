@@ -83,6 +83,7 @@
 	<script>
 		modal();
 		ajaxLogin();
+		getSession();
 	</script>
 </body>
 </html>

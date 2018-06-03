@@ -135,6 +135,7 @@
 		modal();
 		ajaxRegister();
 		ajaxLogin();
+		sessionRestricted();
 	</script>
 </body>
 </html>

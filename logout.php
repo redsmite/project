@@ -6,7 +6,7 @@
  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<title>This Company</title>
+	<title>Notification</title>
 </head>
 <body>
 	<div class="main-container">
@@ -14,20 +14,13 @@
 			<h1><i class="far fa-check-circle"></i>You have Logout</h1>
 			<p>You have successfully logout.</p>
 			<p>This page will be redirected shortly.</p>
-			<a href="index.php">Click here to redirect</a>
+			<a href="#" id='redirectlink'>Click here to redirect</a>
 		</div>
 	</div>
-
+	<script src="js/main.js"></script>
 	<script>
-
-		sessionStorage.removeItem('id');
-		sessionStorage.removeItem('username');
-		sessionStorage.removeItem('usertype');
-
-		setTimeout(function () {
-			  
-		window.location.href= 'index.php';
-		}, 5000);
+		redirectPage();
+		removeSession();
 	</script>
 </body>
 </html>

@@ -6,7 +6,7 @@ function addSidebar(){
 <div class="side-nav" id="side-menu">
 	<ul>
 		<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-		<li><a href="profile.php"><i class="fas fa-user-alt"></i></a></li>
+		<li><a id="profileicon" href="profile.php"><i class="fas fa-user-alt"></i></a></li>
 		<li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
 		<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 		<li><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -32,7 +32,7 @@ function addLogin(){
 						<input type="password" required name="password" id="log-pass" placeholder="Enter Password...">
 						<br>
 						<label for="">Remember Me?</label>
-						<input type="checkbox" name="remember">
+						<input type="checkbox" id="log-remember" name="remember">
 						<br>
 						<input type="submit" class="modal-button" value="Login"></center>
 					</form>

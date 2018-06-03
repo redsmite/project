@@ -96,6 +96,8 @@
 	<script src="js/main.js"></script>
 	<script>
 		modal();
+		ajaxLogin();
+		getSession();
 	</script>
 </body>
 </html>

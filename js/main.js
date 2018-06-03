@@ -61,12 +61,16 @@ function ajaxLogin(){
 		function postName(e){
 			e.preventDefault();
 
+			document.getElementById('process-message').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
+
+
 			var myRequest = new XMLHttpRequest();
 			var url = 'loginprocess.php';
 
 			//form data variables
 			var username = document.getElementById('log-user').value;
 			var password = document.getElementById('log-pass').value;
+			var remember = document.getElementById('log-remember').value;
 
 			var formData = "username="+username+"&password="+password;
 			
@@ -75,15 +79,20 @@ function ajaxLogin(){
 
 			myRequest.onload = function(){
 				var response= JSON.parse(this.responseText);
-
-				document.getElementById('process-message').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
 				console.log(response);
+				console.log(remember);
+				
 				if(response[0]==0){
-
-					sessionStorage.setItem("id",response[1]);
-					sessionStorage.setItem("username",response[2]);
-					sessionStorage.setItem("usertype",response[3]);
-					window.location.href = "loginsuccess.html";
+					if(remember=='on'){
+						localStorage.setItem("id",response[1]);
+						localStorage.setItem("username",response[2]);
+						localStorage.setItem("usertype",response[3]);
+							
+					}
+						sessionStorage.setItem("id",response[1]);
+						sessionStorage.setItem("username",response[2]);
+						sessionStorage.setItem("usertype",response[3]);
+						window.location.href = "loginsuccess.html";
 				} else {
 					document.getElementById('process-message').innerHTML='';
 					document.getElementById('error-message').innerHTML=response[1];
@@ -93,20 +102,15 @@ function ajaxLogin(){
 		}
 }
 
-
-function getSession(){
-	if(sessionStorage.getItem('id')){
-		document.getElementById('modalBtn').innerHTML ='<a href="logout.php" id="modalBtn" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
-	}
-}
-
-
 // Register AJAX
 function ajaxRegister(){
 	document.getElementById('reg-form').addEventListener('submit', regName);
 
 	function regName(e){
 		e.preventDefault();
+
+		document.getElementById('process-message2').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
+			
 
 		var myRequest = new XMLHttpRequest();
 		var url = 'registerprocess.php';
@@ -131,8 +135,6 @@ function ajaxRegister(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			
-			document.getElementById('process-message2').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
-			
 			if(response=="success"){
 				window.location.href = 'thankyou.html';
 			} else {
@@ -143,6 +145,53 @@ function ajaxRegister(){
 		myRequest.send(formData);
 	}
 }
-// Main Method
+
+// Session functions
+function getSession(){
+	getCookie();
+	if(sessionStorage.getItem('id')){
+		document.getElementById('modalBtn').innerHTML ='<a href="logout.php" id="modalBtn" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
+		document.getElementById('profileicon').style.display= 'block';
+	}
+}
+
+function sessionRestricted(){
+	getCookie();
+	if(sessionStorage.getItem('id')){
+		window.location.replace("index.php");
+	}
+}
+
+function getCookie(){
+	if(localStorage.getItem('id')){
+		sessionStorage.setItem("id",localStorage.getItem('id'));
+		sessionStorage.setItem("username",localStorage.getItem('username'));
+		sessionStorage.setItem("usertype",localStorage.getItem('usertype'));
+	}
+}
+
+function removeSession(){
+	localStorage.removeItem('id');
+	localStorage.removeItem('username');
+	localStorage.removeItem('usertype');
+
+	sessionStorage.removeItem('id');
+	sessionStorage.removeItem('username');
+	sessionStorage.removeItem('usertype');
+}
+
+//Redirect Page
+function redirectPage(){
+	document.getElementById('redirectlink').addEventListener('click',historyback);
+
+	function historyback(){
+		window.history.back();
+	}
+	setTimeout(function () {
+		   
+		window.history.back();
+	
+	}, 5000);
+}
 
 changeCompanyName('This','Company');
