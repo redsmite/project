@@ -61,8 +61,7 @@ function ajaxLogin(){
 		function postName(e){
 			e.preventDefault();
 
-			document.getElementById('process-message').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
-
+			addSpinners();
 
 			var myRequest = new XMLHttpRequest();
 			var url = 'loginprocess.php';
@@ -94,7 +93,7 @@ function ajaxLogin(){
 						sessionStorage.setItem("usertype",response[3]);
 						window.location.href = "loginsuccess.html";
 				} else {
-					document.getElementById('process-message').innerHTML='';
+					removeSpinners();
 					document.getElementById('error-message').innerHTML=response[1];
 				}
 			}
@@ -109,7 +108,7 @@ function ajaxRegister(){
 	function regName(e){
 		e.preventDefault();
 
-		document.getElementById('process-message2').innerHTML='<i class="fas fa-sync-alt"></i>Processing...';
+		addSpinners();
 			
 
 		var myRequest = new XMLHttpRequest();
@@ -136,9 +135,10 @@ function ajaxRegister(){
 			var response= this.responseText;
 			
 			if(response=="success"){
+
 				window.location.href = 'thankyou.html';
 			} else {
-				document.getElementById('process-message2').innerHTML='';
+				removeSpinners();
 				document.getElementById('error-message2').innerHTML=response;
 			}
 		}
@@ -191,7 +191,30 @@ function redirectPage(){
 		   
 		window.history.back();
 	
-	}, 5000);
+	}, 2000);
+}
+
+// Spinners
+function pageReload(){
+	document.querySelector('.main-container').style.opacity='0.7';
+	document.querySelector('body').classList.add('spinner');
+
+	// Mimic server req
+	setTimeout(()=>{
+		document.querySelector('body').classList.remove('spinner');
+		document.querySelector('.main-container').style.opacity='1';
+		
+	}, 2000)
+}
+
+function addSpinners(){
+	document.querySelector('.main-container').style.opacity='0.7';
+	document.querySelector('body').classList.add('spinner');
+}
+
+function removeSpinners(){
+	document.querySelector('body').classList.remove('spinner');
+	document.querySelector('.main-container').style.opacity='1';
 }
 
 changeCompanyName('This','Company');

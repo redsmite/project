@@ -113,7 +113,6 @@
 										<button type="submit" name="contact-button" id="contact-button">Submit</button>
 									</div>
 								</div>
-								<div id="process-message2"></div>
 								<div id="error-message2"></div>								
 							</div>	
 						</form>
@@ -136,6 +135,7 @@
 		ajaxRegister();
 		ajaxLogin();
 		sessionRestricted();
+		pageReload();
 	</script>
 </body>
 </html>

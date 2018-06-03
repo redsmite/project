@@ -36,7 +36,6 @@ function addLogin(){
 						<br>
 						<input type="submit" class="modal-button" value="Login"></center>
 					</form>
-					<div id="process-message"></div>
 					<div id="error-message"></div>	
 				</div>
 				<div class="modal-footer">
