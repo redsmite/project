@@ -172,6 +172,7 @@ body{
 	grid-area:login;
 	grid-column-start: right;
 	padding-right: 2px;
+	color:var(--light-color);
 }
 
 #header-text{
@@ -253,11 +254,6 @@ body{
 	color:var(--primary-color);
 	cursor: pointer;
 }
-
-#profileicon{
-	display:none;
-}
-
 
 /* Showcase */
 .showcase{

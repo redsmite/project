@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once'connection.php';
 
 if(isset($_POST['username'])){
@@ -16,10 +17,12 @@ if(isset($_POST['username'])){
 
 				if($row->access==1){
 
-
 					$id = $row->userid;
 					$name = $row->username;
 					$type = $row->usertypeid;
+					
+					$_SESSION['id']=$id;
+					$_SESSION['name']=$name;
 
 					$sessions = array(0,$id,$name,$type);
 

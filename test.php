@@ -9,8 +9,5 @@
 	<title>Test</title>
 </head>
 <body>
-	<button id="change-companyname">
-		Change
-	</button>
 </body>
 </html>

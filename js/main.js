@@ -82,16 +82,12 @@ function ajaxLogin(){
 				console.log(remember);
 				
 				if(response[0]==0){
-					if(remember=='on'){
-						localStorage.setItem("id",response[1]);
-						localStorage.setItem("username",response[2]);
-						localStorage.setItem("usertype",response[3]);
-							
+					if(remember.checked){
+
 					}
-						sessionStorage.setItem("id",response[1]);
-						sessionStorage.setItem("username",response[2]);
-						sessionStorage.setItem("usertype",response[3]);
-						window.location.href = "loginsuccess.html";
+					
+					window.location.href = "loginsuccess.html";
+				
 				} else {
 					removeSpinners();
 					document.getElementById('error-message').innerHTML=response[1];
@@ -144,40 +140,6 @@ function ajaxRegister(){
 		}
 		myRequest.send(formData);
 	}
-}
-
-// Session functions
-function getSession(){
-	getCookie();
-	if(sessionStorage.getItem('id')){
-		document.getElementById('modalBtn').innerHTML ='<a href="logout.php" id="modalBtn" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
-		document.getElementById('profileicon').style.display= 'block';
-	}
-}
-
-function sessionRestricted(){
-	getCookie();
-	if(sessionStorage.getItem('id')){
-		window.location.replace("index.php");
-	}
-}
-
-function getCookie(){
-	if(localStorage.getItem('id')){
-		sessionStorage.setItem("id",localStorage.getItem('id'));
-		sessionStorage.setItem("username",localStorage.getItem('username'));
-		sessionStorage.setItem("usertype",localStorage.getItem('usertype'));
-	}
-}
-
-function removeSession(){
-	localStorage.removeItem('id');
-	localStorage.removeItem('username');
-	localStorage.removeItem('usertype');
-
-	sessionStorage.removeItem('id');
-	sessionStorage.removeItem('username');
-	sessionStorage.removeItem('usertype');
 }
 
 //Redirect Page

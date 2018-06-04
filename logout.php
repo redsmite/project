@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	session_destroy(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,6 @@
 	<script src="js/main.js"></script>
 	<script>
 		redirectPage();
-		removeSession();
 		addSpinners();
 	</script>
 </body>

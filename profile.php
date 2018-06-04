@@ -11,7 +11,7 @@
  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<title></title>
+	<title>Reloading...</title>
 </head>
 <body>
 	<div class="main-container">

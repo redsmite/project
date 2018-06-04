@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include'functions.php';
 	addSidebar();
 	addLogin();
@@ -32,7 +33,9 @@
 					</nav>
 				</div>
 				<div class="box3">
-					<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>LOGIN</a>
+					<?php
+						session_button()
+					?>
 				</div>
 			</div>
 		</header>
@@ -97,7 +100,6 @@
 	<script>
 		modal();
 		ajaxLogin();
-		getSession();
 	</script>
 </body>
 </html>

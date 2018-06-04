@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include'functions.php';
 	addSidebar();
 	addLogin();
@@ -11,7 +12,7 @@
  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<title><span id="company"></span> - Register</title>
+	<title>Reloading...</title>
 </head>
 <body>
 	<div class="main-container">
@@ -32,7 +33,9 @@
 					</nav>
 				</div>
 				<div class="box3">
-					<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>LOGIN</a>
+					<?php
+						session_button()
+					?>
 				</div>
 			</div>
 		</header>
@@ -134,7 +137,6 @@
 		modal();
 		ajaxRegister();
 		ajaxLogin();
-		sessionRestricted();
 		pageReload();
 	</script>
 </body>

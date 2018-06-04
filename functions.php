@@ -6,16 +6,20 @@ function addSidebar(){
 <div class="side-nav" id="side-menu">
 	<ul>
 		<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-		<li><a id="profileicon" href="profile.php"><i class="fas fa-user-alt"></i></a></li>
-		<li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-		<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-		<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-		<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-		<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+		<?php
+			if(isset($_SESSION["id"])){
+			echo"<li><a title="Go to your profile" href="profile.php"><i class="fas fa-user-alt"></i></a></li>";
+		}?>
+		<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
+		<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+		<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+		<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
+		<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
 	</ul>
 </div>';
 }
 
+// Login Pop Out
 function addLogin(){
 	echo'<div id="simpleModal" class="modal">
 			<div class="modal-content">
@@ -44,6 +48,22 @@ function addLogin(){
 			</div>
 		</div>
 	';
+}
+
+function session_button(){
+	if(isset($_SESSION['id'])){
+		echo'Hello ' 
+		
+			 .$_SESSION["name"].'!
+		
+		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
+	}else{
+		echo'<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>LOGIN</a>';
+	}
+}
+
+function profile_button(){
+	
 }
 
 function adminAccess(){
