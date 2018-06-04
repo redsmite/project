@@ -2,21 +2,33 @@
 <?php
 
 function addSidebar(){
+	if(isset($_SESSION["id"])){
+		echo '
+		<div class="side-nav" id="side-menu">
+			<ul>
+				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
+				<li><a title="Go to your profile" href="profile.php?id='.$_SESSION["id"].'"><i class="fas fa-user-alt"></i></a></li>
+				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
+				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
+				<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
+			</ul>
+		</div>';
+	}else{
 	echo'
-<div class="side-nav" id="side-menu">
-	<ul>
-		<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-		<?php
-			if(isset($_SESSION["id"])){
-			echo"<li><a title="Go to your profile" href="profile.php"><i class="fas fa-user-alt"></i></a></li>";
-		}?>
-		<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
-		<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-		<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-		<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
-		<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
-	</ul>
-</div>';
+		<div class="side-nav" id="side-menu">
+			<ul>
+				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
+				
+				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
+				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
+				<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
+			</ul>
+		</div>';
+	}
 }
 
 // Login Pop Out
@@ -52,9 +64,8 @@ function addLogin(){
 
 function session_button(){
 	if(isset($_SESSION['id'])){
-		echo'Hello ' 
-		
-			 .$_SESSION["name"].'!
+		echo'<a class="button" href=profile.php?id='.$_SESSION['id'].'><i class="fas fa-user-alt"></i> '
+			 .$_SESSION["name"].'\'s Profile</a>
 		
 		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
 	}else{
@@ -62,12 +73,34 @@ function session_button(){
 	}
 }
 
-function profile_button(){
-	
+function setupCookie(){
+	if(isset($_COOKIE['id'])){
+		$_SESSION['id'] = $_COOKIE['id'];
+		$_SESSION['name']= $_COOKIE['name'];
+		$_SESSION['type']= $_COOKIE['type'];
+	}
+}
+
+function destroyCookie(){
+	if (isset($_COOKIE['id'])) {
+	    
+	    unset($_COOKIE['id']);
+	    unset($_COOKIE['name']);
+	    unset($_COOKIE['type']);
+
+	    setcookie('id', '', time() - 3600, '/');
+	    setcookie('name', '', time() - 3600, '/');
+	    setcookie('type', '', time() - 3600, '/');
+	}
+}
+
+function user_nonAccess(){
+	if(isset($_SESSION['id'])){
+		header('location:index.php');
+	}
 }
 
 function adminAccess(){
-	session_start();
 	if($_SESSION['usertype']!=3){
 		die('You cannot access this page');
 	}

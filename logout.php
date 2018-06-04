@@ -1,6 +1,8 @@
 <?php
 	session_start();
-	session_destroy(); 
+	session_destroy();
+	include'functions.php';
+	destroyCookie();
 ?>
 <!DOCTYPE html>
 <html lang="en">

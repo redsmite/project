@@ -33,9 +33,11 @@
 					</nav>
 				</div>
 				<div class="box3">
-					<?php
-						session_button()
-					?>
+					<form action="search.php">
+						<i class="fas fa-search"></i>
+						<label>Search</label>
+						<input type="text" id="search-text" placeholder="Search...">
+					</form>
 				</div>
 			</div>
 		</header>
@@ -51,12 +53,10 @@
 						</svg>
 					</p>
 				</div>
-				<div class="search">
-					<form action="search.php">
-						<i class="fas fa-search"></i>
-						<label>Search</label>
-						<input type="text" id="search-text" placeholder="Search...">
-					</form>
+				<div class="profile-grid">
+					<?php
+						session_button()
+					?>
 				</div>
 			</div>
 		</div>

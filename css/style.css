@@ -97,8 +97,8 @@ body{
 
 .subgrid{
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas: "svg search"
+	grid-template-columns: 1fr 4fr;
+	grid-template-areas: "svg profile"
 }
 
 .svg{
@@ -106,10 +106,10 @@ body{
 	padding-top: 2px
 }
 
-.search{
-	grid-area: search;
+.profile-grid{
+	grid-area: profile;
 	grid-column-start: right;
-	padding: 5px;
+	padding: 8px;
 }
 
 .subheader p svg{
@@ -124,18 +124,26 @@ body{
 	cursor: pointer;
 }
 
-.search input[type='text']{
-	height: 20px;
-	border-radius:5px;
+.button{
+	padding: 2px 5px;
+	color:var(--light-color);
+	border:0;
+	margin-right: 4px;
+	text-align: center;
+	cursor:pointer;
+	text-decoration: none;
 }
 
+.button:hover{
+	color:var(--primary-color);
+}
 
 /* Header */
 #main-header{
 	grid-area:header;
 	border-bottom: 2px solid var(--primary-color);
 	background: var(--dark-color);
-	color:var(--contrast);
+	color:var(--light-color);
 }
 
 #highlight-text,#first-text{
@@ -149,7 +157,7 @@ body{
 
 .grid-header{
 	display:grid;
-	grid-template-columns: 4fr 4fr 2fr;
+	grid-template-columns: 4fr 5fr 2fr;
 	grid-template-areas: "title nav login";
 	align-items:center;
 	padding: 10px 0;
@@ -166,13 +174,12 @@ body{
 
 .box2{
 	grid-area:nav;
-	padding-top: 10px
+	padding-top: 10px;
 }
 .box3{
 	grid-area:login;
 	grid-column-start: right;
 	padding-right: 2px;
-	color:var(--light-color);
 }
 
 #header-text{
@@ -195,23 +202,12 @@ body{
 	color:var(--primary-color);
 }
 
-.button{
-	background: var(--contrast);
-	padding: 2px 5px;
-	color:var(--dark-color);
-	border:0;
-	margin-right: 4px;
-	border-radius: 8px;
-	text-align: center;
-	cursor:pointer;
-	text-decoration: none;
-}
 
-.button:hover{
-	background:var(--primary-color);
-	color:var(--light-color);
-}
 
+.box3 input[type='text']{
+	height: 25px;
+	border-radius:5px;
+}
 /* Side Nav*/
 .side-nav{
 	height:100%;

@@ -9,5 +9,11 @@
 	<title>Test</title>
 </head>
 <body>
+	<!-- <?php
+			// setcookie('id', 8, time()+60*60*24*365,'/');
+			// setcookie('name', 'Rize', time()+60*60*24*365,'/');
+			// setcookie('type', 1, time()+60*60*24*365,'/');
+		
+	?> -->
 </body>
 </html>

@@ -3,6 +3,8 @@
 	include'functions.php';
 	addSidebar();
 	addLogin();
+	setupCookie();
+	user_nonAccess();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +35,11 @@
 					</nav>
 				</div>
 				<div class="box3">
-					<?php
-						session_button()
-					?>
+					<form action="search.php">
+						<i class="fas fa-search"></i>
+						<label>Search</label>
+						<input type="text" id="search-text" placeholder="Search...">
+					</form>
 				</div>
 			</div>
 		</header>
@@ -51,12 +55,10 @@
 						</svg>
 					</p>
 				</div>
-				<div class="search">
-					<form action="search.php">
-						<i class="fas fa-search"></i>
-						<label>Search</label>
-						<input type="text" id="search-text" placeholder="Search...">
-					</form>
+				<div class="profile-grid">
+					<?php
+						session_button()
+					?>
 				</div>
 			</div>
 		</div>
@@ -68,46 +70,47 @@
 					<h2><span id="highlight-text">Join</span> Us Today</h2>
 					<div class="form">
 						<center>	
+						<p>*Required</p>
 						<form action="registerprocess.php" id="reg-form" method="post">
 							<div class="grid-register">
 								<div class="box-reg1">
 									<div>
-										<label for="">Username</label><br>
+										<label for="">*Username</label><br>
 										<input type="text" required id="reg-name" placeholder="Enter Username...">
 									</div>
 									<div>
-										<label for="">Password</label><br>
+										<label for="">*Password</label><br>
 										<input type="password" required id="reg-password" placeholder="Enter Password...">
 									</div>
 									<div>
-										<label for="">Re-type Password</label><br>
+										<label for="">*Re-type Password</label><br>
 										<input type="password" required id="reg-retype" placeholder="Enter Password...">
 									</div>
 									<div>
-										<label for="">First Name</label><br>
+										<label for="">*First Name</label><br>
 										<input type="text" required id="reg-first" placeholder="Enter First Name...">
 									</div>
 									<div>
 										<label for="">Middle Name</label><br>
-										<input type="text" required id="reg-middle" placeholder="Enter Middle Name...">
+										<input type="text" id="reg-middle" placeholder="Enter Middle Name...">
 									</div>
 									<div>
-										<label for="">Last Name</label><br>
+										<label for="">*Last Name</label><br>
 										<input type="text" required id="reg-last" placeholder="Enter Last Name...">
 									</div>
 								</div>
 								<div class="box-reg2">
 									<div>
 										<label for="">Birthday</label><br>
-										<input type="date" required id="reg-birthday">
+										<input type="date" id="reg-birthday">
 									</div>
 									<div>
-										<label for="">Email</label><br>
+										<label for="">*Email</label><br>
 										<input type="email" required id="reg-email" placeholder="Enter Email...">
 									</div>
 									<div>
 										<label for="">Phone Number</label><br>
-										<input type="number" required id="reg-phone" placeholder="Enter Phone Number...">
+										<input type="number" id="reg-phone" placeholder="Enter Phone Number...">
 									</div>
 									<div>
 										<label for="">Address</label><br>
@@ -137,7 +140,6 @@
 		modal();
 		ajaxRegister();
 		ajaxLogin();
-		pageReload();
 	</script>
 </body>
 </html>

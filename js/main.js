@@ -54,7 +54,7 @@ function modal(){
 	}
 }
 
-//Register Login
+//Login AJAX
 function ajaxLogin(){
 	document.getElementById('log-form').addEventListener('submit', postName);
 
@@ -69,9 +69,15 @@ function ajaxLogin(){
 			//form data variables
 			var username = document.getElementById('log-user').value;
 			var password = document.getElementById('log-pass').value;
-			var remember = document.getElementById('log-remember').value;
+			var remember = document.getElementById('log-remember');
 
-			var formData = "username="+username+"&password="+password;
+			if(remember.checked==true){
+				remember=1;
+			}else{
+				remember=0;
+			}
+
+			var formData = "username="+username+"&password="+password+"&remember="+remember;
 			
 			myRequest.open('POST', url ,true);
 			myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -79,12 +85,8 @@ function ajaxLogin(){
 			myRequest.onload = function(){
 				var response= JSON.parse(this.responseText);
 				console.log(response);
-				console.log(remember);
 				
 				if(response[0]==0){
-					if(remember.checked){
-
-					}
 					
 					window.location.href = "loginsuccess.html";
 				
@@ -147,11 +149,11 @@ function redirectPage(){
 	document.getElementById('redirectlink').addEventListener('click',historyback);
 
 	function historyback(){
-		window.history.back();
+		window.location.replace("index.php");
 	}
 	setTimeout(function () {
 		   
-		window.history.back();
+		window.location.replace("index.php");
 	
 	}, 2000);
 }

@@ -6,6 +6,7 @@ if(isset($_POST['username'])){
 	//insert into Database
 	$username = $conn->real_escape_string($_POST['username']);
 	$password = md5($_POST['password']);
+	$remember = $_POST['remember'];
 
 	$sql = "SELECT userid,username,password,usertypeid,access FROM tbluser WHERE username='$username' and password='$password'";
 
@@ -23,6 +24,13 @@ if(isset($_POST['username'])){
 					
 					$_SESSION['id']=$id;
 					$_SESSION['name']=$name;
+					$_SESSION['type']=$type;
+
+					if($remember==1){
+						setcookie('id', $id, time()+60*60*24*365,'/');
+						setcookie('name', $name, time()+60*60*24*365,'/');
+						setcookie('type', $type, time()+60*60*24*365,'/');
+					}
 
 					$sessions = array(0,$id,$name,$type);
 
