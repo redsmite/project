@@ -7,7 +7,8 @@ function addSidebar(){
 		<div class="side-nav" id="side-menu">
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-				<li><a title="Go to your profile" href="profile.php?id='.$_SESSION["id"].'"><i class="fas fa-user-alt"></i></a></li>
+				<li><a title="Go to your profile" href="profile.php?id='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
+				<li><a title="Check your private messages" href="privatemessage.php"><i class="far fa-envelope"></i></a></li>
 				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
 				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
 				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
@@ -64,12 +65,12 @@ function addLogin(){
 
 function session_button(){
 	if(isset($_SESSION['id'])){
-		echo'<a class="button" href=profile.php?id='.$_SESSION['id'].'><i class="fas fa-user-alt"></i> '
+		echo'<a class="button" href=profile.php?id='.$_SESSION['name'].'><i class="fas fa-user-alt"></i> '
 			 .$_SESSION["name"].'\'s Profile</a>
 		
-		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>';
+		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>Logout</a>';
 	}else{
-		echo'<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>LOGIN</a>';
+		echo'<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
 	}
 }
 

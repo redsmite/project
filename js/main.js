@@ -130,14 +130,20 @@ function ajaxRegister(){
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 
 		myRequest.onload = function(){
-			var response= this.responseText;
+			var response= JSON.parse(this.responseText);
 			
 			if(response=="success"){
 
 				window.location.href = 'thankyou.html';
 			} else {
+				var output='';
+					for(var i in response){
+					output += '<ul>'+
+						'<li>'+response[i]+'</li>'+
+						'</ul>';
+					}
+				document.getElementById('error-message2').innerHTML = output;
 				removeSpinners();
-				document.getElementById('error-message2').innerHTML=response;
 			}
 		}
 		myRequest.send(formData);

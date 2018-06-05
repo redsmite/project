@@ -15,37 +15,38 @@ if(isset($_POST['username'])){
 	$phoneno= mysqli_real_escape_string($conn,$_POST['phoneno']);
 	$address= mysqli_real_escape_string($conn,$_POST['address']);
 
-	if($password==$retype){
-		$sql="SELECT username FROM tbluser WHERE username='$username'";
-		if($res_u=$conn->query($sql)){
-			if ($res_u->num_rows == 0) {
-				$sql2="SELECT email FROM tbluser WHERE email='$email'";
-				$res_e =$conn->query($sql2);
-				if($res_e->num_rows == 0){
-					
-					$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,access) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday','$timestamp','$email','$phoneno','$address','1','1')";
+	$error=array();
 
-					if($conn->query($sql3)){
-						echo 'success';
-					} else {
-							echo '<i class="fas fa-exclamation-triangle"></i>Sorry, we are having some problems.';
-					}
+	//Check if password is equal
+	if($password!=$retype){
+		array_push($error,'<i class="fas fa-exclamation-triangle"></i>Password doesn\'t match');
+	}
 
-				}else{
-					echo '<i class="fas fa-exclamation-triangle"></i>Email is already taken';
-				}
-			
+	//Check if username is taken
+	$sql="SELECT username FROM tbluser WHERE username='$username'";
+	$res_u=$conn->query($sql);
+	if ($res_u->num_rows != 0) {
+		array_push($error,'<i class="fas fa-exclamation-triangle"></i>Username is already taken');
+	}
 
-			}	else {
-				echo '<i class="fas fa-exclamation-triangle"></i>Username is already taken';
-			}
+	//Check if email is taken		
+	$sql2="SELECT email FROM tbluser WHERE email='$email'";
+	$res_e =$conn->query($sql2);
+	if($res_e->num_rows != 0){
+		array_push($error,'<i class="fas fa-exclamation-triangle"></i>Email is already taken');
+	}
 
+	//Check if no error
+	if(!$error){
+		$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,access) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday','$timestamp','$email','$phoneno','$address','1','1')";
+
+		if($conn->query($sql3)){
+			echo json_encode('success');
 		} else {
-				echo '<i class="fas fa-exclamation-triangle"></i>Sorry, we are having some problems.';
+			echo '<i class="fas fa-exclamation-triangle"></i>Sorry, we are having some problems.';
 		}
-
 	} else {
-		echo'<i class="fas fa-exclamation-triangle"></i>Password doesn\'t match';
+		echo json_encode($error);
 	}
 }
 ?>

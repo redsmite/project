@@ -479,7 +479,7 @@ h2.next-h2{
 .form form{
 	width:80%;
 	background:#333;
-	color:var(--primary-color);
+	color:var(--light-color);
 	padding:20px;
 	border-radius: 16px;
 }
@@ -535,6 +535,11 @@ h2.next-h2{
 	margin-top:4px;
 	background:#ff4040;
 	color:var(--light-color);
+}
+
+#error-message2 li{
+	list-style:none;
+	padding: 2px 0;
 }
 
 #thanks-message{
