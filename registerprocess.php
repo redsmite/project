@@ -38,10 +38,23 @@ if(isset($_POST['username'])){
 
 	//Check if no error
 	if(!$error){
-		$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,access) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday','$timestamp','$email','$phoneno','$address','1','1')";
+		$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,access,is_show_email) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday',$timestamp,'$email','$phoneno','$address','1','1','FALSE')";
 
 		if($conn->query($sql3)){
+
+			//Auto Login
+
+			$sql4='SELECT COALESCE(MAX(userid), 0)+1 AS newUserID FROM tbluser';
+			$result=$conn->query($sql4);
+			$row=$result->fetch_object();
+			$userlogin=$row->newUserID;
+
+			$_SESSION['id']=$userlogin;
+			$_SESSION['name']=$username;
+			$_SESSION['type']=1;
+
 			echo json_encode('success');
+
 		} else {
 			echo '<i class="fas fa-exclamation-triangle"></i>Sorry, we are having some problems.';
 		}

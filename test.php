@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	require_once'connection.php';
+	include'functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +14,12 @@
 	<title>Test</title>
 </head>
 <body>
-	<!-- <?php
-			// setcookie('id', 8, time()+60*60*24*365,'/');
-			// setcookie('name', 'Rize', time()+60*60*24*365,'/');
-			// setcookie('type', 1, time()+60*60*24*365,'/');
+	<?php
+	echo $_SESSION['type'];
+	?>
+	<script src="js/main.js"></script>
+	<script>
 		
-	?> -->
+	</script>
 </body>
 </html>

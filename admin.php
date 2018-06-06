@@ -13,7 +13,7 @@
 		<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text">IT</span> <span id="second-text"></span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text">IT</span><span id="second-text"></span></a></h1>
 				</div>
 			</div>
 		</header>

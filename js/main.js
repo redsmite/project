@@ -1,6 +1,6 @@
 // Get Company Name
 function changeCompanyName(firstText,secondText){	
-	var companyName= firstText+" "+secondText;
+	var companyName= firstText+secondText;
 	document.getElementById("first-text").innerHTML = firstText;
 	document.getElementById("second-text").innerHTML = secondText;
 	document.getElementById("company").innerHTML = companyName;
@@ -131,7 +131,7 @@ function ajaxRegister(){
 
 		myRequest.onload = function(){
 			var response= JSON.parse(this.responseText);
-			
+			console.warn(response);
 			if(response=="success"){
 
 				window.location.href = 'thankyou.html';

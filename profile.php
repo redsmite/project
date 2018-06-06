@@ -4,6 +4,76 @@
 	addSidebar();
 	addLogin();
 	setupCookie();
+
+	//Get Profile Info
+	require_once'connection.php';
+
+	if(isset($_GET['name'])){
+		$name = $_GET['name'];
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email FROM tbluser WHERE username='$name'";
+		if(!$result=$conn->query($sql)){
+			die('<div id="thanks-message">
+				This page doesn\'t exist
+				</div>');
+		}
+
+		$rows=$result->fetch_object();
+		$id=$rows->userid;
+		$user=$rows->username;
+		$firstname=$rows->firstname;
+		$lastname=$rows->lastname;
+		$datecreated=date("M j, Y", strtotime($rows->datecreated));
+		$email=$rows->email;
+		$usertype=$rows->usertypeid;
+		$email_access=$rows->is_show_email;
+		if(isset($rows->middlename)){
+			$middlename=$rows->middlename;
+
+		}else{
+			$middlename='';
+		}
+
+
+		if(isset($rows->birthday)){
+			$birthday=date("M j, Y", strtotime($rows->birthday));
+
+		}else{
+			$birthday='';
+		}
+
+
+		if(isset($rows->phoneno)){
+			$phoneno=$rows->phoneno;
+
+		}else{
+			$phoneno='';
+		}
+
+
+		if(isset($rows->address)){
+			$address=$rows->address;
+
+		}else{
+			$address='';
+		}
+
+
+		if(isset($rows->image)){
+			$image=$rows->image;
+
+		}else{
+			$image='';
+		}
+
+
+		if(isset($rows->bio)){
+			$bio=$rows->bio;
+
+		}else{
+			$bio='';
+		}
+	
+	}	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +91,7 @@
 		<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text"></span> <span id="second-text"></span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text"></span><span id="second-text"></span></a></h1>
 				</div>
 				<div class="box2">
 					<nav class="main-nav">
@@ -62,20 +132,56 @@
 			</div>
 		</div>
 	<!-- Main Content -->
-		<div class="other-content">
-			<div class="container">
-				<div>
-					<h1>Profile Picture</h1>			
+		<div class="profile-content">
+			<div class="user-grid">
+				<div class="left-grid">
+					<div class="profile-pic-wrap">
+						<img src="" alt="Not Yet Defined">
+					</div>
+					<div class="dashboard">
+						<?php
+							echo'<h1>			
+							'.$user.'\'s Profile					
+							</h1>
+							<h3>Joined:'.$datecreated.'</h3>
+							<ul>
+							<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Photo</a></li>
+							<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Info</a></li>
+							<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
+							</ul>';
+						?>
+					</div>
 				</div>
-				<div>
-					<h1>Dashboard</h1>
-				</div>
-				<div>	
-					<h1>Profile Stat</h1>
-				</div>
-				<div>	
-					<h1>Comments</h1>
-				</div>
+				<div class="right-grid">
+					<div class="user-info">
+						<?php
+							echo'<h1>'.$user.'\'s Profile Info</h1>
+							<ul>
+							<li>First Name: '.$firstname.'</li>
+							<li>Middle Name: '.$middlename.'</li>
+							<li>Last Name: '.$lastname.'</li>';
+							
+							if($email_access==0){
+								echo'<li>Email: Info Restricted by User</li>';
+							}else{
+								echo'<li>Email: '.$firstname.'</li>';
+							}
+							echo'<li>Birthday: '.$birthday.'</li>
+							<li>Phone Number: '.$phoneno.'</li>
+							<li>Address: '.$address.'</li>
+							</ul>';
+						?>
+						<div class="biography">
+							<h1>Bio</h1>
+							<?php
+								echo $bio;
+							?>
+						</div>
+					</div>
+					<div class="profile-comments">
+						<h1>Comments</h1>
+					</div>
+				</div>			
 			</div>
 		</div>
 	<!-- Footer -->

@@ -558,6 +558,89 @@ h2.next-h2{
 	color:var(--primary-color);
 }
 
+/* Profile */
+.user-grid{
+	display:grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-areas: "left-grid right-grid";
+	border:1px solid var(--dark-color);
+	box-shadow: 5px 10px var(--darkgray);
+	background: var(--gray);
+	min-height: 100vh;
+}
+
+.left-grid{
+	grid-area: left-grid;
+	border-right: 1px solid var(--dark-color);
+	background:var(--light-color);
+	color:var(--dark-color);
+}
+
+.dashboard{
+	padding:5px;
+}
+
+.left-grid h1{
+	font-size: 20px;
+}
+
+.left-grid h3{
+	font-size: 15px;
+	font-style: italic;
+	font-weight: normal;
+	border-bottom:1px solid var(--darkgray);
+}
+.left-grid a{
+	color:var(--dark-color);
+	text-decoration: none;
+}
+
+.left-grid a:hover{
+	color:var(--primary-color);
+}
+.left-grid li{
+	list-style:none;
+	border-bottom:1px solid var(--darkgray);
+	padding:2px;
+}
+
+.profile-pic-wrap{
+	padding:10px;
+	margin:2px;
+	height:250px;
+	max-width: 100%;
+	background: var(--darkgray);
+}
+
+.right-grid{
+	grid-area: right-grid;
+	padding:5px;
+	color:var(--dark-color);
+}
+
+.right-grid h1{
+	font-size: 25px;
+}
+
+.right-grid li{
+	list-style: none;
+	border-bottom:1px solid var(--darkgray);
+	padding:2px;
+}
+
+.biography{
+	min-height: 200px;
+	padding:5px;
+	border-top:1px solid var(--darkgray);
+	border-bottom:1px solid var(--darkgray);
+}
+
+.profile-comments{
+	min-height: 200px;
+	padding:5px;
+	border-top:1px solid var(--darkgray);
+}
+
 /* Footer */
 .main-footer{
 	grid-area:footer;
@@ -629,6 +712,10 @@ h2.next-h2{
 		"leftbox"
 		"rightbox"
 		"error";
+	}
+	
+	.user-grid{
+		display:block;
 	}
 }
 

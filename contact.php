@@ -21,7 +21,7 @@
 		<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text"></span> <span id="second-text"></span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text"></span><span id="second-text"></span></a></h1>
 				</div>
 				<div class="box2">
 					<nav class="main-nav">
@@ -69,18 +69,19 @@
 					<h2><span id="highlight-text">Get</span> in Touch</h2>		
 					<div class="form">
 						<center>
+							<p>Please don't spam or you'll die.</p>
 							<form action="#" method="post">
 								<div>
 									<label for="name">Name</label><br>
-									<input type="text" name="contact-name">
+									<input type="text" required name="contact-name">
 								</div>
 								<div>
 									<label for="email">Email</label><br>
-									<input type="email" name="contact-email">
+									<input type="email" required name="contact-email">
 								</div>
 								<div>
 									<label for="message">Message</label><br>
-									<textarea name="message" name="contact-message"></textarea>
+									<textarea name="message" required name="contact-message"></textarea>
 								</div>
 								<button type="submit" name="contact-button">Submit</button>
 							</form>
