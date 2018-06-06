@@ -15,7 +15,20 @@
 </head>
 <body>
 	<?php
-	echo $_SESSION['type'];
+	// $username='new user';
+
+	// 		$sql4='SELECT COALESCE(MAX(userid), 0)+1 AS newUserID FROM tbluser';
+	// 		$result=$conn->query($sql4);
+	// 		$row=$result->fetch_object();
+	// 		$userlogin=$row->newUserID;
+
+	// 		$_SESSION['id']=$userlogin;
+	// 		$_SESSION['name']=$username;
+	// 		$_SESSION['type']=1;	
+
+	// 		echo $_SESSION['id'];
+	// 		echo $_SESSION['name'];
+	// 		echo $_SESSION['type'];
 	?>
 	<script src="js/main.js"></script>
 	<script>

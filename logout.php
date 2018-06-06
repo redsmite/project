@@ -26,7 +26,6 @@
 	<script src="js/main.js"></script>
 	<script>
 		redirectPage();
-		addSpinners();
 	</script>
 </body>
 </html>

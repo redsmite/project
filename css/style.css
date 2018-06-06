@@ -157,7 +157,7 @@ body{
 
 .grid-header{
 	display:grid;
-	grid-template-columns: 4fr 5fr 2fr;
+	grid-template-columns: 2fr 3fr 1fr;
 	grid-template-areas: "title nav login";
 	align-items:center;
 	padding: 10px 0;
@@ -484,7 +484,7 @@ h2.next-h2{
 	border-radius: 16px;
 }
 
-.form form input[type="text"],.form form input[type="number"], .form form input[type="email"], .form form input[type="password"],.form form input[type="date"], .edit-form form input[type="text"], .edit-form form input[type="number"], .edit-form form input[type="email"], .edit-form form input[type="password"], .edit-form input[type="date"]{
+.form form input[type="text"],.form form input[type="number"], .form form input[type="email"], .form form input[type="password"],.form form input[type="date"], .edit-form form input[type="text"], .edit-form form input[type="number"], .edit-form form input[type="email"], .edit-form form input[type="password"], .edit-form input[type="date"], .edit-form input[type="file"]{
 	width:80%;
 	height:30px;
 	margin-bottom:10px;
@@ -599,11 +599,20 @@ h2.next-h2{
 }
 
 .profile-pic-wrap{
-	padding:10px;
-	margin:2px;
 	height:250px;
 	max-width: 100%;
-	background: var(--darkgray);
+	background: transparent;
+	border:1px solid var(--dark-color);
+}
+
+.profile-pic-wrap img{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	max-height: 100%;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .user-header{

@@ -4,6 +4,10 @@
 	//Get Profile Info
 	require_once'connection.php';
 
+	if(!isset($_GET['name'])){
+		die('<div id="thanks-message"><p>This page doesn\'t exist.</p></div>');
+	}
+
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
 		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email FROM tbluser WHERE username='$name'";
@@ -137,7 +141,14 @@
 			<div class="user-grid">
 				<div class="left-grid">
 					<div class="profile-pic-wrap">
-						<img src="" alt="Not Yet Defined">
+						<?php
+							if($image){
+								$image= '<img src="data:image/jpeg;base64,'.base64_encode( $image ).'"/>';
+							}else if(!$image){
+								$image='<img src="img/default.png" />';
+							}
+							echo $image;
+						?>
 					</div>
 					<div class="user-header">
 						<?php
@@ -160,7 +171,7 @@
 					</div>
 					<div class="dashboard">
 						<?php
-							if($_SESSION['name']==$_GET['name']){
+							if(isset($_SESSION['name'])==$_GET['name']){
 								echo'<ul>
 									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Photo</a></li>
 									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Profile Info</a></li>
@@ -221,6 +232,7 @@
 	</div>
 	<script src="js/main.js"></script>
 	<script>
+		modal();
 		ajaxLogin();
 	</script>
 </body>

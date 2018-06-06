@@ -161,7 +161,7 @@ function redirectPage(){
 		   
 		window.location.replace("index.php");
 	
-	}, 2000);
+	}, 3000);
 }
 
 // Spinners
