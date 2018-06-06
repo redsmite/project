@@ -1,12 +1,13 @@
 <?php
 	session_start();
 	include'functions.php';
+	user_access();
 	//Get Profile Info
 	require_once'connection.php';
-
-	if(isset($_GET['name'])){
-		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email FROM tbluser WHERE username='$name'";
+	
+	if(isset($_SESSION['id'])){
+		$id = $_SESSION['id'];
+		$sql="SELECT userid,firstname,middlename,lastname,birthday,phoneno,address,usertypeid,bio,is_show_email FROM tbluser WHERE userid='$id'";
 		
 		$result=$conn->query($sql);
 
@@ -17,13 +18,11 @@
 		$rows=$result->fetch_object();
 		
 		$id=$rows->userid;
-		$user=$rows->username;
 		$firstname=$rows->firstname;
 		$lastname=$rows->lastname;
-		$datecreated=date("M j, Y", strtotime($rows->datecreated));
-		$email=$rows->email;
 		$usertype=$rows->usertypeid;
 		$email_access=$rows->is_show_email;
+
 		if(isset($rows->middlename)){
 			$middlename=$rows->middlename;
 
@@ -33,7 +32,7 @@
 
 
 		if(isset($rows->birthday)){
-			$birthday=date("M j, Y", strtotime($rows->birthday));
+			$birthday=$rows->birthday;
 
 		}else{
 			$birthday='';
@@ -53,14 +52,6 @@
 
 		}else{
 			$address='';
-		}
-
-
-		if(isset($rows->image)){
-			$image=$rows->image;
-
-		}else{
-			$image='';
 		}
 
 
@@ -133,82 +124,57 @@
 			</div>
 		</div>
 	<!-- Main Content -->
-		<div class="profile-content">
-			<div class="user-grid">
-				<div class="left-grid">
-					<div class="profile-pic-wrap">
-						<img src="" alt="Not Yet Defined">
+		<div class="other-content">
+			<h1>Edit Info</h1>
+			<div class="edit-form">
+				<center>
+				<form action="editinfoprocess.php"id="edit-form" method="post">
+					<div>
+						<label for="">*First Name</label><br>
+						<input type="text"  <?php echo 'value="'.$firstname.'"'?> required id="edit-first" name="edit-first"placeholder="Enter First Name...">
 					</div>
-					<div class="user-header">
+					<div>
+						<label for="">Middle Name</label><br>
+						<input type="text" <?php echo 'value="'.$middlename.'"'?> id="edit-middle" name="edit-middle"placeholder="Enter Middle Name...">
+					</div>
+					<div>
+						<label for="">*Last Name</label><br>
+						<input type="text" <?php echo 'value="'.$lastname.'"'?> required id="edit-last" name="edit-last" placeholder="Enter Last Name...">
+					</div>
+					<div>
+						<label for="">Birthday</label><br>
+						<input type="date" <?php echo 'value="'.$birthday.'"'?> id="edit-birthday" name="edit-birthday">
+					</div>
+					<div>
+						<label for="">Phone Number</label><br>
+						<input type="number" <?php echo 'value="'.$phoneno.'"'?> id="edit-phone" name="edit-phone" placeholder="Enter Phone Number...">
+					</div>
+					<div>
+						<label for="">Address</label><br>
+						<textarea id="edit-address" name="edit-address" placeholder="Enter Address..."><?php echo $address?> </textarea>
+						<br><br>
+					</div>
+					<div>
+						<label for="">About me</label><br>
+						<textarea id="edit-bio" name="edit-bio" placeholder="Info about yourself..."><?php echo $bio?></textarea>
+					<div>
+						<label for="">Show email?</label>
 						<?php
-							echo'<h1>			
-							'.$user.'					
-							</h1>
-							<h3>Joined:'.$datecreated.'</h3>';
-							if($usertype==1){
-								echo'<p>User</p>';
-							}else if ($usertype==2){
-								echo'<p>User</p>';
-							}else if ($usertype==3){
-								echo'<p>Admin</p>';
+							if($email_access==1){
+								echo'<input type="checkbox" id="privacy" checked value="1" name="privacy">';
+							}else{
+								echo'<input type="checkbox" value="1" id="privacy"name="privacy">';
 							}
 						?>
+						
 					</div>
-					<div class="friends">
-						<h1>Friends</h1>
-						<p>None</p>
+						<br><br>
 					</div>
-					<div class="dashboard">
-						<?php
-							if($_SESSION['name']==$_GET['name']){
-								echo'<ul>
-									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Photo</a></li>
-									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Profile Info</a></li>
-									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
-									</ul>';
-							}else{
-								echo'<ul>
-									<li><a href="adduser.php"><i class="fas fa-user-plus"></i> Add as friend</a></li>
-									</ul>';
-							}
-						?>
+					<div>
+						<button type="submit" name="edit-button" id="edit-button">Submit</button>
 					</div>
-				</div>
-				<div class="right-grid">
-					<div class="user-info">
-						<?php
-							echo'<h1>'.$user.'\'s Personal Info</h1>
-							<ul>';
-							if($middlename==''){
-								echo'<li>Name: '.$firstname.' '.$lastname.'</li>';
-							}else{
-								echo'<li>Name: '.$firstname.' '.$middlename.' '.$lastname.'</li>';
-							}
-							
-							
-							if($email_access==0){
-								echo'<li>Email: <i class="fas fa-exclamation-circle"></i> Info restricted by user</li>';
-							}else{
-								echo'<li>Email: '.$email.'</li>';
-							}
-							echo'<li>Birthday: '.$birthday.'</li>
-							<li>Phone Number: '.$phoneno.'</li>
-							<li>Address: '.$address.'</li>
-							</ul>';
-						?>
-						<div class="biography">
-							<h1>About me</h1>
-							<p>
-							<?php
-								echo nl2br($bio);
-							?>
-							</p>
-						</div>
-					</div>
-					<div class="profile-comments">
-						<h1>Comments</h1>
-					</div>
-				</div>			
+				</form>
+				</center>
 			</div>
 		</div>
 	<!-- Footer -->

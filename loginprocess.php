@@ -38,12 +38,12 @@ if(isset($_POST['username'])){
 
 				}else{
 
-					echo'<i class="fas fa-exclamation-triangle"></i>Sorry, your account has been banned.';
+					echo'<i class="fas fa-exclamation-circle"></i>Sorry, your account has been banned.';
 
 				}
 		
 			}else{
-				$sessions =array(1,'<i class="fas fa-exclamation-triangle"></i>Invalid username or password.');
+				$sessions =array(1,'<i class="fas fa-exclamation-circle"></i>Invalid username or password.');
 				echo json_encode($sessions);
 			}
 		}

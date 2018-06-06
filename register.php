@@ -116,6 +116,8 @@
 										<label for="">Address</label><br>
 										<textarea id="reg-address" placeholder="Enter Address..."></textarea>
 										<br><br>
+									</div>
+									<div>
 										<button type="submit" name="contact-button" id="contact-button">Submit</button>
 									</div>
 								</div>

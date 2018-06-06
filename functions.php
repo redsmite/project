@@ -71,7 +71,8 @@ function session_button(){
 		
 		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>Logout</a>';
 	}else{
-		echo'<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
+		echo'<a href ="register.php" class="button"><i class="fas fa-user-plus"></i>Sign Up</a>
+		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
 	}
 }
 
@@ -93,6 +94,12 @@ function destroyCookie(){
 	    setcookie('id', '', time() - 3600, '/');
 	    setcookie('name', '', time() - 3600, '/');
 	    setcookie('type', '', time() - 3600, '/');
+	}
+}
+
+function user_access(){
+	if(!isset($_SESSION['id'])){
+		header('location:index.php');
 	}
 }
 
