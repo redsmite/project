@@ -10,7 +10,7 @@
 
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email FROM tbluser WHERE username='$name'";
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
 		
 		$result=$conn->query($sql);
 
@@ -27,6 +27,7 @@
 		$datecreated=date("M j, Y", strtotime($rows->datecreated));
 		$email=$rows->email;
 		$usertype=$rows->usertypeid;
+		$gender=$rows->gender;
 		$email_access=$rows->is_show_email;
 		if(isset($rows->middlename)){
 			$middlename=$rows->middlename;
@@ -159,9 +160,9 @@
 							if($usertype==1){
 								echo'<p>User</p>';
 							}else if ($usertype==2){
-								echo'<p>User</p>';
+								echo'<p>DB Admin</p>';
 							}else if ($usertype==3){
-								echo'<p>Admin</p>';
+								echo'<p>Site Admin</p>';
 							}
 						?>
 					</div>
@@ -171,10 +172,10 @@
 					</div>
 					<div class="dashboard">
 						<?php
-							if(isset($_SESSION['name'])==$_GET['name']){
+							if($_SESSION['name']==$_GET['name']){
 								echo'<ul>
 									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Photo</a></li>
-									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Profile Info</a></li>
+									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Personal Info</a></li>
 									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
 									</ul>';
 							}else{
@@ -196,6 +197,13 @@
 								echo'<li>Name: '.$firstname.' '.$middlename.' '.$lastname.'</li>';
 							}
 							
+							if($gender==1){
+								echo'<li>Gender: Male </li>';
+							} else if ($gender==2){
+								echo'<li>Gender: Female </li>';
+							} else{
+								echo'<li>Gender: Non-binary </li>';
+							}
 							
 							if($email_access==0){
 								echo'<li>Email: <i class="fas fa-exclamation-circle"></i> Info restricted by user</li>';

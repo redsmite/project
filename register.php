@@ -100,6 +100,11 @@
 									</div>
 								</div>
 								<div class="box-reg2">
+									<div id="gender-box">
+										<label for="">*Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
+  										<input type="radio" name="gender" id="gender" value="2"> Female
+  										<input type="radio" name="gender" id="gender" value="3"> Non-Binary
+									</div>
 									<div>
 										<label for="">Birthday</label><br>
 										<input type="date" id="reg-birthday">
@@ -115,7 +120,6 @@
 									<div>
 										<label for="">Address</label><br>
 										<textarea id="reg-address" placeholder="Enter Address..."></textarea>
-										<br><br>
 									</div>
 									<div>
 										<button type="submit" name="contact-button" id="contact-button">Submit</button>

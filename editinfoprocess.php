@@ -11,8 +11,9 @@ if(isset($_POST['edit-button'])){
 	$address= $conn->real_escape_string($_POST['edit-address']);
 	$bio= $conn->real_escape_string($_POST['edit-bio']);
 	$privacy=$_POST['privacy'];
+	$gender=$_POST['gender'];
 
-	$sql="UPDATE tbluser SET firstname='$firstname', middlename='$middlename',lastname='$lastname',birthday='$birthday',phoneno='$phoneno',address='$address',bio='$bio',is_show_email='$privacy' WHERE username='$username'";
+	$sql="UPDATE tbluser SET firstname='$firstname', middlename='$middlename',lastname='$lastname',birthday='$birthday',phoneno='$phoneno',address='$address',bio='$bio',is_show_email='$privacy',gender='$gender' WHERE username='$username'";
 	if($result =$conn->query($sql)){
 		header("Location:profile.php?name=".$_SESSION['name']."");
 	}

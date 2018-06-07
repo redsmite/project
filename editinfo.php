@@ -7,7 +7,7 @@
 	
 	if(isset($_SESSION['id'])){
 		$id = $_SESSION['id'];
-		$sql="SELECT userid,firstname,middlename,lastname,birthday,phoneno,address,usertypeid,bio,is_show_email FROM tbluser WHERE userid='$id'";
+		$sql="SELECT userid,firstname,middlename,lastname,birthday,phoneno,address,usertypeid,bio,is_show_email,gender FROM tbluser WHERE userid='$id'";
 		
 		$result=$conn->query($sql);
 
@@ -22,6 +22,7 @@
 		$lastname=$rows->lastname;
 		$usertype=$rows->usertypeid;
 		$email_access=$rows->is_show_email;
+		$gender=$rows->gender;
 
 		if(isset($rows->middlename)){
 			$middlename=$rows->middlename;
@@ -140,6 +141,24 @@
 					<div>
 						<label for="">*Last Name</label><br>
 						<input type="text" <?php echo 'value="'.$lastname.'"'?> required id="edit-last" name="edit-last" placeholder="Enter Last Name...">
+					</div>
+					<div id="gender-box">
+
+						<?php
+						if($gender==1){
+							echo'<label for="">*Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
+							<input type="radio" name="gender" id="gender" value="2"> Female
+							<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
+						}else if ($gender==2){
+							echo'<label for="">*Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+								<input type="radio"  checked name="gender" id="gender" value="2"> Female
+								<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
+						}else{
+							echo'<label for="">*Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+								<input type="radio" name="gender" id="gender" value="2"> Female
+								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary';
+						}
+						?>
 					</div>
 					<div>
 						<label for="">Birthday</label><br>

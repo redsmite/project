@@ -546,6 +546,11 @@ h2.next-h2{
 	grid-area: rightbox;
 }
 
+#gender-box{
+	background: var(--darkgray);
+	margin: 5px 0 5px 0;
+}
+
 #error-message,#error-message2{
 	grid-area: error;
 	width:100%;

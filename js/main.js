@@ -123,8 +123,10 @@ function ajaxRegister(){
 		var email = document.getElementById('reg-email').value;
 		var phoneno = document.getElementById('reg-phone').value;
 		var address = document.getElementById('reg-address').value;
+		var gender = document.querySelector('input[name="gender"]:checked').value;
 
-		var formData = "username="+username+"&password="+password+"&retype="+retype+"&firstname="+firstname+"&middlename="+middlename+"&lastname="+lastname+"&birthday="+birthday+"&email="+email+"&phoneno="+phoneno+"&address="+address;
+		
+		var formData = "username="+username+"&password="+password+"&retype="+retype+"&firstname="+firstname+"&middlename="+middlename+"&lastname="+lastname+"&birthday="+birthday+"&email="+email+"&phoneno="+phoneno+"&address="+address+"&gender="+gender;
 		
 		myRequest.open('POST', url ,true);
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -187,4 +189,4 @@ function removeSpinners(){
 	document.querySelector('.main-container').style.opacity='1';
 }
 
-changeCompanyName('This','Company');
+changeCompanyName('Movie','Reviews');
