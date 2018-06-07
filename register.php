@@ -84,7 +84,7 @@
 									</div>
 									<div>
 										<label for="">*Re-type Password</label><br>
-										<input type="password" required id="reg-retype" placeholder="Enter Password...">
+										<input type="password" required id="reg-retype" placeholder="Retype Password...">
 									</div>
 									<div>
 										<label for="">*First Name</label><br>

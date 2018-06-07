@@ -153,7 +153,7 @@
 							echo'<h1>			
 							'.$user.'					
 							</h1>
-							<h3>Joined:'.$datecreated.'</h3>';
+							<h3>Joined: '.time_elapsed_string($datecreated).'</h3>';
 							if($usertype==1){
 								echo'<p>User</p>';
 							}else if ($usertype==2){
@@ -171,7 +171,7 @@
 						<?php
 							if($_SESSION['name']==$_GET['name']){
 								echo'<ul>
-									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Photo</a></li>
+									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Picture</a></li>
 									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Personal Info</a></li>
 									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
 									</ul>';

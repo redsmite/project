@@ -82,7 +82,7 @@
 		</div>
 	<!-- Main Content -->
 		<div class="other-content">
-			<h1>Edit Profile Photo</h1>
+			<h1><i class="fas fa-camera"></i> Profile Picture</h1>
 			<div class="edit-form">
 				<center>
 							<p>*Please don't post nudes or offensive photos</p> 
@@ -99,7 +99,7 @@
 
 					<form action="insertphoto.php" method="POST" enctype="multipart/form-data">
 						
-						<div>File:
+						<div>Select Picture:
 							<br>
 							<input type="file" value="Choose File" name="img"/>
 						</div>
@@ -124,7 +124,7 @@
 								$error='';
 								
 								if(!$_FILES['img']['tmp_name']){
-									echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>File is empty. Select an image to upload</div>';
+									echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>File is empty. Select an image to upload.</div>';
 								}else{
 
 								$filetemp=$_FILES['img']['tmp_name'];

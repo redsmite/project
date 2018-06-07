@@ -447,7 +447,7 @@ body{
 }
 
 .other-content h1{
-	float:left;
+	float:center;
 	font-size: 25px;
 	border-bottom: 3px solid var(--darkgray);
 }
@@ -482,6 +482,12 @@ h2.next-h2{
 	color:var(--light-color);
 	padding:20px;
 	border-radius: 16px;
+}
+
+.edit-form p{
+	font-style: italic;
+	font-size: 15px;
+	color:var(--darkgray);
 }
 
 .form form input[type="text"],.form form input[type="number"], .form form input[type="email"], .form form input[type="password"],.form form input[type="date"], .edit-form form input[type="text"], .edit-form form input[type="number"], .edit-form form input[type="email"], .edit-form form input[type="password"], .edit-form input[type="date"]{
@@ -555,8 +561,10 @@ h2.next-h2{
 }
 
 #gender-box{
-	background: var(--darkgray);
+	background: var(--gray);
+	color: var(--dark-color);
 	margin: 5px 0 5px 0;
+	padding:10px -50px 10px -50px;
 }
 
 #error-message,#error-message2{

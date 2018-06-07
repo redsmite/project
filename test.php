@@ -15,7 +15,10 @@
 </head>
 <body>
 	<?php
-		echo $_SESSION['name'];
+		echo $_SESSION['name'].'<br>';
+		
+
+		echo time_elapsed_string('2018-06-07 22:50:43');
 	?>
 
 	<form action="" method="POST" enctype="multipart/form-data">

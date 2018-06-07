@@ -126,7 +126,7 @@
 		</div>
 	<!-- Main Content -->
 		<div class="other-content">
-			<h1>Edit Info</h1>
+			<h1><i class="fas fa-pen-square"></i> Personal Info</h1>
 			<div class="edit-form">
 				<center>
 				<form action="editinfoprocess.php"id="edit-form" method="post">
