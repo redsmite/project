@@ -10,7 +10,7 @@
 
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,imgpath,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
 		
 		$result=$conn->query($sql);
 
@@ -61,11 +61,8 @@
 		}
 
 
-		if(isset($rows->image)){
-			$image=$rows->image;
-
-		}else{
-			$image='';
+		if(isset($rows->imgpath)){
+			$image=$rows->imgpath;
 		}
 
 
@@ -144,7 +141,7 @@
 					<div class="profile-pic-wrap">
 						<?php
 							if($image){
-								$image= '<img src="data:image/jpeg;base64,'.base64_encode( $image ).'"/>';
+								$image= '<img src="'.$image.'"/>';
 							}else if(!$image){
 								$image='<img src="img/default.png" />';
 							}

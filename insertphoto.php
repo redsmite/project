@@ -7,7 +7,7 @@
 	
 	if(isset($_SESSION['id'])){
 		$id = $_SESSION['id'];
-		$sql="SELECT image FROM tbluser WHERE userid='$id'";
+		$sql="SELECT imgpath FROM tbluser WHERE userid='$id'";
 		
 		$result=$conn->query($sql);
 
@@ -17,7 +17,7 @@
 
 		$rows=$result->fetch_object();
 		
-		$image=$rows->image;
+		$image=$rows->imgpath;
 	}
 	//End of Get Profile Info
 	addSidebar();
@@ -85,32 +85,33 @@
 			<h1>Edit Profile Photo</h1>
 			<div class="edit-form">
 				<center>
+							<p>*Please don't post nudes or offensive photos</p> 
 					<div class="profile-pic-wrap">
 						<?php
 							if($image){
-								$image= '<img src="data:image/jpeg;base64,'.base64_encode( $image ).'"/>';
+								$fimage= '<img src="'.$image.'"/>';
 							}else if(!$image){
-								$image='<img src="img/default.png" />';
+								$fimage='<img src="img/default.png" />';
 							}
-							echo $image;
+							echo $fimage;
 						?>
 					</div>
 
 					<form action="insertphoto.php" method="POST" enctype="multipart/form-data">
 						
 						<div>File:
-							<input type="file" name="image">
-							<p>*Please don't post nudes or offensive photos</p> 
+							<br>
+							<input type="file" value="Choose File" name="img"/>
 						</div>
 						<div>
-							<input type="submit" name="submit" value ="upload"> <input type="submit" name="remove" value ="remove">
+							<button type="submit" name="submit"><i class="fas fa-upload"></i> Upload</button><br><br> <button type="submit" name="remove"><i class="fas fa-trash-alt"></i> Remove</button>
 						</div>
 						<div id="error-message2">
 						<?php
 							$id=$_SESSION['id'];
 
 							if(isset($_POST['remove'])){
-									$sql = "UPDATE tbluser SET image='' WHERE userid='$id'";  
+									$sql = "UPDATE tbluser SET imgname='',imgtype='',imgpath='' WHERE userid='$id'";  
 									$conn->query($sql);
 									echo("<script>window.location.href = 'profile.php?name=".$_SESSION['name']."';</script>");	
 							}
@@ -120,64 +121,42 @@
 
 							//upload photo
 							if(isset($_POST['submit'])){
+								$error='';
+								
+								if(!$_FILES['img']['tmp_name']){
+									echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>File is empty. Select an image to upload</div>';
+								}else{
 
-							//check if the uploaded file is empty
-							if($_FILES["image"]["tmp_name"]==""){
-								echo '<i class="fas fa-exclamation-circle"></i>File is empty. Select an image to upload';
-							}else{
-							$target_dir = "uploads/";
-							$target_file = $target_dir . basename($_FILES["image"]["name"]);
-							$uploadOk = 1;
-							$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-							// Check if image file is a actual image or fake image
-							if(isset($_POST["submit"])) {
-							    $check = getimagesize($_FILES["image"]["tmp_name"]);
-							    if($check !== false) {
-							        echo "<i class='fas fa-exclamation-circle'></i>File is an image - " . $check["mime"] . ".<br>";
-							        $uploadOk = 1;
-							    } else {
-							        echo "<i class='fas fa-exclamation-circle'></i>File is not an image.<br>";
-							        $uploadOk = 0;
-							    }
-							}
+								$filetemp=$_FILES['img']['tmp_name'];
+								$filename=$_FILES['img']['name'];
+								$filetype=$_FILES['img']['type'];
+								$filepath="upload/".$filename;
+								if($filetype != "image/jpg" && $filetype != "image/png" && $filetype != "image/jpeg"
+								&& $filetype != "image/gif") {
+								     echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</div>';
+								 	$error=1;
+								}
+
+								if (filesize($filetemp) > 500000) {
+								    echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>Sorry, your file is too large. <strong>Maximum: 500kb.</strong></div>';
+								    $error=1;
+								}
 
 
-							// Check if file already exists
-							if (file_exists($target_file)) {
-							    echo "<i class='fas fa-exclamation-circle'></i>Sorry, file already exists.<br>";
-							    $uploadOk = 0;
-							}
+								if($error==''){
+									move_uploaded_file($filetemp, $filepath);
+									$filename=$conn->real_escape_string($filename);
+									$filetype=$conn->real_escape_string($filetype);
+									$filepath=$conn->real_escape_string($filepath);
+									$sql="UPDATE tbluser SET imgname='$filename',imgtype='$filetype',imgpath='$filepath' WHERE userid='$id'";
+									$result=$conn->query($sql) or die($conn->error());
 
-							// Allow certain file formats
-							if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-							&& $imageFileType != "gif" ) {
-							    echo "<i class='fas fa-exclamation-circle'></i>Sorry, only JPG, JPEG, PNG & GIF files are allowed.<br>";
-							    $uploadOk = 0;
+									if($result){
+										echo("<script>window.location.href = 'profile.php?name=".$_SESSION['name']."';</script>");
+									}
+								}
+								}
 							}
-
-							// Check file size
-							if ($_FILES["image"]["size"] > 500000) {
-							    echo "<i class='fas fa-exclamation-circle'></i>Sorry, your file is too large. <strong>Maximum: 500kb.</strong><br>";
-							    $uploadOk = 0;
-							}
-
-							// Check if $uploadOk is set to 0 by an error
-							if ($uploadOk == 0) {
-							    echo "<i class=fas fa-exclamation-circle'></i>Sorry, your file was not uploaded.";
-							// if everything is ok, try to upload file
-							} else {
-							    //if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-							        $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-									$sql = "UPDATE tbluser SET image='$image' WHERE userid='$id'";  
-									$conn->query($sql);
-									echo("<script>window.location.href = 'profile.php?name=".$_SESSION['name']."';</script>");	
-							   /* } else {
-							        echo "Sorry, there was an error uploading your file.";
-							    }*/
-							}
-							}
-							}
-
 							?>
 							</div>
 					</form>
