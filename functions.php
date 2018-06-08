@@ -38,12 +38,13 @@ function addSidebar(){
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
 				<li><a title="Go to your profile" href="profile.php?name='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
 				<li><a title="Check your notifications" href="#"><i class="far fa-bell"></i></a></li>
-				<li><a title="Check your private messages" href="privatemessage.php"><i class="far fa-envelope"></i></a></li>
+				<li><a title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a></li>
+				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
+				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
+				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>
 				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
 				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
 				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-				<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
-				<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
 			</ul>
 		</div>';
 	}else{
@@ -51,12 +52,9 @@ function addSidebar(){
 		<div class="side-nav" id="side-menu">
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-				
 				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
 				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
 				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-				<li><a title="Subscribe to our Youtube Channel" href="#"><i class="fab fa-youtube"></i></a></li>
-				<li><a title="Follow us on LinkedIn" href="#"><i class="fab fa-linkedin"></i></a></li>
 			</ul>
 		</div>';
 	}
@@ -72,7 +70,7 @@ function addLogin(){
 				</div>
 				<div class="modal-body">
 					<form action="loginprocess.php" method="post" id="log-form" >
-						<center><label for="">Username:</label>
+						<center><label for="">Username/Email:</label>
 						<input type="text" required name="username" id="log-user" placeholder="Enter Username...">
 						<br>
 						<label for="">Password:</label>

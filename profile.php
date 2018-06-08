@@ -157,8 +157,10 @@
 							if($usertype==1){
 								echo'<p>User</p>';
 							}else if ($usertype==2){
-								echo'<p>DB Admin</p>';
+								echo'<p>Moderator</p>';
 							}else if ($usertype==3){
+								echo'<p>DB Admin</p>';
+							}else if ($usertype==4){
 								echo'<p>Site Admin</p>';
 							}
 						?>
@@ -171,6 +173,7 @@
 						<?php
 							if($_SESSION['name']==$_GET['name']){
 								echo'<ul>
+									<li><a href="inbox.php"><i class="fas fa-envelope"></i> Check Inbox</a></li>
 									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Picture</a></li>
 									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Personal Info</a></li>
 									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
@@ -178,6 +181,7 @@
 							}else{
 								echo'<ul>
 									<li><a href="adduser.php"><i class="fas fa-user-plus"></i> Add as friend</a></li>
+									<li><a href="sendpm.php"><i class="fas fa-envelope"></i> Send Private Message</a></li>
 									</ul>';
 							}
 						?>
@@ -203,13 +207,13 @@
 							}
 							
 							if($email_access==0){
-								echo'<li>Email: <i class="fas fa-exclamation-circle"></i> Info restricted by user</li>';
+								echo'<li>Email: <i class="fas fa-exclamation-circle"></i> Restricted by user</li>';
 							}else{
 								echo'<li>Email: '.$email.'</li>';
 							}
 							echo'<li>Birthday: '.$birthday.'</li>
-							<li>Phone Number: '.$phoneno.'</li>
-							<li>Address: '.$address.'</li>
+							<li>Contact Number: '.$phoneno.'</li>
+							<li>Location: '.$address.'</li>
 							</ul>';
 						?>
 						<div class="biography">

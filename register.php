@@ -114,11 +114,11 @@
 										<input type="email" required id="reg-email" placeholder="Enter Email...">
 									</div>
 									<div>
-										<label for="">Phone Number</label><br>
+										<label for="">Contact Number</label><br>
 										<input type="number" id="reg-phone" placeholder="Enter Phone Number...">
 									</div>
 									<div>
-										<label for="">Address</label><br>
+										<label for="">Location</label><br>
 										<textarea id="reg-address" placeholder="Enter Address..."></textarea>
 									</div>
 									<div>

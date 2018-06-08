@@ -458,7 +458,6 @@ body{
 
 .content-box h2{
 	margin-bottom: 1rem;
-	padding-right: 100px;
 	text-align: center;
 }
 
@@ -576,7 +575,7 @@ h2.next-h2{
 	color:var(--light-color);
 }
 
-#error-message2 li{
+#error-message li, #error-message2 li{
 	list-style:none;
 	padding: 2px 0;
 }

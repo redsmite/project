@@ -179,7 +179,7 @@ function AjaxEditUser(){
 			console.warn(response);
 			if(response=="success"){
 
-				window.location.href = 'changesuccess.php';
+				window.location.href = 'changesuccess.html';
 			} else {
 				var output='';
 					for(var i in response){
@@ -188,6 +188,47 @@ function AjaxEditUser(){
 						'</ul>';
 					}
 				document.getElementById('error-message2').innerHTML = output;
+				removeSpinners();
+			}
+		}
+		myRequest.send(formData);
+	}
+}
+
+function AjaxEditEmail(){
+	document.getElementById('edit-email').addEventListener('submit', editEmail);
+
+	function editEmail(e){
+		e.preventDefault();
+
+		addSpinners();
+			
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'edituserprocess.php';
+
+		//form data variables
+		var email = document.getElementById('editemail').value;
+
+		var formData = "email="+email;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= JSON.parse(this.responseText);
+			console.warn(response);
+			if(response=="success"){
+
+				window.location.href = 'changeesuccess.html';
+			} else {
+				var output='';
+					for(var i in response){
+					output += '<ul>'+
+						'<li>'+response[i]+'</li>'+
+						'</ul>';
+					}
+				document.getElementById('error-message4').innerHTML = output;
 				removeSpinners();
 			}
 		}

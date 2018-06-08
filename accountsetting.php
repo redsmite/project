@@ -7,7 +7,7 @@
 	
 	if(isset($_SESSION['id'])){
 		$id = $_SESSION['id'];
-		$sql="SELECT userid,username,password,lastupdate FROM tbluser WHERE userid='$id'";
+		$sql="SELECT userid,username,password,email,lastupdate FROM tbluser WHERE userid='$id'";
 		
 		$result=$conn->query($sql);
 
@@ -20,6 +20,7 @@
 		$id=$rows->userid;
 		$username=$rows->username;
 		$password=$rows->password;
+		$email=$rows->email;
 		$lastupdate=$rows->lastupdate;
 		$timestamp = date("Y-m-d H:i:s");
 	}
@@ -106,10 +107,24 @@
 			</div>
 			<div class="edit-form">
 				<center>
+				<form action="" id="edit-email" method="post">
+					<div>
+						<label for="">New Email</label><br>
+						<input type="text" <?php echo 'value="'.$email.'"'?> required id="editemail" name="edit-email" placeholder="Enter New Username...">
+					</div>
+					<div>
+						<button type="submit" name="email-submit" id="email-submit">Submit</button>
+					</div>
+					<div id="error-message4"></div>
+				</form>
+				</center>
+			</div>
+			<div class="edit-form">
+				<center>
 				<form action="" id="edit-password" method="post">
 					<div>
 						<input type="hidden" id="hidden3" <?php echo 'value="'.$password.'"'?> />
-						<label for="">Old Password</label><br>
+						<label for="">Old Password(for verification)</label><br>
 						<input type="password" required id="edit-oldpassword" name="edit-oldpassword" placeholder="Enter Old Password...">
 					</div>
 					<div>
@@ -140,6 +155,7 @@
 	<script>
 		ajaxLogin();
 		AjaxEditUser();
+		AjaxEditEmail();
 		AjaxEditPass();
 	</script>
 </body>

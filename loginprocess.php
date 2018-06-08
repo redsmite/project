@@ -8,7 +8,7 @@ if(isset($_POST['username'])){
 	$password = md5($_POST['password']);
 	$remember = $_POST['remember'];
 
-	$sql = "SELECT userid,username,password,usertypeid,access FROM tbluser WHERE username='$username' and password='$password'";
+	$sql = "SELECT userid,username,email,password,usertypeid,access FROM tbluser WHERE (username='$username' and password='$password') or (email='$username' and password='$password')";
 
 		if($result=$conn->query($sql)){
 		
@@ -43,7 +43,7 @@ if(isset($_POST['username'])){
 				}
 		
 			}else{
-				$sessions =array(1,'<i class="fas fa-exclamation-circle"></i>Invalid username or password.');
+				$sessions =array(1,'<i class="fas fa-exclamation-circle"></i>Invalid username / email or password.');
 				echo json_encode($sessions);
 			}
 		}

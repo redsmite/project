@@ -165,11 +165,11 @@
 						<input type="date" <?php echo 'value="'.$birthday.'"'?> id="edit-birthday" name="edit-birthday">
 					</div>
 					<div>
-						<label for="">Phone Number</label><br>
+						<label for="">Contact Number</label><br>
 						<input type="number" <?php echo 'value="'.$phoneno.'"'?> id="edit-phone" name="edit-phone" placeholder="Enter Phone Number...">
 					</div>
 					<div>
-						<label for="">Address</label><br>
+						<label for="">Location</label><br>
 						<textarea id="edit-address" name="edit-address" placeholder="Enter Address..."><?php echo $address?> </textarea>
 						<br><br>
 					</div>
