@@ -10,7 +10,7 @@
 
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,imgpath,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,imgpath,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
 		
 		$result=$conn->query($sql);
 
@@ -37,7 +37,7 @@
 		}
 
 
-		if(isset($rows->birthday)){
+		if(strtotime($rows->birthday)!=0){
 			$birthday=date("M j, Y", strtotime($rows->birthday));
 
 		}else{
@@ -45,19 +45,19 @@
 		}
 
 
-		if(isset($rows->phoneno)){
-			$phoneno=$rows->phoneno;
+		if(isset($rows->website)){
+			$website=$rows->website;
 
 		}else{
-			$phoneno='';
+			$website='';
 		}
 
 
-		if(isset($rows->address)){
-			$address=$rows->address;
+		if(isset($rows->location)){
+			$location=$rows->location;
 
 		}else{
-			$address='';
+			$location='';
 		}
 
 
@@ -195,7 +195,7 @@
 							if($middlename==''){
 								echo'<li>Name: '.$firstname.' '.$lastname.'</li>';
 							}else{
-								echo'<li>Name: '.$firstname.' '.$middlename.' '.$lastname.'</li>';
+								echo'<li>Name: '.$firstname.' "'.$middlename.'" '.$lastname.'</li>';
 							}
 							
 							if($gender==1){
@@ -212,8 +212,8 @@
 								echo'<li>Email: '.$email.'</li>';
 							}
 							echo'<li>Birthday: '.$birthday.'</li>
-							<li>Contact Number: '.$phoneno.'</li>
-							<li>Location: '.$address.'</li>
+							<li>Website: '.createlink(nl2br($website)).'</li>
+							<li>Location: '.nl2br($location).'</li>
 							</ul>';
 						?>
 						<div class="biography">
@@ -227,6 +227,46 @@
 					</div>
 					<div class="profile-comments">
 						<h1>Comments</h1>
+						<div>
+						<form action="commentprocess.php" method="post" id="postcomment">
+							<textarea name="comment" id="comment"></textarea>
+							<input type="hidden" id="hidden" name="hidden" <?php echo 'value="'.$_SESSION['id'].'"'?> />
+							<input type="hidden" id="hidden2" name="hidden2" <?php echo 'value="'.$_GET['name'].'"'?> />
+						</div>
+						<div>
+							<input type="submit" name="comment-submit">
+						</div>
+							<?php
+								$sql2="SELECT userid FROM tbluser WHERE username='$name'";
+								$result2=$conn->query($sql2);
+								$row=$result2->fetch_object();
+								$rid=$row->userid;
+
+								$sql3="SELECT username,comment,dateposted FROM tblcomment
+								LEFT JOIN tbluser
+									ON tblcomment.userid = tbluser.userid
+								WHERE receiver='$rid'
+								ORDER BY commentid DESC";
+
+								$result3=$conn->query($sql3);
+								while($rows2=$result3->fetch_object()){
+									$Cuser=$rows2->username;
+									$Ccomment=$rows2->comment;
+									$dateposted=$rows2->dateposted;
+
+
+									echo'<div class="comment-box">
+									<div class="comment-header"><a href="profile.php?name='.$Cuser.'"><i class="fas fa-comment-dots"></i>'.$Cuser.'</a>
+									<small>'.time_elapsed_string($dateposted).'</small>
+									</div>
+									<div class="comment-body">
+									<p>'.$Ccomment.'</p>
+									</div>
+									</div>';
+								}
+								
+							?>
+						</form>
 					</div>
 				</div>			
 			</div>

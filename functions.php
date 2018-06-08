@@ -30,6 +30,13 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+function createlink($string){
+$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i'; 
+$string = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $string);
+return $string;
+}
+
 function addSidebar(){
 	if(isset($_SESSION["id"])){
 		echo '
@@ -98,7 +105,7 @@ function session_button(){
 		
 		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>Logout</a>';
 	}else{
-		echo'<a href ="register.php" class="button"><i class="fas fa-user-plus"></i>Sign Up</a>
+		echo'<a href ="register.php" class="button"><i class="fas fa-pencil-alt"></i></i>Sign Up</a>
 		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
 	}
 }

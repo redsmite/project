@@ -32,8 +32,8 @@ if(isset($_POST['username'])){
 	$birthday= mysqli_real_escape_string($conn,$_POST['birthday']);
 	$timestamp = 'NOW()';
 	$email= mysqli_real_escape_string($conn,$_POST['email']);
-	$phoneno= mysqli_real_escape_string($conn,$_POST['phoneno']);
-	$address= mysqli_real_escape_string($conn,$_POST['address']);
+	$website= mysqli_real_escape_string($conn,$_POST['website']);
+	$location= mysqli_real_escape_string($conn,$_POST['location']);
 	$gender= mysqli_real_escape_string($conn,$_POST['gender']);
 
 	//Check if password is equal
@@ -57,7 +57,7 @@ if(isset($_POST['username'])){
 
 	//Check if no error
 	if(!$error){
-		$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,access,is_show_email,gender) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday',$timestamp,'$email','$phoneno','$address','1','1','1','$gender')";
+		$sql3="INSERT INTO tbluser(username,password,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,access,is_show_email,gender) VALUES('$username','$password','$firstname','$middlename','$lastname','$birthday',$timestamp,'$email','$website','$location','1','1','1','$gender')";
 		if($conn->query($sql3)){
 
 			//Auto Login

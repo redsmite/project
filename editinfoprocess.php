@@ -7,13 +7,13 @@ if(isset($_POST['edit-button'])){
 	$middlename= $conn->real_escape_string($_POST['edit-middle']);
 	$lastname= $conn->real_escape_string($_POST['edit-last']);
 	$birthday= $conn->real_escape_string($_POST['edit-birthday']);
-	$phoneno= $conn->real_escape_string($_POST['edit-phone']);
-	$address= $conn->real_escape_string($_POST['edit-address']);
+	$website= $conn->real_escape_string($_POST['edit-website']);
+	$location= $conn->real_escape_string($_POST['edit-location']);
 	$bio= $conn->real_escape_string($_POST['edit-bio']);
 	$privacy=$_POST['privacy'];
 	$gender=$_POST['gender'];
 
-	$sql="UPDATE tbluser SET firstname='$firstname', middlename='$middlename',lastname='$lastname',birthday='$birthday',phoneno='$phoneno',address='$address',bio='$bio',is_show_email='$privacy',gender='$gender' WHERE username='$username'";
+	$sql="UPDATE tbluser SET firstname='$firstname', middlename='$middlename',lastname='$lastname',birthday='$birthday',website='$website',location='$location',bio='$bio',is_show_email='$privacy',gender='$gender' WHERE username='$username'";
 	if($result =$conn->query($sql)){
 		header("Location:profile.php?name=".$_SESSION['name']."");
 	}

@@ -121,12 +121,12 @@ function ajaxRegister(){
 		var lastname = document.getElementById('reg-last').value;
 		var birthday = document.getElementById('reg-birthday').value;
 		var email = document.getElementById('reg-email').value;
-		var phoneno = document.getElementById('reg-phone').value;
-		var address = document.getElementById('reg-address').value;
+		var website = document.getElementById('reg-website').value;
+		var location = document.getElementById('reg-location').value;
 		var gender = document.querySelector('input[name="gender"]:checked').value;
 
 		
-		var formData = "username="+username+"&password="+password+"&retype="+retype+"&firstname="+firstname+"&middlename="+middlename+"&lastname="+lastname+"&birthday="+birthday+"&email="+email+"&phoneno="+phoneno+"&address="+address+"&gender="+gender;
+		var formData = "username="+username+"&password="+password+"&retype="+retype+"&firstname="+firstname+"&middlename="+middlename+"&lastname="+lastname+"&birthday="+birthday+"&email="+email+"&website="+website+"&location="+location+"&gender="+gender;
 		
 		myRequest.open('POST', url ,true);
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -279,7 +279,6 @@ function AjaxEditPass(){
 		myRequest.send(formData);
 	}
 }
-
 
 //Redirect Page
 function redirectPage(){

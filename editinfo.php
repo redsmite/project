@@ -7,7 +7,7 @@
 	
 	if(isset($_SESSION['id'])){
 		$id = $_SESSION['id'];
-		$sql="SELECT userid,firstname,middlename,lastname,birthday,phoneno,address,usertypeid,bio,is_show_email,gender FROM tbluser WHERE userid='$id'";
+		$sql="SELECT userid,firstname,middlename,lastname,birthday,website,location,usertypeid,bio,is_show_email,gender FROM tbluser WHERE userid='$id'";
 		
 		$result=$conn->query($sql);
 
@@ -40,19 +40,19 @@
 		}
 
 
-		if(isset($rows->phoneno)){
-			$phoneno=$rows->phoneno;
+		if(isset($rows->website)){
+			$website=$rows->website;
 
 		}else{
-			$phoneno='';
+			$website='';
 		}
 
 
-		if(isset($rows->address)){
-			$address=$rows->address;
+		if(isset($rows->location)){
+			$location=$rows->location;
 
 		}else{
-			$address='';
+			$location='';
 		}
 
 
@@ -131,52 +131,55 @@
 				<center>
 				<form action="editinfoprocess.php"id="edit-form" method="post">
 					<div>
-						<label for="">*First Name</label><br>
-						<input type="text"  <?php echo 'value="'.$firstname.'"'?> required id="edit-first" name="edit-first"placeholder="Enter First Name...">
+						<label for="">First Name</label><br>
+						<input type="text"  <?php echo 'value="'.$firstname.'"'?> id="edit-first" name="edit-first"placeholder="Enter First Name...">
 					</div>
 					<div>
-						<label for="">Middle Name</label><br>
-						<input type="text" <?php echo 'value="'.$middlename.'"'?> id="edit-middle" name="edit-middle"placeholder="Enter Middle Name...">
+						<label for="">Last Name</label><br>
+						<input type="text" <?php echo 'value="'.$lastname.'"'?> id="edit-last" name="edit-last" placeholder="Enter Last Name...">
 					</div>
 					<div>
-						<label for="">*Last Name</label><br>
-						<input type="text" <?php echo 'value="'.$lastname.'"'?> required id="edit-last" name="edit-last" placeholder="Enter Last Name...">
-					</div>
-					<div id="gender-box">
-
-						<?php
-						if($gender==1){
-							echo'<label for="">*Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
-							<input type="radio" name="gender" id="gender" value="2"> Female
-							<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
-						}else if ($gender==2){
-							echo'<label for="">*Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
-								<input type="radio"  checked name="gender" id="gender" value="2"> Female
-								<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
-						}else{
-							echo'<label for="">*Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
-								<input type="radio" name="gender" id="gender" value="2"> Female
-								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary';
-						}
-						?>
+						<label for="">Nickname</label><br>
+						<input type="text" <?php echo 'value="'.$middlename.'"'?> id="edit-middle" name="edit-middle"placeholder="Enter Nickname...">
 					</div>
 					<div>
 						<label for="">Birthday</label><br>
 						<input type="date" <?php echo 'value="'.$birthday.'"'?> id="edit-birthday" name="edit-birthday">
 					</div>
 					<div>
-						<label for="">Contact Number</label><br>
-						<input type="number" <?php echo 'value="'.$phoneno.'"'?> id="edit-phone" name="edit-phone" placeholder="Enter Phone Number...">
+						<label for="">Website</label><br>
+						<textarea id="edit-website" name="edit-website"><?php echo $website?></textarea>
 					</div>
 					<div>
 						<label for="">Location</label><br>
-						<textarea id="edit-address" name="edit-address" placeholder="Enter Address..."><?php echo $address?> </textarea>
+						<textarea id="edit-location" name="edit-location"><?php echo $location?></textarea>
 						<br><br>
 					</div>
+					<div id="gender-box">
+
+						<?php
+						if($gender==1){
+							echo'<label for="">Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
+							<input type="radio" name="gender" id="gender" value="2"> Female
+							<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
+						}else if ($gender==2){
+							echo'<label for="">Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+								<input type="radio"  checked name="gender" id="gender" value="2"> Female
+								<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
+						}else{
+							echo'<label for="">Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+								<input type="radio" name="gender" id="gender" value="2"> Female
+								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary';
+						}
+						?>
+					</div>
+					<br>
 					<div>
 						<label for="">About me</label><br>
 						<textarea id="edit-bio" name="edit-bio" placeholder="Tell us about yourself..."><?php echo $bio?></textarea>
+					</div>
 					<div>
+
 						<label for="">Show email?</label>
 						<?php
 							if($email_access==1){
@@ -188,7 +191,6 @@
 						
 					</div>
 						<br><br>
-					</div>
 					<div>
 						<button type="submit" name="edit-button" id="edit-button">Submit</button>
 					</div>
