@@ -152,6 +152,94 @@ function ajaxRegister(){
 	}
 }
 
+function AjaxEditUser(){
+	document.getElementById('edit-username').addEventListener('submit', editName);
+
+	function editName(e){
+		e.preventDefault();
+
+		addSpinners();
+			
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'edituserprocess.php';
+
+		//form data variables
+		var username = document.getElementById('edit-name').value;
+		var update = document.getElementById('hidden').value;
+		var time = document.getElementById('hidden2').value;
+
+		var formData = "username="+username+"&update="+update+"&time="+time;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= JSON.parse(this.responseText);
+			console.warn(response);
+			if(response=="success"){
+
+				window.location.href = 'changesuccess.php';
+			} else {
+				var output='';
+					for(var i in response){
+					output += '<ul>'+
+						'<li>'+response[i]+'</li>'+
+						'</ul>';
+					}
+				document.getElementById('error-message2').innerHTML = output;
+				removeSpinners();
+			}
+		}
+		myRequest.send(formData);
+	}
+}
+
+function AjaxEditPass(){
+	document.getElementById('edit-password').addEventListener('submit', editPass);
+
+	function editPass(e){
+		e.preventDefault();
+
+		addSpinners();
+			
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'edituserprocess.php';
+
+		//form data variables
+		var oldpass = document.getElementById('edit-oldpassword').value;
+		var newpass = document.getElementById('edit-newpassword').value;
+		var retype = document.getElementById('edit-retype').value;
+		var truepass = document.getElementById('hidden3').value;
+
+		var formData = "oldpass="+oldpass+"&newpass="+newpass+"&retype="+retype+"&truepass="+truepass;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= JSON.parse(this.responseText);
+			console.warn(response);
+			if(response=="success"){
+
+				window.location.href = 'changepsuccess.html';
+			} else {
+				var output='';
+					for(var i in response){
+					output += '<ul>'+
+						'<li>'+response[i]+'</li>'+
+						'</ul>';
+					}
+				document.getElementById('error-message3').innerHTML = output;
+				removeSpinners();
+			}
+		}
+		myRequest.send(formData);
+	}
+}
+
+
 //Redirect Page
 function redirectPage(){
 	document.getElementById('redirectlink').addEventListener('click',historyback);
@@ -164,6 +252,39 @@ function redirectPage(){
 		window.location.replace("index.php");
 	
 	}, 3000);
+}
+
+function redirectProfile(){
+	
+	var myRequest = new XMLHttpRequest();
+	var url = 'edituserprocess.php';
+	var session = "$_SESSION['name']";
+	
+	var formData = "session="+session;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			document.getElementById('redirectlink').addEventListener('click',historyback);
+
+					
+			function historyback(){
+				window.location.replace("profile.php?name="+response);
+			}
+			setTimeout(function () {
+				   
+				window.location.replace("profile.php?name="+response);
+			
+			}, 3000);
+
+		}
+	}
+	myRequest.send(formData);
+
 }
 
 // Spinners

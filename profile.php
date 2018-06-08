@@ -24,7 +24,7 @@
 		$user=$rows->username;
 		$firstname=$rows->firstname;
 		$lastname=$rows->lastname;
-		$datecreated=date("M j, Y", strtotime($rows->datecreated));
+		$datecreated=$rows->datecreated;
 		$email=$rows->email;
 		$usertype=$rows->usertypeid;
 		$gender=$rows->gender;

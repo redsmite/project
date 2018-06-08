@@ -21,7 +21,7 @@
 		$username=$rows->username;
 		$password=$rows->password;
 		$lastupdate=$rows->lastupdate;
-		$timestamp = time();
+		$timestamp = date("Y-m-d H:i:s");
 	}
 	//End of Get Profile Info
 	addSidebar();
@@ -91,6 +91,8 @@
 				<center>
 				<form action="" id="edit-username" method="post">
 					<div>
+						<input type="hidden" id="hidden" <?php echo 'value="'.$lastupdate.'"'?> />
+						<input type="hidden" id="hidden2" <?php echo 'value="'.$timestamp.'"'?> />
 						<label for="">New Username</label><br>
 						<p>*Warning: Can only change your username once per month</p>
 						<input type="text" <?php echo 'value="'.$username.'"'?> required id="edit-name" name="edit-name" placeholder="Enter New Username...">
@@ -98,43 +100,7 @@
 					<div>
 						<button type="submit" name="username-submit" id="username-submit">Submit</button>
 					</div>
-					<?php
-						if(isset($_POST['username-submit'])){
-							$error='';
-
-							$lastupdate=strtotime($lastupdate);
-							$diff=time()-$lastupdate;
-							$month=60*60*24*28;
-							if($diff<$month){
-								echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i> You have recently changed your username. Please read above.</div>';
-							}else{
-
-							if(strlen($_POST['edit-name']) > 20)
-							{
-							    echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>Username must not be longer than 20 characters</div>';
-							    $error=1;
-							}
-
-							if($username==$_POST['edit-name']){
-								echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i> No changes made.</div>';
-							    $error=1;	
-							}
-
-							if (preg_match('/[^A-Z]/i',$_POST['edit-name']))
-							{
-							     echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>Username must not contain special characters or spaces.</div>';
-							     $error=1;
-							}
-							if($error==''){
-								$username=$_POST['edit-name'];
-								$_SESSION['name']=$username;
-								$sql="UPDATE tbluser SET username='$username', lastupdate=$timestamp WHERE userid='$id'";
-								$conn->query($sql) or die(mysqli_error($conn));
-								echo("<script>window.location.href = 'profile.php?name=".$_SESSION['name']."';</script>");
-							}
-							}
-						}
-					?>
+					<div id="error-message2"></div>
 				</form>
 				</center>
 			</div>
@@ -142,6 +108,7 @@
 				<center>
 				<form action="" id="edit-password" method="post">
 					<div>
+						<input type="hidden" id="hidden3" <?php echo 'value="'.$password.'"'?> />
 						<label for="">Old Password</label><br>
 						<input type="password" required id="edit-oldpassword" name="edit-oldpassword" placeholder="Enter Old Password...">
 					</div>
@@ -156,25 +123,7 @@
 					<div>
 						<button type="submit" name="password-submit" id="password-submit">Submit</button>
 					</div>
-					<?php
-						if(isset($_POST['password-submit'])){
-							$old=md5($_POST['edit-oldpassword']);
-							$new=$_POST['edit-newpassword'];
-							$new2=$_POST['edit-retype'];
-							if($password!=$old){
-								 echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i> Password doesn\'t match with old password.</div>';
-							}else{
-								if($new!=$new2){
-									echo'<div id="error-message2"><i class="fas fa-exclamation-circle"></i>New Password doesn\'t match.</div>';
-								}else{
-									$new=md5($new);
-									$sql="UPDATE tbluser SET password='$new' WHERE userid='$id'";
-									$conn->query($sql) or die($conn->error);
-									echo("<script>window.location.href = 'profile.php?name=".$_SESSION['name']."';</script>");
-								}
-							}
-						}
-					?>
+					<div id="error-message3"></div>
 				</form>
 				</center>
 			</div>
@@ -190,6 +139,8 @@
 	<script src="js/main.js"></script>
 	<script>
 		ajaxLogin();
+		AjaxEditUser();
+		AjaxEditPass();
 	</script>
 </body>
 </html>

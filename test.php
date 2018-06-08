@@ -15,48 +15,15 @@
 </head>
 <body>
 	<?php
-		echo $_SESSION['name'].'<br>';
-		
-
-		echo time_elapsed_string('2018-06-07 22:50:43');
+		$timestamp = date("Y-m-d H:i:s");
+		echo $timestamp;
 	?>
 
-	<form action="" method="POST" enctype="multipart/form-data">
-		<table align="center">
-			<h2 align="center">Image Insertion</h2>
-			<tr>
-				<td><label>Image</label></td>
-				<td><label>:</label></td>
-				<td><label><input type="file" name="img" required/></label></td>
-			</tr>
-			<tr>
-				<td><label></label></td>
-				<td><label></label></td>
-				<td><label><input type="submit" name="save_btn" value="SAVE" required/></label></td>
-			</tr>
-		</table>
-	</form>
-	<?php
-		if(isset($_POST['save_btn'])){
-			$username=$_SESSION['name'];
-			$filetemp=$_FILES['img']['tmp_name'];
-			$filename=$_FILES['img']['name'];
-			$filetype=$_FILES['img']['type'];
-			$filepath="upload/".$filename;
+	<input type="hidden" id="hidden" <?php echo 'value="'.$hidden.'"'?>/>
+	<script>
+		var rize = document.getElementById('hidden').value;
 
-			move_uploaded_file($filetemp, $filepath);
-			$sql="UPDATE tbluser SET imgname='$filename',imgtype='$filetype',imgpath='$filepath' WHERE username='$username'";
-			$result=$conn->query($sql) or die($conn->error());
-
-			if($result){
-				echo 'Success';
-			}
-		}
-		$sql2="SELECT imgpath FROM tbluser WHERE username='$username'";
-		$result2=$conn->query($sql2) or die($conn->error());
-		$rows=$result2->fetch_object();
-		$image=$rows->imgpath;
-	?>
-	<img src="<?php echo $image; ?>">
+		console.log(rize)
+	</script>
 </body>
 </html>

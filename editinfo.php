@@ -175,7 +175,7 @@
 					</div>
 					<div>
 						<label for="">About me</label><br>
-						<textarea id="edit-bio" name="edit-bio" placeholder="Info about yourself..."><?php echo $bio?></textarea>
+						<textarea id="edit-bio" name="edit-bio" placeholder="Tell us about yourself..."><?php echo $bio?></textarea>
 					<div>
 						<label for="">Show email?</label>
 						<?php
