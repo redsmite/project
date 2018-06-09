@@ -6,7 +6,7 @@
 }
 
 :root{
-
+	--lightblue:#c0deed;
 	/*	Blue-Orangered	*/
 	/*--primary-color:#56a79a;
 	--secondary-color:#778899;
@@ -530,7 +530,7 @@ h2.next-h2{
 }
 
 .edit-form{
-	background: #c0deed;
+	background:var(--lightblue) ;
 	color: var(--dark-color);
 	width:50%;
 	margin-left: auto;
@@ -724,16 +724,24 @@ h2.next-h2{
 }
 
 #profile-comments input[type=submit]{
+	height: 20px;
+	width: 50px;
+	border: 0;
+	background: var(--lightblue);
+	color:var(--darkgray);
+	cursor: pointer;
+	margin-top: 2px;
+}
+
+#comment-submit{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
 	height: 30px;
 	width: 60px;
-	border: 0;
-	background: var(--dark-color);
-	color:var(--light-color);
 	cursor: pointer;
 	margin-top: 2px;
+	margin-bottom: 5px;
 }
 
 .comment-box{
@@ -742,7 +750,6 @@ h2.next-h2{
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2px;
-	border-radius: px;
 }
 
 .comment-box small{
@@ -756,20 +763,20 @@ h2.next-h2{
 	padding-bottom:12px;
 }
 
-.comment-box a{
+.cm-user{
 	color: var(--light-color);
 	text-decoration: none;
 	padding-left:4px;
 }
 
-.comment-box a:hover{
+.cm-user:hover{
 	color:var(--primary-color);
 }
 
 .comment-body{
 	background: var(--light-color);
 	padding-left: 5px;
-	min-height:50px;
+	min-height:40px;
 	border: 1px solid var(--dark-color);
 }
 
@@ -782,6 +789,12 @@ h2.next-h2{
 
 .comment-tn img{
 	max-width: 100%;
+}
+
+.modified{
+	font-style:italic;
+	text-align: right;
+	font-size: 10px;
 }
 
 /* Footer */

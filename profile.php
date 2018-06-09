@@ -171,6 +171,7 @@
 					</div>
 					<div class="dashboard">
 						<?php
+						if(isset($_SESSION['id'])){
 							if($_SESSION['name']==$_GET['name']){
 								echo'<ul>
 									<li><a href="inbox.php"><i class="fas fa-envelope"></i> Check Inbox</a></li>
@@ -184,6 +185,7 @@
 									<li><a href="sendpm.php"><i class="fas fa-envelope"></i> Send Private Message</a></li>
 									</ul>';
 							}
+						}
 						?>
 					</div>
 				</div>
@@ -227,22 +229,27 @@
 					</div>
 					<div id="profile-comments">
 						<h1>Comments</h1>
-						<div>
+						<?php
+					if(isset($_SESSION['id'])){
+						echo'<div>
 						<form action="commentprocess.php" method="post" id="postcomment">
-							<textarea name="comment" id="comment"></textarea>
-							<input type="hidden" id="hidden" name="hidden" <?php echo 'value="'.$_SESSION['id'].'"'?> />
-							<input type="hidden" id="hidden2" name="hidden2" <?php echo 'value="'.$_GET['name'].'"'?> />
+							<textarea name="comment" required id="comment"></textarea>
+							<input type="hidden" id="hidden" name="hidden" value="'.$_SESSION["id"].'" />
+							<input type="hidden" id="hidden2" name="hidden2" value="'.$_GET["name"].'" />
 						</div>
 						<div>
-							<input type="submit" name="comment-submit">
-						</div>
+							<input type="submit" id="comment-submit" name="comment-submit">
+							</form>
+						</div>';
+						}
+						?>
 							<?php
 								$sql2="SELECT userid FROM tbluser WHERE username='$name'";
 								$result2=$conn->query($sql2);
 								$row=$result2->fetch_object();
 								$rid=$row->userid;
 
-								$sql3="SELECT commentid,username,comment,dateposted,imgpath FROM tblcomment
+								$sql3="SELECT commentid,tblcomment.userid,username,comment,dateposted,imgpath,modified FROM tblcomment
 								LEFT JOIN tbluser
 									ON tblcomment.userid = tbluser.userid
 								WHERE receiver='$rid'
@@ -252,17 +259,24 @@
 								$result3=$conn->query($sql3);
 								while($rows2=$result3->fetch_object()){
 									$Cid=$rows2->commentid;
+									$Cuid=$rows2->userid;
 									$Cuser=$rows2->username;
 									$Ccomment=$rows2->comment;
 									$dateposted=$rows2->dateposted;
 									$Cimg=$rows2->imgpath;
+									$modified=$rows2->modified;
 									if($Cimg==''){
 										$Cimg='img/default.png';
+									}
+									if($modified==0){
+										$modified='';
+									}else{
+										$modified='<i>Modified: '.time_elapsed_string($modified).'</i>';
 									}
 
 									echo'<div class="comment-box">
 									<div class="comment-header">
-									<a href="profile.php?name='.$Cuser.'">
+									<a class="cm-user" href="profile.php?name='.$Cuser.'">
 									<div class="comment-tn">
 									<img src="'.$Cimg.'">
 									</div>
@@ -270,7 +284,22 @@
 									<small>'.time_elapsed_string($dateposted).'</small>
 									</div>
 									<div class="comment-body">
-									<p>'.nl2br($Ccomment).'</p>
+									<p>'.nl2br($Ccomment).'
+										<p class="modified">'.$modified.'</p>';
+					//Delete / Edit Comment
+					if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
+						echo'
+						<form action="commentprocess.php" method="post">
+						<input type="hidden" id="hidden4" name="hidden4" value="'.$_GET["name"].'" />
+							<input type="hidden" name="hidden3" value="'.$Cid.'">
+							<input type="submit" value="delete" name="deletebtn"> <input type="submit" value="edit" name="editbtn">
+						</form>';
+					}				
+
+					
+									
+
+									echo'</p>
 									</div>
 									</div>';
 								}

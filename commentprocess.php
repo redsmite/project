@@ -18,4 +18,12 @@ if(isset($_POST['comment-submit'])){
 	header("Location:profile.php?name=".$receiver."#profile-comments");
 }
 
+if(isset($_POST['deletebtn'])){
+	$cid=$_POST['hidden3'];
+	$receiver=$conn->real_escape_string($_POST['hidden4']);
+	$sql="DELETE FROM tblcomment WHERE commentid='$cid'";
+	$result=$conn->query($sql);
+	header("Location:profile.php?name=".$receiver."#profile-comments");
+}
+
 ?>
