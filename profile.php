@@ -236,8 +236,6 @@
 							<textarea name="comment" required id="comment"></textarea>
 							<input type="hidden" id="hidden" name="hidden" value="'.$_SESSION["id"].'" />
 							<input type="hidden" id="hidden2" name="hidden2" value="'.$_GET["name"].'" />
-						</div>
-						<div>
 							<input type="submit" id="comment-submit" name="comment-submit">
 							</form>
 						</div>';
@@ -289,11 +287,16 @@
 					//Delete / Edit Comment
 					if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
 						echo'
-						<form action="commentprocess.php" method="post">
-						<input type="hidden" id="hidden4" name="hidden4" value="'.$_GET["name"].'" />
-							<input type="hidden" name="hidden3" value="'.$Cid.'">
-							<input type="submit" value="delete" name="deletebtn"> <input type="submit" value="edit" name="editbtn">
+						<form align="right" action="commentprocess.php" method="post">
+						<input type="hidden" name="hidden4" value="'.$_GET["name"].'" />
+							<input type="hidden" name="hidden3" value="'.$Cid.'">'; 
+							if($Cuid==$_SESSION['id']){
+								echo'<a href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
+							}
+						echo'	<input type="submit" value="delete" name="deletebtn">   
+
 						</form>';
+			
 					}				
 
 					
@@ -302,10 +305,8 @@
 									echo'</p>
 									</div>
 									</div>';
-								}
-								
+								}	
 							?>
-						</form>
 					</div>
 				</div>			
 			</div>

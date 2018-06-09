@@ -19,10 +19,10 @@
 		</header>
 	<!-- Login Form -->
 		<div class="other-content">
-			<h1 id="admin-label">Site Administration</h1>
+			<h1>Site Administration</h1>
 			<div class="container">
 				<div class="content-box">
-					<h2 id="admin-text"><span id="highlight-text">Admin</span> Login</h2>
+					<h2><span id="highlight-text">Admin</span> Login</h2>
 					<div class="form">
 						<center>
 							<form action="#" method="post">

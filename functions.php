@@ -147,6 +147,7 @@ function user_access(){
 	}
 }
 
+
 function user_nonAccess(){
 	if(isset($_SESSION['id'])){
 		header('location:index.php');

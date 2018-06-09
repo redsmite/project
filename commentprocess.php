@@ -1,5 +1,8 @@
 <?php
 session_start();
+include'functions.php';
+user_access();
+
 include'connection.php';
 if(isset($_POST['comment-submit'])){
 	$comment=$conn->real_escape_string($_POST['comment']);
@@ -24,6 +27,35 @@ if(isset($_POST['deletebtn'])){
 	$sql="DELETE FROM tblcomment WHERE commentid='$cid'";
 	$result=$conn->query($sql);
 	header("Location:profile.php?name=".$receiver."#profile-comments");
+	;
+}
+
+if(isset($_POST['submit'])){
+	$id= $_POST['hidden'];
+	$name= $_POST['hidden2'];
+
+	$sql="SELECT comment FROM tblcomment WHERE commentid='$id'";
+	if($result=$conn->query($sql)){
+	$row=$result->fetch_object();
+	$comment=$row->comment;
+	}else{	
+		die('This page doesn\'t exist');
+	}
+
+	if($comment==$_POST['comment']){
+		header("Location:profile.php?name=".$name."#profile-comments");
+	}
+	
+	$comment=$conn->real_escape_string($_POST['comment']);
+
+	$sql2="UPDATE tblcomment SET comment='$comment',modified=NOW() WHERE commentid='$id'";
+	$result2=$conn->query($sql2);
+	header("Location:profile.php?name=".$name."#profile-comments");
+}
+
+if(isset($_POST['back'])){
+	$name= $_POST['hidden2'];
+	header("Location:profile.php?name=".$name."#profile-comments");
 }
 
 ?>
