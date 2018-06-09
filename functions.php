@@ -52,6 +52,7 @@ function addSidebar(){
 				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
 				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
 				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a title="Logout" href="logout.php"><i class="fas fa-power-off"></i></a></li>
 			</ul>
 		</div>';
 	}else{
@@ -99,11 +100,20 @@ function addLogin(){
 }
 
 function session_button(){
+	$conn = mysqli_connect ("localhost", "root", "", "itsproject");
 	if(isset($_SESSION['id'])){
-		echo'<a class="button" href=profile.php?name='.$_SESSION['name'].'><i class="fas fa-user-alt"></i> '
-			 .$_SESSION["name"].'\'s Profile</a>
-		
-		<a href="logout.php" class="button"><i class="fas fa-sign-out-alt"></i>Logout</a>';
+		$sql="SELECT imgpath FROM tbluser WHERE userid=".$_SESSION['id']."";
+		$result=$conn->query($sql);
+		$row=$result->fetch_object();
+		$tn_image=$row->imgpath;
+		if($tn_image==''){
+			$tn_image='img/default.png';
+		}
+
+
+		echo'<a class="button" href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
+		<a class="button" href=profile.php?name='.$_SESSION['name'].'>
+		'.$_SESSION["name"].'\'s Profile<div class="top-tn"><img src="'.$tn_image.'""></div></a>';
 	}else{
 		echo'<a href ="register.php" class="button"><i class="fas fa-pencil-alt"></i></i>Sign Up</a>
 		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';

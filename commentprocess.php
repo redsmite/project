@@ -15,7 +15,7 @@ if(isset($_POST['comment-submit'])){
 	$sql2="INSERT INTO tblcomment (userid,receiver,comment,dateposted) VALUES('$id','$rid','$comment',NOW())";
 	$result2=$conn->query($sql2) or die(mysqli_error($conn));
 
-	header("Location:profile.php?name=".$receiver."");
+	header("Location:profile.php?name=".$receiver."#profile-comments");
 }
 
 ?>

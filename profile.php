@@ -225,7 +225,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="profile-comments">
+					<div id="profile-comments">
 						<h1>Comments</h1>
 						<div>
 						<form action="commentprocess.php" method="post" id="postcomment">
@@ -242,25 +242,35 @@
 								$row=$result2->fetch_object();
 								$rid=$row->userid;
 
-								$sql3="SELECT username,comment,dateposted FROM tblcomment
+								$sql3="SELECT commentid,username,comment,dateposted,imgpath FROM tblcomment
 								LEFT JOIN tbluser
 									ON tblcomment.userid = tbluser.userid
 								WHERE receiver='$rid'
-								ORDER BY commentid DESC";
+								ORDER BY commentid DESC
+								LIMIT 10";
 
 								$result3=$conn->query($sql3);
 								while($rows2=$result3->fetch_object()){
+									$Cid=$rows2->commentid;
 									$Cuser=$rows2->username;
 									$Ccomment=$rows2->comment;
 									$dateposted=$rows2->dateposted;
-
+									$Cimg=$rows2->imgpath;
+									if($Cimg==''){
+										$Cimg='img/default.png';
+									}
 
 									echo'<div class="comment-box">
-									<div class="comment-header"><a href="profile.php?name='.$Cuser.'"><i class="fas fa-comment-dots"></i>'.$Cuser.'</a>
+									<div class="comment-header">
+									<a href="profile.php?name='.$Cuser.'">
+									<div class="comment-tn">
+									<img src="'.$Cimg.'">
+									</div>
+									'.$Cuser.'</a>
 									<small>'.time_elapsed_string($dateposted).'</small>
 									</div>
 									<div class="comment-body">
-									<p>'.$Ccomment.'</p>
+									<p>'.nl2br($Ccomment).'</p>
 									</div>
 									</div>';
 								}
