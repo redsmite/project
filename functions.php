@@ -108,8 +108,12 @@ function session_button(){
 		if($tn_image==''){
 			$tn_image='img/default.png';
 		}
+		$id=$_SESSION['id'];
+		$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' and checked=0 ORDER BY notifid DESC LIMIT 30";
+		$result=$conn->query($sql);
+		$count=$result->num_rows;
 		echo'<a class="button" title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a>
-		<a class="button" id="notifbtn" title="Check your notifications" onclick="toggleNotif()""><i class="far fa-bell"></i></a>
+		<a class="button" id="notifbtn" title="Check your notifications" onclick="toggleNotif()""><i class="far fa-bell"></i><span id="notifnum">'.$count.'</span></a>
 		<a class="button" href=profile.php?name='.$_SESSION['name'].'>
 		'.$_SESSION["name"].'\'s Profile<div class="top-tn"><img src="'.$tn_image.'""></div></a>';
 		echo'<div id="notifdrop">
@@ -118,9 +122,7 @@ function session_button(){
 
 //Notification
 
-$id=$_SESSION['id'];
-$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC LIMIT 5";
-$result=$conn->query($sql);
+
 while($rows=$result->fetch_object())
 {
 $nid=$rows->notifid;

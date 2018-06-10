@@ -61,6 +61,26 @@ function toggleNotif(){
     } else {
         x.style.display = "none";
     }
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'edituserprocess.php';
+	var checked = "1";
+	
+	var formData = "checked="+checked;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		console.log(response);
+		if(response){	
+    		document.getElementById("notifnum").innerHTML='0';
+		}
+	}
+	myRequest.send(formData);
+
+
 }
 
 //Login AJAX
@@ -341,7 +361,6 @@ function pageReload(){
 	document.querySelector('.main-container').style.opacity='0.7';
 	document.querySelector('body').classList.add('spinner');
 
-	// Mimic server req
 	setTimeout(()=>{
 		document.querySelector('body').classList.remove('spinner');
 		document.querySelector('.main-container').style.opacity='1';

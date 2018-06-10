@@ -122,6 +122,19 @@ if(isset($_POST['session'])){
 	echo json_encode($name);
 }
 
+if(isset($_POST['checked'])){
+	$id=$_SESSION['id'];
+	$sql="SELECT notifid FROM tblnotif WHERE receiverid='$id' and checked=0 ORDER BY notifid DESC";
+	$result=$conn->query($sql);
+	$row=$result->fetch_object();
+	while($row){
+		$notifid=$row->notifid;
 
+		$update="UPDATE tblnotif SET checked=1 WHERE notifid='$notifid'";
+		$udres=$conn->query($update);
+	}
+
+	echo json_encode('here');
+}
 
 ?>

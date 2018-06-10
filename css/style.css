@@ -176,6 +176,13 @@ body{
 	color:var(--primary-color);
 }
 
+#notifnum{
+	background: red;
+	padding:0 4px;
+	border-radius: 50%;
+	color: var(--light-color);
+}
+
 /* Header */
 #main-header{
 	grid-area:header;
