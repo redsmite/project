@@ -54,6 +54,15 @@ function modal(){
 	}
 }
 
+function toggleNotif(){
+	  var x = document.getElementById("notifdrop");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
 //Login AJAX
 function ajaxLogin(){
 	document.getElementById('log-form').addEventListener('submit', postName);

@@ -149,6 +149,30 @@ body{
 	max-width: 100%
 }
 
+#notifdrop{
+	display:none;
+	z-index: 1;
+	position:absolute;
+	right:16px;
+	top:42px;
+	max-height:320px;
+	width:280px;
+	background: var(--gray);
+	border: 1px solid var(--darkgray);
+	overflow-y:auto;
+}
+
+#notifdrop li{
+	color:var(--dark-color);
+	padding:5px;
+	border:1px solid var(--darkgray);
+}
+
+#notifdrop a{
+	text-decoration: none;
+	color:var(--primary-color);
+}
+
 
 /* Header */
 #main-header{
@@ -721,19 +745,23 @@ h2.next-h2{
 }
 
 #profile-comments input[type='submit']{
-	height: 20px;
+	height: 25px;
 	width: 50px;
-	border: 0;
-	background: var(--lightblue);
-	color:var(--darkgray);
+	border:0;
+	background: var(--darkgray);
+	color:var(--light-color);
 	cursor: pointer;
-	margin-top: 2px;
+}
+
+#profile-comments input[type='submit']:hover{
+	background: var(--primary-color);
 }
 
 #comment-submit{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
+	border:0;
 	height: 30px;
 	width: 60px;
 	cursor: pointer;
@@ -779,10 +807,14 @@ h2.next-h2{
 
 .comment-body a{
 	text-decoration: none;
-	background: var(--lightblue);
-	color:var(--darkgray);
+	background: var(--darkgray);
+	color:var(--light-color);
 	font-size: 12px;
-	padding: 3px 15px;
+	padding: 6.2px 15px;
+}
+
+.comment-body a:hover{
+	background: var(--primary-color);
 }
 
 .comment-tn{

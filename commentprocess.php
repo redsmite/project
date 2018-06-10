@@ -15,10 +15,21 @@ if(isset($_POST['comment-submit'])){
 	$row=$result->fetch_object();
 	$rid=$row->userid;
 
+	
+
+
+
 	$sql2="INSERT INTO tblcomment (userid,receiver,comment,dateposted) VALUES('$id','$rid','$comment',NOW())";
 	$result2=$conn->query($sql2) or die(mysqli_error($conn));
+	if($rid==$id){
 
-	header("Location:profile.php?name=".$receiver."#profile-comments");
+			header("Location:profile.php?name=".$receiver."#profile-comments");
+	}else{
+		$sql3="INSERT INTO tblnotif (userid,receiverid,notif) values('$id','$rid','commented on your profile')";
+		$result3=$conn->query($sql3);
+
+		header("Location:profile.php?name=".$receiver."#profile-comments");
+}
 }
 
 if(isset($_POST['deletebtn'])){
@@ -44,13 +55,14 @@ if(isset($_POST['submit'])){
 
 	if($comment==$_POST['comment']){
 		header("Location:profile.php?name=".$name."#profile-comments");
-	}
+	} else{
 	
-	$comment=$conn->real_escape_string($_POST['comment']);
+		$comment=$conn->real_escape_string($_POST['comment']);
 
-	$sql2="UPDATE tblcomment SET comment='$comment',modified=NOW() WHERE commentid='$id'";
-	$result2=$conn->query($sql2);
-	header("Location:profile.php?name=".$name."#profile-comments");
+		$sql2="UPDATE tblcomment SET comment='$comment',modified=NOW() WHERE commentid='$id'";
+		$result2=$conn->query($sql2);
+		header("Location:profile.php?name=".$name."#profile-comments");
+	}
 }
 
 if(isset($_POST['back'])){

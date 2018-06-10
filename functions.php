@@ -44,7 +44,6 @@ function addSidebar(){
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
 				<li><a title="Go to your profile" href="profile.php?name='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
-				<li><a title="Check your notifications" href="#"><i class="far fa-bell"></i></a></li>
 				<li><a title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a></li>
 				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
@@ -111,9 +110,39 @@ function session_button(){
 		}
 
 
-		echo'<a class="button" href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
+		echo'<a class="button" href="logout.php"><i class="fas fa-power-off"></i></a> 
+		<a class="button" onclick="toggleNotif()""><i class="far fa-bell"></i></a>
 		<a class="button" href=profile.php?name='.$_SESSION['name'].'>
 		'.$_SESSION["name"].'\'s Profile<div class="top-tn"><img src="'.$tn_image.'""></div></a>';
+		echo'<div id="notifdrop">
+		<ul>';
+
+//Notification
+
+$id=$_SESSION['id'];
+$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC LIMIT 5";
+$result=$conn->query($sql);
+while($rows=$result->fetch_object())
+{
+$nid=$rows->notifid;
+$uid=$rows->userid;
+$rid=$rows->receiverid;
+$notif=$rows->notif;
+$date=time_elapsed_string($rows->notifdate);
+
+$sql2="SELECT username FROM tbluser WHERE userid='$uid'";
+$result2=$conn->query($sql2);
+$rows2=$result2->fetch_object();
+
+$uname=$rows2->username;
+
+
+echo'<li><a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+
+}
+		echo'<center><a href="notification.php">See all notifications</a></center>
+		</ul>
+		</div>';
 	}else{
 		echo'<a href ="register.php" class="button"><i class="fas fa-pencil-alt"></i></i>Sign Up</a>
 		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';

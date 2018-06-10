@@ -99,6 +99,7 @@
 	<script>
 		modal();
 		ajaxLogin();
+		notifpopout();
 	</script>
 </body>
 </html>
