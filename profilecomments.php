@@ -1,8 +1,8 @@
 <?php
 session_start();
-include'connection.php';
 include'functions.php';
-user_access();
+require_once'connection.php';
+$name=$_GET['name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,34 +62,76 @@ user_access();
 		</div>
 			<!-- Main Content -->
 		<div class="other-content">
-			<h1><a class="btp" href="profile.php?name=<?php echo $_SESSION['name'] ?>">Go back to your profile</a></h1>
+			<h1><a class="btp" href="profile.php?name=<?php echo $name ?>">Back to <?php echo $name ?>'s Profile</a></h1>
 <?php
-$id=$_SESSION['id'];
-$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC";
-$result=$conn->query($sql);
-$result=$conn->query($sql);
-$count=$result->num_rows;
-echo '<h4>Notifications('.$count.')</h4>
-<ul id="notiflist">';
-while($rows=$result->fetch_object())
-{
-$nid=$rows->notifid;
-$uid=$rows->userid;
-$rid=$rows->receiverid;
-$notif=$rows->notif;
-$date=time_elapsed_string($rows->notifdate);
 
-$sql2="SELECT username FROM tbluser WHERE userid='$uid'";
+$sql2="SELECT userid FROM tbluser WHERE username='$name'";
 $result2=$conn->query($sql2);
-$rows2=$result2->fetch_object();
+$row=$result2->fetch_object();
+$rid=$row->userid;
 
-$uname=$rows2->username;
+$sql3="SELECT commentid,tblcomment.userid,username,comment,dateposted,imgpath,modified FROM tblcomment
+LEFT JOIN tbluser
+	ON tblcomment.userid = tbluser.userid
+WHERE receiver='$rid'
+ORDER BY commentid DESC";
 
 
-echo'<li><a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+$result3=$conn->query($sql3);
+$count=$result3->num_rows;
+
+echo '<h4>Comments('.$count.')</h4>';
+while($rows2=$result3->fetch_object()){
+	$Cid=$rows2->commentid;
+	$Cuid=$rows2->userid;
+	$Cuser=$rows2->username;
+	$Ccomment=$rows2->comment;
+	$dateposted=$rows2->dateposted;
+	$Cimg=$rows2->imgpath;
+	$modified=$rows2->modified;
+	if($Cimg==''){
+		$Cimg='img/default.png';
+	}
+	if($modified==0){
+		$modified='';
+	}else{
+		$modified='<i>Modified: '.time_elapsed_string($modified).'</i>';
+	}
+
+	echo'<div class="comment-box">
+	<div class="comment-header">
+	<a class="cm-user" href="profile.php?name='.$Cuser.'">
+	<div class="comment-tn">
+	<img src="'.$Cimg.'">
+	</div>
+	'.$Cuser.'</a>
+	<small>'.time_elapsed_string($dateposted).'</small>
+	</div>
+	<div class="comment-body">
+	<p>'.nl2br($Ccomment).'
+		<p class="modified">'.$modified.'</p>';
+//Delete / Edit Comment
+if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
+echo'
+<form align="right" action="commentprocess.php" method="post">
+<input type="hidden" name="hidden4" value="'.$_GET["name"].'" />
+<input type="hidden" name="hidden3" value="'.$Cid.'">'; 
+if($Cuid==$_SESSION['id']){
+	echo'<a href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
 }
+echo'	<input type="submit" value="delete" name="deletebtn">   
 
-echo '</ul>';
+</form>';
+
+}				
+
+
+		
+
+		echo'</p>
+		</div>
+		</div>';
+	}	
 ?>
 </div>
 <!-- Footer -->

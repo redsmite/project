@@ -108,13 +108,12 @@ function session_button(){
 		if($tn_image==''){
 			$tn_image='img/default.png';
 		}
-
-
-		echo'<a class="button" href="logout.php"><i class="fas fa-power-off"></i></a> 
-		<a class="button" onclick="toggleNotif()""><i class="far fa-bell"></i></a>
+		echo'<a class="button" title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a>
+		<a class="button" id="notifbtn" title="Check your notifications" onclick="toggleNotif()""><i class="far fa-bell"></i></a>
 		<a class="button" href=profile.php?name='.$_SESSION['name'].'>
 		'.$_SESSION["name"].'\'s Profile<div class="top-tn"><img src="'.$tn_image.'""></div></a>';
 		echo'<div id="notifdrop">
+		Notifications
 		<ul>';
 
 //Notification
@@ -181,89 +180,6 @@ function user_nonAccess(){
 	if(isset($_SESSION['id'])){
 		header('location:index.php');
 	}
-}
-
-//Profile functions
-function get_user_info(){
-	//Get Profile Info
-
-	if(!$name = $_GET['name']){
-		die();
-	}
-	$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,phoneno,address,usertypeid,image,bio FROM tbluser WHERE username='$name'";
-	if(!$result=$conn->query($sql)){
-		die('<div id="thanks-message">
-			This page doesn\'t exist
-			</div>');
-	}
-
-	$rows=$result->fetch_object();
-	$id=$rows->userid;
-	$user=$rows->username;
-	$firstname=$rows->firstname;
-	$lastname=$rows->lastname;
-	$datecreated=$rows->datecreated;
-	$email=$rows->email;
-	$usertype=$rows->usertypeid;
-	if(isset($rows->middlename)){
-		$middlename=$rows->middlename;
-
-	}else{
-		$middlename='';
-	}
-
-
-	if(isset($rows->birthday)){
-		$birthday=$rows->birthday;
-
-	}else{
-		$birthday='';
-	}
-
-
-	if(isset($rows->phoneno)){
-		$phoneno=$rows->phoneno;
-
-	}else{
-		$phoneno='';
-	}
-
-
-	if(isset($rows->address)){
-		$address=$rows->address;
-
-	}else{
-		$address='';
-	}
-
-
-	if(isset($rows->image)){
-		$image=$rows->image;
-
-	}else{
-		$image='';
-	}
-
-
-	if(isset($rows->bio)){
-		$bio=$rows->bio;
-
-	}else{
-		$bio='';
-	}
-}
-
-function user_info(){
-
-	get_user_info();
-
-	echo'<h1>'.$user.'\'s Profile</h1>
-		<h3>Date Joined:'.$datecreated.'</h3>
-		<ul>
-			<li>First Name:'.$firstname.'</li>
-			<li>Middle Name:'.$middlename.'</li>
-			<li>Last Name:'.$lastname.'</li>
-		</ul>';
 }
 
 function adminAccess(){

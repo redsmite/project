@@ -229,6 +229,7 @@
 					</div>
 					<div id="profile-comments">
 						<h1>Comments</h1>
+						<p align="right"><a id="allcom" href="profilecomments.php?name=<?php echo $name ?>">Show All Comments</a></p>
 						<?php
 					if(isset($_SESSION['id'])){
 						echo'<div>

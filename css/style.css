@@ -8,9 +8,9 @@
 :root{
 	--lightblue:#c0deed;
 	/*	Blue-Orangered	*/
-	/*--primary-color:#56a79a;
+/*	--primary-color:#FF4500;
 	--secondary-color:#778899;
-	--contrast:	#FF4500;
+	--contrast:	#56a79a;
 	--secondary-contrast:#926239;
 	--light-color:#fafafa;
 	--dark-color:#222;
@@ -159,20 +159,22 @@ body{
 	width:280px;
 	background: var(--gray);
 	border: 1px solid var(--darkgray);
+	color:var(--dark-color);
 	overflow-y:auto;
 }
 
-#notifdrop li{
+#notifdrop li,#notiflist li{
 	color:var(--dark-color);
 	padding:5px;
 	border:1px solid var(--darkgray);
+	list-style: none;
+	line-height: 2rem;
 }
 
-#notifdrop a{
+#notifdrop a,#notiflist a{
 	text-decoration: none;
 	color:var(--primary-color);
 }
-
 
 /* Header */
 #main-header{
@@ -734,6 +736,10 @@ h2.next-h2{
 	border-top:1px solid var(--darkgray);
 }
 
+#allcom{
+	color:var(--dark-color);
+}
+
 #profile-comments textarea{
 	width:90%;
 	height:125px;
@@ -860,6 +866,10 @@ h2.next-h2{
 	background:#222;
 	color:#fff;
 	cursor: pointer;
+}
+
+.btp{
+	color:var(--dark-color);
 }
 
 /* Footer */
