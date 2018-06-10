@@ -65,7 +65,7 @@ user_access();
 			<h1><a class="btp" href="profile.php?name=<?php echo $_SESSION['name'] ?>">Go back to your profile</a></h1>
 <?php
 $id=$_SESSION['id'];
-$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC";
+$sql="SELECT notifid,userid,receiverid,notif,notifdate,notiftype FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC";
 $result=$conn->query($sql);
 $result=$conn->query($sql);
 $count=$result->num_rows;
@@ -77,6 +77,7 @@ $nid=$rows->notifid;
 $uid=$rows->userid;
 $rid=$rows->receiverid;
 $notif=$rows->notif;
+$type=$rows->notiftype;
 $date=time_elapsed_string($rows->notifdate);
 
 $sql2="SELECT username FROM tbluser WHERE userid='$uid'";
@@ -85,8 +86,10 @@ $rows2=$result2->fetch_object();
 
 $uname=$rows2->username;
 
+if($type==1){
 
-echo'<li><a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+	echo'<li><i class="far fa-comment-dots"></i> <a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+}
 }
 
 echo '</ul>';

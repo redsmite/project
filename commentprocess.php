@@ -14,7 +14,7 @@ if(isset($_POST['comment-submit'])){
 	$result=$conn->query($sql);
 	$row=$result->fetch_object();
 	$rid=$row->userid;
-
+	$timestamp='NOW()';
 	
 
 
@@ -25,7 +25,7 @@ if(isset($_POST['comment-submit'])){
 
 			header("Location:profile.php?name=".$receiver."#profile-comments");
 	}else{
-		$sql3="INSERT INTO tblnotif (userid,receiverid,notif) values('$id','$rid','commented on your profile')";
+		$sql3="INSERT INTO tblnotif (userid,receiverid,notif,notifdate,notiftype) values('$id','$rid','commented on your profile',$timestamp,'1')";
 		$result3=$conn->query($sql3);
 
 		header("Location:profile.php?name=".$receiver."#profile-comments");

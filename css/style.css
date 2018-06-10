@@ -613,7 +613,7 @@ h2.next-h2{
 	width:100%;
 	padding:0;
 	margin-top:4px;
-	background:#ff4040;
+	background:red;
 	color:var(--light-color);
 }
 

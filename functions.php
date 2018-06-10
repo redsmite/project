@@ -109,7 +109,7 @@ function session_button(){
 			$tn_image='img/default.png';
 		}
 		$id=$_SESSION['id'];
-		$sql="SELECT notifid,userid,receiverid,notif,notifdate FROM tblnotif WHERE receiverid='$id' and checked=0 ORDER BY notifid DESC LIMIT 30";
+		$sql="SELECT notifid,userid,receiverid,notif,notifdate,notiftype FROM tblnotif WHERE receiverid='$id' and checked=0 ORDER BY notifid DESC";
 		$result=$conn->query($sql);
 		$count=$result->num_rows;
 		echo'<a class="button" title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a>
@@ -121,7 +121,9 @@ function session_button(){
 		<ul>';
 
 //Notification
-
+if($count==0){
+	echo'<li>No notifications yet...</li>';
+}else{
 
 while($rows=$result->fetch_object())
 {
@@ -130,6 +132,7 @@ $uid=$rows->userid;
 $rid=$rows->receiverid;
 $notif=$rows->notif;
 $date=time_elapsed_string($rows->notifdate);
+$type=$rows->notiftype;
 
 $sql2="SELECT username FROM tbluser WHERE userid='$uid'";
 $result2=$conn->query($sql2);
@@ -138,9 +141,13 @@ $rows2=$result2->fetch_object();
 $uname=$rows2->username;
 
 
-echo'<li><a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+if($type==1){
 
+	echo'<li><i class="far fa-comment-dots"></i> <a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
 }
+}
+}
+
 		echo'<center><a href="notification.php">See all notifications</a></center>
 		</ul>
 		</div>';
