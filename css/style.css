@@ -6,6 +6,8 @@
 }
 
 :root{
+	--facebookblue:#4267b2;
+	--twitterblue:#00aced;
 	--lightblue:#c0deed;
 	/*	Blue-Orangered	*/
 /*	--primary-color:#FF4500;
@@ -26,6 +28,16 @@
 	--dark-color:#222;
 	--gray:#eee;
 	--darkgray:#888888;
+
+	/*Facebook-like*/
+	/*--primary-color:#fff;
+	--secondary-color:#fff;
+	--contrast:	#fff;
+	--secondary-contrast:#fff;
+	--light-color:#fff;
+	--dark-color:#4267b2;
+	--gray:#fff;
+	--darkgray:#4267b2;*/
 
 	/*	Magenta-Lime */	
 	/*--primary-color:#ff00ff;
@@ -176,7 +188,7 @@ body{
 	color:var(--primary-color);
 }
 
-#notifnum{
+#notifnum,#pmnum{
 	background: red;
 	padding:0 4px;
 	border-radius: 50%;
@@ -879,6 +891,40 @@ h2.next-h2{
 	color:var(--dark-color);
 }
 
+#sendmsg{
+	height: 180px;
+}
+
+.inbox-box{
+	width:95%;
+	background: var(--lightblue);
+	color: var(--dark-color);
+	padding:5px;
+	padding-left: 10px;
+	border-radius: 5px;
+	box-shadow: 5px 5px var(--darkgray);
+	margin-bottom: 10px;
+}
+
+.sender{
+	color:var(--dark-color);
+}
+
+.reply{
+	color:var(--primary-color);
+}
+
+.inbox-div{
+	background: var(--light-color);
+	border-radius: 5px;
+	padding:5px;
+}
+
+
+.inbox-date{
+	float:right;
+}
+
 /* Footer */
 .main-footer{
 	grid-area:footer;
@@ -953,6 +999,21 @@ h2.next-h2{
 
 
 @media(max-width: 568px){
+	#notifbtn{
+		margin-right: 16px;
+	}
+
+	.top-tn{
+		position:absolute;
+		left:100px;
+		top: 40px;
+	}
+
+	#notifdrop{
+		width:auto;
+		top:73px;
+		left:15px;
+	}
 	.grid-header{
 		display: block;
 		grid-template-columns: 1fr;

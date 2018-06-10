@@ -2,6 +2,8 @@
 session_start();
 include'connection.php';
 include'functions.php';
+addSidebar();
+setupCookie();
 user_access();
 ?>
 <!DOCTYPE html>
@@ -60,13 +62,17 @@ user_access();
 				</div>
 			</div>
 		</div>
-			<!-- Main Content -->
+	<!-- Main Content -->
 		<div class="other-content">
 			<h1><a class="btp" href="profile.php?name=<?php echo $_SESSION['name'] ?>">Go back to your profile</a></h1>
 <?php
 $id=$_SESSION['id'];
-$sql="SELECT notifid,userid,receiverid,notif,notifdate,notiftype FROM tblnotif WHERE receiverid='$id' ORDER BY notifid DESC";
-$result=$conn->query($sql);
+$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype FROM tblnotif
+LEFT JOIN tbluser
+ON tblnotif.userid=tbluser.userid
+WHERE receiverid='$id' 
+ORDER BY notifid DESC";
+
 $result=$conn->query($sql);
 $count=$result->num_rows;
 echo '<h4>Notifications('.$count.')</h4>
@@ -74,17 +80,11 @@ echo '<h4>Notifications('.$count.')</h4>
 while($rows=$result->fetch_object())
 {
 $nid=$rows->notifid;
-$uid=$rows->userid;
+$uname=$rows->username;
 $rid=$rows->receiverid;
 $notif=$rows->notif;
 $type=$rows->notiftype;
 $date=time_elapsed_string($rows->notifdate);
-
-$sql2="SELECT username FROM tbluser WHERE userid='$uid'";
-$result2=$conn->query($sql2);
-$rows2=$result2->fetch_object();
-
-$uname=$rows2->username;
 
 if($type==1){
 

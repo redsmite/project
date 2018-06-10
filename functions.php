@@ -1,4 +1,3 @@
-<!-- Side Menu -->
 <?php
 date_default_timezone_set('Asia/Manila');
 
@@ -37,6 +36,7 @@ $string = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $
 return $string;
 }
 
+//Sidebar
 function addSidebar(){
 	if(isset($_SESSION["id"])){
 		echo '
@@ -44,7 +44,7 @@ function addSidebar(){
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
 				<li><a title="Go to your profile" href="profile.php?name='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
-				<li><a title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a></li>
+				<li><a title="Check your private messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i></a></li>
 				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
 				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>
@@ -101,26 +101,40 @@ function addLogin(){
 function session_button(){
 	$conn = mysqli_connect ("localhost", "root", "", "itsproject");
 	if(isset($_SESSION['id'])){
-		$sql="SELECT imgpath FROM tbluser WHERE userid=".$_SESSION['id']."";
+
+	$id=$_SESSION['id'];
+		$sql="SELECT imgpath FROM tbluser WHERE userid=".$id."";
 		$result=$conn->query($sql);
 		$row=$result->fetch_object();
 		$tn_image=$row->imgpath;
 		if($tn_image==''){
 			$tn_image='img/default.png';
 		}
-		$id=$_SESSION['id'];
-		$sql="SELECT notifid,userid,receiverid,notif,notifdate,notiftype FROM tblnotif WHERE receiverid='$id' and checked=0 ORDER BY notifid DESC";
-		$result=$conn->query($sql);
-		$count=$result->num_rows;
-		echo'<a class="button" title="Check your private messages" href="inbox.php"><i class="far fa-envelope"></i></a>
-		<a class="button" id="notifbtn" title="Check your notifications" onclick="toggleNotif()""><i class="far fa-bell"></i><span id="notifnum">'.$count.'</span></a>
+
+//PM Count
+$sql="SELECT pmid FROM tblpm WHERE receiverid='$id' AND checked=0";
+$result=$conn->query($sql);
+$count=$result->num_rows;
+		echo'<a class="button" title="Check your private messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i><span id="pmnum">'.$count.'</span></a>';
+
+//Notification Count
+
+$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype FROM tblnotif
+	LEFT JOIN tbluser
+		ON tblnotif.userid=tbluser.userid
+	WHERE receiverid='$id' and checked=0
+	ORDER BY notifid DESC";
+$result=$conn->query($sql);
+$count=$result->num_rows;
+
+		echo'<a class="button" id="notifbtn" title="Check your notifications" onclick="toggleNotif()""><i class="far fa-bell"></i><span id="notifnum">'.$count.'</span></a>
 		<a class="button" href=profile.php?name='.$_SESSION['name'].'>
 		'.$_SESSION["name"].'\'s Profile<div class="top-tn"><img src="'.$tn_image.'""></div></a>';
 		echo'<div id="notifdrop">
 		Notifications
 		<ul>';
 
-//Notification
+//Notification Drop down
 if($count==0){
 	echo'<li>No notifications yet...</li>';
 }else{
@@ -128,15 +142,11 @@ if($count==0){
 while($rows=$result->fetch_object())
 {
 $nid=$rows->notifid;
-$uid=$rows->userid;
+$uname=$rows->username;
 $rid=$rows->receiverid;
 $notif=$rows->notif;
 $date=time_elapsed_string($rows->notifdate);
 $type=$rows->notiftype;
-
-$sql2="SELECT username FROM tbluser WHERE userid='$uid'";
-$result2=$conn->query($sql2);
-$rows2=$result2->fetch_object();
 
 $uname=$rows2->username;
 

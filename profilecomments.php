@@ -1,5 +1,7 @@
 <?php
 session_start();
+addSidebar();
+setupCookie();
 include'functions.php';
 require_once'connection.php';
 $name=$_GET['name'];

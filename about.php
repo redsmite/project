@@ -2,6 +2,7 @@
 	session_start();
 	include'functions.php';
 	addSidebar();
+	setupCookie();
 	addLogin();
 ?>
 <!DOCTYPE html>

@@ -14,16 +14,10 @@
 	<title>Test</title>
 </head>
 <body>
-	<?php
-		$timestamp = date("Y-m-d H:i:s");
-		echo $timestamp;
-	?>
-
-	<input type="hidden" id="hidden" <?php echo 'value="'.$hidden.'"'?>/>
-	<script>
-		var rize = document.getElementById('hidden').value;
-
-		console.log(rize)
-	</script>
+	<div class="sendpm">
+		<form action="">
+			
+		</form>
+	</div>
 </body>
 </html>

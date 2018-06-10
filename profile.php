@@ -174,7 +174,7 @@
 						if(isset($_SESSION['id'])){
 							if($_SESSION['name']==$_GET['name']){
 								echo'<ul>
-									<li><a href="inbox.php"><i class="fas fa-envelope"></i> Check Inbox</a></li>
+									<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Check Inbox</a></li>
 									<li><a href="insertphoto.php"><i class="fas fa-camera"></i> Change Profile Picture</a></li>
 									<li><a href="editinfo.php"><i class="fas fa-pen-square"></i> Edit Personal Info</a></li>
 									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
@@ -182,7 +182,7 @@
 							}else{
 								echo'<ul>
 									<li><a href="adduser.php"><i class="fas fa-user-plus"></i> Add as friend</a></li>
-									<li><a href="sendpm.php"><i class="fas fa-envelope"></i> Send Private Message</a></li>
+									<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Send Private Message</a></li>
 									</ul>';
 							}
 						}

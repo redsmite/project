@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	include'functions.php';
+	addSidebar();
+	setupCookie();
 	user_access();
 	//Get Profile Info
 	require_once'connection.php';

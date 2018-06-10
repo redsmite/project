@@ -378,4 +378,4 @@ function removeSpinners(){
 	document.querySelector('.main-container').style.opacity='1';
 }
 
-changeCompanyName('Movie','Reviews');
+changeCompanyName('Movie','Review');
