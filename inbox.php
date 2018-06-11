@@ -132,7 +132,7 @@ while($row=$result->fetch_object()){
 			<img src="'.$imgpath.'">
 		</div>'.$Sname.'</a><br>
 	<div class="inbox-div"> 
-		<p class="inbxmsg">'.nl2br($message).'</p>
+		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
 
@@ -170,7 +170,7 @@ while($row=$result->fetch_object()){
 			<div class="comment-tn">
 				<img src="'.$imgpath.'">
 			</div>
-		<div class="inbox-div"> <p class="inbxmsg">'.nl2br($message).'</p></div>
+		<div class="inbox-div"> <p class="inbxmsg">'.createlink(nl2br($message)).'</p></div>
 		<a class="reply" href="inbox.php?name='.$Sname.'">Reply</a>
 		</div>';
 

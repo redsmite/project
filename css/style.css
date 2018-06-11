@@ -189,6 +189,7 @@ body{
 }
 
 #notifnum,#pmnum{
+	display: none;
 	background: red;
 	padding:0 4px;
 	border-radius: 50%;
@@ -499,6 +500,7 @@ body{
 /* Content from other pages */
 
 .other-content{
+	box-sizing: border-box;
 	padding:5px;
 	background: var(--gray);
 	min-height:70vh;
@@ -658,7 +660,6 @@ h2.next-h2{
 	border:1px solid var(--dark-color);
 	box-shadow: 5px 10px var(--darkgray);
 	background: var(--gray);
-	min-height: 100vh;
 }
 
 .left-grid{
@@ -830,6 +831,16 @@ h2.next-h2{
 	padding-left: 5px;
 	min-height:80px;
 	border: 1px solid var(--dark-color);
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.com-container{
+	width:670px;
+}
+
+.comment-cm{
+	word-wrap: break-word;
 }
 
 .comment-body a{
@@ -964,6 +975,7 @@ h2.next-h2{
 }
 
 .inbox-div{
+	overflow-x: auto;
 	background: var(--light-color);
 	border-radius: 5px;
 	padding:5px;
@@ -974,6 +986,7 @@ h2.next-h2{
 }
 
 .inbxmsg{
+	word-wrap: break-word;
 	padding-left: 25px;
 }
 
@@ -1030,6 +1043,9 @@ h2.next-h2{
 }
 
 @media(max-width: 800px){
+	.main-container{
+		padding:0;
+	}
 	.main-nav a.current{
 		margin-bottom:5px;
 	}
@@ -1079,6 +1095,11 @@ h2.next-h2{
 		display:block;
 	}
 
+	.com-container{
+		width:500px;
+	}
+
+
 	.inbox-grid{
 		display:grid;
 		grid-template-columns: 1fr;
@@ -1099,9 +1120,7 @@ h2.next-h2{
 	}
 
 	.top-tn{
-		position:absolute;
-		left:115px;
-		top: 40px;
+		display:none;
 	}
 
 	#notifdrop{
@@ -1154,5 +1173,9 @@ h2.next-h2{
 
 	#thanks-message{
 		margin: -100px -70px;
+	}
+
+	.com-container{
+		width:280px;
 	}
 }

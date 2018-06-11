@@ -133,7 +133,7 @@
 			</div>
 		</div>
 	<!-- Main Content -->
-		<div class="profile-content">
+		<div class="other-content">
 			<div class="user-grid">
 				<div class="left-grid">
 					<div class="profile-pic-wrap">
@@ -281,7 +281,8 @@
 									<small>'.time_elapsed_string($dateposted).'</small>
 									</div>
 									<div class="comment-body">
-									<p>'.nl2br($Ccomment).'
+									<div class="com-container"><p class="comment-cm">'.nl2br($Ccomment).'</p>
+									</div>
 										<p class="modified">'.$modified.'</p>';
 					//Delete / Edit Comment
 					if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
@@ -301,7 +302,7 @@
 					
 									
 
-									echo'</p>
+									echo'
 									</div>
 									</div>';
 								}	

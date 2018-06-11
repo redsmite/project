@@ -108,7 +108,7 @@ while($rows2=$result3->fetch_object()){
 	<small>'.time_elapsed_string($dateposted).'</small>
 	</div>
 	<div class="comment-body">
-	<p>'.nl2br($Ccomment).'
+	<div class="com-container"><p class="comment-cm">'.nl2br($Ccomment).'</p></div>
 		<p class="modified">'.$modified.'</p>';
 //Delete / Edit Comment
 if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
@@ -125,10 +125,7 @@ echo'	<input type="submit" value="delete" name="deletebtn">
 
 }				
 
-
-		
-
-		echo'</p>
+		echo'
 		</div>
 		</div>';
 	}	

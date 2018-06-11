@@ -54,6 +54,17 @@ function modal(){
 	}
 }
 
+//No display if count is zero
+var y = document.getElementById("notifnum");
+var z = document.getElementById("pmnum");
+
+if(y.innerText!=0){
+	y.style.display="inline";
+}
+if(z.innerText!=0){
+	z.style.display="inline";
+}
+
 function toggleNotif(){
 	  var x = document.getElementById("notifdrop");
     if (x.style.display === "none") {
@@ -61,6 +72,9 @@ function toggleNotif(){
     } else {
         x.style.display = "none";
     }
+
+
+
 
 	var myRequest = new XMLHttpRequest();
 	var url = 'edituserprocess.php';
