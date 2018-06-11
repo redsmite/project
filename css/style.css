@@ -981,6 +981,33 @@ h2.next-h2{
 	float:right;
 }
 
+/* Search */
+
+.search-ul li{
+	list-style: none;
+	padding: 10px 4px;
+	border: 1px solid var(--darkgray);
+}
+
+.search-ul li:nth-child(even){
+	background: var(--light-color);
+}
+
+.search-ul a{
+	color: var(--dark-color);
+}
+
+.sch-tn{
+	height:45px;
+	width:45px;
+	overflow:hidden;
+	float:left;
+}
+
+.sch-tn img{
+	max-width:100%;
+}
+
 /* Footer */
 .main-footer{
 	grid-area:footer;

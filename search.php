@@ -1,9 +1,10 @@
 <?php
-	session_start();
-	include'functions.php';
-	addSidebar();
-	addLogin();
-	setupCookie();
+session_start();
+include'functions.php';
+include'connection.php';
+user_access();
+addSidebar();
+setupCookie();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
 							<li><a href="index.php">HOME</a></li>
 							<li><a href="about.php">ABOUT</a></li>
 							<li><a href="services.php">SERVICES</a></li>
-							<li><a href="contact.php" class="current">CONTACT</a></li>
+							<li><a href="contact.php">CONTACT</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -59,35 +60,40 @@
 				</div>
 			</div>
 		</div>
-	<!-- Contact Form -->
-		<div class="other-content">
-			<h1>Contact Us</h1>
-			<div class="container">
-				<div class="content-box">
-					<h2><span id="highlight-text">Get</span> in Touch</h2>		
-					<div class="form">
-						<center>
-							<p>Please don't spam or you'll die.</p>
-							<form action="#" method="post">
-								<div>
-									<label for="name">Name</label><br>
-									<input type="text" required name="contact-name">
-								</div>
-								<div>
-									<label for="email">Email</label><br>
-									<input type="email" required name="contact-email">
-								</div>
-								<div>
-									<label for="message">Message</label><br>
-									<textarea name="message" required name="contact-message"></textarea>
-								</div>
-								<button type="submit" name="contact-button">Submit</button>
-							</form>
-						</center>	
-					</div>
-				</div>
-			</div>
+	<!-- Main Content -->
+	<div class="other-content">
+		<h1>Search User</h1>
+		<ul class="search-ul">
+<?php
+if(isset($_GET['search-text'])){
+	$search= $_GET['search-text'];
+
+	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY username";
+	$result=$conn->query($sql);
+	if($result->num_rows==0){
+		echo'No results found';
+	}
+	while($row=$result->fetch_object()){
+		$name = $row->username;
+		$img = $row->imgpath;
+		$date = date("M j, Y", strtotime($row->datecreated));
+		if (!$img){
+			$img='img/default.png';
+		}
+
+		echo'<li><a href="profile.php?name='.$name.'">
+		<div class="sch-tn">
+		<img src="'.$img.'">
 		</div>
+		<p>'.$name.'</a></p>
+		<p>Joined: '.$date.'</p>
+		<li>';
+
+	}
+}
+?>
+		</ul>
+	</div>
 	<!-- Footer -->
 		<footer class="main-footer">
 			<div class="container">
@@ -103,3 +109,8 @@
 	</script>
 </body>
 </html>
+<?php
+	$id=$_SESSION['id'];
+	$update="UPDATE tblpm SET checked=1 WHERE receiverid='$id'";
+	$R_up=$conn->query($update);
+?>

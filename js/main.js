@@ -74,8 +74,8 @@ function toggleNotif(){
 	myRequest.onload = function(){
 		var response= this.responseText;
 		console.log(response);
-		if(response){	
-    		document.getElementById("notifnum").innerHTML='0';
+		if(response){
+			
 		}
 	}
 	myRequest.send(formData);

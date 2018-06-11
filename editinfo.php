@@ -99,11 +99,9 @@
 					</nav>
 				</div>
 				<div class="box3">	
-					<form action="search.php">
-						<i class="fas fa-search"></i>
-						<label>Search</label>
-						<input type="text" id="search-text" placeholder="Search...">
-					</form>
+					<?php
+						search_function();
+					?>
 				</div>
 			</div>
 		</header>

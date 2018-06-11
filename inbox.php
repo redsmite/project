@@ -3,13 +3,13 @@ session_start();
 include'functions.php';
 include'connection.php';
 user_access();
-addSidebar();
-setupCookie();
 if(isset($_GET['name'])){
 	$name=$_GET['name'];	
 }else{
 	die('This page doesn\'t exist.');
 }
+addSidebar();
+setupCookie();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,16 +35,14 @@ if(isset($_GET['name'])){
 							<li><a href="index.php">HOME</a></li>
 							<li><a href="about.php">ABOUT</a></li>
 							<li><a href="services.php">SERVICES</a></li>
-							<li><a href="contact.php" class="current">CONTACT</a></li>
+							<li><a href="contact.php">CONTACT</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="box3">
-					<form action="search.php">
-						<i class="fas fa-search"></i>
-						<label>Search</label>
-						<input type="text" id="search-text" placeholder="Search...">
-					</form>
+					<?php
+						search_function();
+					?>
 				</div>
 			</div>
 		</header>
@@ -151,6 +149,9 @@ while($row=$result->fetch_object()){
 	$result=$conn->query($sql);
 	$count=$result->num_rows;
 	echo'<h4>Messages('.$count.')</h4>';
+	if($count==0){
+		echo'<p>No messages yet...</p>';
+	}
 	while($row=$result->fetch_object()){
 		$Sname=$row->username;
 		$message=$row->message;

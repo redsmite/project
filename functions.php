@@ -119,7 +119,7 @@ $count=$result->num_rows;
 
 //Notification Count
 
-$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype FROM tblnotif
+$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype,checked FROM tblnotif
 	LEFT JOIN tbluser
 		ON tblnotif.userid=tbluser.userid
 	WHERE receiverid='$id' and checked=0
@@ -153,6 +153,7 @@ $uname=$rows->username;
 
 if($type==1){
 
+
 	echo'<li><i class="far fa-comment-dots"></i> <a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
 }
 }
@@ -165,6 +166,16 @@ if($type==1){
 		echo'<a href ="register.php" class="button"><i class="fas fa-pencil-alt"></i></i>Sign Up</a>
 		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
 	}
+}
+
+function search_function(){
+	echo'
+		<form action="search.php" method="get">
+			<i class="fas fa-search"></i>
+			<label>Search</label>
+			<input type="text" name="search-text" id="search-text" placeholder="Search user...">
+		</form>
+	';
 }
 
 function setupCookie(){
