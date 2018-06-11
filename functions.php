@@ -148,7 +148,7 @@ $notif=$rows->notif;
 $date=time_elapsed_string($rows->notifdate);
 $type=$rows->notiftype;
 
-$uname=$rows2->username;
+$uname=$rows->username;
 
 
 if($type==1){

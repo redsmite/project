@@ -749,6 +749,8 @@ h2.next-h2{
 	padding-left: 5px;
 }
 
+/* Profile comments */
+
 #profile-comments{
 	min-height: 200px;
 	padding:5px;
@@ -891,8 +893,55 @@ h2.next-h2{
 	color:var(--dark-color);
 }
 
+/* Private Message */
+
+.inbox-grid{
+	display:grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-areas: "leftinbox rightinbox";
+	box-sizing: border-box;
+}
+
+.left-inbox{
+	grid-area: leftinbox;
+}
+
+.inboxform-div{
+	background:var(--darkgray) ;
+	color: var(--light-color);
+	width:100%;
+	height: 95%;
+	line-height: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--dark-color);
+}
+
+.inboxform-div input{
+	width: 80%;
+}
+
 #sendmsg{
-	height: 180px;
+	height:300px;
+	width:80%;
+}
+
+#inbox-submit{
+	height: 25px;
+	width: 100px;
+	border:0;
+	margin:2px;
+	background: var(--dark-color);
+	color:var(--light-color);
+	cursor: pointer;
+}
+
+.right-inbox{
+	grid-area: rightinbox;
+	border: 1px solid var(--dark-color);
+	margin-left: 3px;
+	padding-left: 5px;
+	height: 420px;
+	overflow-y: scroll;
 }
 
 .inbox-box{
@@ -920,6 +969,13 @@ h2.next-h2{
 	padding:5px;
 }
 
+.new{
+	color:red;
+}
+
+.inbxmsg{
+	padding-left: 25px;
+}
 
 .inbox-date{
 	float:right;
@@ -995,6 +1051,18 @@ h2.next-h2{
 	.user-grid{
 		display:block;
 	}
+
+	.inbox-grid{
+		display:grid;
+		grid-template-columns: 1fr;
+		grid-template-areas: "leftinbox" 
+		"rightinbox";
+		box-sizing: border-box;
+	}
+	#sendmsg{
+		height:100px;
+		width:90%;
+	}
 }
 
 
@@ -1005,7 +1073,7 @@ h2.next-h2{
 
 	.top-tn{
 		position:absolute;
-		left:100px;
+		left:115px;
 		top: 40px;
 	}
 

@@ -10,10 +10,6 @@ if(isset($_GET['name'])){
 }else{
 	die('This page doesn\'t exist.');
 }
-$id=$_SESSION['id'];
-$update="UPDATE tblpm SET checked=1 WHERE receiverid='$id'";
-$R_up=$conn->query($update);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,72 +72,105 @@ $R_up=$conn->query($update);
 		<?php
 if($name!=$_SESSION['name']){
 	//Send PM
-	echo'
-		<div class="other-content">
-			<p>Send <span id="highlight-text">'.$name.'</span> a private message</p>
-			<div class="container">
-				<div class="content-box">	
-					<div class="edit-form">
-						<center>
-							<form action="#" method="post">
-								<div>
-									<label for="name">Subject</label><br>
-									<input type="text" placeholder="No subject..." name="subject">
-								</div>
-								<div>
-									<label for="message">Message</label><br>
-									<textarea id="sendmsg" name="message" required></textarea>
-								</div>
-								<button type="submit" name="message-btn">Submit</button>
-							</form>
-						</center>	
-					</div>
+	echo'<div class="inbox-grid">
+			<div class="left-inbox">
+			<p>Send <span id="highlight-text">'.$name.'</span> a private message</p>	
+				<div class="inboxform-div">
+					<center>
+						<form action="#" method="post">
+							<div>
+								<label for="message">Message</label><br>
+								<textarea id="sendmsg" name="message" required></textarea>
+							</div>
+							<button type="submit" id="inbox-submit" name="message-btn">Send Message</button>
+						</form>
+					</center>	
 				</div>
-			</div>
-		</div>
-	';
-	if(isset($_POST['message-btn'])){
-		$sql="SELECT userid FROM tbluser WHERE username='$name'";
-		$result=$conn->query($sql);
-		$row=$result->fetch_object();
-		$Rid=$row->userid;
+			</div>';
+//Send private message
+if(isset($_POST['message-btn'])){
+	$sql="SELECT userid FROM tbluser WHERE username='$name'";
+	$result=$conn->query($sql);
+	$row=$result->fetch_object();
+	$Rid=$row->userid;
 
-		$sender=$conn->real_escape_string($_SESSION['id']);
-		$receiver=$conn->real_escape_string($Rid);
-		$subject=$conn->real_escape_string($_POST['subject']);
-		$message=$conn->real_escape_string($_POST['message']);
-		$timestamp='NOW()';
-		
-		$sql2="INSERT INTO tblpm (senderid,receiverid,subject,message,pmdate) VALUES('$sender','$receiver','$subject','$message',$timestamp)";
-		$result=$conn->query($sql2);
-		echo'Message Send';
+	$sender=$conn->real_escape_string($_SESSION['id']);
+	$receiver=$conn->real_escape_string($Rid);
+	$message=$conn->real_escape_string($_POST['message']);
+	$timestamp='NOW()';
+	
+	$sql2="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('$sender','$receiver','$message',$timestamp)";
+	$result=$conn->query($sql2);
+}
+			echo'<div class="right-inbox">
+					<p>Show Conversation</p>';
+$id=$_SESSION['id'];
+
+$Rquery="SELECT userid FROM tbluser WHERE username='$name'";
+$result=$conn->query($Rquery);
+$row=$result->fetch_object();
+$Rid=$row->userid;
+
+$sql="SELECT username,imgpath,message,pmdate FROM tblpm
+LEFT JOIN tbluser
+	ON senderid=userid
+WHERE (receiverid='$id' and username='$name') or (senderid='$id' and receiverid='$Rid')
+ORDER BY pmid DESC 
+LIMIT 30
+";
+
+$result=$conn->query($sql);
+while($row=$result->fetch_object()){
+	$Sname=$row->username;
+	$message=$row->message;
+	$imgpath=$row->imgpath;
+	$date=$row->pmdate;
+	if($imgpath==''){
+		$imgpath='img/default.png';
 	}
+	echo '<div class="inbox-box">
+	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+		<div class="comment-tn">
+			<img src="'.$imgpath.'">
+		</div>'.$Sname.'</a><br>
+	<div class="inbox-div"> 
+		<p class="inbxmsg">'.nl2br($message).'</p>
+	</div>
+	</div>';
 
+}
+		echo'</div>
+	</div>';
 } else{
 	$id=$_SESSION['id'];
-	$sql="SELECT username,imgpath,subject,message,pmdate FROM tblpm
+	$sql="SELECT username,imgpath,message,pmdate,checked FROM tblpm
 	LEFT JOIN tbluser
 		ON senderid=userid
 	WHERE receiverid='$id'
 	ORDER BY pmid DESC";
 	$result=$conn->query($sql);
+	$count=$result->num_rows;
+	echo'<h4>Messages('.$count.')</h4>';
 	while($row=$result->fetch_object()){
 		$Sname=$row->username;
-		$subject=$row->subject;
 		$message=$row->message;
 		$imgpath=$row->imgpath;
 		$date=$row->pmdate;
+		$checked=$row->checked;
 		if($imgpath==''){
 			$imgpath='img/default.png';
 		}
 		echo '<div class="inbox-box">
-		<a class="sender" href="profile.php?name='.$Sname.'">
+		<a class="sender" href="profile.php?name='.$Sname.'">'.$Sname.'</a>';	
+		if($checked==0){
+			echo'<span class="new"> <i class="fab fa-gripfire"></i>new</span>';
+		}
+		echo'<span class="inbox-date">'.time_elapsed_string($date).'</span>
 			<div class="comment-tn">
 				<img src="'.$imgpath.'">
-			</div>'.$Sname.'</a><br>
-		Subject: '.$subject.'<br>
+			</div>
 		<div class="inbox-div"> <p class="inbxmsg">'.nl2br($message).'</p></div>
-		<a class="reply" href="inbox.php?name='.$Sname.'">Reply</a><span class="inbox-date">'.time_elapsed_string($date).'</span>
+		<a class="reply" href="inbox.php?name='.$Sname.'">Reply</a>
 		</div>';
 
 	}
@@ -163,3 +192,8 @@ if($name!=$_SESSION['name']){
 	</script>
 </body>
 </html>
+<?php
+	$id=$_SESSION['id'];
+	$update="UPDATE tblpm SET checked=1 WHERE receiverid='$id'";
+	$R_up=$conn->query($update);
+?>

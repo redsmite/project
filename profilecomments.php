@@ -1,8 +1,8 @@
 <?php
 session_start();
+include'functions.php';
 addSidebar();
 setupCookie();
-include'functions.php';
 require_once'connection.php';
 $name=$_GET['name'];
 ?>
