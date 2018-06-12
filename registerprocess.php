@@ -14,6 +14,11 @@ if(isset($_POST['username'])){
 	{
 	     array_push($error,'<i class="fas fa-exclamation-circle"></i>Username must not contain special characters or spaces');
 	}
+
+	// if username is a special search string
+	if ($_POST['username']=='Show_All') {
+		array_push($error,'<i class="fas fa-exclamation-circle"></i>Username is a special search string');
+	}
 	
 
 	if(strlen($_POST['password']) < 8)

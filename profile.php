@@ -308,7 +308,8 @@
 									echo'
 									</div>
 									</div>';
-								}	
+								}
+								mysqli_close($conn);	
 							?>
 					</div>
 				</div>			

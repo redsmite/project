@@ -240,4 +240,5 @@ while($row=$result->fetch_object()){
 	$id=$_SESSION['id'];
 	$update="UPDATE tblpm SET checked=1 WHERE receiverid='$id'";
 	$R_up=$conn->query($update);
+	mysqli_close($conn);
 ?>

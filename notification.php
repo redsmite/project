@@ -140,6 +140,7 @@ if($type==1){
 }
 
 echo '</ul>';
+mysqli_close($conn);
 ?>
 </div>
 <!-- Footer -->

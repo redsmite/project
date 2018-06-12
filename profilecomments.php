@@ -80,7 +80,6 @@ if($last < 1){
 	$last = 1;
 }
 $pagenum = 1;
-// Get pagenum from URL vars if it is present, else it is = 1
 if(isset($_GET['pn'])){
 	$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
 }
@@ -114,7 +113,6 @@ if($last != 1){
 	    }
     }
     $paginationCtrls .= ''.$pagenum.' &nbsp; ';
-	// Render clickable number links that should appear on the right of the target page number
 	for($i = $pagenum+1; $i <= $last; $i++){
 		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$i.'">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
@@ -181,6 +179,7 @@ echo'	<input type="submit" value="delete" name="deletebtn">
 		</div>
 		</div>';
 	}
+	mysqli_close($conn);
 ?>
 </div>
 <!-- Footer -->

@@ -23,6 +23,7 @@
 		$email=$rows->email;
 		$lastupdate=$rows->lastupdate;
 		$timestamp = date("Y-m-d H:i:s");
+		mysqli_close($conn);
 	}
 	//End of Get Profile Info
 	addSidebar();

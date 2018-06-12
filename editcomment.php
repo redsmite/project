@@ -18,6 +18,7 @@ $sql="SELECT comment FROM tblcomment WHERE commentid='$id'";
 if($result=$conn->query($sql)){
 $row=$result->fetch_object();
 $comment=$row->comment;
+mysqli_close($conn);
 }else{	
 	die('This page doesn\'t exist');
 }

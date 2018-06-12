@@ -3,6 +3,7 @@ session_start();
 include'functions.php';
 include'connection.php';
 addSidebar();
+addLogin();
 setupCookie();
 ?>
 <!DOCTYPE html>
@@ -64,14 +65,79 @@ setupCookie();
 		<h1>Search User</h1>
 		<ul class="search-ul">
 <?php
+if (empty($_GET['search-text'])){
+	$_GET['search-text']='Show_All';
+	echo '<p>Show All Users</p>';
+}
 if(isset($_GET['search-text'])){
 	$search= $_GET['search-text'];
 
-	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY username";
+	if(!$search=='Show_All'){
+		$sql="SELECT userid FROM tbluser WHERE username LIKE '$search%'";
+	}else if($search=='Show_All'){
+		$sql="SELECT userid FROM tbluser";	
+	}
+
 	$result=$conn->query($sql);
+
 	if($result->num_rows==0){
 		echo'No results found';
 	}
+	$rows=$result->num_rows;
+	$page_rows = 10;
+	$last = ceil($rows/$page_rows);
+	if($last < 1){
+		$last = 1;
+	}
+	$pagenum = 1;
+	if(isset($_GET['pn'])){
+		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+	}
+	if ($pagenum < 1) { 
+	    $pagenum = 1; 
+	} else if ($pagenum > $last) { 
+	    $pagenum = $last; 
+	}
+	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+
+	if(!$search=='Show_All'){
+	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY username $limit";
+	}else if($search=='Show_All'){
+		$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY username $limit";	
+	}
+	$textline1 = "Users (<b>$rows</b>)";
+	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
+	$paginationCtrls = '';
+	if($last != 1){
+		if ($pagenum > 1) {
+	        $previous = $pagenum - 1;
+			$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
+			for($i = $pagenum-4; $i < $pagenum; $i++){
+				if($i > 0){
+			        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+					}
+			    }
+		    }
+		    $paginationCtrls .= ''.$pagenum.' &nbsp; ';
+			for($i = $pagenum+1; $i <= $last; $i++){
+				$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+				if($i >= $pagenum+4){
+					break;
+				}
+			}
+			    if ($pagenum != $last) {
+		        $next = $pagenum + 1;
+		        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$next.'">Next</a> ';
+		    }
+		}
+	 echo'<h2>  '.$textline1.'</h2>
+	  <p>  '.$textline2.' </p>
+	  <div id="pagination_controls"> '.$paginationCtrls.'</div>';
+
+
+
+	$result=$conn->query($sql);
+
 	while($row=$result->fetch_object()){
 		$name = $row->username;
 		$img = $row->imgpath;
@@ -90,6 +156,7 @@ if(isset($_GET['search-text'])){
 
 	}
 }
+mysqli_close($conn);
 ?>
 		</ul>
 	</div>

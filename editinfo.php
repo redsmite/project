@@ -65,6 +65,7 @@
 			$bio='';
 		}
 	}
+	mysqli_close($conn);
 	//End of Get Profile Info
 	addSidebar();
 	addLogin();
