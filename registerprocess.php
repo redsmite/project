@@ -72,7 +72,7 @@ if(isset($_POST['username'])){
 			$_SESSION['name']=$username;
 			$_SESSION['type']=1;
 
-			$message='Hello new user, welcome to our website \n Regards\n Site Admin';
+			$message='Hello '.$username.'! \n Welcome to Our Website. \n Thanks for joining us. \n Regards,\n Site Admin';
 
 			$sendpm="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('1','$userlogin','$message',$timestamp)";
 			$rsendpm=$conn->query($sendpm);

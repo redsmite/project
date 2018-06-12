@@ -183,9 +183,14 @@ body{
 	line-height: 2rem;
 }
 
-#notifdrop a,#notiflist a{
+.n1{
 	text-decoration: none;
 	color:var(--primary-color);
+}
+
+.n2{
+	text-decoration: none;
+	color:var(--dark-color);
 }
 
 #notifnum,#pmnum{
@@ -902,6 +907,15 @@ h2.next-h2{
 
 .btp{
 	color:var(--dark-color);
+}
+
+/* Pagination */
+#pagination_controls{
+	margin-bottom: 5px;
+}
+#pagination_controls a{
+	color:var(--primary-color);
+	text-decoration: none;
 }
 
 /* Private Message */

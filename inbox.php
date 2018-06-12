@@ -141,17 +141,60 @@ while($row=$result->fetch_object()){
 	</div>';
 } else{
 	$id=$_SESSION['id'];
+	$sql="SELECT pmid FROM tblpm WHERE receiverid='$id'";
+	$result=$conn->query($sql);
+	$rows=$result->num_rows;
+	$page_rows = 10;
+	$last = ceil($rows/$page_rows);
+	if($last < 1){
+		$last = 1;
+	}
+	$pagenum = 1;
+	if(isset($_GET['pn'])){
+		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+	}
+	if ($pagenum < 1) { 
+	    $pagenum = 1; 
+	} else if ($pagenum > $last) { 
+	    $pagenum = $last; 
+	}
+	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+	$textline1 = "Messages (<b>$rows</b>)";
+	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
+	$paginationCtrls = '';
+	if($last != 1){
+		if ($pagenum > 1) {
+        $previous = $pagenum - 1;
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
+		for($i = $pagenum-4; $i < $pagenum; $i++){
+			if($i > 0){
+		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+				}
+	   		}
+    	}
+	    $paginationCtrls .= ''.$pagenum.' &nbsp; ';
+	    for($i = $pagenum+1; $i <= $last; $i++){
+			$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+			if($i >= $pagenum+4){
+				break;
+			}
+		}
+		if ($pagenum != $last) {
+	        $next = $pagenum + 1;
+	        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$next.'">Next</a> ';
+	    }
+	}
+	echo'<h2>  '.$textline1.'</h2>
+	<p>  '.$textline2.' </p>
+	<div id="pagination_controls"> '.$paginationCtrls.'</div>';
+
 	$sql="SELECT username,imgpath,message,pmdate,checked FROM tblpm
 	LEFT JOIN tbluser
 		ON senderid=userid
 	WHERE receiverid='$id'
-	ORDER BY pmid DESC";
+	ORDER BY pmid DESC $limit";
 	$result=$conn->query($sql);
 	$count=$result->num_rows;
-	echo'<h4>Messages('.$count.')</h4>';
-	if($count==0){
-		echo'<p>No messages yet...</p>';
-	}
 	while($row=$result->fetch_object()){
 		$Sname=$row->username;
 		$message=$row->message;

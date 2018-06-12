@@ -2,7 +2,6 @@
 session_start();
 include'functions.php';
 include'connection.php';
-user_access();
 addSidebar();
 setupCookie();
 ?>
@@ -109,8 +108,3 @@ if(isset($_GET['search-text'])){
 	</script>
 </body>
 </html>
-<?php
-	$id=$_SESSION['id'];
-	$update="UPDATE tblpm SET checked=1 WHERE receiverid='$id'";
-	$R_up=$conn->query($update);
-?>

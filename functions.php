@@ -119,7 +119,7 @@ $count=$result->num_rows;
 
 //Notification Count
 
-$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype,checked FROM tblnotif
+$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype,checked,details FROM tblnotif
 	LEFT JOIN tbluser
 		ON tblnotif.userid=tbluser.userid
 	WHERE receiverid='$id' and checked=0
@@ -149,12 +149,13 @@ $date=time_elapsed_string($rows->notifdate);
 $type=$rows->notiftype;
 
 $uname=$rows->username;
+$details=$rows->details;
 
 
 if($type==1){
 
 
-	echo'<li><i class="far fa-comment-dots"></i> <a href="profile.php?name='.$uname.'">'.$uname.'</a> '.$notif.' '.$date.'</li>';
+	echo'<li><i class="far fa-comment-dots"></i> <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> <a class="n2" href="profile.php?name='.$_SESSION['name'].'#comment'.$details.'">'.$notif.' '.$date.'</a></li>';
 }
 }
 }

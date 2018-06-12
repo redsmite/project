@@ -24,7 +24,7 @@
 		$user=$rows->username;
 		$firstname=$rows->firstname;
 		$lastname=$rows->lastname;
-		$datecreated=$rows->datecreated;
+		$datecreated=date("M j, Y", strtotime($rows->datecreated));
 		$email=$rows->email;
 		$usertype=$rows->usertypeid;
 		$gender=$rows->gender;
@@ -151,7 +151,7 @@
 							echo'<h1>			
 							'.$user.'					
 							</h1>
-							<h3>Joined: '.time_elapsed_string($datecreated).'</h3>';
+							<h3>Joined: '.$datecreated.'</h3>';
 							if($usertype==1){
 								echo'<p>User</p>';
 							}else if ($usertype==2){
@@ -251,7 +251,7 @@
 									ON tblcomment.userid = tbluser.userid
 								WHERE receiver='$rid'
 								ORDER BY commentid DESC
-								LIMIT 10";
+								LIMIT 15";
 
 								$result3=$conn->query($sql3);
 								while($rows2=$result3->fetch_object()){
@@ -271,7 +271,7 @@
 										$modified='<i>Modified: '.time_elapsed_string($modified).'</i>';
 									}
 
-									echo'<div class="comment-box">
+									echo'<div id="comment'.$Cid.'" class="comment-box">
 									<div class="comment-header">
 									<a class="cm-user" href="profile.php?name='.$Cuser.'">
 									<div class="comment-tn">
@@ -285,7 +285,10 @@
 									</div>
 										<p class="modified">'.$modified.'</p>';
 					//Delete / Edit Comment
-					if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
+					if(!isset($_SESSION['name'])|| !isset($_SESSION['id']))
+					{
+
+					}else if($name==$_SESSION['name']||$Cuid==$_SESSION['id']){
 						echo'
 						<form align="right" action="commentprocess.php" method="post">
 						<input type="hidden" name="hidden4" value="'.$_GET["name"].'" />

@@ -7,6 +7,8 @@ function changeCompanyName(firstText,secondText){
 	document.title= companyName;
 }
 
+changeCompanyName('Movie','Review');
+
 //sideMenu
 function openSlideMenu(){
 	document.getElementById('side-menu').style.width='90px';
@@ -392,4 +394,3 @@ function removeSpinners(){
 	document.querySelector('.main-container').style.opacity='1';
 }
 
-changeCompanyName('Movie','Review');
