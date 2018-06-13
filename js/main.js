@@ -173,6 +173,35 @@ function friendno(){
 	myRequest.send(formData);
 }
 
+function friendremove(){
+	var rmv=document.getElementById('rmv-fr');
+
+	rmv.innerText='Removing friend...';
+
+	var fid = rmv.getAttribute('value');
+
+	console.log(fid);
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var rmv =  fid;
+
+	var formData = "rmv="+rmv;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
+}
+
 //Login AJAX
 function ajaxLogin(){
 	document.getElementById('log-form').addEventListener('submit', postName);

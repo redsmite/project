@@ -27,7 +27,7 @@ if(isset($_POST['fr'])){
 	$sql2="INSERT INTO tblnotif(userid,receiverid,notifdate,notiftype,details,details2) VALUES($user1,$user2,$timestamp,'2','$newID','1')";
 	$result2=$conn->query($sql2);
 
-	echo json_encode($sql2);
+	echo json_encode('oke-oke-okay');
 }
 
 if(isset($_POST['fryes'])){
@@ -46,7 +46,7 @@ if(isset($_POST['fryes'])){
 	$sql="UPDATE tblnotif SET details2=2 WHERE notifid='$nid'";
 	$result=$conn->query($sql);
 
-	echo json_encode($sql);
+	echo json_encode('oke-oke-okay');
 }
 
 if(isset($_POST['frno'])){
@@ -59,12 +59,21 @@ if(isset($_POST['frno'])){
 	$user2=$rows->receiverid;
 	$fid=$rows->details;
 
-	$sql="UPDATE tblfriend SET accepted=3 WHERE friendid='$fid'";
+	$sql="DELETE from tblfriend WHERE friendid='$fid'";
 	$result=$conn->query($sql);
 
 	$sql="UPDATE tblnotif SET details2=3 WHERE notifid='$nid'";
 	$result=$conn->query($sql);
 
-	echo json_encode($sql);
+	echo json_encode('oke-oke-okay');
+}
+
+if(isset($_POST['rmv'])){
+	$fid=$_POST['rmv'];
+
+	$sql="DELETE from tblfriend WHERE friendid='$fid'";
+	$result=$conn->query($sql);
+
+	echo json_encode('oke-oke-okay');
 }
 ?>

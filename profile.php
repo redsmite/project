@@ -165,30 +165,30 @@
 					</div>
 					<div class="friends">
 						<h1>Friends</h1>
-						<a href="friends.php"><p id="showallfr">Show all friends</p></a>
+						<a href="profilefriends.php"><p id="showallfr">Show all friends</p></a>
 <?php
-if(isset($_SESSION['id'])){
-	$sql="SELECT user1,user2 FROM tblfriend WHERE (user1='$id' or user2='$id') AND accepted=2  LIMIT 10";
-	$result=$conn->query($sql);
-	while($rows=$result->fetch_object()){
-	$user1=$rows->user1;
-	$user2=$rows->user2;
+// Show friends
+$sql="SELECT user1,user2 FROM tblfriend WHERE (user1='$id' or user2='$id') AND accepted=2  LIMIT 10";
+$result=$conn->query($sql);
+while($rows=$result->fetch_object()){
+$user1=$rows->user1;
+$user2=$rows->user2;
 
-	$sql2="SELECT username,imgpath FROM tbluser WHERE (userid = '$user1' or userid='$user2') AND (userid!='$id')";
-	$result2=$conn->query($sql2);
-	while($rows2=$result2->fetch_object()){
-		$username=$rows2->username;
-		$imgpath=$rows2->imgpath;
+$sql2="SELECT username,imgpath FROM tbluser WHERE (userid = '$user1' or userid='$user2') AND (userid!='$id')";
+$result2=$conn->query($sql2);
+while($rows2=$result2->fetch_object()){
+	$username=$rows2->username;
+	$imgpath=$rows2->imgpath;
 
-		echo'<div class="friends-tn">
-				<a title="'.$username.'" href="profile.php?name='.$username.'"><img src="'.$imgpath.'"></a>
-			</div>';
-	
-	}
-	}
+	echo'<div class="friends-tn">
+			<a title="'.$username.'" href="profile.php?name='.$username.'"><img src="'.$imgpath.'"></a>
+		</div>';
 
-	
 }
+}
+
+
+
 ?>
 <br class="clearBoth" />
 					</div>
@@ -210,16 +210,18 @@ $test="SELECT user1,user2 FROM tblfriend WHERE
 $testR=$conn->query($test);
 $rows=$testR->fetch_object();
 if($testR->num_rows!=0){
-	$test="SELECT accepted FROM tblfriend WHERE 
+	$test="SELECT friendid,accepted,friendsince FROM tblfriend WHERE 
 	(user1='$id' and user2='$thisid') or (user1='$thisid' and user2='$id')";
 	$testR=$conn->query($test);
 	$rows=$testR->fetch_object();
+	$fid=$rows->friendid;
 	$accepted=$rows->accepted;
+	$friendsince=$rows->friendsince;
 	if($accepted==1){
 	echo'<li><p><i class="fas fa-user-plus"></i> Pending request...</p></li>';
 	} else if ($accepted==2){
-		echo'<li><p><i class="fas fa-user-plus"></i> you are friends with this user</p></li>';
-	} else if ($accepted==3){
+		echo'<li><a id="rmv-fr" value="'.$fid.'" onclick="friendremove()"><i class="fas fa-ban"></i> Remove Friend</a></li>';
+	} else if ($accepted==3 && $friendsince==''){
 		echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>';
 	}
 }else{

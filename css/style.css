@@ -707,6 +707,10 @@ h2.next-h2{
 	cursor: pointer;
 }
 
+#rmv-fr{
+	cursor: pointer;
+}
+
 .fr-btn{
 	cursor: pointer;
 	color: blue;
