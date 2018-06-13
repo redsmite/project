@@ -165,7 +165,7 @@
 					</div>
 					<div class="friends">
 						<h1>Friends</h1>
-						<a href="profilefriends.php"><p id="showallfr">Show all friends</p></a>
+						<a href="profilefriends.php?name=<?php echo $name; ?>"><p id="showallfr">Show all friends</p></a>
 <?php
 // Show friends
 $sql="SELECT user1,user2 FROM tblfriend WHERE (user1='$id' or user2='$id') AND accepted=2  LIMIT 10";

@@ -698,6 +698,9 @@ h2.next-h2{
 	border-bottom:1px solid var(--darkgray);
 }
 
+
+/* Friends */
+
 .friends{
 	min-height: 100px;
 	border-bottom:1px solid var(--darkgray);
@@ -714,6 +717,58 @@ h2.next-h2{
 .fr-btn{
 	cursor: pointer;
 	color: blue;
+}
+
+
+.friends-tn{
+	float: left;
+	margin:3px 2px;
+	height:60px;
+	width:45px;
+	overflow:hidden;
+	border: 1px solid var(--dark-color);
+}
+
+.friends-tn img{
+	max-width: 100%;
+}
+
+.clearBoth{
+	clear:both;
+}
+
+
+#showallfr:hover{
+	color:var(--dark-color);
+}
+
+.fr-div{
+	float:left;
+	margin:2px 3px;
+	background: var(--dark-color);
+	color: var(--light-color);
+	padding:10px;
+	border: 1px solid var(--contrast);
+	box-shadow: 5px 5px var(--darkgray);
+	text-align: center;
+}
+
+.fr-div a{
+	color:var(--primary-color);
+	text-decoration: none;
+}
+
+.showfr-tn{
+	display: block;
+	margin: 0 auto;
+	height:125px;
+	width:100px;
+	overflow:hidden;
+	border: 1px solid var(--light-color);
+}
+
+.showfr-tn img{
+	max-width: 100%;
 }
 
 .dashboard{
@@ -884,29 +939,7 @@ h2.next-h2{
 	max-width: 100%;
 }
 
-/* Friends */
-.friends-tn{
-	float: left;
-	margin:3px 2px;
-	height:60px;
-	width:45px;
-	overflow:hidden;
-	border: 1px solid var(--dark-color);
-}
-
-
-#showallfr:hover{
-	color:var(--dark-color);
-}
-
-.friends-tn img{
-	max-width: 100%;
-}
-
-.clearBoth{
-	clear:both;
-}
-
+/* Comments Edit */
 .modified{
 	font-style:italic;
 	text-align: right;
