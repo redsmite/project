@@ -75,9 +75,6 @@ function toggleNotif(){
         x.style.display = "none";
     }
 
-
-
-
 	var myRequest = new XMLHttpRequest();
 	var url = 'edituserprocess.php';
 	var checked = "1";
@@ -97,6 +94,83 @@ function toggleNotif(){
 	myRequest.send(formData);
 
 
+}
+
+function friendprocess(){
+	var fr=document.getElementById("fr-btn");
+	fr.innerHTML='<i class="fas fa-user-plus"></i>Pending Request...';
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var fr =  fr.getAttribute('value');
+
+	var formData = "fr="+fr;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
+}
+
+function friendyes(){
+	var nid = document.querySelector(".fr-btn").getAttribute('value');
+	var nid2='fr-'+nid;
+	var fr= document.getElementById(nid2);
+	fr.innerHTML="Request Accepted";
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var fryes =  nid;
+
+	var formData = "fryes="+fryes;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
+}
+
+
+function friendno(){
+	var nid = document.querySelector(".fr-btn").getAttribute('value');
+	var nid2='fr-'+nid;
+	var fr= document.getElementById(nid2);
+	fr.innerHTML="Request Denied";
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var frno =  nid;
+
+	var formData = "frno="+frno;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
 }
 
 //Login AJAX

@@ -32,7 +32,7 @@ if(isset($_POST['comment-submit'])){
 		$Cid=$row->newUserID;
 
 
-		$sql3="INSERT INTO tblnotif (userid,receiverid,notif,notifdate,notiftype,details) values('$id','$rid','commented on your profile',$timestamp,'1','$Cid')";
+		$sql3="INSERT INTO tblnotif (userid,receiverid,notifdate,notiftype,details) values('$id','$rid',$timestamp,'1','$Cid')";
 		$result3=$conn->query($sql3);
 
 		header("Location:profile.php?name=".$receiver."#profile-comments");

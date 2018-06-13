@@ -65,18 +65,11 @@ setupCookie();
 		<h1>Search User</h1>
 		<ul class="search-ul">
 <?php
-if (empty($_GET['search-text'])){
-	$_GET['search-text']='Show_All';
-	echo '<p>Show All Users</p>';
-}
 if(isset($_GET['search-text'])){
 	$search= $_GET['search-text'];
 
-	if(!$search=='Show_All'){
+
 		$sql="SELECT userid FROM tbluser WHERE username LIKE '$search%'";
-	}else if($search=='Show_All'){
-		$sql="SELECT userid FROM tbluser";	
-	}
 
 	$result=$conn->query($sql);
 
@@ -100,11 +93,8 @@ if(isset($_GET['search-text'])){
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 
-	if(!$search=='Show_All'){
 	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY username $limit";
-	}else if($search=='Show_All'){
-		$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY username $limit";	
-	}
+	
 	$textline1 = "Users (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 	$paginationCtrls = '';

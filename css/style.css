@@ -703,6 +703,15 @@ h2.next-h2{
 	border-bottom:1px solid var(--darkgray);
 }
 
+#fr-btn{
+	cursor: pointer;
+}
+
+.fr-btn{
+	cursor: pointer;
+	color: blue;
+}
+
 .dashboard{
 	padding:5px;
 }
@@ -869,6 +878,29 @@ h2.next-h2{
 
 .comment-tn img{
 	max-width: 100%;
+}
+
+/* Friends */
+.friends-tn{
+	float: left;
+	margin:3px 2px;
+	height:60px;
+	width:45px;
+	overflow:hidden;
+	border: 1px solid var(--dark-color);
+}
+
+
+#showallfr:hover{
+	color:var(--dark-color);
+}
+
+.friends-tn img{
+	max-width: 100%;
+}
+
+.clearBoth{
+	clear:both;
 }
 
 .modified{

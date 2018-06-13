@@ -119,7 +119,7 @@ $count=$result->num_rows;
 
 //Notification Count
 
-$sql="SELECT notifid,username,receiverid,notif,notifdate,notiftype,checked,details FROM tblnotif
+$sql="SELECT notifid,username,imgpath,receiverid,notifdate,notiftype,checked,details,details2 FROM tblnotif
 	LEFT JOIN tbluser
 		ON tblnotif.userid=tbluser.userid
 	WHERE receiverid='$id' and checked=0
@@ -144,18 +144,49 @@ while($rows=$result->fetch_object())
 $nid=$rows->notifid;
 $uname=$rows->username;
 $rid=$rows->receiverid;
-$notif=$rows->notif;
 $date=time_elapsed_string($rows->notifdate);
 $type=$rows->notiftype;
 
+$imgpath=$rows->imgpath;
 $uname=$rows->username;
 $details=$rows->details;
+$details2=$rows->details2;
 
 
 if($type==1){
 
 
-	echo'<li><i class="far fa-comment-dots"></i> <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> <a class="n2" href="profile.php?name='.$_SESSION['name'].'#comment'.$details.'">'.$notif.' '.$date.'</a></li>';
+	echo'<li><div class="comment-tn">
+				<img src="'.$imgpath.'">
+			</div> <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> <a class="n2" href="profile.php?name='.$_SESSION['name'].'#comment'.$details.'"> has commented on your profile '.$date.'</a></li>';
+} else if($type==2){
+	if ($details2==1){
+	echo'<li><div class="comment-tn">
+				<img src="'.$imgpath.'">
+			</div>
+			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
+		<div id="fr-'.$nid.'"><a class="fr-btn" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-btn" onclick="friendno()" value="'.$nid.'">No</a>
+		</div>
+		</li>';
+	} else if($details2==2){
+		echo'<li><div class="comment-tn">
+				<img src="'.$imgpath.'">
+			</div>
+			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
+		<div id="fr-'.$nid.'">
+			Request Accepted
+		</div>
+		</li>';
+	} else if($details2==3){
+		echo'<li><div class="comment-tn">
+				<img src="'.$imgpath.'">
+			</div>
+			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
+		<div id="fr-'.$nid.'">
+			Request Denied
+		</div>
+		</li>';
+	}
 }
 }
 }
