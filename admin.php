@@ -6,7 +6,7 @@
  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<title>Reloading...</title>
+	<title><?php companytitle()?></title>
 <body>
 	<div class="container">
 		<!-- Header -->
@@ -42,11 +42,9 @@
 			</div>
 		</div>
 	<!-- Footer -->
-		<footer class="main-footer">
-			<div class="container">
-				<p>Copyright &copy; <span id="company"></span> | 2018</p>
-			</div>
-		</footer>
+		<?php
+			addfooter();
+		?>
 	<!-- End of Container -->
 	</div>
 	<script src="js/main.js"></script>

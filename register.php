@@ -1,10 +1,10 @@
 <?php
 	session_start();
 	include'functions.php';
+	user_nonAccess();
 	addSidebar();
 	addLogin();
 	setupCookie();
-	user_nonAccess();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,52 +14,14 @@
  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<title>Reloading...</title>
+	<title><?php companytitle()?></title>
 </head>
 <body>
 	<div class="main-container">
 	<!-- Header -->
-		<header id="main-header">
-			<div class="grid-header">
-				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text"></span> <span id="second-text"></span></a></h1>
-				</div>
-				<div class="box2">
-					<nav class="main-nav">
-						<ul class="header-list">
-							<li><a href="index.php">HOME</a></li>
-							<li><a href="about.php">ABOUT</a></li>
-							<li><a href="services.php">SERVICES</a></li>
-							<li><a href="contact.php">CONTACT</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="box3">
-					<?php
-						search_function();
-					?>
-				</div>
-			</div>
-		</header>
-	<!-- Sub Header -->
-		<div class="subheader">
-			<div class="subgrid">
-				<div class="svg">
-					<p class="open-slide" onclick="openSlideMenu()">
-						<svg width="30" height="30">
-							<path d="M0,5 30,5" stroke="#fafafa" stroke-width="5"/>
-							<path d="M0,14 30,14" stroke="#fafafa" stroke-width="5"/>
-							<path d="M0,23 30,23" stroke="#fafafa" stroke-width="5"/>	
-						</svg>
-					</p>
-				</div>
-				<div class="profile-grid">
-					<?php
-						session_button()
-					?>
-				</div>
-			</div>
-		</div>
+	<?php
+		addheader();
+	?>
 	<!-- Contact Form -->
 		<div class="other-content">
 			<h1>Register</h1>
@@ -132,11 +94,9 @@
 			</div>
 		</div>
 	<!-- Footer -->
-		<footer class="main-footer">
-			<div class="container">
-				<p>Copyright &copy; <span id="company"></span> | 2018</p>
-			</div>
-		</footer>
+		<?php
+			addfooter();
+		?>
 	<!-- End of Container -->
 	</div>
 	<script src="js/main.js"></script>

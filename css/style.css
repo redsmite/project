@@ -226,7 +226,7 @@ body{
 	padding: 10px 0;
 }
 
-.main-nav a.current{
+.current{
 	color:var(--contrast);
 	padding-bottom:3px;
 }

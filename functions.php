@@ -1,6 +1,63 @@
 <?php
 date_default_timezone_set('Asia/Manila');
 
+function companytitle(){
+	echo'MovieReviews';
+}
+
+function addheader(){
+	echo'<header id="main-header">
+			<div class="grid-header">
+				<div class="box1">
+					<h1 id="header-text"><a href="index.php"><span id="first-text">Movie</span><span id="second-text">Reviews</span></a></h1>
+				</div>
+				<div class="box2">
+					<nav class="main-nav">
+						<ul class="header-list">
+							<li><a id="main-nav1" href="index.php">HOME</a></li>
+							<li><a id="main-nav2" href="about.php">ABOUT</a></li>
+							<li><a id="main-nav3" href="services.php">SERVICES</a></li>
+							<li><a id="main-nav4" href="contact.php">CONTACT</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="box3">';
+					
+						search_function();
+					
+				echo'</div>
+			</div>
+		</header>
+	<!-- Sub Header -->
+		<div class="subheader">
+			<div class="subgrid">
+				<div class="svg">
+					<p class="open-slide" onclick="openSlideMenu()">
+						<svg width="30" height="30">
+							<path d="M0,5 30,5" stroke="#fafafa" stroke-width="5"/>
+							<path d="M0,14 30,14" stroke="#fafafa" stroke-width="5"/>
+							<path d="M0,23 30,23" stroke="#fafafa" stroke-width="5"/>	
+						</svg>
+					</p>
+				</div>
+				<div class="profile-grid">';
+					
+						session_button();
+					
+				echo'</div>
+			</div>
+		</div>
+	';
+}
+
+function addfooter(){
+	echo'<footer class="main-footer">
+			<div class="container">
+				<p>Copyright &copy; <span id="company">MovieReviews</span> | 2018</p>
+			</div>
+		</footer>';
+}
+
 function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
     $ago = new DateTime($datetime);

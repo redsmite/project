@@ -1,14 +1,3 @@
-// Get Company Name
-function changeCompanyName(firstText,secondText){	
-	var companyName= firstText+secondText;
-	document.getElementById("first-text").innerHTML = firstText;
-	document.getElementById("second-text").innerHTML = secondText;
-	document.getElementById("company").innerHTML = companyName;
-	document.title= companyName;
-}
-
-changeCompanyName('Movie','Review');
-
 //sideMenu
 function openSlideMenu(){
 	document.getElementById('side-menu').style.width='90px';
@@ -473,6 +462,10 @@ function redirectProfile(){
 	}
 	myRequest.send(formData);
 
+}
+
+function activepage(thispage){
+	document.querySelector(thispage).style.color='var(--contrast)';
 }
 
 // Spinners
