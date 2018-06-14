@@ -5,6 +5,7 @@ include'functions.php';
 addSidebar();
 setupCookie();
 user_access();
+updateStatus();
 ?>
 <!DOCTYPE html>
 <html lang="en">

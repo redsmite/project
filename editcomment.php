@@ -3,6 +3,7 @@ session_start();
 include'connection.php';
 include'functions.php';
 user_access();
+updateStatus();
 
 if($_GET['this']!=$_SESSION['id']){
 	die('This page doesn\'t exist');

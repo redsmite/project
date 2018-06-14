@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include'functions.php';
+	updateStatus();
 	//Get Profile Info
 	require_once'connection.php';
 
@@ -10,7 +11,7 @@
 
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,imgpath,bio,is_show_email,gender FROM tbluser WHERE username='$name'";
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,imgpath,bio,is_show_email,gender,lastonline FROM tbluser WHERE username='$name'";
 		
 		$result=$conn->query($sql);
 
@@ -29,6 +30,9 @@
 		$usertype=$rows->usertypeid;
 		$gender=$rows->gender;
 		$email_access=$rows->is_show_email;
+		$online=$rows->lastonline;
+		$time=time();
+
 		if(isset($rows->middlename)){
 			$middlename=$rows->middlename;
 
@@ -114,6 +118,12 @@
 							'.$user.'					
 							</h1>
 							<h3>Joined: '.$datecreated.'</h3>';
+							if($time-strtotime($online)< 300){
+								echo'<h3><font color="green">Online</font></h3>';
+							} else{
+								echo'<h3>Last Online: '.time_elapsed_string($online).'</h3>';
+							}
+
 							if($usertype==1){
 								echo'<p>User</p>';
 							}else if ($usertype==2){
@@ -130,29 +140,28 @@
 						<a href="profilefriends.php?name=<?php echo $name; ?>"><p id="showallfr">Show all friends</p></a>
 <?php
 // Show friends
-$sql="SELECT user1,user2 FROM tblfriend WHERE (user1='$id' or user2='$id') AND accepted=2  LIMIT 10";
+$sql="SELECT user1,user2,username,imgpath FROM tblfriend
+LEFT JOIN tbluser
+	ON userid=user1 or userid=user2
+ WHERE (user1='$id' or user2='$id') AND accepted=2 AND userid!='$id'
+ ORDER BY lastonline DESC LIMIT 10";
 $result=$conn->query($sql);
 while($rows=$result->fetch_object()){
 $user1=$rows->user1;
 $user2=$rows->user2;
-
-$sql2="SELECT username,imgpath FROM tbluser WHERE (userid = '$user1' or userid='$user2') AND (userid!='$id')";
-$result2=$conn->query($sql2);
-while($rows2=$result2->fetch_object()){
-	$username=$rows2->username;
-	$imgpath=$rows2->imgpath;
+$username=$rows->username;
+$imgpath=$rows->imgpath;
 
 	echo'<div class="friends-tn">
 			<a title="'.$username.'" href="profile.php?name='.$username.'"><img src="'.$imgpath.'"></a>
 		</div>';
 
-}
+
 }
 
 
 
 ?>
-<br class="clearBoth" />
 					</div>
 					<div class="dashboard">
 						<?php

@@ -3,6 +3,7 @@ session_start();
 include'functions.php';
 addSidebar();
 setupCookie();
+updateStatus();
 require_once'connection.php';
 $name=$_GET['name'];
 ?>
@@ -25,6 +26,7 @@ $name=$_GET['name'];
 	<!-- Main Content -->
 		<div class="other-content">
 			<h1><a class="btp" href="profile.php?name=<?php echo $name ?>">Back to <?php echo $name ?>'s Profile</a></h1>
+			<div class="wrap-center">
 <?php
 // Show friends
 $sql="SELECT userid FROM tbluser WHERE username='$name'";
@@ -87,17 +89,19 @@ $page_rows = 8;
 
 
 
-$sql="SELECT user1,user2,friendsince,username,imgpath FROM tblfriend
+$sql="SELECT user1,user2,friendsince,username,imgpath,lastonline FROM tblfriend
 LEFT JOIN tbluser
 	ON userid=user1 or userid=user2
  WHERE (user1='$id' or user2='$id') AND accepted=2 AND userid!='$id'
- ORDER BY friendid DESC $limit";
+ ORDER BY lastonline DESC $limit";
 
 $result=$conn->query($sql);
 while($rows=$result->fetch_object()){
 $user1=$rows->user1;
 $user2=$rows->user2;
 $since=date("M j, Y", strtotime($rows->friendsince));
+$online=$rows->lastonline;
+$time=time();
 
 
 $username=$rows->username;
@@ -107,13 +111,20 @@ $imgpath=$rows->imgpath;
 	<div class="showfr-tn">
 			<a href="profile.php?name='.$username.'"><img src="'.$imgpath.'"></a></div>
 		<p><a href="profile.php?name='.$username.'">'.$username.'</a></p>
-		<p>Friend Since: '.$since.'</p>
-		</div>';
+		<p>Friend Since: '.$since.'</p>';
+		if($time-strtotime($online)< 300){
+			echo'<p><font color="green">Online</font></p>';
+		} else{
+			echo'<p>Last Online: '.time_elapsed_string($online).'</p>';
+		}
+
+		echo'</div>';
 
 }
 
 	mysqli_close($conn);
 ?>
+	</div>
 </div>
 	<!-- Footer -->
 		<?php

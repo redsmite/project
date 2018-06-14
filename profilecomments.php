@@ -3,6 +3,7 @@ session_start();
 include'functions.php';
 addSidebar();
 setupCookie();
+updateStatus();
 require_once'connection.php';
 $name=$_GET['name'];
 ?>

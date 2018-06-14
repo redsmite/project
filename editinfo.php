@@ -4,6 +4,7 @@
 	addSidebar();
 	setupCookie();
 	user_access();
+	updateStatus();
 	//Get Profile Info
 	require_once'connection.php';
 	

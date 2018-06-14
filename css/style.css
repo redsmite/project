@@ -704,6 +704,7 @@ h2.next-h2{
 .friends{
 	min-height: 100px;
 	border-bottom:1px solid var(--darkgray);
+	text-align: center;
 }
 
 #fr-btn{
@@ -721,7 +722,7 @@ h2.next-h2{
 
 
 .friends-tn{
-	float: left;
+	display: inline-block;
 	margin:3px 2px;
 	height:60px;
 	width:45px;
@@ -733,18 +734,19 @@ h2.next-h2{
 	max-width: 100%;
 }
 
-.clearBoth{
-	clear:both;
-}
-
 
 #showallfr:hover{
 	color:var(--dark-color);
 }
 
+.wrap-center{
+  	text-align:center;
+}
+
 .fr-div{
-	float:left;
-	margin:2px 3px;
+	display: inline-block;
+	border-radius: 10%;
+	margin:5px 3px;
 	background: var(--dark-color);
 	color: var(--light-color);
 	padding:10px;
@@ -760,11 +762,12 @@ h2.next-h2{
 
 .showfr-tn{
 	display: block;
+	background: var(--light-color);
 	margin: 0 auto;
 	height:125px;
 	width:100px;
 	overflow:hidden;
-	border: 1px solid var(--light-color);
+	border: 1px solid var(--contrast);
 }
 
 .showfr-tn img{
@@ -976,6 +979,7 @@ h2.next-h2{
 
 .btp{
 	color:var(--dark-color);
+	text-decoration: none;
 }
 
 /* Pagination */
@@ -1123,6 +1127,9 @@ h2.next-h2{
 		height:auto;
 		margin-bottom: 25px
 	}
+	.user-grid{
+		display:block;
+	}
 }
 
 @media(max-width: 800px){
@@ -1172,10 +1179,6 @@ h2.next-h2{
 		"leftbox"
 		"rightbox"
 		"error";
-	}
-	
-	.user-grid{
-		display:block;
 	}
 
 	.com-container{

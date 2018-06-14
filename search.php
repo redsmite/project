@@ -5,6 +5,7 @@ include'connection.php';
 addSidebar();
 addLogin();
 setupCookie();
+updateStatus();
 ?>
 <!DOCTYPE html>
 <html lang="en">

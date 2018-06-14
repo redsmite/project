@@ -5,6 +5,16 @@ function companytitle(){
 	echo'MovieReviews';
 }
 
+function updateStatus(){
+	if(isset($_SESSION['id'])){
+		$conn = new mysqli('localhost','root','','itsproject');
+		$id=$_SESSION['id'];
+		$sql="UPDATE tbluser SET lastonline=NOW() WHERE userid=$id";
+		$result=$conn->query($sql);
+		mysqli_close($conn);
+	}
+}
+
 function addheader(){
 	echo'<header id="main-header">
 			<div class="grid-header">

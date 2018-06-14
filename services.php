@@ -3,6 +3,7 @@
 	include'functions.php';
 	addSidebar();
 	addLogin();
+	updateStatus();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -2,6 +2,7 @@
 	session_start();
 	include'functions.php';
 	user_access();
+	updateStatus();
 	//Get Profile Info
 	require_once'connection.php';
 	

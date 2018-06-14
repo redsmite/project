@@ -3,6 +3,7 @@ session_start();
 include'functions.php';
 include'connection.php';
 user_access();
+updateStatus();
 if(isset($_GET['name'])){
 	$name=$_GET['name'];	
 }else{
