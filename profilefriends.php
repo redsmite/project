@@ -56,7 +56,7 @@ $page_rows = 8;
 	    $pagenum = $last; 
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-	$textline1 = "Friends (<b>$rows</b>)";
+	$textline1 = $name."'s Friends (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 	$paginationCtrls = '';
 	if($last != 1){
@@ -113,7 +113,7 @@ $imgpath=$rows->imgpath;
 		<p><a href="profile.php?name='.$username.'">'.$username.'</a></p>
 		<p>Friend Since: '.$since.'</p>';
 		if($time-strtotime($online)< 300){
-			echo'<p><font color="green">Online</font></p>';
+			echo'<h5><font color="green">Online</font></h5>';
 		} else{
 			echo'<p>Last Online: '.time_elapsed_string($online).'</p>';
 		}

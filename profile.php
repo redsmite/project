@@ -119,19 +119,19 @@
 							</h1>
 							<h3>Joined: '.$datecreated.'</h3>';
 							if($time-strtotime($online)< 300){
-								echo'<h3><font color="green">Online</font></h3>';
+								echo'<h5><font color="green">Online</font></h5>';
 							} else{
 								echo'<h3>Last Online: '.time_elapsed_string($online).'</h3>';
 							}
 
 							if($usertype==1){
-								echo'<p>User</p>';
+								//Nothing
 							}else if ($usertype==2){
-								echo'<p>Moderator</p>';
+								echo'<p><font color="coral">Moderator</font></p>';
 							}else if ($usertype==3){
-								echo'<p>DB Admin</p>';
+								echo'<p><font color="cyan">DB Admin</font></p>';
 							}else if ($usertype==4){
-								echo'<p>Site Admin</p>';
+								echo'<p><font color="magenta">Site Admin</font></p>';
 							}
 						?>
 					</div>

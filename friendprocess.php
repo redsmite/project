@@ -13,6 +13,10 @@ if(isset($_POST['fr'])){
 	$row=$result->fetch_object();
 	$user2=$row->userid;
 
+	$sql="SELECT user1,user2 FROM tblfriend WHERE (user1=$user1 and user2=$user2)or(user1=$user2 and user2=$user1)";
+	$result=$conn->query($sql);
+	if($result->num_rows==0){
+
 	$sql="INSERT INTO tblfriend(user1,user2,accepted) VALUES ('$user1','$user2',1) ";
 	$result=$conn->query($sql);
 
@@ -28,6 +32,9 @@ if(isset($_POST['fr'])){
 	$result2=$conn->query($sql2);
 
 	echo json_encode('oke-oke-okay');
+	}else{
+		echo json_encode('oke-oke-okay');
+	}
 }
 
 if(isset($_POST['fryes'])){

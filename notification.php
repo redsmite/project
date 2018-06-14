@@ -108,7 +108,7 @@ if($type==1){
 				<img src="'.$imgpath.'">
 			</div>
 			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
-		<div id="fr-'.$nid.'"><a class="fr-btn" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-btn" onclick="friendno()" value="'.$nid.'">No</a>
+		<div id="fr-'.$nid.'"><a class="fr-yes" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-no" onclick="friendno()" value="'.$nid.'">No</a>
 		</div>
 		</li>';
 	} else if($details2==2){

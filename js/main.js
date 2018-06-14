@@ -110,7 +110,7 @@ function friendprocess(){
 }
 
 function friendyes(){
-	var nid = document.querySelector(".fr-btn").getAttribute('value');
+	var nid = document.querySelector(".fr-yes").getAttribute('value');
 	var nid2='fr-'+nid;
 	var fr= document.getElementById(nid2);
 	fr.innerHTML="Request Accepted";
@@ -137,7 +137,7 @@ function friendyes(){
 
 
 function friendno(){
-	var nid = document.querySelector(".fr-btn").getAttribute('value');
+	var nid = document.querySelector(".fr-no").getAttribute('value');
 	var nid2='fr-'+nid;
 	var fr= document.getElementById(nid2);
 	fr.innerHTML="Request Denied";

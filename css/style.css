@@ -679,10 +679,15 @@ h2.next-h2{
 }
 
 .profile-pic-wrap{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border-radius: 50%;
 	height:250px;
-	max-width: 100%;
-	background: transparent;
+	width: 250px;
+	background: var(--secondary-color);
 	border:1px solid var(--dark-color);
+	overflow:hidden;
 }
 
 .profile-pic-wrap img{
@@ -690,7 +695,6 @@ h2.next-h2{
 	margin-right: auto;
 	display: block;
 	max-height: 100%;
-	max-width: 100%;
 }
 
 .user-header{
@@ -715,11 +719,27 @@ h2.next-h2{
 	cursor: pointer;
 }
 
-.fr-btn{
+.fr-yes{
 	cursor: pointer;
-	color: blue;
+	padding: 2px 10px;
+	border-radius: 20%;
+	border: 1px solid var(--dark-color);
+	margin-right: 10px;
+	margin-left: 5px;
+	background: var(--primary-color);
+	color:var(--light-color);
 }
 
+
+.fr-no{
+	padding: 2px 10px;
+	border-radius: 20%;
+	border: 1px solid var(--dark-color);
+	cursor: pointer;
+	color: blue;
+	background: var(--contrast);
+	color:var(--light-color);
+}
 
 .friends-tn{
 	display: inline-block;
@@ -1035,8 +1055,9 @@ h2.next-h2{
 
 .right-inbox{
 	grid-area: rightinbox;
-	border: 1px solid var(--dark-color);
-	margin-left: 3px;
+	background: var(--twitterblue);
+	border: 3px solid var(--contrast);
+	margin-left: 5px;
 	padding-left: 5px;
 	height: 420px;
 	overflow-y: scroll;
@@ -1048,7 +1069,7 @@ h2.next-h2{
 	color: var(--dark-color);
 	padding:5px;
 	padding-left: 10px;
-	border-radius: 5px;
+	border-radius: 20px;
 	box-shadow: 5px 5px var(--darkgray);
 	margin-bottom: 10px;
 }
@@ -1064,7 +1085,7 @@ h2.next-h2{
 .inbox-div{
 	overflow-x: auto;
 	background: var(--light-color);
-	border-radius: 5px;
+	border-radius: 20px;
 	padding:5px;
 }
 
@@ -1116,6 +1137,7 @@ h2.next-h2{
 	color:var(--contrast);
 	text-align: center;
 	padding: 8px;
+	border-bottom: 3px solid var(--contrast);
 }
 
 /* Responsive */

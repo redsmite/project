@@ -115,9 +115,9 @@ function addSidebar(){
 				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
 				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>
-				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
-				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
+				<li><a target="_blank" title="Follow us on Twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+				<li><a target="_blank" title="Follow us on Instagram" href="https://www.instagram.com/?hl=ens"><i class="fab fa-instagram"></i></a></li>
 				<li><a title="Logout" href="logout.php"><i class="fas fa-power-off"></i></a></li>
 			</ul>
 		</div>';
@@ -126,9 +126,9 @@ function addSidebar(){
 		<div class="side-nav" id="side-menu">
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-				<li><a title="Like us on Facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
-				<li><a title="Follow us on Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-				<li><a title="Follow us on Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
+				<li><a target="_blank" title="Follow us on Twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+				<li><a target="_blank" title="Follow us on Instagram" href="https://www.instagram.com/?hl=ens"><i class="fab fa-instagram"></i></a></li>
 			</ul>
 		</div>';
 	}
@@ -232,7 +232,7 @@ if($type==1){
 				<img src="'.$imgpath.'">
 			</div>
 			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
-		<div id="fr-'.$nid.'"><a class="fr-btn" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-btn" onclick="friendno()" value="'.$nid.'">No</a>
+		<div id="fr-'.$nid.'"><a class="fr-yes" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-no" onclick="friendno()" value="'.$nid.'">No</a>
 		</div>
 		</li>';
 	} else if($details2==2){
