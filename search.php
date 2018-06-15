@@ -32,7 +32,7 @@ if(isset($_GET['search-text'])){
 	$search= $_GET['search-text'];
 
 
-		$sql="SELECT userid FROM tbluser WHERE username LIKE '$search%'";
+	$sql="SELECT userid FROM tbluser WHERE username LIKE '$search%'";
 
 	$result=$conn->query($sql);
 

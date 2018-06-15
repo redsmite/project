@@ -1,6 +1,7 @@
 <?php
 session_start();
 include'functions.php';
+addlogin();
 addSidebar();
 setupCookie();
 updateStatus();

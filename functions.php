@@ -36,6 +36,11 @@ function addheader(){
 						search_function();
 					
 				echo'</div>
+				<div class="modal2">
+				</div>
+				<div id="search-dropdown">
+
+				</div>
 			</div>
 		</header>
 	<!-- Sub Header -->
@@ -272,7 +277,7 @@ function search_function(){
 		<form action="search.php" method="get">
 			<i class="fas fa-search"></i>
 			<label>Search</label>
-			<input type="text" required name="search-text" id="search-text" placeholder="Search user...">
+			<input type="text" onkeyup="searchdropdown()" required name="search-text" id="search-text" autocomplete="off" placeholder="Search user...">
 		</form>
 	';
 }

@@ -85,6 +85,47 @@ function toggleNotif(){
 
 }
 
+function searchdropdown(){
+	var src = document.getElementById('search-dropdown');
+	var input = document.getElementById('search-text');
+	var modal =document.querySelector('.modal2');
+
+	modal.addEventListener('click',hidesearch);
+
+	if(input.value!=null){
+		modal.style.display='block';
+		src.style.display='block';
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'searchprocess.php';
+		var search = document.getElementById('search-text').value;
+		
+		var formData = "search="+search;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			console.log(this.responseText);
+			var dataArray= this.responseText.split('||');
+				var output='';
+				for(i=0;i<dataArray.length-1;i++){
+					var itemArray = dataArray[i].split('|');
+					output+='<ul class="drop-ul"><li><a href="profile.php?name='+itemArray[0]+'"><div class="drop-tn"><img src="'+itemArray[1]+'"></div><p>'+itemArray[0]+'</a></p><small>Joined: '+itemArray[2]+'</small><li></ul>';
+				}
+			document.getElementById('search-dropdown').innerHTML = output;
+			
+			
+		}
+		myRequest.send(formData);		
+	}
+
+	function hidesearch(){
+		modal.style.display='none';
+		src.style.display='none';
+	}
+}
+
 function friendprocess(){
 	var fr=document.getElementById("fr-btn");
 	fr.innerHTML='<i class="fas fa-user-plus"></i>Pending Request...';

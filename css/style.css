@@ -87,7 +87,7 @@ body{
 	border-radius: 50%;
 	border: 2px solid transparent;
 	border-top-color: var(--primary-color);
-	border-bottom-color: var(--primary-color);
+	border-bottom-color: var(--contrast);
 	animation: spinner 0.7s ease infinite;
 }
 
@@ -175,12 +175,21 @@ body{
 	overflow-y:auto;
 }
 
-#notifdrop li,#notiflist li{
+#notifdrop li{
 	color:var(--dark-color);
 	padding:5px;
 	border:1px solid var(--darkgray);
 	list-style: none;
 	line-height: 2rem;
+}
+
+#notiflist li{
+	color:var(--dark-color);
+	padding:5px;
+	border:1px solid var(--darkgray);
+	list-style: none;
+	line-height: 3rem;
+	overflow:hidden;
 }
 
 .n1{
@@ -271,6 +280,60 @@ body{
 	height: 25px;
 	border-radius:5px;
 }
+
+#search-dropdown{
+	z-index: 2;
+	display:none;
+	position:absolute;
+	right:16px;
+	top:85px;
+	height:320px;
+	width:300px;
+	background: var(--gray);
+	color: var(--dark-color);
+	overflow-y: auto;
+	border:var(--dark-color);
+}
+
+.modal2{
+	display:none;
+	position:fixed;
+	z-index:1;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+}
+
+.drop-ul li{
+	list-style: none;
+	padding: 4px 2px;
+	border: 1px solid var(--light-color);
+	overflow:hidden;
+}
+
+.drop-ul li a{
+	text-decoration: none;
+	color:var(--dark-color);
+}
+
+.drop-ul li small{
+	font-style: italic;
+}
+
+.drop-tn{
+	height:75px;
+	width:75px;
+	overflow:hidden;
+	float:left;
+	margin-right: 5px;
+}
+
+.drop-tn img{
+	max-width:100%;
+}	
+
+
 /* Side Nav*/
 .side-nav{
 	height:100%;
@@ -785,7 +848,8 @@ h2.next-h2{
 	background: var(--light-color);
 	margin: 0 auto;
 	height:125px;
-	width:100px;
+	width:125px;
+	border-radius: 50%;
 	overflow:hidden;
 	border: 1px solid var(--contrast);
 }
@@ -952,8 +1016,9 @@ h2.next-h2{
 }
 
 .comment-tn{
-	height:30px;
-	width:30px;
+	height:75px;
+	width:75px;
+	border-radius: 50%;
 	overflow:hidden;
 	float:left;
 }
@@ -1108,10 +1173,7 @@ h2.next-h2{
 	list-style: none;
 	padding: 10px 4px;
 	border: 1px solid var(--darkgray);
-}
-
-.search-ul li:nth-child(even){
-	background: var(--light-color);
+	overflow:hidden;
 }
 
 .search-ul a{
@@ -1119,10 +1181,11 @@ h2.next-h2{
 }
 
 .sch-tn{
-	height:45px;
-	width:45px;
+	height:100px;
+	width:100px;
 	overflow:hidden;
 	float:left;
+	margin-right: 5px;
 }
 
 .sch-tn img{
