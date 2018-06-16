@@ -122,7 +122,7 @@ while($row=$result->fetch_object()){
 	    $pagenum = $last; 
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-	$textline1 = "Messages (<b>$rows</b>)";
+	$textline1 = "<i class='fas fa-comments'></i>Messages (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 	$paginationCtrls = '';
 	if($last != 1){

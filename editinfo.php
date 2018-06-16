@@ -125,15 +125,23 @@
 						if($gender==1){
 							echo'<label for="">Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
 							<input type="radio" name="gender" id="gender" value="2"> Female
-							<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
+							<input type="radio" name="gender" id="gender" value="3"> Non-Binary
+							<input type="radio" name="gender" id="gender" checked value="4"> Don\'t';
 						}else if ($gender==2){
-							echo'<label for="">Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
 								<input type="radio"  checked name="gender" id="gender" value="2"> Female
-								<input type="radio" name="gender" id="gender" value="3"> Non-Binary';
-						}else{
-							echo'<label for="">Gender</label><br><input type="radio" required name="gender" id="gender" value="1"> Male
+								<input type="radio" name="gender" id="gender" value="3"> Non-Binary
+								<input type="radio" name="gender" id="gender" checked value="4"> Don\'t Show';
+						}else if($gender==3){
+							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
 								<input type="radio" name="gender" id="gender" value="2"> Female
-								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary';
+								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary
+								<input type="radio" name="gender" id="gender" checked value="4"> Don\'t Show';
+						}else{
+							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
+								<input type="radio" name="gender" id="gender" value="2"> Female
+								<input type="radio" name="gender" id="gender" value="3"> Non-Binary
+								<input type="radio" name="gender" id="gender" checked value="4"> Don\'t Show';
 						}
 						?>
 					</div>

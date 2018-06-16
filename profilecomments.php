@@ -26,7 +26,6 @@ $name=$_GET['name'];
 	?>
 	<!-- Main Content -->
 		<div class="other-content">
-			<h1><a class="btp" href="profile.php?name=<?php echo $name ?>">Back to <?php echo $name ?>'s Profile</a></h1>
 <?php
 
 $sql2="SELECT userid FROM tbluser WHERE username='$name'";
@@ -62,7 +61,7 @@ LEFT JOIN tbluser
 WHERE receiver='$rid'
 ORDER BY commentid DESC $limit";
 
-$textline1 = "Comments (<b>$rows</b>)";
+$textline1 = "<i class='fas fa-comments'></i>Comments (<b>$rows</b>)";
 $textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 $paginationCtrls = '';
 if($last != 1){
@@ -133,7 +132,7 @@ echo'
 if($Cuid==$_SESSION['id']){
 	echo'<a href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
 }
-echo'	<input type="submit" value="delete" name="deletebtn">   
+echo'	<input type="submit" value="delete" class="comment-delete" name="deletebtn">   
 
 </form>';
 

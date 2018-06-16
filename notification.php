@@ -25,7 +25,6 @@ updateStatus();
 	?>
 	<!-- Main Content -->
 		<div class="other-content">
-			<h1><a class="btp" href="profile.php?name=<?php echo $_SESSION['name'] ?>">Go back to your profile</a></h1>
 <?php
 $id=$_SESSION['id'];
 $sql="SELECT notifid FROM tblnotif WHERE receiverid='$id'";
@@ -46,7 +45,7 @@ $page_rows = 10;
 	    $pagenum = $last; 
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-	$textline1 = "Notifications (<b>$rows</b>)";
+	$textline1 = "<i class='fas fa-bell'></i>Notifications (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 	$paginationCtrls = '';
 	if($last != 1){
@@ -96,6 +95,9 @@ $date=time_elapsed_string($rows->notifdate);
 $details=$rows->details;
 $details2=$rows->details2;
 $imgpath=$rows->imgpath;
+if(!$imgpath){
+	$imgpath='img/default.png';
+}
 
 if($type==1){
 

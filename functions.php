@@ -110,8 +110,12 @@ return $string;
 
 //Sidebar
 function addSidebar(){
+	echo'<div id="sidebarmodal" onclick="closeSlideMenu()">
+		</div>';
 	if(isset($_SESSION["id"])){
 		echo '
+		<div id="sidebarmodal">
+		</div>
 		<div class="side-nav" id="side-menu">
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
@@ -223,7 +227,9 @@ $imgpath=$rows->imgpath;
 $uname=$rows->username;
 $details=$rows->details;
 $details2=$rows->details2;
-
+if(!$imgpath){
+	$imgpath='img/default.png';
+}
 
 if($type==1){
 
@@ -263,7 +269,7 @@ if($type==1){
 }
 }
 
-		echo'<center><a href="notification.php">See all notifications</a></center>
+		echo'<center><a id="seeallnotif" href="notification.php">See all notifications</a></center>
 		</ul>
 		</div>';
 	}else{

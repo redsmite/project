@@ -2,11 +2,13 @@
 function openSlideMenu(){
 	document.getElementById('side-menu').style.width='90px';
 	document.getElementById('side-menu').marginleft='90px';
+	document.getElementById('sidebarmodal').style.display='block';
 }
 
 function closeSlideMenu(){
 	document.getElementById('side-menu').style.width='0';
 	document.getElementById('side-menu').marginleft='0';
+	document.getElementById('sidebarmodal').style.display='none';
 }
 
 // Create modal
@@ -294,17 +296,9 @@ function ajaxRegister(){
 		var username = document.getElementById('reg-name').value;
 		var password = document.getElementById('reg-password').value;
 		var retype = document.getElementById('reg-retype').value;
-		var firstname = document.getElementById('reg-first').value;
-		var middlename = document.getElementById('reg-middle').value;
-		var lastname = document.getElementById('reg-last').value;
-		var birthday = document.getElementById('reg-birthday').value;
 		var email = document.getElementById('reg-email').value;
-		var website = document.getElementById('reg-website').value;
-		var location = document.getElementById('reg-location').value;
-		var gender = document.querySelector('input[name="gender"]:checked').value;
-
 		
-		var formData = "username="+username+"&password="+password+"&retype="+retype+"&firstname="+firstname+"&middlename="+middlename+"&lastname="+lastname+"&birthday="+birthday+"&email="+email+"&website="+website+"&location="+location+"&gender="+gender;
+		var formData = "username="+username+"&password="+password+"&retype="+retype+"&email="+email;
 		
 		myRequest.open('POST', url ,true);
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
