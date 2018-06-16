@@ -26,48 +26,13 @@
 		$usertype=$rows->usertypeid;
 		$email_access=$rows->is_show_email;
 		$gender=$rows->gender;
-
-		if(isset($rows->middlename)){
-			$middlename=$rows->middlename;
-
-		}else{
-			$middlename='';
-		}
-
-
-		if(isset($rows->birthday)){
-			$birthday=$rows->birthday;
-
-		}else{
-			$birthday='';
-		}
-
-
-		if(isset($rows->website)){
-			$website=$rows->website;
-
-		}else{
-			$website='';
-		}
-
-
-		if(isset($rows->location)){
-			$location=$rows->location;
-
-		}else{
-			$location='';
-		}
-
-
-		if(isset($rows->bio)){
-			$bio=$rows->bio;
-
-		}else{
-			$bio='';
-		}
+		$middlename=$rows->middlename;
+		$birthday=$rows->birthday;
+		$website=$rows->website;
+		$location=$rows->location;
+		$bio=$rows->bio;
 	}
 	mysqli_close($conn);
-	//End of Get Profile Info
 	addSidebar();
 	addLogin();
 	setupCookie();
@@ -126,17 +91,17 @@
 							echo'<label for="">Gender</label><br><input type="radio" checked required name="gender" id="gender" value="1"> Male
 							<input type="radio" name="gender" id="gender" value="2"> Female
 							<input type="radio" name="gender" id="gender" value="3"> Non-Binary
-							<input type="radio" name="gender" id="gender" checked value="4"> Don\'t';
+							<input type="radio" name="gender" id="gender" value="4"> Don\'t';
 						}else if ($gender==2){
 							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
 								<input type="radio"  checked name="gender" id="gender" value="2"> Female
 								<input type="radio" name="gender" id="gender" value="3"> Non-Binary
-								<input type="radio" name="gender" id="gender" checked value="4"> Don\'t Show';
+								<input type="radio" name="gender" id="gender" value="4"> Don\'t Show';
 						}else if($gender==3){
 							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
 								<input type="radio" name="gender" id="gender" value="2"> Female
 								<input type="radio" name="gender" id="gender" checked value="3"> Non-Binary
-								<input type="radio" name="gender" id="gender" checked value="4"> Don\'t Show';
+								<input type="radio" name="gender" id="gender" value="4"> Don\'t Show';
 						}else{
 							echo'<label for="">Gender</label><br><input type="radio" name="gender" id="gender" value="1"> Male
 								<input type="radio" name="gender" id="gender" value="2"> Female

@@ -31,7 +31,7 @@ if(isset($_POST['username'])){
 			array_push($error,'<i class="fas fa-exclamation-circle"></i> No changes made.');	
 		}
 
-		if (preg_match('/[^A-Z]/i',$_POST['username']))
+ 		if (preg_match('/[^A-Z]/i',$_POST['username']))
 		{
 		     array_push($error,'<i class="fas fa-exclamation-circle"></i>Username must not contain special characters or spaces.');
 		}

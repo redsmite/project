@@ -10,7 +10,7 @@ if(isset($_POST['username'])){
 	    array_push($error,'<i class="fas fa-exclamation-circle"></i>Username must not be longer than 20 characters');
 	}
 
-	if (preg_match('/\/^[a-zA-Z0-9-_]+$\//',$_POST['username']))
+	if (preg_match('/[^A-Z]/i',$_POST['username']))
 	{
 	     array_push($error,'<i class="fas fa-exclamation-circle"></i>Username must not contain special characters or spaces');
 	}

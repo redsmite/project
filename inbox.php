@@ -63,8 +63,7 @@ if(isset($_POST['message-btn'])){
 	$sql2="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('$sender','$receiver','$message',$timestamp)";
 	$result=$conn->query($sql2);
 }
-			echo'<div class="right-inbox">
-					<p>Show Conversation</p>';
+			echo'<div class="right-inbox">';
 $id=$_SESSION['id'];
 
 $Rquery="SELECT userid FROM tbluser WHERE username='$name'";
@@ -89,7 +88,9 @@ while($row=$result->fetch_object()){
 	if($imgpath==''){
 		$imgpath='img/default.png';
 	}
-	echo '<div class="inbox-box">
+
+	if($Sname==$_SESSION['name']){
+	echo '<div class="chat-me">
 	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
@@ -98,6 +99,17 @@ while($row=$result->fetch_object()){
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
+	}else{
+	echo '<div class="chat-notme">
+	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+		<div class="comment-tn">
+			<img src="'.$imgpath.'">
+		</div>'.$Sname.'</a><br>
+	<div class="inbox-div"> 
+		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
+	</div>
+	</div>';
+	}
 
 }
 		echo'</div>

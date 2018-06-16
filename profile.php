@@ -11,7 +11,7 @@
 
 	if(isset($_GET['name'])){
 		$name = $_GET['name'];
-		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,imgpath,bio,is_show_email,gender,lastonline FROM tbluser WHERE username='$name'";
+		$sql="SELECT userid,username,firstname,middlename,lastname,birthday,datecreated,email,website,location,usertypeid,imgpath,bio,is_show_email,gender,lastonline,profileviews FROM tbluser WHERE username='$name'";
 		
 		$result=$conn->query($sql);
 
@@ -31,59 +31,35 @@
 		$email_access=$rows->is_show_email;
 		$online=$rows->lastonline;
 		$time=time();
+		$middlename=$rows->middlename;
+		if($rows->birthday==0){
 
-		if(isset($rows->middlename)){
-			$middlename=$rows->middlename;
-
-		}else{
-			$middlename='';
-		}
-
-
-		if(strtotime($rows->birthday)!=0){
-			$birthday=date("M j, Y", strtotime($rows->birthday));
-
-		}else{
 			$birthday='';
-		}
-
-
-		if(isset($rows->website)){
-			$website=$rows->website;
 
 		}else{
-			$website='';
+
+			$birthday=date("M j, Y", strtotime($rows->birthday));
 		}
+		$website=$rows->website;
+		$location=$rows->location;
+		$image=$rows->imgpath;
+		$bio=$rows->bio;
+		$gender=$rows->gender;
+		$views=$rows->profileviews;
+	}
+	//Add to Profile View
+	if(!isset($_SESSION['id'])){
+		$sql="UPDATE tbluser SET profileviews+=1 WHERE userid='$id'";
+		$result=$conn->query($sql);
+	}
 
-
-		if(isset($rows->location)){
-			$location=$rows->location;
-
-		}else{
-			$location='';
-		}
-
-
-		if(isset($rows->imgpath)){
-			$image=$rows->imgpath;
-		}
-
-
-		if(isset($rows->bio)){
-			$bio=$rows->bio;
-
-		}else{
-			$bio='';
-		}
-
-		if(isset($rows->gender)){
-			$gender=$rows->gender;
-
-		}else{
-			$gender='';
+	if(isset($_SESSION['id'])){
+		if($id!=$_SESSION['id']){
+			$sql="UPDATE tbluser SET profileviews=profileviews+1 WHERE userid='$id'";
+			$result=$conn->query($sql);
 		}
 	}
-	//End of Get Profile Info
+
 	addSidebar();
 	addLogin();
 	setupCookie();
@@ -208,6 +184,9 @@ if($testR->num_rows!=0){
 									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Send Private Message</a></li>
 									</ul>';
 							}
+						}
+						if($id==$_SESSION['id']){
+						echo'<p id="profileviews"><i class="far fa-eye"></i> Profile Views: '.$views.'</p>';
 						}
 						?>
 					</div>
