@@ -185,8 +185,11 @@ if($testR->num_rows!=0){
 									</ul>';
 							}
 						}
-						if($id==$_SESSION['id']){
-						echo'<p id="profileviews"><i class="far fa-eye"></i> Profile Views: '.$views.'</p>';
+						//Profile Views
+						if(isset($_SESSION['id'])){
+							if($id==$_SESSION['id']){
+							echo'<p id="profileviews"><i class="far fa-eye"></i> Profile Views: '.$views.'</p>';
+							}
 						}
 						?>
 					</div>
