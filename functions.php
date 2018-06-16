@@ -120,7 +120,7 @@ function addSidebar(){
 			<ul>
 				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
 				<li><a title="Go to your profile" href="profile.php?name='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
-				<li><a title="Check your private messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i></a></li>
+				<li><a title="Check your messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i></a></li>
 				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
 				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>

@@ -694,6 +694,8 @@ h2.next-h2{
 }
 
 #error-message,#error-message2,#error-message3,#error-message4{
+	text-align: center;
+	line-height: 1.5em;
 	grid-area: error;
 	width:100%;
 	padding:0;
@@ -901,7 +903,6 @@ h2.next-h2{
 }
 
 .btp{
-	text-decoration: none;
 	color:var(--dark-color);
 }
 
@@ -1130,23 +1131,19 @@ h2.next-h2{
 /* Private Message */
 
 .inbox-grid{
-	display:grid;
-	grid-template-columns: 1fr 2fr;
-	grid-template-areas: "leftinbox rightinbox";
 	box-sizing: border-box;
 }
 
-.left-inbox{
-	grid-area: leftinbox;
-}
-
 .inboxform-div{
+	display: block;
+	margin-left:auto;
+	margin-right:auto; 
 	background:var(--darkgray) ;
 	color: var(--light-color);
-	width:100%;
+	width:80%;
 	height: 95%;
 	line-height: 2rem;
-    border-radius: 10%;
+    border-radius: 25px;
     border: 1px solid var(--dark-color);
 }
 
@@ -1155,25 +1152,25 @@ h2.next-h2{
 }
 
 #sendmsg{
-	height:300px;
-	width:80%;
+	height:100px;
+	width:90%;
 }
 
 #inbox-submit{
-	height: 25px;
-	width: 100px;
+	height: 30px;
+	width: 140px;
 	border:0;
 	margin:2px;
+	border-radius: 5px;
 	background: var(--dark-color);
 	color:var(--light-color);
 	cursor: pointer;
 }
 
 .right-inbox{
-	grid-area: rightinbox;
 	background: var(--gray);
 	border: 3px solid var(--contrast);
-	margin-left: 5px;
+	margin: 5px;
 	padding: 20px 0 20px 5px;
 	height: 420px;
 	overflow-y: auto;
@@ -1225,7 +1222,7 @@ h2.next-h2{
 }
 
 .reply{
-	color:var(--primary-color);
+	color:var(--dark-color);
 }
 
 .inbox-div{
@@ -1341,19 +1338,6 @@ h2.next-h2{
 
 	.com-container{
 		width:500px;
-	}
-
-
-	.inbox-grid{
-		display:grid;
-		grid-template-columns: 1fr;
-		grid-template-areas: "leftinbox" 
-		"rightinbox";
-		box-sizing: border-box;
-	}
-	#sendmsg{
-		height:100px;
-		width:90%;
 	}
 }
 

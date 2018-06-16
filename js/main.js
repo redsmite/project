@@ -304,19 +304,13 @@ function ajaxRegister(){
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 
 		myRequest.onload = function(){
-			var response= JSON.parse(this.responseText);
+			var response= this.responseText;
 			console.warn(response);
 			if(response=="success"){
 
 				window.location.href = 'thankyou.html';
 			} else {
-				var output='';
-					for(var i in response){
-					output += '<ul>'+
-						'<li>'+response[i]+'</li>'+
-						'</ul>';
-					}
-				document.getElementById('error-message2').innerHTML = output;
+				document.getElementById('error-message2').innerHTML = response;
 				removeSpinners();
 			}
 		}
@@ -450,6 +444,40 @@ function AjaxEditPass(){
 		}
 		myRequest.send(formData);
 	}
+}
+
+function ajaxinbox(){
+	var form=document.getElementById('chatform');
+	var formsend=document.getElementById('chatform').addEventListener('submit', sendmessage);
+
+	function sendmessage(e){
+		e.preventDefault();
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var message = document.getElementById('sendmsg').value;
+		var name = document.getElementById('hidden').value;
+		
+		
+		var formData = "message="+message+"&name="+name;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			if(response){
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+			}
+		}
+		myRequest.send(formData);
+	}
+
 }
 
 //Redirect Page

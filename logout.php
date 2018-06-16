@@ -17,7 +17,7 @@
 <body>
 	<div class="main-container">
 		<div id="thanks-message">
-			<h1><i class="far fa-check-circle"></i>You have Logout</h1>
+			<h1><i class="far fa-check-circle"></i>Thank you, Come again!</h1>
 			<p>You have successfully logout.</p>
 			<p>This page will be redirected shortly.</p>
 			<a href="#" id='redirectlink'>Click here to redirect</a>

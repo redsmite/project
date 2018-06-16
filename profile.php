@@ -181,7 +181,7 @@ if($testR->num_rows!=0){
 	echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>';
 }
 									
-									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Send Private Message</a></li>
+									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Send Message</a></li>
 									</ul>';
 							}
 						}

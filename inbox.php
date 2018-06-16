@@ -35,11 +35,12 @@ if($name!=$_SESSION['name']){
 	//Send PM
 	echo'<div class="inbox-grid">
 			<div class="left-inbox">
-			<p>Send <span id="highlight-text">'.$name.'</span> a private message</p>	
+			<p>Conversation with <span id="highlight-text">'.$name.'</span></p>	
 				<div class="inboxform-div">
 					<center>
-						<form action="#" method="post">
+						<form action="#" id="chatform" method="post">
 							<div>
+							<input type="hidden" id="hidden" name="hidden" value="'.$_GET["name"].'" />
 								<label for="message">Message</label><br>
 								<textarea id="sendmsg" name="message" required></textarea>
 							</div>
@@ -48,21 +49,8 @@ if($name!=$_SESSION['name']){
 					</center>	
 				</div>
 			</div>';
-//Send private message
-if(isset($_POST['message-btn'])){
-	$sql="SELECT userid FROM tbluser WHERE username='$name'";
-	$result=$conn->query($sql);
-	$row=$result->fetch_object();
-	$Rid=$row->userid;
 
-	$sender=$conn->real_escape_string($_SESSION['id']);
-	$receiver=$conn->real_escape_string($Rid);
-	$message=$conn->real_escape_string($_POST['message']);
-	$timestamp='NOW()';
-	
-	$sql2="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('$sender','$receiver','$message',$timestamp)";
-	$result=$conn->query($sql2);
-}
+//Show Conversation
 			echo'<div class="right-inbox">';
 $id=$_SESSION['id'];
 
@@ -114,6 +102,12 @@ while($row=$result->fetch_object()){
 }
 		echo'</div>
 	</div>';
+
+	//Javascript
+	echo'<script src="js/main.js"></script>
+	<script>
+		ajaxinbox();
+	</script>';
 } else{
 	$id=$_SESSION['id'];
 	$sql="SELECT pmid FROM tblpm WHERE receiverid='$id'";
@@ -206,6 +200,7 @@ while($row=$result->fetch_object()){
 	<script>
 		modal();
 		ajaxLogin();
+		ajaxinbox();
 	</script>
 </body>
 </html>
