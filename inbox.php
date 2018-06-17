@@ -29,24 +29,19 @@ setupCookie();
 		addheader();
 	?>
 	<!-- Main Content -->
-		<div class="other-content">
+		<div class="chat-container">
 <?php
 if($name!=$_SESSION['name']){
 	//Send PM
 	echo'<div class="inbox-grid">
 			<div class="left-inbox">
-			<p>Conversation with <span id="highlight-text">'.$name.'</span></p>	
 				<div class="inboxform-div">
-					<center>
-						<form action="#" id="chatform" method="post">
-							<div>
-							<input type="hidden" id="hidden" name="hidden" value="'.$_GET["name"].'" />
-								<label for="message">Message</label><br>
-								<textarea id="sendmsg" name="message" required></textarea>
-							</div>
-							<button type="submit" id="inbox-submit" name="message-btn">Send Message</button>
-						</form>
-					</center>	
+					<form action="#" id="chatform" method="post">
+						<div>
+						<input type="hidden" id="hidden" name="hidden" value="'.$_GET["name"].'" />
+							<input type="text" autocomplete="off" id="sendmsg" name="message" required>Enter
+						</div>
+					</form>
 				</div>
 			</div>';
 
@@ -63,7 +58,6 @@ $sql="SELECT username,imgpath,message,pmdate FROM tblpm
 LEFT JOIN tbluser
 	ON senderid=userid
 WHERE (receiverid='$id' and username='$name') or (senderid='$id' and receiverid='$Rid')
-ORDER BY pmid DESC 
 LIMIT 30
 ";
 
@@ -83,7 +77,7 @@ while($row=$result->fetch_object()){
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
 		</div>'.$Sname.'</a><br>
-	<div class="inbox-div"> 
+	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
@@ -93,7 +87,7 @@ while($row=$result->fetch_object()){
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
 		</div>'.$Sname.'</a><br>
-	<div class="inbox-div"> 
+	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
@@ -107,10 +101,13 @@ while($row=$result->fetch_object()){
 	echo'<script src="js/main.js"></script>
 	<script>
 		ajaxinbox();
+		var messageBody = document.querySelector(".right-inbox");
+		messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 	</script>';
 } else{
 	$id=$_SESSION['id'];
-	$sql="SELECT pmid FROM tblpm WHERE receiverid='$id'";
+	$sql="SELECT pmid FROM tblpm WHERE receiverid='$id' 
+	GROUP BY senderid";
 	$result=$conn->query($sql);
 	$rows=$result->num_rows;
 	$page_rows = 10;
@@ -128,7 +125,7 @@ while($row=$result->fetch_object()){
 	    $pagenum = $last; 
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-	$textline1 = "<i class='fas fa-comments'></i>Messages (<b>$rows</b>)";
+	$textline1 = "<i class='fas fa-comments'></i>Conversations (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 	$paginationCtrls = '';
 	if($last != 1){
@@ -160,7 +157,7 @@ while($row=$result->fetch_object()){
 	$sql="SELECT username,imgpath,message,pmdate,checked FROM tblpm
 	LEFT JOIN tbluser
 		ON senderid=userid
-	WHERE receiverid='$id'
+	WHERE pmid IN (SELECT max(pmid) FROM  tblpm WHERE receiverid='$id' GROUP BY senderid)
 	ORDER BY pmid DESC $limit";
 	$result=$conn->query($sql);
 	$count=$result->num_rows;
@@ -183,7 +180,7 @@ while($row=$result->fetch_object()){
 				<img src="'.$imgpath.'">
 			</div>
 		<div class="inbox-div"> <p class="inbxmsg">'.createlink(nl2br($message)).'</p></div>
-		<a class="reply" href="inbox.php?name='.$Sname.'">Reply</a>
+		<a class="reply" href="inbox.php?name='.$Sname.'#main-footer">Show Conversation</a>
 		</div>';
 
 	}

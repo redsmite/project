@@ -473,6 +473,8 @@ function ajaxinbox(){
 				form.reset();
 				
 				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 			}
 		}
 		myRequest.send(formData);

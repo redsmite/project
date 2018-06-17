@@ -66,7 +66,7 @@ function addheader(){
 }
 
 function addfooter(){
-	echo'<footer class="main-footer">
+	echo'<footer id="main-footer">
 			<div class="container">
 				<p>Copyright &copy; <span id="company">MovieReviews</span> | 2018</p>
 			</div>
@@ -188,7 +188,7 @@ function session_button(){
 		}
 
 //PM Count
-$sql="SELECT pmid FROM tblpm WHERE receiverid='$id' AND checked=0";
+$sql="SELECT pmid FROM tblpm WHERE receiverid='$id' AND checked=0 GROUP BY senderid";
 $result=$conn->query($sql);
 $count=$result->num_rows;
 		echo'<a class="button" title="Check your private messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i><span id="pmnum">'.$count.'</span></a>';

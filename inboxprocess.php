@@ -36,7 +36,6 @@ $sql="SELECT username,imgpath,message,pmdate FROM tblpm
 LEFT JOIN tbluser
 	ON senderid=userid
 WHERE (receiverid='$id' and username='$name') or (senderid='$id' and receiverid='$Rid')
-ORDER BY pmid DESC 
 LIMIT 30
 ";
 
@@ -57,7 +56,7 @@ while($row=$result->fetch_object()){
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
 		</div>'.$Sname.'</a><br>
-	<div class="inbox-div"> 
+	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
@@ -67,7 +66,7 @@ while($row=$result->fetch_object()){
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
 		</div>'.$Sname.'</a><br>
-	<div class="inbox-div"> 
+	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';

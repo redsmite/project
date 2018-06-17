@@ -124,6 +124,10 @@ body{
 	padding: 8px;
 }
 
+.profile-grid i{
+	font-size:25px;
+}
+
 .subheader p svg{
 	padding-left: 10px
 }
@@ -583,6 +587,12 @@ body{
 	box-sizing: border-box;
 	padding:5px;
 	background: var(--gray);
+	min-height:70vh;
+}
+
+.chat-container{
+	box-sizing: border-box;
+	background: var(--light-color);
 	min-height:70vh;
 }
 
@@ -1131,20 +1141,28 @@ h2.next-h2{
 /* Private Message */
 
 .inbox-grid{
+	display: grid; 
+	grid-template-areas: 
+	"right-inbox"
+	"left-inbox";
 	box-sizing: border-box;
 }
 
+.left-inbox{
+	grid-area: left-inbox;
+}
+
 .inboxform-div{
+	position:fixed;
+	top:458px;
+	left:10%;
 	display: block;
-	margin-left:auto;
-	margin-right:auto; 
-	background:var(--darkgray) ;
+	background:var(--dark-color) ;
 	color: var(--light-color);
 	width:80%;
-	height: 95%;
 	line-height: 2rem;
-    border-radius: 25px;
-    border: 1px solid var(--dark-color);
+    border: 1px solid var(--contrast);
+    text-align: center;
 }
 
 .inboxform-div input{
@@ -1152,29 +1170,17 @@ h2.next-h2{
 }
 
 #sendmsg{
-	height:100px;
+	height:30px;
 	width:90%;
-}
-
-#inbox-submit{
-	height: 30px;
-	width: 140px;
-	border:0;
-	margin:2px;
-	border-radius: 5px;
-	background: var(--dark-color);
-	color:var(--light-color);
-	cursor: pointer;
+	margin:10px 0;
 }
 
 .right-inbox{
-	background: var(--gray);
-	border: 3px solid var(--contrast);
-	margin: 5px;
+	grid-area: right-inbox;
+	background: var(--dark-color);
 	padding: 20px 0 20px 5px;
-	height: 420px;
+	height: 450px;
 	overflow-y: auto;
-	border-radius: 8%;
 	box-sizing: border-box;	
 }
 
@@ -1198,7 +1204,7 @@ h2.next-h2{
 	padding:5px;
 	padding-left: 10px;
 	border-radius: 20px;
-	border:1px solid var(--darkgray);
+	border:1px solid var(--light-color);
 	margin-bottom: 10px;
 	min-height: 65px;
 }
@@ -1210,7 +1216,7 @@ h2.next-h2{
 	padding:5px;
 	padding-left: 10px;
 	border-radius: 20px;
-	border:1px solid var(--darkgray);
+	border:1px solid var(--light-color);
 	margin-bottom: 10px;
 	min-height: 65px;
 	margin-left: 22%;
@@ -1230,6 +1236,12 @@ h2.next-h2{
 	background: var(--light-color);
 	border-radius: 10px;
 	border: 1px solid var(--darkgray);
+	padding:5px;
+}
+
+.chat-div{
+	overflow-x: auto;
+	border-radius: 10px;
 	padding:5px;
 }
 
@@ -1272,7 +1284,7 @@ h2.next-h2{
 }
 
 /* Footer */
-.main-footer{
+#main-footer{
 	grid-area:footer;
 	border-top: 3px solid var(--primary-color);
 	background: var(--dark-color);
