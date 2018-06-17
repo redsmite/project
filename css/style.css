@@ -125,7 +125,7 @@ body{
 }
 
 .profile-grid i{
-	font-size:25px;
+	font-size:20px;
 }
 
 .subheader p svg{
@@ -1186,11 +1186,22 @@ h2.next-h2{
 
 .inbox-box{
 	width:95%;
-	background: var(--lightblue);
+	background: var(--gray);
 	color: var(--dark-color);
 	padding:5px;
 	padding-left: 10px;
-	border-radius: 20px;
+	border:1px solid var(--darkgray);
+	box-shadow: 5px 5px var(--darkgray);
+	margin-bottom: 10px;
+	min-height: 65px;
+}
+
+.inbox-new{
+	width:95%;
+	background: var(--contrast);
+	color: var(--darkcolor);
+	padding:5px;
+	padding-left: 10px;
 	border:1px solid var(--darkgray);
 	box-shadow: 5px 5px var(--darkgray);
 	margin-bottom: 10px;

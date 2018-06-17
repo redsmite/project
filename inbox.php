@@ -157,7 +157,7 @@ while($row=$result->fetch_object()){
 	$sql="SELECT username,imgpath,message,pmdate,checked FROM tblpm
 	LEFT JOIN tbluser
 		ON senderid=userid
-	WHERE pmid IN (SELECT max(pmid) FROM  tblpm WHERE receiverid='$id' GROUP BY senderid)
+	WHERE pmid IN (SELECT max(pmid) FROM tblpm WHERE receiverid='$id' GROUP BY senderid)
 	ORDER BY pmid DESC $limit";
 	$result=$conn->query($sql);
 	$count=$result->num_rows;
@@ -170,10 +170,15 @@ while($row=$result->fetch_object()){
 		if($imgpath==''){
 			$imgpath='img/default.png';
 		}
-		echo '<div class="inbox-box">
-		<a class="sender" href="profile.php?name='.$Sname.'">'.$Sname.'</a>';	
+
 		if($checked==0){
-			echo'<span class="new"> <i class="fab fa-gripfire"></i>new</span>';
+			echo '<div class="inbox-new">
+				<a class="sender" href="profile.php?name='.$Sname.'">'.$Sname.'</a>	
+				<span class="new"> <i class="fab fa-gripfire"></i>new</span>';
+		}else{
+			
+			echo'<div class="inbox-box">
+				<a class="sender" href="profile.php?name='.$Sname.'">'.$Sname.'</a>';
 		}
 		echo'<span class="inbox-date">'.time_elapsed_string($date).'</span>
 			<div class="comment-tn">
