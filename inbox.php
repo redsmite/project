@@ -29,11 +29,13 @@ setupCookie();
 		addheader();
 	?>
 	<!-- Main Content -->
-		<div class="chat-container">
+		<div class="other-content">
 <?php
 if($name!=$_SESSION['name']){
 	//Send PM
-	echo'<div class="inbox-grid">
+	echo'
+	<div class="closethis"><a href="inbox.php?name='.$_SESSION['name'].'"><i class="fas fa-times"></i></a></div>
+	<div class="inbox-grid">
 			<div class="left-inbox">
 				<div class="inboxform-div">
 					<form action="#" id="chatform" method="post">

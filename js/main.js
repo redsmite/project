@@ -554,4 +554,3 @@ function removeSpinners(){
 	document.querySelector('body').classList.remove('spinner');
 	document.querySelector('.main-container').style.opacity='1';
 }
-
