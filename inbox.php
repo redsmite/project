@@ -58,7 +58,6 @@ $sql="SELECT username,imgpath,message,pmdate FROM tblpm
 LEFT JOIN tbluser
 	ON senderid=userid
 WHERE (receiverid='$id' and username='$name') or (senderid='$id' and receiverid='$Rid')
-LIMIT 30
 ";
 
 $result=$conn->query($sql);
