@@ -468,7 +468,6 @@ function ajaxinbox(){
 
 		myRequest.onload = function(){
 			var response= this.responseText;
-			console.log(response);
 			if(response){
 				form.reset();
 				
@@ -479,7 +478,36 @@ function ajaxinbox(){
 		}
 		myRequest.send(formData);
 	}
+}
 
+function loadInboxInterval(){
+	setInterval(loadInbox, 2000);
+
+	function loadInbox() {
+    	
+    	var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var load = "hello";
+		var name = document.getElementById('hidden').value;
+		
+		
+		var formData = "load="+load+"&name="+name;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			if(response){
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+			}
+		}
+		myRequest.send(formData);
+	
+	}
 }
 
 //Redirect Page

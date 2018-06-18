@@ -102,6 +102,7 @@ while($row=$result->fetch_object()){
 	echo'<script src="js/main.js"></script>
 	<script>
 		ajaxinbox();
+		loadInboxInterval();
 		var messageBody = document.querySelector(".right-inbox");
 		messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 	</script>';

@@ -25,8 +25,8 @@ function addheader(){
 					<nav class="main-nav">
 						<ul class="header-list">
 							<li><a id="main-nav1" href="index.php">HOME</a></li>
-							<li><a id="main-nav2" href="about.php">ABOUT</a></li>
-							<li><a id="main-nav3" href="services.php">SERVICES</a></li>
+							<li><a id="main-nav2" href="movie.php">MOVIE</a></li>
+							<li><a id="main-nav3" href="community.php">COMMUNITY</a></li>
 							<li><a id="main-nav4" href="contact.php">CONTACT</a></li>
 						</ul>
 					</nav>

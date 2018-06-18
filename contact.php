@@ -24,31 +24,27 @@
 	?>
 	<!-- Contact Form -->
 		<div class="other-content">
-			<h1>Contact Us</h1>
-			<div class="container">
-				<div class="content-box">
-					<h2><span id="highlight-text">Get</span> in Touch</h2>		
-					<div class="form">
-						<center>
-							<p>Please don't spam or you'll die.</p>
-							<form action="#" method="post">
-								<div>
-									<label for="name">Name</label><br>
-									<input type="text" required name="contact-name">
-								</div>
-								<div>
-									<label for="email">Email</label><br>
-									<input type="email" required name="contact-email">
-								</div>
-								<div>
-									<label for="message">Message</label><br>
-									<textarea name="message" required name="contact-message"></textarea>
-								</div>
-								<button type="submit" name="contact-button">Submit</button>
-							</form>
-						</center>	
+			<h1><i class="fas fa-phone"></i> Contact Us</h1>
+			<h2><span id="highlight-text">Get</span> in Touch</h2>	
+			<div class="form">
+				<center>
+				<p>Please don't spam or you'll die.</p>
+				<form action="#" method="post">
+					<div>
+						<label for="name">Name</label><br>
+						<input type="text" required name="contact-name">
 					</div>
-				</div>
+					<div>
+						<label for="email">Email</label><br>
+						<input type="email" required name="contact-email">
+					</div>
+					<div>
+						<label for="message">Message</label><br>
+						<textarea name="message" required name="contact-message"></textarea>
+					</div>
+					<button type="submit" name="contact-button">Submit</button>
+				</form>
+				</center>	
 			</div>
 		</div>
 	<!-- Footer -->
