@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Manila');
 
 function companytitle(){
-	echo'MovieReviews';
+	echo'RainbowDream';
 }
 
 function updateStatus(){
@@ -19,19 +19,9 @@ function addheader(){
 	echo'<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text">Movie</span><span id="second-text">Reviews</span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text">Rainbow</span><span id="second-text">Dream</span></a></h1>
 				</div>
-				<div class="box2">
-					<nav class="main-nav">
-						<ul class="header-list">
-							<li><a id="main-nav1" href="index.php">HOME</a></li>
-							<li><a id="main-nav2" href="movie.php">MOVIE</a></li>
-							<li><a id="main-nav3" href="community.php">COMMUNITY</a></li>
-							<li><a id="main-nav4" href="contact.php">CONTACT</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="box3">';
+				<div class="box2">';
 					
 						search_function();
 					
@@ -68,7 +58,7 @@ function addheader(){
 function addfooter(){
 	echo'<footer id="main-footer">
 			<div class="container">
-				<p>Copyright &copy; <span id="company">MovieReviews</span> | 2018</p>
+				<p>Copyright &copy; <span id="company">RainbowDream</span> | 2018</p>
 			</div>
 		</footer>';
 }

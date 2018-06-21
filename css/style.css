@@ -228,6 +228,11 @@ body{
 	color:var(--primary-color);
 }
 
+#second-text{
+	color:var(--contrast);
+}
+
+
 #header-text a{
 	text-decoration: none;
 	color:var(--light-color);
@@ -241,20 +246,11 @@ body{
 	padding: 10px 0;
 }
 
-.current{
-	color:var(--contrast);
-	padding-bottom:3px;
-}
-
 .box1{
 	grid-area:title;
 }
 
 .box2{
-	grid-area:nav;
-	padding-top: 10px;
-}
-.box3{
 	grid-area:login;
 	grid-column-start: right;
 	padding-right: 2px;
@@ -264,27 +260,9 @@ body{
 	padding-left:10px;
 }
 
-.main-nav ul li{
-	display:inline;
-	padding-right:20px;
-	list-style:none;
-}
 
-.main-nav a{
-	text-decoration: none;
-	color:var(--light-color);
-}
-
-.main-nav a:hover{
-	text-decoration: none;
-	color:var(--primary-color);
-}
-
-
-
-.box3 input[type='text']{
+.box2 input[type='text']{
 	height: 25px;
-	border-radius:5px;
 }
 
 #search-dropdown{
@@ -551,21 +529,28 @@ body{
 .main-content-grid{
 	grid-area:content;
 	display:grid;
-	grid-template-columns: 2fr 1fr;
-	grid-template-areas: "main sidebar";
+	grid-template-columns: 3fr 1fr;
+	grid-template-areas: 
+	"announcement announcement"
+	"main sidebar";
+}
+
+.announcement{
+	grid-area:announcement;
+	min-height: 50vh;
+	border: 1px solid var(--darkgray);
+	padding: 10px;
+	background: var(--gray);
 }
 
 .content-body{
 	grid-area: main;
-	padding:5px;
 	padding:10px;
-	background: var(--darkgray);
-	color:var(--light-color);
+	background: var(--secondary-contrast);
 }
 
-.content-body h2{
+.announcement h2,.content-body h2{
 	color:var(--primary-color);
-	border-bottom: 1px solid var(--darkgray);
 	margin:2px;
 }
 
@@ -1157,10 +1142,9 @@ body{
 }
 
 .inboxform-div{
-	position:fixed;
-	top:458px;
-	left:10%;
 	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	background:var(--dark-color) ;
 	color: var(--light-color);
 	width:80%;

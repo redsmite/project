@@ -27,7 +27,7 @@
 			<h1>Register</h1>
 			<div class="container">
 				<div class="content-box">
-					<h2><span id="highlight-text">Join</span> Us Today</h2>
+					<h2><span id="highlight-text">Create</span> an Account</h2>
 					<div class="form">
 						<center>
 						<form action="registerprocess.php" id="reg-form" method="post">

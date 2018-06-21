@@ -216,7 +216,7 @@ if($testR->num_rows!=0){
 							}
 							
 							if($email_access==0){
-								echo'<li>Email: <i class="fas fa-exclamation-circle"></i> Restricted by user</li>';
+								echo'<li>Email:</li>';
 							}else{
 								echo'<li>Email: '.$email.'</li>';
 							}

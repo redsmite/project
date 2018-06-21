@@ -65,11 +65,9 @@ mysqli_close($conn);
 			</div>
 		</div>
 	<!-- Footer -->
-		<footer class="main-footer">
-			<div class="container">
-				<p>Copyright &copy; <span id="company"></span> | 2018</p>
-			</div>
-		</footer>
+		<?php
+			addfooter();
+		?>
 	<!-- End of Container -->
 	</div>
 	<script src="js/main.js"></script>
