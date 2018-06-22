@@ -1,3 +1,11 @@
+<?php
+session_start();
+include'functions.php';
+require_once'connection.php';
+user_access();
+adminaccess();
+admingoback();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,28 +21,43 @@
 		<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text">IT</span><span id="second-text"></span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text">Rainbow</span><span id="second-text">Dream</span></a></h1>
 				</div>
 			</div>
 		</header>
 	<!-- Login Form -->
 		<div class="other-content">
-			<h1>Site Administration</h1>
+			<h1>Site Admin</h1>
 			<div class="container">
 				<div class="content-box">
-					<h2><span id="highlight-text">Admin</span> Login</h2>
+					<h2><span id="highlight-text">Admin</span> Access</h2>
 					<div class="form">
 						<center>
 							<form action="#" method="post">
 								<div>
 									<label for="name">Name</label><br>
-									<input type="text" name="admin-name">
+									<input type="text" autocomplete="off" name="admin-name">
 								</div>
 								<div>
 									<label for="email">Password</label><br>
 									<input type="password" name="admin-password">
 								</div>
-								<button type="submit" name="contact-button">Submit</button>
+								<button type="submit" name="submit">Submit</button>
+								<?php
+if(isset($_POST['submit'])){
+	$name=$conn->real_escape_string($_POST['admin-name']);
+	$password=$conn->real_escape_string($_POST['admin-password']);
+
+	$sql="SELECT name,password FROM tbladmin WHERE name='$name' and password='$password'";
+	$result=$conn->query($sql);
+	if($result->num_rows==0){
+		echo'<div id="error-message"><i class="fas fa-exclamation-circle"></i>Admin access failed.</div>';
+	} else {
+		$_SESSION['admin']='IchigoParfait';
+		header('Location: adminpanel.php');
+	}
+}
+?>
 							</form>
 						</center>	
 					</div>

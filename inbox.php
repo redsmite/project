@@ -103,6 +103,7 @@ while($row=$result->fetch_object()){
 	<script>
 		ajaxinbox();
 		loadInboxInterval();
+		document.getElementById("sendmsg").focus();
 		var messageBody = document.querySelector(".right-inbox");
 		messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 	</script>';

@@ -108,10 +108,14 @@ function addSidebar(){
 		</div>
 		<div class="side-nav" id="side-menu">
 			<ul>
-				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>
-				<li><a title="Go to your profile" href="profile.php?name='.$_SESSION["name"].'"><i class="fas fa-user-alt"></i></a></li>
-				<li><a title="Check your messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i></a></li>
-				<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
+				<li><p href="#" class="btn-close" onclick="closeSlideMenu()">&times;</p></li>';
+				
+				//If site admin
+				if($_SESSION['type']==4){
+					echo'<li><a title="Admin Panel" href="admin.php"><i class="fas fa-unlock-alt"></i></a></li>';
+				}
+				
+				echo'<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
 				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>
 				<li><a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
@@ -181,7 +185,7 @@ function session_button(){
 $sql="SELECT pmid FROM tblpm WHERE receiverid='$id' AND checked=0 GROUP BY senderid";
 $result=$conn->query($sql);
 $count=$result->num_rows;
-		echo'<a class="button" title="Check your private messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i><span id="pmnum">'.$count.'</span></a>';
+		echo'<a class="button" title="Check your messages" href="inbox.php?name='.$_SESSION["name"].'"><i class="far fa-envelope"></i><span id="pmnum">'.$count.'</span></a>';
 
 //Notification Count
 
@@ -313,7 +317,25 @@ function user_nonAccess(){
 }
 
 function adminAccess(){
-	if($_SESSION['usertype']!=3){
-		die('You cannot access this page');
+	if(isset($_SESSION['id'])){
+		if($_SESSION['type']!=4){
+			header('Location: index.php');
+		}
+	}
+}
+
+function adminpanelAccess(){
+	if(isset($_SESSION['admin'])){
+		if($_SESSION['admin']!='IchigoParfait'){
+			header('Location: admin.php');
+		}
+	}
+}
+
+function admingoback(){
+	if(isset($_SESSION['admin'])){
+		if($_SESSION['admin']=='IchigoParfait'){
+			header('Location: adminpanel.php');
+		}
 	}
 }

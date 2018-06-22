@@ -49,7 +49,7 @@
 	}
 	//Add to Profile View
 	if(!isset($_SESSION['id'])){
-		$sql="UPDATE tbluser SET profileviews+=1 WHERE userid='$id'";
+		$sql="UPDATE tbluser SET profileviews=profileviews+1 WHERE userid='$id'";
 		$result=$conn->query($sql);
 	}
 
@@ -181,16 +181,29 @@ if($testR->num_rows!=0){
 	echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>';
 }
 									
-									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-envelope"></i> Send Message</a></li>
+									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-comments"></i> Chat with '.$_GET["name"].'</a></li>
 									</ul>';
 							}
 						}
+						echo'<table id="profilestats">';
+						// Comment Count
+						$sql="SELECT commentid FROM tblcomment WHERE userid = '$id'";
+						$result=$conn->query($sql);
+						$count = $result->num_rows;
+						echo'<tr>
+						<th><i class="far fa-comment-dots"></i> Comments:</th>
+						<th>'.$count.'</th>
+						</tr>';
 						//Profile Views
 						if(isset($_SESSION['id'])){
 							if($id==$_SESSION['id']){
-							echo'<p id="profileviews"><i class="far fa-eye"></i> Profile Views: '.$views.'</p>';
+							echo'<tr>
+							<th><i class="far fa-eye"></i> Profile Views:</th>
+							<th>'.$views.'</th>
+							</tr>';
 							}
 						}
+						echo'</table>';
 						?>
 					</div>
 				</div>
@@ -292,7 +305,7 @@ if($testR->num_rows!=0){
 										<small>'.time_elapsed_string($dateposted).'</small>
 										</div>
 										<div class="comment-body">
-										<div class="com-container"><p class="comment-cm">'.nl2br($Ccomment).'</p>
+										<div class="com-container"><p class="comment-cm">'.createlink(nl2br($Ccomment)).'</p>
 										</div>
 											<p class="modified">'.$modified.'</p>';
 						//Delete / Edit Comment
@@ -305,7 +318,7 @@ if($testR->num_rows!=0){
 							<input type="hidden" name="hidden4" value="'.$_GET["name"].'" />
 								<input type="hidden" name="hidden3" value="'.$Cid.'">'; 
 								if($Cuid==$_SESSION['id']){
-									echo'<a href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
+									echo'<a class="profile-edit" href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
 								}
 							echo'	<input type="submit" value="delete" name="deletebtn">   
 

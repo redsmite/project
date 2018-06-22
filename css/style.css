@@ -546,7 +546,10 @@ body{
 .content-body{
 	grid-area: main;
 	padding:10px;
-	background: var(--secondary-contrast);
+	background: var(--light-color);
+	border-left: 1px solid var(--darkgray);
+	border-right: 1px solid var(--darkgray);
+	border-bottom: 1px solid var(--darkgray);
 }
 
 .announcement h2,.content-body h2{
@@ -559,6 +562,7 @@ body{
 	background: var(--light-color);
 	padding:10px;
 	margin:5px;
+	border: 1px solid var(--dark-color);
 	box-shadow: 5px 10px var(--darkgray);
 }
 
@@ -572,7 +576,7 @@ body{
 	box-sizing: border-box;
 	padding:5px;
 	background: var(--gray);
-	min-height:70vh;
+	min-height:85vh;
 }
 
 .other-content h1{
@@ -601,8 +605,7 @@ body{
 
 .form form{
 	width:50%;
-	background:#333;
-	color:var(--light-color);
+	background:var(--lightblue);
 	padding:20px;
 	border-radius: 16px;
 }
@@ -929,9 +932,10 @@ body{
 	padding:2px;
 }
 
-#profileviews{
+#profilestats{
 	margin-top: 5px;
-	color:var(--darkgray);
+	color:var(--dark-color);
+	line-height: 1.5em;
 }
 
 /* Right Grid Profile*/
@@ -1060,7 +1064,7 @@ body{
 	word-wrap: break-word;
 }
 
-.comment-body a{
+.profile-edit{
 	text-decoration: none;
 	background: var(--darkgray);
 	color:var(--light-color);
