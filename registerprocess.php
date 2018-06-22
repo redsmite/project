@@ -72,7 +72,7 @@ if(isset($_POST['username'])){
 
 			$message='Hello '.$username.'! \n Welcome to RainbowDream. \n Thanks for joining us.';
 
-			$sendpm="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('1','$userlogin','$message',$timestamp)";
+			$sendpm="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('71','$userlogin','$message',$timestamp)";
 			$rsendpm=$conn->query($sendpm);
 
 			echo 'success';

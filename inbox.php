@@ -41,6 +41,7 @@ if($name!=$_SESSION['name']){
 					<form action="#" id="chatform" method="post">
 						<div>
 						<input type="hidden" id="hidden" name="hidden" value="'.$_GET["name"].'" />
+						<input type="hidden" id="hidden2" name="hidden2" value="'.$_SESSION["id"].'" />
 							<input type="text" autocomplete="off" id="sendmsg" name="message" required>Enter
 						</div>
 					</form>

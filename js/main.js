@@ -474,6 +474,9 @@ function ajaxinbox(){
 				document.querySelector('.right-inbox').innerHTML=response;
 				var messageBody = document.querySelector(".right-inbox");
 				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+				if(name=='TuturuBot'){
+					botreply(message,name);
+				}
 			}
 		}
 		myRequest.send(formData);
@@ -507,6 +510,141 @@ function loadInboxInterval(){
 		}
 		myRequest.send(formData);
 	
+	}
+}
+
+function botreply(message,name){
+	var form=document.getElementById('chatform');
+
+	if(message=='!hello'){
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var hellobot = '♪ tu tu ru Mayushi-desu!';
+		
+		
+		var formData = "hellobot="+hellobot;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			if(response){
+
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+			}
+		}
+		myRequest.send(formData);
+	}else if(message=='!sing'){
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var song = 'renai-circulation';
+		
+		
+		var formData = "song="+song;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			if(response){
+
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+			}
+		}
+		myRequest.send(formData);
+	}else if(message=='!time'){
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var time = 'tell time';
+		
+		
+		var formData = "time="+time;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			if(response){
+
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+			}
+		}
+		myRequest.send(formData);
+	}else if(message=='!thanks'){
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var thanks = 'say thank you';
+		
+		
+		var formData = "thanks="+thanks;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			if(response){
+
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+			}
+		}
+		myRequest.send(formData);
+	}else if(message=='!bye'){
+		var myRequest = new XMLHttpRequest();
+		var url = 'inboxprocess.php';
+
+		//form data variables
+		var bye = 'say goodbye';
+		
+		
+		var formData = "bye="+bye;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			if(response){
+
+				form.reset();
+				
+				document.querySelector('.right-inbox').innerHTML=response;
+				var messageBody = document.querySelector(".right-inbox");
+				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+			}
+		}
+		myRequest.send(formData);
 	}
 }
 

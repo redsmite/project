@@ -3,19 +3,18 @@ session_start();
 require_once'connection.php';
 include'functions.php';
 
-if(isset($_POST['message'])){
+//encapsulate sending message
+function sendmessage($sender,$name,$message){
 
-	$message=$_POST['message'];
-	$name=$_POST['name'];
+	$conn = new mysqli('localhost','root','','itsproject');
 
 	$sql="SELECT userid FROM tbluser WHERE username='$name'";
 	$result=$conn->query($sql);
 	$row=$result->fetch_object();
 	$Rid=$row->userid;
 
-	$sender=$conn->real_escape_string($_SESSION['id']);
 	$receiver=$conn->real_escape_string($Rid);
-	$message=$conn->real_escape_string($_POST['message']);
+	$message=$conn->real_escape_string($message);
 	$timestamp='NOW()';
 	
 	$sql="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('$sender','$receiver','$message',$timestamp)";
@@ -25,8 +24,6 @@ if(isset($_POST['message'])){
 
 	//Reset Inbox
 
-$id=$_SESSION['id'];
-
 $Rquery="SELECT userid FROM tbluser WHERE username='$name'";
 $result=$conn->query($Rquery);
 $row=$result->fetch_object();
@@ -35,7 +32,7 @@ $Rid=$row->userid;
 $sql="SELECT username,imgpath,message,pmdate FROM tblpm
 LEFT JOIN tbluser
 	ON senderid=userid
-WHERE (receiverid='$id' and username='$name') or (senderid='$id' and receiverid='$Rid')
+WHERE (receiverid='$sender' and username='$name') or (senderid='$sender' and receiverid='$Rid')
 ";
 
 $data='';
@@ -78,6 +75,64 @@ while($row=$result->fetch_object()){
 
 	echo $data;
 }
+
+//User sends message
+
+if(isset($_POST['message'])){
+
+	$sender=$_SESSION['id'];
+	$name=$_POST['name'];
+	$message=$_POST['message'];
+
+	sendmessage($sender,$name,$message);	
+}
+
+//TuturuBot Replies
+
+if(isset($_POST['hellobot'])){
+
+	$name=$_SESSION['name'];
+	$message=$_POST['hellobot'];
+
+	sendmessage(71,$name,$message);
+	
+}
+
+if(isset($_POST['song'])){
+	$name=$_SESSION['name'];
+	$message='♪ (se~ no!)
+
+	♪ demo  sonnan ja  dame
+	♪ mou  sonnan ja  hora
+	♪ kokoro wa shinka suru yo 
+	♪ motto motto';
+
+	sendmessage(71,$name,$message);
+}
+
+if(isset($_POST['time'])){
+	$name=$_SESSION['name'];
+	$message='The time is ' . date("h:i:s A") . ' '. $name. '-san';
+
+	sendmessage(71,$name,$message);
+}
+
+if(isset($_POST['thanks'])){
+	$name=$_SESSION['name'];
+	$message='You\'re welcome '. $name. '-san!';
+
+	sendmessage(71,$name,$message);
+}
+
+if(isset($_POST['bye'])){
+	$name=$_SESSION['name'];
+	$message='Goodbye '. $name. '-san see you later!';
+
+	sendmessage(71,$name,$message);
+}
+
+
+//reset div every time
 
 if(isset($_POST['load'])){
 
@@ -135,6 +190,7 @@ while($row=$result->fetch_object()){
 
 	echo $data;
 }
+
 
 
 ?>
