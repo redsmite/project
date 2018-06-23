@@ -124,6 +124,13 @@ if(isset($_POST['thanks'])){
 	sendmessage(71,$name,$message);
 }
 
+if(isset($_POST['chat'])){
+	$name=$_SESSION['name'];
+	$message=$_POST['chat'];
+
+	sendmessage(71,$name,$message);
+}
+
 if(isset($_POST['bye'])){
 	$name=$_SESSION['name'];
 	$message='Goodbye '. $name. '-san see you later!';
