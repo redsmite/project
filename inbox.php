@@ -34,6 +34,12 @@ setupCookie();
 if($name!=$_SESSION['name']){
 	//Send PM
 	echo'
+	<audio id="myAudio">
+		<source src="audio/tuturumayushiidesuring.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="mySong">
+		<source src="audio/renaicirculation.mp3" type="audio/mpeg">
+	</audio>
 	<div class="closethis"><a href="inbox.php?name='.$_SESSION['name'].'"><i class="fas fa-times"></i></a></div>
 	<div class="inbox-grid">
 			<div class="left-inbox">
@@ -41,6 +47,7 @@ if($name!=$_SESSION['name']){
 					<form action="#" id="chatform" method="post">
 						<div>
 						<input type="hidden" id="hidden" name="hidden" value="'.$_GET["name"].'" />
+						<input type="hidden" id="hidden2" name="hidden2" value="'.$_SESSION["id"].'" />
 							<input type="text" autocomplete="off" id="sendmsg" name="message" required>Enter
 						</div>
 					</form>

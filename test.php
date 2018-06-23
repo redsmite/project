@@ -14,11 +14,21 @@
 	<title>Test</title>
 </head>
 <body>
-	<div class="sendpm">
-		<form action="">
-			
-		</form>
-	</div>
+
+	
+		<audio id='myAudio'>
+  			<source src='audio/tuturumayushiidesuring.mp3' type='audio/mpeg'>
+		</audio>
+		<button onclick="playAudio()" type="button">Play Audio</button>
+	<script>
+		
+
+		var x = document.getElementById("myAudio"); 
+
+function playAudio() { 
+    x.play(); 
+}	 
+	</script>
 </body>
 </html>
 <?php
