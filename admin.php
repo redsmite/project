@@ -30,12 +30,12 @@ admingoback();
 			<h1>Site Admin</h1>
 			<div class="container">
 				<div class="content-box">
-					<h2><span id="highlight-text">Admin</span> Access</h2>
+					<h2><span id="highlight-text">Access</span> Code</h2>
 					<div class="form">
 						<center>
 							<form action="#" method="post">
 								<div>
-									<label for="name">Name</label><br>
+									<label for="name">Codename</label><br>
 									<input type="text" autocomplete="off" name="admin-name">
 								</div>
 								<div>

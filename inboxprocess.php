@@ -3,6 +3,7 @@ session_start();
 require_once'connection.php';
 include'functions.php';
 user_access();
+
 //encapsulate sending message
 function sendmessage($sender,$name,$message){
 
@@ -137,6 +138,7 @@ if(isset($_POST['bye'])){
 
 	sendmessage(71,$name,$message);
 }
+
 
 // send to all users a message through bot
 

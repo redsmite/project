@@ -58,6 +58,9 @@ function addheader(){
 function addfooter(){
 	echo'<footer id="main-footer">
 			<div class="container">
+				<a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
+				<a target="_blank" title="Follow us on Twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+				<a target="_blank" title="Follow us on Instagram" href="https://www.instagram.com/?hl=ens"><i class="fab fa-instagram"></i></a>
 				<p>Copyright &copy; <span id="company">RainbowDream</span> | 2018</p>
 			</div>
 		</footer>';
@@ -118,9 +121,6 @@ function addSidebar(){
 				echo'<li><a title="Change your profile picture" href="insertphoto.php"><i class="fas fa-camera"></i></i></a></li>
 				<li><a title="Edit your personal info" href="editinfo.php"><i class="fas fa-pen-square"></i></a></li>
 				<li><a title="Change your account settings" href="accountsetting.php"><i class="fas fa-cog"></i></a></li>
-				<li><a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
-				<li><a target="_blank" title="Follow us on Twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
-				<li><a target="_blank" title="Follow us on Instagram" href="https://www.instagram.com/?hl=ens"><i class="fab fa-instagram"></i></a></li>
 				<li><a title="Logout" href="logout.php"><i class="fas fa-power-off"></i></a></li>
 			</ul>
 		</div>';

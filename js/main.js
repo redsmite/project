@@ -553,12 +553,12 @@ function botreply(message,name){
 
 		myRequest.onload = function(){
 			var response= this.responseText;
+
 			if(response){
 
 				form.reset();
 				var renaicirculation = document.getElementById("mySong"); 
 				renaicirculation.play(); 
-
 				document.querySelector('.right-inbox').innerHTML=response;
 				var messageBody = document.querySelector(".right-inbox");
 				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
@@ -642,7 +642,6 @@ function botreply(message,name){
 				document.querySelector('.right-inbox').innerHTML=response;
 				var messageBody = document.querySelector(".right-inbox");
 				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
-
 				setTimeout(function () {
 					window.location.replace("index.php");;
 				}, 3000);
@@ -672,7 +671,7 @@ function botreply(message,name){
 		'Pa... pa... pa... What sound does a panda make...?',
 		'I like this clothes because they\'re easy to move.',
 		'*pant, pant* ...I\'m so tired... B-But it\'s not like I\'m not athletic. I\'m just suited to short distances... probably.',
-		'Not all flowers smell good...',
+		'D-Do you mind staying with me for a while?',
 		'Don\'t you think that the pink and yellow of the flowers fit me too well?',
 		'I\'m a sweet angel after all, so I\'m sure I can easily get to your heart~ ♪',
 		'Putting chocolate on dry fruit seems to give it an adult taste. Mayushii likes it quite a bit.',
@@ -752,6 +751,7 @@ function botreply(message,name){
 		'My colleagues are always so tough on me. *Sniffle*',
 		'If only I had some special skill…',
 		'Sunflower is the only flower with flower in its name!'
+
 		]
 		var rand = Math.floor((Math.random() * messages.length-1) + 1);
 
@@ -836,6 +836,7 @@ function fetchallUser(){
 		}
 		myRequest.send(formData);
 }
+
 
 //Redirect Page
 function redirectPage(){

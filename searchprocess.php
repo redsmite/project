@@ -7,7 +7,7 @@ if(isset($_POST['search'])){
 	$search=$_POST['search'];
 
 	$data='';
-	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY lastonline DESC LIMIT 10";
+	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '%$search%' ORDER BY lastonline DESC LIMIT 10";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
 
