@@ -2,7 +2,7 @@
 session_start();
 require_once'connection.php';
 include'functions.php';
-
+user_access();
 //encapsulate sending message
 function sendmessage($sender,$name,$message){
 
@@ -136,6 +136,23 @@ if(isset($_POST['bye'])){
 	$message='Goodbye '. $name. '-san see you later!';
 
 	sendmessage(71,$name,$message);
+}
+
+// send to all users a message through bot
+
+if(isset($_POST['sendall'])){
+	$message=$conn->real_escape_string($_POST['sendall']);
+	$timestamp = 'NOW()';
+
+	$sql = "SELECT userid FROM tbluser";
+	$result=$conn->query($sql);
+	$count = $result->num_rows;
+
+	for ($i = 0; $i <= $count; $i++) {
+		$send="INSERT INTO tblpm (senderid,receiverid,message,pmdate) VALUES('71','$i','$message',$timestamp)";
+		$result=$conn->query($send);
+	}
+	echo 'oke-oke-okay';
 }
 
 

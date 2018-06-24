@@ -566,10 +566,10 @@ function botreply(message,name){
 		}
 		myRequest.send(formData);
 	}else if(message=='!stop'){
-				form.reset();
-				var renaicirculation = document.getElementById("mySong"); 
-				renaicirculation.pause(); 
-		myRequest.send(formData);
+			form.reset();
+			var renaicirculation = document.getElementById("mySong"); 
+			renaicirculation.pause();
+			renaicirculation.currentTime = 0;
 	}else if(message=='!time'){
 		var myRequest = new XMLHttpRequest();
 		var url = 'inboxprocess.php';
@@ -642,6 +642,10 @@ function botreply(message,name){
 				document.querySelector('.right-inbox').innerHTML=response;
 				var messageBody = document.querySelector(".right-inbox");
 				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+				setTimeout(function () {
+					window.location.replace("index.php");;
+				}, 3000);
 			}
 		}
 		myRequest.send(formData);
@@ -668,7 +672,7 @@ function botreply(message,name){
 		'Pa... pa... pa... What sound does a panda make...?',
 		'I like this clothes because they\'re easy to move.',
 		'*pant, pant* ...I\'m so tired... B-But it\'s not like I\'m not athletic. I\'m just suited to short distances... probably.',
-		'No! Stay right beside me! ...Don\'t leave me alone. I\'ll get lonely.',
+		'Not all flowers smell good...',
 		'Don\'t you think that the pink and yellow of the flowers fit me too well?',
 		'I\'m a sweet angel after all, so I\'m sure I can easily get to your heart~ ♪',
 		'Putting chocolate on dry fruit seems to give it an adult taste. Mayushii likes it quite a bit.',
@@ -681,8 +685,8 @@ function botreply(message,name){
 		'On days when there\'s a cold wind, I want to walk home together with someone~',
 		'Did something happen?',
 		'I have pretty good luck you know',
-		'I worked at a maid cafe called May Queen Nyan-nyan',
-		'Sing together with me!',
+		'Mimosa punica, or sensitive plant, will actually fold up its leaves when it is touched. Crazy isn\'t it?',
+		'Has my cheer beam reached you all? Bzzt☆" ...Never mind, please look away.',
 		'How are you feeling? I\'m in perfect shape.',
 		'Do you want to go out somewhere today?',
 		'You\'re under arrest! Just kidding... Did that fit me?',
@@ -702,7 +706,7 @@ function botreply(message,name){
 		'White rice is amazing... I wonder why it is so white...',
 		'This may come as a surprise... but I\'m pretty good at origami.',
 		'Surprisingly, February is the chilliest month of the year...',
-		'Technique matters, but like singing, putting your heart into your calligraphy\'s the most important part.',
+		'Leave it to me! You get away from here. Hurry!" ...Just kidding. Did that fit me?',
 		'The role of scarry jack-o\'-lanterns is to ward off mischevious spirits who come to play pranks.',
 		'If there\'s something I can do to help, just say the word!',
 		'I want to live a life free of regrets.',
@@ -776,6 +780,61 @@ function botreply(message,name){
 		}
 		myRequest.send(formData);
 	}
+}
+
+// Admin Panel
+
+function sendAllUser(){
+	var form = document.getElementById('sendtoallform');
+	form.addEventListener('submit', postName);
+
+		function postName(e){
+			e.preventDefault();
+
+			addSpinners();
+
+			var myRequest = new XMLHttpRequest();
+			var url = 'inboxprocess.php';
+
+			//form data variables
+			var sendall = document.getElementById('sendtoallmessage').value;
+
+			var formData = "sendall="+sendall;
+			
+			myRequest.open('POST', url ,true);
+			myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+			myRequest.onload = function(){
+
+				var response= this.responseText;
+				
+				if(response){
+					removeSpinners();
+					form.reset();
+					alert('Message has been sent to all users');
+				}
+			}
+			myRequest.send(formData);
+		}
+}
+
+function fetchallUser(){
+	var myRequest = new XMLHttpRequest();
+		var url = 'adminprocess.php';
+
+		var formData = "fetch="+fetch;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+				
+			document.getElementById('fetch').innerHTML = response;
+			
+			
+		}
+		myRequest.send(formData);
 }
 
 //Redirect Page
