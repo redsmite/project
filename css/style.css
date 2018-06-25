@@ -194,16 +194,26 @@ body{
 
 #notifdrop{
 	display:none;
-	z-index: 1;
+	z-index: 2;
 	position:absolute;
 	right:16px;
 	top:42px;
 	max-height:320px;
-	width:280px;
+	width:320px;
 	background: var(--gray);
 	border: 1px solid var(--darkgray);
 	color:var(--dark-color);
 	overflow-y:auto;
+}
+
+#modal3{
+	display:none;
+	position:fixed;
+	z-index:1;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
 }
 
 #notifdrop li{
@@ -614,6 +624,18 @@ body{
 	margin:5px;
 	border: 1px solid var(--dark-color);
 	box-shadow: 5px 10px var(--darkgray);
+}
+
+#gold{
+	color:gold;
+}
+
+#silver{
+	color:silver;
+}
+
+#bronze{
+	color:#cd7f32;
 }
 
 /* Content from other pages */
@@ -1369,9 +1391,34 @@ body{
 	line-height: 1.5em;
 }
 
+#fetch table,#fetch th,#fetch tr{
+	border: 1px solid var(--dark-color);
+	border-collapse: collapse;
+}
+
+
+#fetch tr:nth-child(odd){
+	background: var(--light-color);
+}
+
+#fetch tr:first-child{
+	height: 10px;
+	background: var(--dark-color);
+	color: var(--light-color);
+}
+
+#fetch th{
+	padding: 5px 10px;
+}
+
 #fetch a{
-	color: var(--primary-color);
+	color: var(--dark-color);
 	text-decoration: none;
+	cursor: pointer;
+}
+
+#fetch a:hover{
+	color: var(--primary-color);
 }
 
 /* Footer */

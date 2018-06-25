@@ -189,11 +189,9 @@ $count=$result->num_rows;
 
 //Notification Count
 
-$sql="SELECT notifid,username,imgpath,receiverid,notifdate,notiftype,checked,details,details2 FROM tblnotif
-	LEFT JOIN tbluser
-		ON tblnotif.userid=tbluser.userid
+$sql="SELECT notifid FROM tblnotif
 	WHERE receiverid='$id' and checked=0
-	ORDER BY notifid DESC";
+	";
 $result=$conn->query($sql);
 $count=$result->num_rows;
 
@@ -205,6 +203,15 @@ $count=$result->num_rows;
 		<ul>';
 
 //Notification Drop down
+$sql="SELECT notifid,username,imgpath,receiverid,notifdate,notiftype,checked,details,details2 FROM tblnotif
+	LEFT JOIN tbluser
+		ON tblnotif.userid=tbluser.userid
+	WHERE receiverid='$id'
+	ORDER BY notifid DESC
+	LIMIT 10";
+
+$result=$conn->query($sql);
+$count=$result->num_rows;
 if($count==0){
 	echo'<li>No notifications yet...</li>';
 }else{
@@ -237,7 +244,7 @@ if($type==1){
 				<img src="'.$imgpath.'">
 			</div>
 			 <a class="n1" href="profile.php?name='.$uname.'">'.$uname.'</a> has sent a friend request '.$date.'<br>
-		<div id="fr-'.$nid.'"><a class="fr-yes" onclick="friendyes()" value="'.$nid.'">Yes</a> <a class="fr-no" onclick="friendno()" value="'.$nid.'">No</a>
+		<div id="fr-'.$nid.'"><a class="fr-yes" onclick="friendyes(this)" value="'.$nid.'">Yes</a> <a class="fr-no" onclick="friendno(this)" value="'.$nid.'">No</a>
 		</div>
 		</li>';
 	} else if($details2==2){
@@ -270,6 +277,8 @@ if($type==1){
 		echo'<a href ="register.php" class="button"><i class="fas fa-pencil-alt"></i></i>Sign Up</a>
 		<a id="modalBtn" class="button"><i class="fas fa-sign-in-alt"></i>Login</a>';
 	}
+	echo'<div id="modal3" onclick="toggleNotif()">
+	</div>';
 }
 
 function search_function(){

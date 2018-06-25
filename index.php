@@ -49,7 +49,7 @@
 				<div class="sidebar">
 					<h3>Newest Users</h3>
 <?php
-//fetch users
+//newest users
 	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY userid DESC LIMIT 5";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
@@ -75,7 +75,8 @@
 				<div class="sidebar2">
 					<h3>Popular Users</h3>
 <?php
-//fetch users
+//popular users
+	$count=1;
 	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY profileviews DESC LIMIT 5";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
@@ -90,10 +91,19 @@
 
 		echo'
 		<div>
-		<ul class="drop-ul"><li><a href="profile.php?name='.$name.'"><div class="drop-tn"><img src="'.$img.'"></div><p>'.$name.'</a></p><small>Joined: '.$date.'</small><br>
+		<ul class="drop-ul"><li><a href="profile.php?name='.$name.'"><div class="drop-tn"><img src="'.$img.'"></div><p>';
+		if ($count==1){
+			echo'<i class="fas fa-trophy" id="gold"></i>';
+		}else if ($count==2){
+			echo'<i class="fas fa-trophy" id="silver"></i>';
+		}else if ($count==3){
+			echo'<i class="fas fa-trophy" id="bronze"></i>';
+		}
+		echo ' '.$name.'</a></p><small>Joined: '.$date.'</small><br>
 			<small>'.$time.'</small>
 		<li></ul>
 		</div>';
+		$count++;
 	}
 
 ?>		

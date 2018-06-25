@@ -59,11 +59,16 @@ if(z.innerText!=0){
 }
 
 function toggleNotif(){
-	  var x = document.getElementById("notifdrop");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+	  var dropdown = document.getElementById("notifdrop");
+	  var modal3 =  document.getElementById("modal3");
+
+    if (dropdown.style.display === "none") {
+        dropdown.style.display = "block";
+       	modal3.style.display = "block";
+
     } else {
-        x.style.display = "none";
+        dropdown.style.display = "none";
+        modal3.style.display = "none";
     }
 
 	var myRequest = new XMLHttpRequest();
@@ -150,8 +155,8 @@ function friendprocess(){
 	myRequest.send(formData);
 }
 
-function friendyes(){
-	var nid = document.querySelector(".fr-yes").getAttribute('value');
+function friendyes(clickedid){
+	var nid = clickedid.getAttribute('value');
 	var nid2='fr-'+nid;
 	var fr= document.getElementById(nid2);
 	fr.innerHTML="Request Accepted";
@@ -177,8 +182,8 @@ function friendyes(){
 }
 
 
-function friendno(){
-	var nid = document.querySelector(".fr-no").getAttribute('value');
+function friendno(clickedid){
+	var nid = clickedid.getAttribute('value');
 	var nid2='fr-'+nid;
 	var fr= document.getElementById(nid2);
 	fr.innerHTML="Request Denied";
@@ -835,6 +840,12 @@ function fetchallUser(){
 			
 		}
 		myRequest.send(formData);
+}
+
+function useraccess(clickedid){
+	
+	var user='user-'+clickedid;
+	document.getElementById(user).innerHTML='oke-oke-okay';
 }
 
 
