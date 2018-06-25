@@ -156,7 +156,11 @@ $imgpath=$rows->imgpath;
 									<li><a href="accountsetting.php"><i class="fas fa-cog"></i> Account Settings</a></li>
 									</ul>';
 							}else{
-								echo'<ul>';// Test if user is friend or not
+								echo'<ul>
+								<li>
+								<a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-comments"></i> Chat with '.$_GET["name"].'</a>
+								</li>';
+// Test if user is friend or not
 $thisid=$_SESSION['id'];								
 $test="SELECT user1,user2 FROM tblfriend WHERE 
 (user1='$id' and user2='$thisid') or (user1='$thisid' and user2='$id')";
@@ -171,18 +175,19 @@ if($testR->num_rows!=0){
 	$accepted=$rows->accepted;
 	$friendsince=$rows->friendsince;
 	if($accepted==1){
-	echo'<li><p><i class="fas fa-user-plus"></i> Pending request...</p></li>';
+	echo'<li><p><i class="fas fa-user-plus"></i> Pending request...</p></li>
+	</ul>';
 	} else if ($accepted==2){
-		echo'<li><a id="rmv-fr" value="'.$fid.'" onclick="friendremove()"><i class="fas fa-ban"></i> Remove Friend</a></li>';
+		echo'<li><a id="rmv-fr" value="'.$fid.'" onclick="friendremove()"><i class="fas fa-ban"></i> Remove Friend</a></li>
+		</ul>';
 	} else if ($accepted==3 && $friendsince==''){
-		echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>';
+		echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>
+		</ul>';
 	}
 }else{
-	echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>';
+	echo'<li><a id="fr-btn" value="'.$name.'" onclick="friendprocess()"><i class="fas fa-user-plus"></i> Add as friend</a></li>
+	</ul>';
 }
-									
-									echo'<li><a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-comments"></i> Chat with '.$_GET["name"].'</a></li>
-									</ul>';
 							}
 						}
 						echo'<table id="profilestats">';
@@ -259,7 +264,7 @@ if($testR->num_rows!=0){
 								<textarea name="comment" required id="comment"></textarea>
 								<input type="hidden" id="hidden" name="hidden" value="'.$_SESSION["id"].'" />
 								<input type="hidden" id="hidden2" name="hidden2" value="'.$_GET["name"].'" />
-								<input type="submit" id="comment-submit" name="comment-submit">
+								<input type="submit" id="comment-submit" name="comment-submit" value="submit">
 								</form>
 							</div>';
 							}

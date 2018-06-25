@@ -49,20 +49,20 @@ while($row=$result->fetch_object()){
 
 	if($Sname==$_SESSION['name']){
 	$data.= '<div class="chat-me">
-	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+	<a class="sender" href="profile.php?name='.$Sname.'">
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
-		</div>'.$Sname.'</a><br>
+		</div>'.$Sname.'</a><span class="inbox-date">'.time_elapsed_string($date).'</span><br>
 	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
 	}else{
 	$data.= '<div class="chat-notme">
-	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+	<a class="sender" href="profile.php?name='.$Sname.'">
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
-		</div>'.$Sname.'</a><br>
+		</div>'.$Sname.'</a><span class="inbox-date">'.time_elapsed_string($date).'</span><br>
 	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
@@ -189,20 +189,20 @@ while($row=$result->fetch_object()){
 
 	if($Sname==$_SESSION['name']){
 	$data.= '<div class="chat-me">
-	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+	<a class="sender" href="profile.php?name='.$Sname.'">
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
-		</div>'.$Sname.'</a><br>
+		</div>'.$Sname.'</a><span class="inbox-date">'.time_elapsed_string($date).'</span><br>
 	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>
 	</div>';
 	}else{
 	$data.= '<div class="chat-notme">
-	<a class="sender" href="profile.php?name='.$Sname.'"><span class="inbox-date">'.time_elapsed_string($date).'</span>
+	<a class="sender" href="profile.php?name='.$Sname.'">
 		<div class="comment-tn">
 			<img src="'.$imgpath.'">
-		</div>'.$Sname.'</a><br>
+		</div>'.$Sname.'</a><span class="inbox-date">'.time_elapsed_string($date).'</span><br>
 	<div class="chat-div"> 
 		<p class="inbxmsg">'.createlink(nl2br($message)).'</p>
 	</div>

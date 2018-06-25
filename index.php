@@ -72,6 +72,32 @@
 
 ?>
 				</div>
+				<div class="sidebar2">
+					<h3>Popular Users</h3>
+<?php
+//fetch users
+	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY profileviews DESC LIMIT 5";
+	$result=$conn->query($sql);
+	while($row=$result->fetch_object()){
+
+		$name=$row->username;
+		$img=$row->imgpath;
+		if(!$img){
+			$img='img/default.png';
+		}
+		$date = date("M j, Y", strtotime($row->datecreated));
+		$time = date("g:i:s A", strtotime($row->datecreated));
+
+		echo'
+		<div>
+		<ul class="drop-ul"><li><a href="profile.php?name='.$name.'"><div class="drop-tn"><img src="'.$img.'"></div><p>'.$name.'</a></p><small>Joined: '.$date.'</small><br>
+			<small>'.$time.'</small>
+		<li></ul>
+		</div>';
+	}
+
+?>		
+				</div>
 			</div>
 		</div>
 	<!-- Footer -->

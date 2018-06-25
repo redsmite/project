@@ -130,7 +130,7 @@ echo'
 <input type="hidden" name="hidden4" value="'.$_GET["name"].'" />
 <input type="hidden" name="hidden3" value="'.$Cid.'">'; 
 if($Cuid==$_SESSION['id']){
-	echo'<a href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
+	echo'<a class="profile-edit" href="editcomment.php?id='.$Cid.'&name='.$name.'&this='.$Cuid.'">edit</a>';
 }
 echo'	<input type="submit" value="delete" class="comment-delete" name="deletebtn">   
 

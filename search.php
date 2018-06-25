@@ -32,7 +32,7 @@ if(isset($_GET['search-text'])){
 	$search= $_GET['search-text'];
 
 
-	$sql="SELECT userid FROM tbluser WHERE username LIKE '$search%'";
+	$sql="SELECT userid FROM tbluser WHERE username LIKE '%$search%'";
 
 	$result=$conn->query($sql);
 
@@ -56,7 +56,7 @@ if(isset($_GET['search-text'])){
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 
-	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '$search%' ORDER BY username $limit";
+	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '%$search%' ORDER BY username $limit";
 	
 	$textline1 = "Users (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
@@ -64,23 +64,23 @@ if(isset($_GET['search-text'])){
 	if($last != 1){
 		if ($pagenum > 1) {
 	        $previous = $pagenum - 1;
-			$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
+			$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search-text='.$search.'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
 			for($i = $pagenum-4; $i < $pagenum; $i++){
 				if($i > 0){
-			        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+			        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search-text='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
 					}
 			    }
 		    }
 		    $paginationCtrls .= ''.$pagenum.' &nbsp; ';
 			for($i = $pagenum+1; $i <= $last; $i++){
-				$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+				$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?search-text='.$search.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
 				if($i >= $pagenum+4){
 					break;
 				}
 			}
 			    if ($pagenum != $last) {
 		        $next = $pagenum + 1;
-		        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?search='.$search.'&pn='.$next.'">Next</a> ';
+		        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?search-text='.$search.'&pn='.$next.'">Next</a> ';
 		    }
 		}
 	 echo'<h2>  '.$textline1.'</h2>
