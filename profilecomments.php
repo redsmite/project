@@ -1,8 +1,8 @@
 <?php
 session_start();
 include'functions.php';
-addlogin();
 addSidebar();
+addLogin();
 setupCookie();
 updateStatus();
 require_once'connection.php';
@@ -26,6 +26,7 @@ $name=$_GET['name'];
 	?>
 	<!-- Main Content -->
 		<div class="other-content">
+			<h1><a class="btp" href="profile.php?name=<?php echo $name ?>">Back to <?php echo $name ?>'s Profile</a></h1>
 <?php
 
 $sql2="SELECT userid FROM tbluser WHERE username='$name'";

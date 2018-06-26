@@ -2,6 +2,7 @@
 session_start();
 include'functions.php';
 addSidebar();
+addLogin();
 setupCookie();
 updateStatus();
 require_once'connection.php';

@@ -47,6 +47,32 @@ adminpanelAccess();
 			</div>
 			<div id="fetch"></div>
 		</div>
+		<div class="admin-reports">
+			<h1>Reports</h1>
+<?php
+	$sql = "SELECT username,reason,tblreport.datecreated FROM tblreport
+	LEFT JOIN tbluser
+		ON tblreport.userid=tbluser.userid";
+	$result = $conn->query($sql);
+	while($row=$result->fetch_object()){
+		$username= $row->username;
+		$reason = $row->reason;
+		$date= time_elapsed_string($row->datecreated);
+
+		echo '<p>'.$username.'</p>';
+		
+		if($reason==1){
+			echo'<p>This user has nude or offensive profile picture</p>';
+		}else if($reason==2){
+			echo'<p>This user has a toxic behavior</p>';
+		} else{
+			echo'<p>'.$reason.'</p>';
+		} 
+		echo'<p>'.$date.'</p>
+		<br>';
+	}
+?>
+		</div>
 	<!-- Footer -->
 		<?php
 			addfooter();

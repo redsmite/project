@@ -71,4 +71,30 @@ if(isset($_POST['photo'])){
 	$sql = "INSERT INTO tblnotif(receiverid,notifdate,notiftype) VALUES('$id',NOW(),3)";
 	$result = $conn->query($sql);
 }
+
+if(isset($_POST['select'])){
+	$select = $_POST['select'];
+	$reason = $_POST['reason'];
+	$name = $_POST['username'];
+
+	$sql = "SELECT userid FROM tbluser WHERE username ='$name'";
+	$result = $conn->query($sql);
+	$row = $result->fetch_object();
+	$id = $row->userid;
+
+	if (!$reason){
+
+	$sql = "INSERT INTO tblreport (reason,datecreated,userid)
+	VALUES ('$select',NOW(),'$id')";
+	$result = $conn->query($sql);
+
+	}else{
+
+
+	$sql = "INSERT INTO tblreport (reason,datecreated,userid)
+	VALUES ('$reason',NOW(),'$id')";
+	$result = $conn->query($sql);
+	
+	}
+}
 ?>

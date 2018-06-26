@@ -294,6 +294,35 @@ function search_function(){
 	';
 }
 
+function reportuser(){
+	if(isset($_SESSION['id'])){
+	echo'
+	<div id="modal4" onclick="hidereport()">
+	</div>
+	<div id="reportdiv">
+		<div id="reportheader">
+			<span>Report this user</span>
+			<a onclick="hidereport()"><i class="far fa-window-close"></i></a>
+		</div>
+		<div id="reportbody">
+			<form id="reportform">
+				<p>Select reason:</p>
+				<select id="select-reason">
+					<option value="1">This user has nude or offensive profile picture</option>
+					<option value="2">This user has a toxic behavior</option>
+				</select>
+				<p>Other reasons:</p>
+				<textarea id="report-reasons" placeholder="State reasons..."></textarea>
+				<br>
+				<input type="hidden" id="report-username" value="'.$_GET['name'].'">
+				<input type="submit">
+			</form>
+		</div>
+	</div>
+	';
+	}
+}
+
 function setupCookie(){
 	if(isset($_COOKIE['id'])){
 		$_SESSION['id'] = $_COOKIE['id'];

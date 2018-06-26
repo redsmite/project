@@ -63,6 +63,7 @@
 	addSidebar();
 	addLogin();
 	setupCookie();
+	reportuser();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -159,6 +160,8 @@ $imgpath=$rows->imgpath;
 								echo'<ul>
 								<li>
 								<a href="inbox.php?name='.$_GET["name"].'"><i class="fas fa-comments"></i> Chat with '.$_GET["name"].'</a>
+								</li>
+								<li><a id="report" onclick="showreport()"><i class="far fa-flag"></i> Report this User</a>
 								</li>';
 // Test if user is friend or not
 $thisid=$_SESSION['id'];								
@@ -352,6 +355,7 @@ if($testR->num_rows!=0){
 	</div>
 	<script src="js/main.js"></script>
 	<script>
+		reportuser();
 		modal();
 		ajaxLogin();
 	</script>

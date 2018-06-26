@@ -500,6 +500,8 @@ function AjaxEditPass(){
 	}
 }
 
+// Chat
+
 function ajaxinbox(){
 	var form=document.getElementById('chatform');
 	var formsend=document.getElementById('chatform').addEventListener('submit', sendmessage);
@@ -942,6 +944,58 @@ function removephoto(clickedid){
 		console.log(response);
 	}
 	myRequest.send(formData);
+}
+
+// Report User
+
+function showreport(){
+	
+	var modal = document.getElementById('modal4');
+	var report = document.getElementById('reportdiv');
+
+	modal.style.display='block';
+	report.style.display='block';
+}
+
+function hidereport(){
+	var modal = document.getElementById('modal4');
+	var report = document.getElementById('reportdiv');
+
+	modal.style.display='none';
+	report.style.display='none';
+}
+
+function reportuser(){
+	var form = document.getElementById('reportform');
+	form.addEventListener('submit', sendreport);
+
+	function sendreport(e){
+		e.preventDefault();
+
+		addSpinners();
+
+		var select = document.getElementById('select-reason').value;
+		var reason = document.getElementById('report-reasons').value;
+		var username = document.getElementById('report-username').value;
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'adminprocess.php';
+		
+		var formData = "select="+select+"&reason="+reason+"&username="+username;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			if(response){
+				console.log(response);
+				removeSpinners();
+				hidereport();
+			}
+		}
+		myRequest.send(formData);
+		}
 }
 
 //Redirect Page
