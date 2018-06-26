@@ -10,6 +10,9 @@
 	--twitterblue:#00aced;
 	--lightblue:#c0deed;
 	--sunflower:#ffce1b;
+	--orangered:#FF4500;
+	--magenta:#ff00ff;
+	--lime:#32CD32;
 	/*	Blue-Orangered	*/
 	/*--primary-color:#FF4500;
 	--secondary-color:#778899;
@@ -28,7 +31,7 @@
 	--light-color:#fafafa;
 	--dark-color:#222;
 	--gray:#eee;
-	--darkgray:#333;
+	--darkgray:#999;
 
 	/*Facebook-like*/
 	/*--primary-color:#fff;
@@ -1381,14 +1384,39 @@ body{
 
 /* Admin */
 
+.get-users-div{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background: var(--primary-color);
+	border: 1px solid var(--darkgray);
+	text-align: center;
+	padding-bottom: 20px;
+	width:60%;
+	border-radius: 8px;
+}
+
+.get-users-div input{
+	height:30px;
+	width: 80%;
+	border-radius: 5px;
+}
+
 #fetch{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
-	background: var(--gray);
+	background: var(--contrast);
 	padding: 30px;
 	width: 80%;
 	line-height: 1.5em;
+	height: 60vh;
+	border: 1px solid var(--darkgray);
+	border-radius: 8px;
+	margin-bottom: 15px;
+}
+#fetch table{
+	margin:0 auto;
 }
 
 #fetch table,#fetch th,#fetch tr{
@@ -1396,6 +1424,9 @@ body{
 	border-collapse: collapse;
 }
 
+#fetch tr:nth-child(even){
+	background: var(--darkgray);
+}
 
 #fetch tr:nth-child(odd){
 	background: var(--light-color);
@@ -1419,6 +1450,14 @@ body{
 
 #fetch a:hover{
 	color: var(--primary-color);
+}
+
+.banned{
+	color: red;
+}
+
+.notbanned{
+	color: green;
 }
 
 /* Footer */
@@ -1515,6 +1554,10 @@ body{
 	.inboxform-div{
 		width:100%;
 	}
+
+	.get-users-div{
+		width:80%;
+	}
 }
 
 
@@ -1581,5 +1624,9 @@ body{
 
 	.com-container{
 		width:280px;
+	}
+
+	.get-users-div{
+		width:95%;
 	}
 }

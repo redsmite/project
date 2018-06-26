@@ -46,7 +46,7 @@
 			<h1><i class="fas fa-camera"></i> Profile Picture</h1>
 			<div class="edit-form">
 				<center>
-							<p>*Please don't post nudes or offensive photos</p> 
+							<p>*Please don't post nudes or offensive pictures</p> 
 					<div class="profile-pic-wrap">
 						<?php
 							if($image){

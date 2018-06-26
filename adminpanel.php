@@ -41,10 +41,11 @@ adminpanelAccess();
 					</center>
 				</form>
 			</div>
-			<h1>All user's profile</h1>
-			<div id="fetch">
-				
+			<div class="get-users-div">
+				<h1>Get User</h1>
+				<input type="text" onkeyup="fetchUser()" id="get-user">
 			</div>
+			<div id="fetch"></div>
 		</div>
 	<!-- Footer -->
 		<?php
@@ -55,7 +56,6 @@ adminpanelAccess();
 	<script src="js/main.js"></script>
 	<script>
 		sendAllUser();
-		fetchallUser();
 	</script>
 </body>
 </html>

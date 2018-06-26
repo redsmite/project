@@ -36,10 +36,9 @@ if(isset($_POST['username'])){
 
 					echo json_encode($sessions);
 
-				}else{
-
-					echo'<i class="fas fa-exclamation-circle"></i>Sorry, your account has been banned.';
-
+				}else if($row->access==0) {
+					$sessions =array(1,'<i class="fas fa-exclamation-circle"></i>Sorry, your account is banned.');
+					echo json_encode($sessions);
 				}
 		
 			}else{

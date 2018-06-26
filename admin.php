@@ -30,12 +30,12 @@ admingoback();
 			<h1>Site Admin</h1>
 			<div class="container">
 				<div class="content-box">
-					<h2><span id="highlight-text">Access</span> Code</h2>
+					<h2><span id="highlight-text">Admin</span> Login</h2>
 					<div class="form">
 						<center>
 							<form action="#" method="post">
 								<div>
-									<label for="name">Codename</label><br>
+									<label for="name">Name</label><br>
 									<input type="text" autocomplete="off" name="admin-name">
 								</div>
 								<div>
@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
 	$sql="SELECT name,password FROM tbladmin WHERE name='$name' and password='$password'";
 	$result=$conn->query($sql);
 	if($result->num_rows==0){
-		echo'<div id="error-message"><i class="fas fa-exclamation-circle"></i>Admin access failed.</div>';
+		echo'<div id="error-message"><i class="fas fa-exclamation-circle"></i>Admin login failed.</div>';
 	} else {
 		$_SESSION['admin']='IchigoParfait';
 		header('Location: adminpanel.php');

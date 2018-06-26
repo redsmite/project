@@ -181,6 +181,33 @@ function friendyes(clickedid){
 	myRequest.send(formData);
 }
 
+function friendyesb(clickedid){
+	var nid = clickedid.getAttribute('value');
+	var nid2='fr-'+nid;
+	var fr= document.getElementById(nid2);
+	fr.innerHTML="Request Accepted";
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var fryes =  nid;
+
+	var formData = "fryes="+fryes;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			location.reload();
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
+}
+
 
 function friendno(clickedid){
 	var nid = clickedid.getAttribute('value');
@@ -201,6 +228,33 @@ function friendno(clickedid){
 		var response= JSON.parse(this.responseText);
 		console.warn(response);
 		if(response){
+			console.log('oke-oke-okay');
+
+		}
+	}
+	myRequest.send(formData);
+}
+
+function friendnob(clickedid){
+	var nid = clickedid.getAttribute('value');
+	var nid2='fr-'+nid;
+	var fr= document.getElementById(nid2);
+	fr.innerHTML="Request Denied";
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'friendprocess.php';
+	var frno =  nid;
+
+	var formData = "frno="+frno;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= JSON.parse(this.responseText);
+		console.warn(response);
+		if(response){
+			location.reload();
 			console.log('oke-oke-okay');
 
 		}
@@ -823,9 +877,13 @@ function sendAllUser(){
 		}
 }
 
-function fetchallUser(){
+function fetchUser(){
 	var myRequest = new XMLHttpRequest();
 		var url = 'adminprocess.php';
+
+		var fetch = document.getElementById('get-user').value;
+
+		console.log(fetch);
 
 		var formData = "fetch="+fetch;
 		
@@ -845,9 +903,46 @@ function fetchallUser(){
 function useraccess(clickedid){
 	
 	var user='user-'+clickedid;
-	document.getElementById(user).innerHTML='oke-oke-okay';
+	var myRequest = new XMLHttpRequest();
+
+	var url = 'adminprocess.php';
+
+	var formData = "status="+clickedid;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		if(response){
+			document.getElementById(user).innerHTML= response;
+
+		}
+	}
+	myRequest.send(formData);
 }
 
+function removephoto(clickedid){
+	var userid = clickedid.getAttribute('value');
+	var divid='photo-'+userid;
+	var div= document.getElementById(divid);
+	div.innerHTML="Removing Photo...";
+
+	var myRequest = new XMLHttpRequest();
+
+	var url = 'adminprocess.php';
+
+	var formData = "photo="+userid;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		console.log(response);
+	}
+	myRequest.send(formData);
+}
 
 //Redirect Page
 function redirectPage(){

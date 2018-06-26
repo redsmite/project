@@ -266,6 +266,9 @@ if($type==1){
 		</div>
 		</li>';
 	}
+}else if ($type==3){
+	echo'<li><i class="fas fa-ban banned"></i> Sorry, your profile picture has been removed.<br>
+	Please read the rules and guidelines.</li>';
 }
 }
 }
