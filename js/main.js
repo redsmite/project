@@ -885,8 +885,6 @@ function fetchUser(){
 
 		var fetch = document.getElementById('get-user').value;
 
-		console.log(fetch);
-
 		var formData = "fetch="+fetch;
 		
 		myRequest.open('POST', url ,true);
@@ -900,6 +898,13 @@ function fetchUser(){
 			
 		}
 		myRequest.send(formData);
+}
+
+function resetfetch(){
+	var input = document.getElementById('get-user');
+	var form = document.getElementById('fetch');
+	input.value='';
+	form.innerHTML ='<div onclick="resetfetch()" class="closethis"><a><i class="fas fa-times"></i></a></div>'; 
 }
 
 function useraccess(clickedid){
@@ -941,7 +946,6 @@ function removephoto(clickedid){
 
 	myRequest.onload = function(){
 		var response= this.responseText;
-		console.log(response);
 	}
 	myRequest.send(formData);
 }
@@ -989,13 +993,36 @@ function reportuser(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			if(response){
-				console.log(response);
+				alert('This user has been reported, thank you.');
 				removeSpinners();
 				hidereport();
 			}
 		}
 		myRequest.send(formData);
 		}
+}
+
+function checkedreport(clicked){
+	var id =clicked.getAttribute('id');
+	
+	var markid = 'rp-'+id;
+	var marked = document.getElementById(markid);
+	marked.innerHTML ='<p class="checkreport">Checked</p>';
+
+	var myRequest = new XMLHttpRequest();
+
+	var url = 'adminprocess.php';
+
+	var formData = "check="+id;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		console.log(response);
+	}
+	myRequest.send(formData);
 }
 
 //Redirect Page

@@ -7,7 +7,8 @@ user_access();
 if(isset($_POST['fetch'])){
 	$fetch = $_POST['fetch'];
 
-	$data='<table>
+	$data='<div onclick="resetfetch()" class="closethis"><a><i class="fas fa-times"></i></a></div>
+	<table>
 	<tr>
 	<th>Profile</th>
 	<th>Ban/Allow</th>
@@ -76,6 +77,7 @@ if(isset($_POST['select'])){
 	$select = $_POST['select'];
 	$reason = $_POST['reason'];
 	$name = $_POST['username'];
+	$reporter = $_SESSION['id'];
 
 	$sql = "SELECT userid FROM tbluser WHERE username ='$name'";
 	$result = $conn->query($sql);
@@ -84,17 +86,27 @@ if(isset($_POST['select'])){
 
 	if (!$reason){
 
-	$sql = "INSERT INTO tblreport (reason,datecreated,userid)
-	VALUES ('$select',NOW(),'$id')";
+	$sql = "INSERT INTO tblreport (reason,datecreated,userid,reporter)
+	VALUES ('$select',NOW(),'$id','$reporter')";
 	$result = $conn->query($sql);
+	echo'oke-oke-okay';
 
 	}else{
 
 
-	$sql = "INSERT INTO tblreport (reason,datecreated,userid)
-	VALUES ('$reason',NOW(),'$id')";
+	$sql = "INSERT INTO tblreport (reason,datecreated,userid,reporter)
+	VALUES ('$reason',NOW(),'$id','$reporter')";
 	$result = $conn->query($sql);
-	
+	echo'oke-oke-okay';
 	}
+}
+
+if(isset($_POST['check'])){
+	$id = $_POST['check'];
+
+	$sql = "UPDATE tblreport SET checked=1 WHERE reportid = '$id'";
+	$result = $conn->query($sql);
+
+	echo 'oke-oke-okay';
 }
 ?>

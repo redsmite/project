@@ -114,7 +114,7 @@ $imgpath=$rows->imgpath;
 		<p><a href="profile.php?name='.$username.'">'.$username.'</a></p>
 		<p>Friend Since: '.$since.'</p>';
 		if($time-strtotime($online)< 300){
-			echo'<h5><font color="green">Online</font></h5>';
+			echo'<h5><font color="#98fb98">Online</font></h5>';
 		} else{
 			echo'<p>Last Online: '.time_elapsed_string($online).'</p>';
 		}

@@ -7,12 +7,13 @@
 
 :root{
 	--facebookblue:#4267b2;
-	--twitterblue:#00aced;
+	--twitterlogo:#00aced;
 	--lightblue:#c0deed;
 	--sunflower:#ffce1b;
 	--orangered:#FF4500;
 	--magenta:#ff00ff;
 	--lime:#32CD32;
+	--palegreen:#98fb98;
 	/*	Blue-Orangered	*/
 	/*--primary-color:#FF4500;
 	--secondary-color:#778899;
@@ -1391,7 +1392,7 @@ body{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	background: var(--primary-color);
+	background: var(--lightblue);
 	border: 1px solid var(--darkgray);
 	text-align: center;
 	padding-bottom: 20px;
@@ -1409,11 +1410,11 @@ body{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
-	background: var(--contrast);
+	background: var(--lightblue);
 	padding: 30px;
 	width: 80%;
 	line-height: 1.5em;
-	height: 60vh;
+	height: 400px;
 	border: 1px solid var(--darkgray);
 	border-radius: 8px;
 	margin-bottom: 15px;
@@ -1461,6 +1462,53 @@ body{
 
 .notbanned{
 	color: green;
+}
+
+.admin-reports{
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	width: 80vw;
+	background: var(--lightblue);
+	margin-bottom: 10px;
+	border: 1px solid var(--darkgray);
+	border-radius: 8px;
+}
+
+.reportlist{
+	padding: 10px;
+}
+
+.reportlist li{
+	display: block;
+	margin: 0 auto;
+	list-style: none;
+	padding-bottom: 10px;
+	background: var(--gray);
+	border: 1px solid var(--darkgray);
+	width: 80%;
+}
+
+.reportlist li a{
+	color: var(--dark-color);
+	font-weight: bold;
+}
+
+.newreport{
+	float: right;
+	color: red;
+	margin-right: 5px;
+}
+
+.checkreport{
+	float: right;
+	color: green;
+	margin-right: 5px;
+}
+
+.reportlist li:hover{
+	background: var(--darkgray);
+	color: var(--light-color);
 }
 
 /* Report User */

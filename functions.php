@@ -308,8 +308,11 @@ function reportuser(){
 			<form id="reportform">
 				<p>Select reason:</p>
 				<select id="select-reason">
-					<option value="1">This user has nude or offensive profile picture</option>
-					<option value="2">This user has a toxic behavior</option>
+					<option value="1">This user has a pornographic profile picture</option>
+					<option value="2">This user has an offensive profile picture</option>
+					<option value="3">This user is toxic</option>
+					<option value="4">Spamming</option>
+					<option value="5">I hate this user</option>
 				</select>
 				<p>Other reasons:</p>
 				<textarea id="report-reasons" placeholder="State reasons..."></textarea>
