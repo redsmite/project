@@ -45,6 +45,7 @@
 				<div class="content-body">
 					<h2>Recent Discussions</h2>
 					<p>None...</p>
+					<p><a href="forums.php">Forums</a></p>
 				</div>
 				<div class="sidebar">
 					<h3>Newest Users</h3>

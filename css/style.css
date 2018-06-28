@@ -692,7 +692,6 @@ body{
 .edit-form p{
 	font-style: italic;
 	font-size: 15px;
-	color:var(--darkgray);
 }
 
 .form form input[type="text"],.form form input[type="number"], .form form input[type="email"], .form form input[type="password"],.form form input[type="date"], .edit-form form input[type="text"], .edit-form form input[type="number"], .edit-form form input[type="email"], .edit-form form input[type="password"], .edit-form input[type="date"]{
@@ -1248,7 +1247,7 @@ body{
 
 .right-inbox{
 	grid-area: right-inbox;
-	background:url(../img/chat-wallpaper.jpg);
+	background:url(../img/rainbow.jpg);
 	background-position:center;
 	background-size:cover;
 	background-repeat:no-repeat;
@@ -1575,6 +1574,115 @@ body{
 	cursor: pointer;
 }
 
+/* Forums */
+.forum-grid{
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	grid-template-areas: "main-forum forum-sidebar";
+}
+
+/* Main Forum */
+
+.main-forum{
+	grid-area: main-forum;
+	border-right: 1px solid var(--darkgray);
+	min-height:100vh;
+	background: var(--light-color);
+}
+
+
+/* Forum Sidebar */
+.forum-sidebar{
+	grid-area: forum-sidebar;
+	min-height:100vh;
+	background: var(--gray);
+	padding: 5px;
+}
+
+.sidebar-button{
+	float:right;
+	width: 90%;
+	background: var(--lime);
+	color: var(--light-color);
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: 15px;
+}
+
+#subscribe{
+	margin-top: 50px;
+	float:right;
+	width: 90%;
+	background: var(--facebookblue);
+	color: var(--light-color);
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+#new-forum-form{
+	display: none;
+	position:fixed;
+	width: 500px;
+	background: var(--darkgray);
+	left:20%;
+	top: 5%;
+	z-index: 2;
+	padding: 10px;
+}
+
+#new-forum-modal{
+	display:none;
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index: 1;
+}
+
+#new-forum-form form{
+	display: block;
+	margin: 0 auto;
+	padding: 20px;
+	width:80%;
+	background: var(--lightblue);
+	border: 1px solid var(--dark-color);
+	text-align: center;
+}
+
+#new-forum-form input[type="text"]{
+	width: 80%;
+	height: 30px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+#new-forum-form textarea{
+	width: 80%;
+	height: 100px;
+	border-radius: 5px;
+	margin-bottom: 10px;	
+}
+
+#new-forum-form input[type="submit"]{
+	width: 50%;
+	height: 50px;
+	border-radius: 5px;
+	background: var(--dark-color);
+	color: var(--light-color); 
+}
+
+.forum-panel{
+	text-align: center;
+	line-height: 1.5em;
+	padding-left: 30px;
+}
+
+.forum-panel p{
+	margin-bottom: 10px;
+}
+
 /* Footer */
 #main-footer{
 	grid-area:footer;
@@ -1672,6 +1780,12 @@ body{
 
 	.get-users-div{
 		width:80%;
+	}
+
+
+	#new-forum-form{
+		width:95%;
+		left: 0;
 	}
 }
 

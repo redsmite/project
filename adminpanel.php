@@ -36,7 +36,7 @@ adminpanelAccess();
 						<textarea id="sendtoallmessage"  required placeholder="enter message..."></textarea>
 					</div>
 					<div>
-						<input type="submit">
+						<input type="submit" value="submit">
 					</div>
 					</center>
 				</form>

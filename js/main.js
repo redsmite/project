@@ -1025,6 +1025,58 @@ function checkedreport(clicked){
 	myRequest.send(formData);
 }
 
+// Forums
+
+function createNewForum(){
+	let modal = document.getElementById('new-forum-modal');
+	let form = document.getElementById('new-forum-form');
+	modal.style.display='block';
+	form.style.display='block';
+}
+
+function closeNewForum(){
+	let modal = document.getElementById('new-forum-modal');
+	let form = document.getElementById('new-forum-form');
+	modal.style.display='none';
+	form.style.display='none';
+}
+
+function newForumForm(){
+	document.getElementById('create-forum-form').addEventListener('submit', createforum);
+
+		function createforum(e){
+			e.preventDefault();
+
+			addSpinners();
+
+			var myRequest = new XMLHttpRequest();
+			var url = 'forumprocess.php';
+
+			//form data variables
+			var title = document.getElementById('forum-title').value;
+			var name = document.getElementById('forum-name').value;
+			var desc = document.getElementById('forum-desc').value;
+
+			var formData = "title="+title+"&name="+name+"&desc="+desc;
+			
+			myRequest.open('POST', url ,true);
+			myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+			myRequest.onload = function(){
+				var response= this.responseText;
+				
+				if(!isNaN(response)){
+					removeSpinners();
+					window.location.replace("forums.php?id="+response);
+				} else {
+					document.getElementById('error-message2').innerHTML= response;
+					removeSpinners();
+				}
+			}
+			myRequest.send(formData);
+		}
+}
+
 //Redirect Page
 function redirectPage(){
 	document.getElementById('redirectlink').addEventListener('click',historyback);
