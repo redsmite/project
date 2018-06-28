@@ -29,7 +29,7 @@
 				<div class="showcase-content">
 					<div class="showcase-container">
 						<h1>Welcome to RainbowDream</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos suscipit, quis vel inventore, autem possimus a! Debitis ipsa, nobis aperiam.</p><br>
+						<p>This is a website where farmers, breeders or craftsman sell their goods and stuff.</p><br>
 						<p><a href="about.php">Read More</a></p>
 					</div>
 				</div>
@@ -43,9 +43,32 @@
 					<p>None...</p>
 				</div>
 				<div class="content-body">
-					<h2>Recent Discussions</h2>
-					<p>None...</p>
-					<p><a href="forums.php">Forums</a></p>
+					<h2>Trending Posts</h2>
+					<ul id="forum-list">
+<?php
+$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments FROM tblpost
+	LEFT JOIN tblforum
+		ON tblpost.forumid = tblforum.forumid
+	LEFT JOIN tbluser
+		ON userid = starter
+	ORDER BY postid DESC
+	LIMIT 50";
+	$result = $conn->query($sql);
+	while($row=$result->fetch_object()){
+		$id = $row->postid;
+		$forumid = $row->forumid;
+		$forum = $row->name;
+		$ptitle = $row->title;
+		$name = $row->username;
+		$comments = $row->comments;
+		$date = $row->datecreated;
+
+		echo '<li value="'.$id.'"><p class="main-forum-title">'.$ptitle.'</p>
+		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
+		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p></li>';
+	}
+?>
+				</ul>
 				</div>
 				<div class="sidebar">
 					<h3>Newest Users</h3>
@@ -74,9 +97,25 @@
 ?>
 				</div>
 				<div class="sidebar2">
+					<h3>Popular Forums</h3>
+					<ul id="forum-list">
+<?php
+//Popular Forums
+	$sql = "SELECT forumid,name, (views+subscriber) AS popular FROM tblforum ORDER BY popular DESC LIMIT 10";
+	$result = $conn->query($sql);
+	while($row=$result->fetch_object()){
+		$id = $row->forumid;
+		$name = $row->name;
+
+		echo'<li><a href="forums.php?id='.$id.'">'. $name.'</a></li>';
+	}
+?>
+				</ul>
+				</div>
+				<div class="sidebar3">
 					<h3>Popular Users</h3>
 <?php
-//popular users
+//Popular Users
 	$count=1;
 	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY profileviews DESC LIMIT 5";
 	$result=$conn->query($sql);
@@ -94,11 +133,11 @@
 		<div>
 		<ul class="drop-ul"><li><a href="profile.php?name='.$name.'"><div class="drop-tn"><img src="'.$img.'"></div><p>';
 		if ($count==1){
-			echo'<i class="fas fa-trophy" id="gold"></i>';
+			echo'<i class="fas fa-trophy gold"></i>';
 		}else if ($count==2){
-			echo'<i class="fas fa-trophy" id="silver"></i>';
+			echo'<i class="fas fa-trophy silver"></i>';
 		}else if ($count==3){
-			echo'<i class="fas fa-trophy" id="bronze"></i>';
+			echo'<i class="fas fa-trophy bronze"></i>';
 		}
 		echo ' '.$name.'</a></p><small>Joined: '.$date.'</small><br>
 			<small>'.$time.'</small>

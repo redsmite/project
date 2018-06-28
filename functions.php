@@ -326,6 +326,62 @@ function reportuser(){
 	}
 }
 
+function forumcontrols(){
+	if(!isset($_SESSION['id'])){
+		echo'<div id="sidebar-blank"></div>';
+	}else{
+		echo'<div id="create-new-post" class="sidebar-button" onclick="createNewPost()">
+				<h3><i class="fas fa-plus-square"></i> Create New Post</h3>
+			</div>
+			<div id="create-new-forum" class="sidebar-button" onclick="createNewForum()">
+				<h3><i class="fas fa-plus-square"></i> Create Your Own Forum</h3>
+			</div>
+			<div id="subscribe">
+				<h3>Subscribe</h3>
+			</div>
+			<div id="new-forum-modal" onclick="closeNewForum()"></div>
+			<div id="new-forum-form">
+				<form id="create-forum-form">
+					<div>
+						<p>Forum Name:</p>
+						<p>*Must not contain spaces or special characters</p>
+						<input id="forum-name" required type="text">
+					</div>
+					<div>
+						<p>Title:</p>
+						<input id="forum-title" required type="text">
+					</div>
+					<div>
+						<p>Forum Description:</p>
+						<textarea id="forum-desc" required></textarea>
+					</div>
+					<div>
+						<input type="submit" value="Submit">
+					</div>
+					<div id="error-message2"></div>
+				</form>
+			</div>
+			<div id="new-post-modal" onclick="closeNewPost()"></div>
+			<div id="new-post-form">
+				<form id="create-post-form">
+					<div>
+						<p>Title</p>
+						<input type="text" id="post-title" required>
+					</div>
+					<div>
+						<p>Text</p>
+						<textarea id="post-text" required></textarea>
+					</div>
+					<div>
+						<input type="submit" value="Submit">
+					</div>
+					<input type="hidden" id="post-forum" value="<?php echo $forums ?>">
+					<input type="hidden" id="post-user" value="<?php echo $_SESSION["id"] ?>">
+				</form>
+			</div>';
+		}
+}
+
 function setupCookie(){
 	if(isset($_COOKIE['id'])){
 		$_SESSION['id'] = $_COOKIE['id'];

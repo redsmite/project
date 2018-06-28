@@ -7,8 +7,13 @@ if(!isset($_GET['id'])){
 	die('This forum doesn\'t exists.');
 }
 
+if(!isset($_GET['thread'])){
+	die('This post doesn\'t exists.');
+}
+
 //Get forum information
 $forums = $_GET['id'];
+$thread = $_GET['thread'];
 
 $sql = "SELECT forumid,title,name,description,datecreated FROM tblforum WHERE forumid='$forums'";
 $result = $conn->query($sql);	
@@ -22,8 +27,14 @@ $date = date("M j, Y", strtotime($fetch->datecreated));
 
 //forum views
 
-$sql = "UPDATE tblforum SET views=views+1 WHERE forumid='$forums'";
+$sql = "UPDATE tblforum SET views=views+1 WHERE forumid='$thread'";
 $result= $conn->query($sql);
+
+//Post views
+
+$sql = "UPDATE tblpost SET views=views+1 WHERE postid='$forums'";
+$result= $conn->query($sql);
+
 
 addSidebar();
 addLogin();
@@ -56,11 +67,9 @@ updateStatus();
  		ON tblpost.forumid = tblforum.forumid
  	LEFT JOIN tbluser
  		ON userid = starter
- 	WHERE tblforum.forumid = '$forums'
-	ORDER BY postid
- 	LIMIT 50";
+ 	WHERE tblforum.forumid = '$forums' AND postid='$thread'";
  	$result = $conn->query($sql);
- 	while($row=$result->fetch_object()){
+ 	$row=$result->fetch_object();
  		$id = $row->postid;
  		$forumid = $row->forumid;
  		$forum = $row->name;
@@ -70,11 +79,19 @@ updateStatus();
  		$pdate = $row->datecreated;
 
  		echo '<li value="'.$id.'"><p class="main-forum-title">'.$ptitle.'</p>
- 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'</p>
- 		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p></li>';
- 	}
+ 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'</li>';
 ?>
 			</ul>
+			<div class="reply-form">
+				<form id="reply-submit">
+					<div>
+						<textarea id="reply-text"></textarea>
+					</div>
+					<div>
+						<input type="submit" value="Submit">
+					</div>
+				</form>
+			</div>
 			</div>
 			<div class="forum-sidebar">
 				<?php

@@ -40,4 +40,15 @@ if(isset($_POST['title'])){
 		echo $error;
 	}
 }
+
+if(isset($_POST['newpost'])){
+	$title = $conn->real_escape_string($_POST['newpost']);
+	$text = $conn->real_escape_string($_POST['text']);
+	$forum = $_POST['forum'];
+	$user = $_POST['user'];
+
+	$sql = "INSERT INTO tblpost(forumid,title,datecreated,description,starter) VALUES ('$forum','$title',NOW(),'$text','$user')";
+	$result = $conn->query($sql);
+	echo 'success';
+}
 ?>
