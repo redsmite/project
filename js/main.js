@@ -1092,11 +1092,13 @@ function closeNewPost(){
 }
 
 function newPostForm(){
-	document.getElementById('create-post-form').addEventListener('submit', createPost);
+	let form = document.getElementById('create-post-form');
+	form.addEventListener('submit', createPost);
 
 	function createPost(e){
 		e.preventDefault();
 
+		addSpinners();
 
 		var myRequest = new XMLHttpRequest();
 		var url = 'forumprocess.php';
@@ -1114,9 +1116,13 @@ function newPostForm(){
 
 		myRequest.onload = function(){
 			var response= this.responseText;
-			if(response){
-				console.log(response);
+			if(response=='success'){
+				form.reset();
 				closeNewPost();
+				removeSpinners();
+			}else{
+				document.getElementById('error-message3').innerHTML= response;
+				removeSpinners();
 			}
 		}
 		myRequest.send(formData);

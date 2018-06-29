@@ -46,7 +46,7 @@
 					<h2>Trending Posts</h2>
 					<ul id="forum-list">
 <?php
-$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -62,10 +62,26 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$name = $row->username;
 		$comments = $row->comments;
 		$date = $row->datecreated;
+		$score = $row->score;
 
-		echo '<li value="'.$id.'"><p class="main-forum-title">'.$ptitle.'</p>
+		echo '<li value="'.$id.'">
+		<div class="forum-post-grid">
+		<div class="vote">
+			<div class="upvote">
+			<i class="fas fa-sort-up"></i>
+			</div>
+			<div>'.$score.'</div>
+			<div class="downvote">
+			<i class="fas fa-sort-down"></i>
+			</div>
+		</div>
+		<div class="post-right">
+		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
-		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p></li>';
+		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		</div>
+		</div>
+		</li>';
 	}
 ?>
 				</ul>

@@ -51,28 +51,44 @@ updateStatus();
 				<h1><?php echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>' ?></h1>
 				<ul id="forum-list">
 <?php
-	$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments FROM tblpost
- 	LEFT JOIN tblforum
- 		ON tblpost.forumid = tblforum.forumid
- 	LEFT JOIN tbluser
- 		ON userid = starter
- 	WHERE tblforum.forumid = '$forums'
-	ORDER BY postid
- 	LIMIT 50";
- 	$result = $conn->query($sql);
- 	while($row=$result->fetch_object()){
- 		$id = $row->postid;
- 		$forumid = $row->forumid;
- 		$forum = $row->name;
- 		$ptitle = $row->title;
- 		$name = $row->username;
- 		$comments = $row->comments;
- 		$pdate = $row->datecreated;
+$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+	LEFT JOIN tblforum
+		ON tblpost.forumid = tblforum.forumid
+	LEFT JOIN tbluser
+		ON userid = starter
+	WHERE tblpost.forumid='$forums'
+	ORDER BY postid DESC
+	LIMIT 50";
+	$result = $conn->query($sql);
+	while($row=$result->fetch_object()){
+		$id = $row->postid;
+		$forumid = $row->forumid;
+		$forum = $row->name;
+		$ptitle = $row->title;
+		$name = $row->username;
+		$comments = $row->comments;
+		$date = $row->datecreated;
+		$score = $row->score;
 
- 		echo '<li value="'.$id.'"><p class="main-forum-title">'.$ptitle.'</p>
- 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'</p>
- 		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p></li>';
- 	}
+		echo '<li value="'.$id.'">
+		<div class="forum-post-grid">
+		<div class="vote">
+			<div class="upvote">
+			<i class="fas fa-sort-up"></i>
+			</div>
+			<div>'.$score.'</div>
+			<div class="downvote">
+			<i class="fas fa-sort-down"></i>
+			</div>
+		</div>
+		<div class="post-right">
+		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
+		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
+		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		</div>
+		</div>
+		</li>';
+	}
 ?>
 			</ul>
 			</div>

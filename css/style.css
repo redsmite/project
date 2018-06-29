@@ -1271,11 +1271,9 @@ body{
 
 .right-inbox{
 	grid-area: right-inbox;
-	background:url(../img/rainbow.jpg);
-	background-position:center;
-	background-size:cover;
-	background-repeat:no-repeat;
-	background-attachment: fixed;
+	background: var(--light-color);
+	border-left: 1px solid var(--dark-color);
+	border-right: 1px solid var(--dark-color);
 	padding: 20px 0 20px 5px;
 	display: block;
 	margin-right: auto;
@@ -1627,6 +1625,46 @@ body{
 .main-forum-title{
 	font-size: 22px;
 	font-weight: bold;
+}
+
+.forum-post-grid{
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	grid-template-areas: "vote post-right"
+}
+
+.forum-post-grid a{
+	text-decoration: none;
+}
+
+.vote{
+	grid-area: vote;
+	width: 40px;
+	text-align: center;
+}
+
+.vote i{
+	font-size: 25px;
+}
+
+.upvote,.downvote{
+	cursor: pointer;
+}
+
+.post-right{
+	grid-area: post-right;
+}
+
+.text-content{
+	display: block;
+	margin:0 auto;
+	min-height: 120px;
+	width: 95%;
+	padding: 10px;
+	border: 1px solid var(--dark-color);
+	border-radius: 8px;
+	margin-bottom: 10px;
+	line-height: 1.5em;
 }
 
 .reply-form{

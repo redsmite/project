@@ -47,8 +47,22 @@ if(isset($_POST['newpost'])){
 	$forum = $_POST['forum'];
 	$user = $_POST['user'];
 
+	$error="";
+
+	if(strlen($text) < 30)
+	{
+	    $error.='<i class="fas fa-exclamation-circle"></i>Text must be atleast 30 characters<br>';
+	}
+
+
+	if(!$error){
+
 	$sql = "INSERT INTO tblpost(forumid,title,datecreated,description,starter) VALUES ('$forum','$title',NOW(),'$text','$user')";
 	$result = $conn->query($sql);
 	echo 'success';
+
+	}else{
+		echo $error;
+	}
 }
 ?>

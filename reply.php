@@ -62,7 +62,7 @@ updateStatus();
 				<h1><?php echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>' ?></h1>
 				<ul id="forum-list">
 <?php
-	$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,tblpost.description,tblpost.score ,username,comments FROM tblpost
  	LEFT JOIN tblforum
  		ON tblpost.forumid = tblforum.forumid
  	LEFT JOIN tbluser
@@ -75,11 +75,29 @@ updateStatus();
  		$forum = $row->name;
  		$ptitle = $row->title;
  		$name = $row->username;
+ 		$pdesc = $row->description;
+ 		$score = $row->score;
  		$comments = $row->comments;
  		$pdate = $row->datecreated;
 
- 		echo '<li value="'.$id.'"><p class="main-forum-title">'.$ptitle.'</p>
- 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'</li>';
+ 		echo '<li value="'.$id.'">
+ 		<div class="forum-post-grid">
+ 		<div class="vote">
+ 		<div class="upvote">
+			<i class="fas fa-sort-up"></i>
+			</div>
+			<div>'.$score.'</div>
+			<div class="downvote">
+			<i class="fas fa-sort-down"></i>
+		</div>
+		</div>
+		<div class="right-post">
+			<p class="main-forum-title">'.$ptitle.'</p>
+		</div>
+ 		</div>
+ 		<div class="text-content">'.$pdesc.'</div>
+ 		<p>Submitted by: <a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'
+ 		</li>';
 ?>
 			</ul>
 			<div class="reply-form">

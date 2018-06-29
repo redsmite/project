@@ -330,6 +330,7 @@ function forumcontrols(){
 	if(!isset($_SESSION['id'])){
 		echo'<div id="sidebar-blank"></div>';
 	}else{
+		$forums = $_GET['id'];	
 		echo'<div id="create-new-post" class="sidebar-button" onclick="createNewPost()">
 				<h3><i class="fas fa-plus-square"></i> Create New Post</h3>
 			</div>
@@ -344,7 +345,7 @@ function forumcontrols(){
 				<form id="create-forum-form">
 					<div>
 						<p>Forum Name:</p>
-						<p>*Must not contain spaces or special characters</p>
+						<small><i>*Must not contain spaces or special characters</i></small>
 						<input id="forum-name" required type="text">
 					</div>
 					<div>
@@ -370,13 +371,15 @@ function forumcontrols(){
 					</div>
 					<div>
 						<p>Text</p>
+						<small><i>*Required 30 characters.<i></small>
 						<textarea id="post-text" required></textarea>
 					</div>
 					<div>
 						<input type="submit" value="Submit">
 					</div>
-					<input type="hidden" id="post-forum" value="<?php echo $forums ?>">
-					<input type="hidden" id="post-user" value="<?php echo $_SESSION["id"] ?>">
+					<input type="hidden" id="post-forum" value="'. $forums .'">
+					<input type="hidden" id="post-user" value="'.$_SESSION["id"] .'">
+					<div id="error-message3"></div>	
 				</form>
 			</div>';
 		}
