@@ -65,4 +65,32 @@ if(isset($_POST['newpost'])){
 		echo $error;
 	}
 }
+
+if(isset($_POST['sub'])){
+	$id = $_SESSION['id'];
+	$sub = $_POST['sub'];
+
+	$sql = "SELECT subid FROM tblsubscribe WHERE subscriber='$id' AND forum='$sub'";
+
+	$result= $conn->query($sql);
+	if($result->num_rows==0){
+
+	$sql = "INSERT INTO tblsubscribe(subscriber,forum) VALUES('$id','$sub')";
+	$result= $conn->query($sql);
+	
+	$sql = "UPDATE tblforum SET subscriber=subscriber+1 WHERE forumid='$sub'";
+	$result= $conn->query($sql);
+
+	echo 'Thanks for subbing in.';
+
+	} else {
+	$sql = "DELETE FROM tblsubscribe WHERE subscriber='$id' AND forum='$sub' ";
+	$result= $conn->query($sql);
+
+	$sql = "UPDATE tblforum SET subscriber=subscriber-1 WHERE forumid='$sub'";
+	$result= $conn->query($sql);
+	echo 'You have unsubscribed.';
+	}
+
+}
 ?>

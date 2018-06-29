@@ -34,6 +34,7 @@
 							<div class="grid-register">
 								<div>
 									<label for="">Username</label><br>
+									<small><i>*Must not be longer than 20 characters and not include spaces or special characters</i></small>
 									<input type="text" required id="reg-name" placeholder="Enter Username...">
 								</div>
 								<div>
@@ -42,10 +43,11 @@
 								</div>
 								<div>
 									<label for="">Password</label><br>
+									<small><i>*Must be atleast 8 character or longer.</i></small>
 									<input type="password" required id="reg-password" placeholder="Enter Password...">
 								</div>
 								<div>
-									<label for="">Re-type Password</label><br>
+									<label for="">Confirm Password</label><br>
 									<input type="password" required id="reg-retype" placeholder="Retype Password...">
 								</div>
 								<div>

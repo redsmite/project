@@ -15,7 +15,7 @@ if(!isset($_GET['thread'])){
 $forums = $_GET['id'];
 $thread = $_GET['thread'];
 
-$sql = "SELECT forumid,title,name,description,datecreated FROM tblforum WHERE forumid='$forums'";
+$sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
 $result = $conn->query($sql);	
 $fetch = $result->fetch_object();
 
@@ -23,6 +23,7 @@ $fid = $fetch->forumid;
 $title = $fetch->title;
 $name = $fetch->name;
 $desc = $fetch->description;
+$subcount = $fetch->subscriber;
 $date = date("M j, Y", strtotime($fetch->datecreated));
 
 //forum views
@@ -119,7 +120,7 @@ updateStatus();
 					<h2 id="forum-name"><?php echo $title?></h2>
 					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
 					<p id="description"><?php echo $desc ?></p>
-					<p id="subscriber-count">0 Subscribers.</p>
+					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
 					<p id="users-count">1 Users here now.</p>
 				</div>
 			</div>

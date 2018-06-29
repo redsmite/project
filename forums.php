@@ -10,7 +10,7 @@ if(!isset($_GET['id'])){
 //Get forum information
 $forums = $_GET['id'];
 
-$sql = "SELECT forumid,title,name,description,datecreated FROM tblforum WHERE forumid='$forums'";
+$sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
 $result = $conn->query($sql);	
 $fetch = $result->fetch_object();
 
@@ -18,6 +18,7 @@ $fid = $fetch->forumid;
 $title = $fetch->title;
 $name = $fetch->name;
 $desc = $fetch->description;
+$subcount = $fetch->subscriber;
 $date = date("M j, Y", strtotime($fetch->datecreated));
 
 //forum views
@@ -67,7 +68,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$ptitle = $row->title;
 		$name = $row->username;
 		$comments = $row->comments;
-		$date = $row->datecreated;
+		$datep = $row->datecreated;
 		$score = $row->score;
 
 		echo '<li value="'.$id.'">
@@ -83,7 +84,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		</div>
 		<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
-		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
+		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($datep).'</p>
 		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
 		</div>
 		</div>
@@ -100,7 +101,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 					<h2 id="forum-name"><?php echo $title?></h2>
 					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
 					<p id="description"><?php echo $desc ?></p>
-					<p id="subscriber-count">0 Subscribers.</p>
+					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
 					<p id="users-count">1 Users here now.</p>
 				</div>
 			</div>

@@ -1129,6 +1129,37 @@ function newPostForm(){
 	}
 }
 
+function subscribeForum(clicked){
+	let subscribe = document.getElementById('subscribe');
+	if (subscribe.innerHTML=='<h3>Subscribe</h3>'){
+		subscribe.innerHTML='<h3>Unsubscribe</h3>';
+	}else{
+		subscribe.innerHTML='<h3>Subscribe</h3>'
+	}
+	addSpinners();
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'forumprocess.php';
+
+	//form data variables
+
+	let sub = clicked.getAttribute('value');
+	
+	var formData = "sub="+sub;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		if(response){
+			removeSpinners();
+			console.log(response);
+		}
+	}
+	myRequest.send(formData);
+}
+
 //Redirect Page
 function redirectPage(){
 	document.getElementById('redirectlink').addEventListener('click',historyback);
@@ -1173,7 +1204,6 @@ function redirectProfile(){
 		}
 	}
 	myRequest.send(formData);
-
 }
 
 function activepage(thispage){

@@ -327,19 +327,32 @@ function reportuser(){
 }
 
 function forumcontrols(){
+	$forums = $_GET['id'];
+	$id = $_SESSION['id'];
+
+	$conn = new mysqli('localhost','root','','itsproject');
+	$sql = "SELECT subid FROM tblsubscribe WHERE subscriber='$id' AND forum='$forums'";
+
+	$result= $conn->query($sql);
+	$count =$result->num_rows;
+
 	if(!isset($_SESSION['id'])){
 		echo'<div id="sidebar-blank"></div>';
 	}else{
-		$forums = $_GET['id'];	
 		echo'<div id="create-new-post" class="sidebar-button" onclick="createNewPost()">
 				<h3><i class="fas fa-plus-square"></i> Create New Post</h3>
 			</div>
 			<div id="create-new-forum" class="sidebar-button" onclick="createNewForum()">
 				<h3><i class="fas fa-plus-square"></i> Create Your Own Forum</h3>
 			</div>
-			<div id="subscribe">
-				<h3>Subscribe</h3>
-			</div>
+			<div id="subscribe" value="'.$forums.'" onclick="subscribeForum(this)">';
+				
+				if($count==0){
+					echo'<h3>Subscribe</h3>';
+				}else{
+					echo'<h3>Unsubscribe</h3>';
+				}
+			echo'</div>
 			<div id="new-forum-modal" onclick="closeNewForum()"></div>
 			<div id="new-forum-form">
 				<form id="create-forum-form">
