@@ -9,7 +9,9 @@ if(!isset($_GET['id'])){
 
 //Get forum information
 $forums = $_GET['id'];
+if(isset($_SESSION['id'])){
 $uid = $_SESSION['id'];
+}
 
 $sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
 $result = $conn->query($sql);	
@@ -72,6 +74,11 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$datep = $row->datecreated;
 		$score = $row->score;
 
+		echo '<li value="'.$id.'">
+ 		<div class="forum-post-grid">';
+//login'd user can only vote
+ 		if(isset($_SESSION['id'])){
+ 		//check upvote/downvote
 		$sql2 = "SELECT upvoteid FROM tblupvotepost WHERE user='$uid' and post='$id'";
 		$result2 = $conn->query($sql2);
 		$upvote = $result2->num_rows;
@@ -79,32 +86,31 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$sql3 = "SELECT downvoteid FROM tbldownvotepost WHERE user='$uid' and post='$id'";
 		$result3 = $conn->query($sql3);
 		$downvote = $result3->num_rows;
-
-		echo '<li value="'.$id.'">
- 		<div class="forum-post-grid">';
-//login'd user can only vote
- 		if(isset($_SESSION['id'])){
+ 		
  		echo'
- 		<div class="vote">
- 			<div id="up-'.$id.'" value="'.$id.'" onclick="upvotepost(this)" class="upvote">';
-			
+ 		<div class="vote">';
+ 			
  			if(!$upvote){
-				echo'<i class="fas fa-sort-up"></i>';
+ 			echo'<div id="up-'.$id.'" style="color:black;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
  			}else{
- 				echo'<font color="magenta"><i class="fas fa-sort-up"></i></font>';
+ 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
  			}
 			
 
-			echo'</div>
-			<div id="score-'.$id.'">'.$score.'</div>
-			<div id="down-'.$id.'" value="'.$id.'" onclick="downvotepost(this)" class="downvote">';
+			echo'
+			<div id="score-'.$id.'">'.$score.'</div>';
+			
 			if(!$downvote){
-				echo'<i class="fas fa-sort-down"></i>';
+			echo'
+			<div id="down-'.$id.'" style="color:black;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			</div>';
 			}else{
-				echo'<font color="cyan"><i class="fas fa-sort-down"></i></font>';
+			echo'
+			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			</div>';
 			}
 
-			echo'</div>
+			echo'
 		</div>';
 
 		}else{

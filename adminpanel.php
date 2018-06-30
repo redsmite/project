@@ -125,19 +125,19 @@ if($last != 1){
 			echo '<p class="checkreport">Checked</p>';
 		}
 
-		echo'<p>Reported User: <a href="profile.php?name='.$username.'">'.$username.'</a></p>
-		<p>Submitted by: <a href="profile.php?name='.$reporter.'">'.$reporter.'</a></p>';
+		echo'<p>Reported User: <a href="profile.php?name='.$username.'"><font color="orangered">'.$username.'</font></a></p>
+		<p>Reported by: <a href="profile.php?name='.$reporter.'">'.$reporter.'</a></p>';
 		
 		if($reason==1){
 			echo'<p>Reason: Pornographic profile picture.</p>';
 		}else if($reason==2){
 			echo'<p>Reason: Offensive profile picture.</p>';
 		}else if($reason==3){
-			echo'<p>Reason: This user is toxic.</p>';
+			echo'<p>Reason: This user harasses me.</p>';
 		}else if($reason==4){
 			echo'<p>Reason: Spamming.</p>';
 		}else if($reason==5){
-			echo'<p>Reason: I hate this user.</p>';
+			echo'<p>Reason: Scammer.</p>';
 		}else{
 			echo'<p>Reason: '.$reason.'</p>';
 		} 

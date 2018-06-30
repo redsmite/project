@@ -92,6 +92,7 @@ function toggleNotif(){
 }
 
 function searchdropdown(){
+	var crit = document.getElementById('criteria').value;
 	var src = document.getElementById('search-dropdown');
 	var input = document.getElementById('search-text');
 	var modal =document.querySelector('.modal2');
@@ -99,6 +100,30 @@ function searchdropdown(){
 	modal.addEventListener('click',hidesearch);
 
 	if(input.value!=null){
+
+		if(crit==1){
+		modal.style.display='block';
+		src.style.display='block';
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'searchprocess.php';
+		var search = document.getElementById('search-text').value;
+
+		var formData = "search2="+search;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			
+			document.getElementById('search-dropdown').innerHTML = response;			
+			
+		}
+		myRequest.send(formData);
+
+
+		}else if(crit==2){
 		modal.style.display='block';
 		src.style.display='block';
 
@@ -123,6 +148,7 @@ function searchdropdown(){
 			
 		}
 		myRequest.send(formData);		
+	}
 	}
 
 	function hidesearch(){
@@ -1117,9 +1143,7 @@ function newPostForm(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			if(response=='success'){
-				form.reset();
-				closeNewPost();
-				removeSpinners();
+				window.location.replace("forums.php?id="+forum);
 			}else{
 				document.getElementById('error-message3').innerHTML= response;
 				removeSpinners();

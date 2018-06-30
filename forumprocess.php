@@ -16,6 +16,11 @@ if(isset($_POST['title'])){
 		$error.='<p><i class="fas fa-exclamation-circle"></i>Forum name must not contain special characters or spaces</p>';
 	}
 
+	if(strlen($name) > 25)
+	{
+	    $error.='<i class="fas fa-exclamation-circle"></i>Forum name length is too long.<br>';
+	}
+
 // Test if forum name exists
 	$sql= "SELECT forumid FROM tblforum WHERE name = '$name'";
 	$result = $conn->query($sql);

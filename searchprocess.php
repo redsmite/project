@@ -22,4 +22,20 @@ if(isset($_POST['search'])){
 	}
 	echo $data;
 }
+
+if(isset($_POST['search2'])){
+	$search = $conn->real_escape_string($_POST['search2']);
+
+	$data='';
+
+	$sql = "SELECT forumid,name FROM tblforum WHERE name LIKE '%$search%' LIMIT 10";
+	$result = $conn->query($sql);
+	while($row = $result->fetch_object()){
+		$id = $row->forumid;
+		$name = $row->name;
+
+		$data.= '<ul class="drop-ul2"><li><a href="forums.php?id='.$id.'">'.$name.'</li></ul>';
+	}
+	echo $data;
+}
 ?>

@@ -303,11 +303,14 @@ body{
 	padding-left:10px;
 }
 
+.box2 select{
+	height: 30px;
+	border-radius: 3px;
+}
 
 .box2 input[type='text']{
 	height: 30px;
 	width: 200px;
-	background: var(--light-color);
 	border-radius: 3px;
 }
 
@@ -343,6 +346,18 @@ body{
 
 .drop-ul li a{
 	text-decoration: none;
+	color:var(--dark-color);
+}
+
+.drop-ul2 li{
+	list-style: none;
+	padding: 10px 2px;
+	overflow:hidden;
+}
+
+.drop-ul2 li a{
+	text-decoration: none;
+	font-size: 25px;
 	color:var(--dark-color);
 }
 
@@ -634,7 +649,7 @@ body{
 }
 
 .sidebar2 a{
-	font-size: 30px;
+	font-size: 25px;
 	text-decoration: none;
 	color: var(--dark-color);
 }
@@ -1413,7 +1428,7 @@ body{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	background: var(--lightblue);
+	background: var(--lime);
 	border: 1px solid var(--darkgray);
 	text-align: center;
 	padding-bottom: 20px;
@@ -1431,7 +1446,7 @@ body{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
-	background: var(--lightblue);
+	background: var(--facebookblue);
 	padding: 30px;
 	width: 80%;
 	line-height: 1.5em;
@@ -1490,7 +1505,8 @@ body{
 	margin: 0 auto;
 	text-align: center;
 	width: 80vw;
-	background: var(--lightblue);
+	background: var(--orangered);
+	color: var(--dark-color);
 	margin-bottom: 10px;
 	border: 1px solid var(--darkgray);
 	border-radius: 8px;

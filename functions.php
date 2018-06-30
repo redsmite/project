@@ -289,7 +289,11 @@ function search_function(){
 		<form action="search.php" method="get">
 			<i class="fas fa-search"></i>
 			<label>Search</label>
-			<input type="text" onkeyup="searchdropdown()" required name="search-text" id="search-text" autocomplete="off" placeholder="Search user...">
+			<select name="criteria" id="criteria">
+				<option value="1">Forum</option>
+				<option value="2">User</option>
+			</select>
+			<input type="text" onkeyup="searchdropdown()" required name="search-text" id="search-text" autocomplete="off">
 		</form>
 	';
 }
@@ -308,11 +312,11 @@ function reportuser(){
 			<form id="reportform">
 				<p>Select reason:</p>
 				<select id="select-reason">
-					<option value="1">This user has a pornographic profile picture</option>
-					<option value="2">This user has an offensive profile picture</option>
-					<option value="3">This user is toxic</option>
+					<option value="1">Pornographic profile picture</option>
+					<option value="2">Offensive profile picture</option>
+					<option value="3">This user is harassing me</option>
 					<option value="4">Spamming</option>
-					<option value="5">I hate this user</option>
+					<option value="5">Scammer</option>
 				</select>
 				<p>Other reasons:</p>
 				<textarea id="report-reasons" placeholder="State reasons..."></textarea>
@@ -358,7 +362,8 @@ function forumcontrols(){
 				<form id="create-forum-form">
 					<div>
 						<p>Forum Name:</p>
-						<small><i>*Must not contain spaces or special characters</i></small>
+						<small><i>*Must not contain spaces or special characters</i></small><br>
+						<small><i>*Must not be longer than 25 characters</i></small>
 						<input id="forum-name" required type="text">
 					</div>
 					<div>

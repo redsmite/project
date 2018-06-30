@@ -12,7 +12,9 @@ if(!isset($_GET['thread'])){
 }
 
 //Get forum information
-$id=$_SESSION['id'];
+if(isset($_SESSION['id'])){
+	$uid=$_SESSION['id'];
+}
 $forums = $_GET['id'];
 $thread = $_GET['thread'];
 
@@ -36,17 +38,6 @@ $result= $conn->query($sql);
 
 $sql = "UPDATE tblpost SET views=views+1 WHERE postid='$forums'";
 $result= $conn->query($sql);
-
-
-//check upvote / downvote
-$sql = "SELECT upvoteid FROM tblupvotepost WHERE user='$id' and post='$thread'";
-$result = $conn->query($sql);
-$upvote = $result->num_rows;
-
-$sql = "SELECT downvoteid FROM tbldownvotepost WHERE user='$id' and post='$thread'";
-$result = $conn->query($sql);
-$downvote = $result->num_rows;
-
 
 addSidebar();
 addLogin();
@@ -96,27 +87,40 @@ updateStatus();
  		<div class="forum-post-grid">';
 //login'd user can only vote
  		if(isset($_SESSION['id'])){
+
+		//check upvote / downvote
+ 		$sql2 = "SELECT upvoteid FROM tblupvotepost WHERE user='$uid' and post='$id'";
+		$result2 = $conn->query($sql2);
+		$upvote = $result2->num_rows;
+
+		$sql3 = "SELECT downvoteid FROM tbldownvotepost WHERE user='$uid' and post='$id'";
+		$result3 = $conn->query($sql3);
+		$downvote = $result3->num_rows;
+
  		echo'
- 		<div class="vote">
- 			<div id="up-'.$id.'" value="'.$id.'" onclick="upvotepost(this)" class="upvote">';
-			
+ 		<div class="vote">';
+ 			
  			if(!$upvote){
-				echo'<i class="fas fa-sort-up"></i>';
+ 			echo'<div id="up-'.$id.'" style="color:black;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
  			}else{
- 				echo'<font color="magenta"><i class="fas fa-sort-up"></i></font>';
+ 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
  			}
 			
 
-			echo'</div>
-			<div id="score-'.$id.'">'.$score.'</div>
-			<div id="down-'.$id.'" value="'.$id.'" onclick="downvotepost(this)" class="downvote">';
+			echo'
+			<div id="score-'.$id.'">'.$score.'</div>';
+			
 			if(!$downvote){
-				echo'<i class="fas fa-sort-down"></i>';
+			echo'
+			<div id="down-'.$id.'" style="color:black;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			</div>';
 			}else{
-				echo'<font color="cyan"><i class="fas fa-sort-down"></i></font>';
+			echo'
+			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			</div>';
 			}
 
-			echo'</div>
+			echo'
 		</div>';
 
 		}else{
@@ -157,11 +161,39 @@ updateStatus();
 					forumcontrols();
 				?>
 				<div class="forum-panel">
+					<p>This Post was submitted on: 
+					<b><?php echo date("M j, Y", strtotime($pdate))?></b></p>
+					<?php
+	$sql = "SELECT upvoteid FROM tblupvotepost WHERE post='$id'";
+	$result = $conn->query($sql);
+	$upvotecount = $result->num_rows;
+
+	$sql = "SELECT downvoteid FROM tbldownvotepost WHERE post='$id'";
+	$result = $conn->query($sql);
+	$downvotecount = $result->num_rows;
+
+	if ($score == 0 or $score == 1 or $score== -1){
+		echo '<h3>'.$score.' Point</h3>';
+	} else{
+		echo '<h3>'.$score.' Points</h3>';	
+	}
+	$total = $upvotecount + $downvotecount;
+	if ($total==0){
+		$upvotecount = 1;
+		$total = 2;
+	}
+	$percent = round($upvotecount/$total * 100);
+
+	echo '('.$percent.'% Upvoted)';
+?>
+					</p>
+					<hr>
 					<h2 id="forum-name"><?php echo $title?></h2>
 					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
 					<p id="description"><?php echo $desc ?></p>
 					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
 					<p id="users-count">1 Users here now.</p>
+					<p>
 				</div>
 			</div>
 		</div>
