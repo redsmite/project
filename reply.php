@@ -12,6 +12,7 @@ if(!isset($_GET['thread'])){
 }
 
 //Get forum information
+$id=$_SESSION['id'];
 $forums = $_GET['id'];
 $thread = $_GET['thread'];
 
@@ -35,6 +36,16 @@ $result= $conn->query($sql);
 
 $sql = "UPDATE tblpost SET views=views+1 WHERE postid='$forums'";
 $result= $conn->query($sql);
+
+
+//check upvote / downvote
+$sql = "SELECT upvoteid FROM tblupvotepost WHERE user='$id' and post='$thread'";
+$result = $conn->query($sql);
+$upvote = $result->num_rows;
+
+$sql = "SELECT downvoteid FROM tbldownvotepost WHERE user='$id' and post='$thread'";
+$result = $conn->query($sql);
+$downvote = $result->num_rows;
 
 
 addSidebar();
@@ -82,21 +93,50 @@ updateStatus();
  		$pdate = $row->datecreated;
 
  		echo '<li value="'.$id.'">
- 		<div class="forum-post-grid">
+ 		<div class="forum-post-grid">';
+//login'd user can only vote
+ 		if(isset($_SESSION['id'])){
+ 		echo'
  		<div class="vote">
- 		<div class="upvote">
+ 			<div id="up-'.$id.'" value="'.$id.'" onclick="upvotepost(this)" class="upvote">';
+			
+ 			if(!$upvote){
+				echo'<i class="fas fa-sort-up"></i>';
+ 			}else{
+ 				echo'<font color="magenta"><i class="fas fa-sort-up"></i></font>';
+ 			}
+			
+
+			echo'</div>
+			<div id="score-'.$id.'">'.$score.'</div>
+			<div id="down-'.$id.'" value="'.$id.'" onclick="downvotepost(this)" class="downvote">';
+			if(!$downvote){
+				echo'<i class="fas fa-sort-down"></i>';
+			}else{
+				echo'<font color="cyan"><i class="fas fa-sort-down"></i></font>';
+			}
+
+			echo'</div>
+		</div>';
+
+		}else{
+			echo'
+		<div class="vote">
+ 			<div class="upvote">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
 			<div class="downvote">
 			<i class="fas fa-sort-down"></i>
 		</div>
-		</div>
-		<div class="right-post">
+		</div>';
+		}
+
+		echo'<div class="right-post">
 			<p class="main-forum-title">'.$ptitle.'</p>
 		</div>
  		</div>
- 		<div class="text-content">'.$pdesc.'</div>
+ 		<div class="text-content">'.nl2br($pdesc).'</div>
  		<p>Submitted by: <a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'
  		</li>';
 ?>

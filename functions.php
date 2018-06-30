@@ -327,18 +327,18 @@ function reportuser(){
 }
 
 function forumcontrols(){
-	$forums = $_GET['id'];
-	$id = $_SESSION['id'];
-
-	$conn = new mysqli('localhost','root','','itsproject');
-	$sql = "SELECT subid FROM tblsubscribe WHERE subscriber='$id' AND forum='$forums'";
-
-	$result= $conn->query($sql);
-	$count =$result->num_rows;
-
 	if(!isset($_SESSION['id'])){
 		echo'<div id="sidebar-blank"></div>';
 	}else{
+		$forums = $_GET['id'];
+		$id = $_SESSION['id'];
+
+		$conn = new mysqli('localhost','root','','itsproject');
+		$sql = "SELECT subid FROM tblsubscribe WHERE subscriber='$id' AND forum='$forums'";
+
+		$result= $conn->query($sql);
+		$count =$result->num_rows;
+		
 		echo'<div id="create-new-post" class="sidebar-button" onclick="createNewPost()">
 				<h3><i class="fas fa-plus-square"></i> Create New Post</h3>
 			</div>

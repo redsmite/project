@@ -1136,7 +1136,6 @@ function subscribeForum(clicked){
 	}else{
 		subscribe.innerHTML='<h3>Subscribe</h3>'
 	}
-	addSpinners();
 
 	var myRequest = new XMLHttpRequest();
 	var url = 'forumprocess.php';
@@ -1153,11 +1152,87 @@ function subscribeForum(clicked){
 	myRequest.onload = function(){
 		var response= this.responseText;
 		if(response){
-			removeSpinners();
-			console.log(response);
+			document.getElementById('subscriber-count').innerText=response;
 		}
 	}
 	myRequest.send(formData);
+}
+
+function upvotepost(clicked){
+	let val = clicked.getAttribute('value');
+	
+	let upvoteid = 'up-'+val;
+	let upvote = document.getElementById(upvoteid);	
+
+	let downvoteid = 'down-'+val;
+	let downvote = document.getElementById(downvoteid);
+	
+	
+	if(upvote.style.color=='magenta'){
+		upvote.style.color='black';
+	}else{
+		upvote.style.color='magenta';
+		downvote.style.color='black';
+	}
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'forumprocess.php';
+
+	//form data variables
+	
+	var formData = "upvote="+val;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		if(response){
+			let scoreid = 'score-'+val;
+			let score = document.getElementById(scoreid);
+			score.innerText = response;
+		}
+	}
+	myRequest.send(formData);
+
+}
+
+function downvotepost(clicked){
+	let val = clicked.getAttribute('value');
+	
+	let upvoteid = 'up-'+val;
+	let upvote = document.getElementById(upvoteid);
+
+	let downvoteid = 'down-'+val;
+	let downvote = document.getElementById(downvoteid);
+	
+	if(downvote.style.color=='cyan'){
+		downvote.style.color='black';
+	}else{
+		downvote.style.color='cyan';
+		upvote.style.color='black';
+	}
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'forumprocess.php';
+
+	//form data variables
+	
+	var formData = "downvote="+val;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		if(response){
+			let scoreid = 'score-'+val;
+			let score = document.getElementById(scoreid);
+			score.innerText = response;
+		}
+	}
+	myRequest.send(formData);
+
 }
 
 //Redirect Page

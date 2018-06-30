@@ -81,7 +81,11 @@ if(isset($_POST['sub'])){
 	$sql = "UPDATE tblforum SET subscriber=subscriber+1 WHERE forumid='$sub'";
 	$result= $conn->query($sql);
 
-	echo 'Thanks for subbing in.';
+	$sql = "SELECT subscriber FROM tblforum WHERE forumid='$sub'";
+	$result=$conn->query($sql);
+	$row= $result->fetch_object();
+	$subcount = $row->subscriber;
+	echo $subcount.' Subscribers';
 
 	} else {
 	$sql = "DELETE FROM tblsubscribe WHERE subscriber='$id' AND forum='$sub' ";
@@ -89,8 +93,113 @@ if(isset($_POST['sub'])){
 
 	$sql = "UPDATE tblforum SET subscriber=subscriber-1 WHERE forumid='$sub'";
 	$result= $conn->query($sql);
-	echo 'You have unsubscribed.';
+	$sql = "SELECT subscriber FROM tblforum WHERE forumid='$sub'";
+	$result=$conn->query($sql);
+	$row= $result->fetch_object();
+	$subcount = $row->subscriber;
+	echo $subcount.' Subscribers';
 	}
 
 }
+
+if(isset($_POST['upvote'])){
+	$upvote = $_POST['upvote'];
+	$id = $_SESSION['id'];
+
+	$sql = "SELECT upvoteid FROM tblupvotepost WHERE user='$id' and post='$upvote'";
+	$result = $conn->query($sql);
+	$count = $result->num_rows;
+	if($count){
+	
+	$sql = "DELETE FROM tblupvotepost WHERE user='$id' and post='$upvote'";
+	$result = $conn->query($sql);
+
+	$sql = "UPDATE tblpost SET score=score-1 WHERE postid='$upvote'";
+	$result = $conn->query($sql);
+
+	$sql = "SELECT score FROM tblpost WHERE postid='$upvote'";
+	$result= $conn->query($sql);
+	$row = $result->fetch_object();
+	$score = $row->score;
+	echo $score;
+
+	}else{
+	
+	$sql = "INSERT INTO tblupvotepost (user,post) VALUES ('$id','$upvote')";
+	$result = $conn->query($sql);
+
+	$sql = "SELECT downvoteid FROM tbldownvotepost WHERE user ='$id' AND post ='$upvote'";
+	$result = $conn->query($sql);
+	$downvoted = $result->num_rows;
+
+	if($downvoted){
+	$sql = "DELETE FROM tbldownvotepost WHERE user ='$id' AND post ='$upvote' ";
+	$result = $conn->query($sql);
+
+	$sql = "UPDATE tblpost SET score=score+2 WHERE postid='$upvote'";
+	$result = $conn->query($sql);
+	}else{
+	$sql = "UPDATE tblpost SET score=score+1 WHERE postid='$upvote'";
+	$result = $conn->query($sql);
+
+	}
+	$sql = "SELECT score FROM tblpost WHERE postid='$upvote'";
+	$result= $conn->query($sql);
+	$row = $result->fetch_object();
+	$score = $row->score;
+	echo $score;
+	}
+}
+
+if(isset($_POST['downvote'])){
+	$downvote = $_POST['downvote'];
+	$id = $_SESSION['id'];
+
+	$sql = "SELECT downvoteid FROM tbldownvotepost WHERE user='$id' and post='$downvote'";
+	$result = $conn->query($sql);
+	$count = $result->num_rows;
+	if($count){
+		$sql = "DELETE FROM tbldownvotepost WHERE user ='$id' AND post ='$downvote' ";
+		$result = $conn->query($sql);
+
+		$sql = "UPDATE tblpost SET score=score+1 WHERE postid='$downvote'";
+		$result = $conn->query($sql);
+
+		$sql = "SELECT score FROM tblpost WHERE postid='$downvote'";
+		$result= $conn->query($sql);
+		$row = $result->fetch_object();
+		$score = $row->score;
+		echo $score;
+	}else{
+
+	$sql = "SELECT upvoteid FROM tblupvotepost WHERE user='$id' and post='$downvote'";
+	$result = $conn->query($sql);
+	$upvoted = $result->num_rows;
+
+		if(!$upvoted){
+		
+		$sql = "INSERT INTO tbldownvotepost (user,post) VALUES ('$id','$downvote')";
+		$result = $conn->query($sql);
+		$sql = "UPDATE tblpost SET score=score-1 WHERE postid='$downvote'";
+		$result = $conn->query($sql);
+
+
+		}else{
+
+		$sql = "DELETE FROM tblupvotepost WHERE user='$id' and post='$downvote'";
+		$result = $conn->query($sql);
+		
+		$sql = "INSERT INTO tbldownvotepost (user,post) VALUES ('$id','$downvote')";
+		$result = $conn->query($sql);
+		$sql = "UPDATE tblpost SET score=score-2 WHERE postid='$downvote'";
+		$result = $conn->query($sql);
+		}
+		$sql = "SELECT score FROM tblpost WHERE postid='$downvote'";
+		$result= $conn->query($sql);
+		$row = $result->fetch_object();
+		$score = $row->score;
+		echo $score;
+	}
+}
+
 ?>
