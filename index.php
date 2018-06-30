@@ -6,6 +6,9 @@
 	addLogin();
 	setupCookie();
 	updateStatus();
+	if(isset($_SESSION['id'])){
+		$uid = $_SESSION['id'];
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,14 +46,19 @@
 					<p>None...</p>
 				</div>
 				<div class="content-body">
-					<h2>Trending Posts</h2>
+					<h2>Newest Posts</h2>
 					<ul id="forum-list">
 <?php
-$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
 		ON userid = starter
+	LEFT JOIN tblupvotepost
+		ON postid = tblupvotepost.post
+	LEFT JOIN tbldownvotepost
+		ON postid = tbldownvotepost.post
+	GROUP BY postid
 	ORDER BY postid DESC
 	LIMIT 50";
 	$result = $conn->query($sql);
@@ -63,19 +71,57 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$comments = $row->comments;
 		$date = $row->datecreated;
 		$score = $row->score;
+		$upvote = $row->upvoteid;
+		$downvote = $row->downvoteid;
+
+		$sql2 = "SELECT upvoteid FROM tblupvotepost WHERE user='$uid' and post='$id'";
+		$result2 = $conn->query($sql2);
+		$upvote = $result2->num_rows;
+
+		$sql3 = "SELECT downvoteid FROM tbldownvotepost WHERE user='$uid' and post='$id'";
+		$result3 = $conn->query($sql3);
+		$downvote = $result3->num_rows;
 
 		echo '<li value="'.$id.'">
-		<div class="forum-post-grid">
+ 		<div class="forum-post-grid">';
+//login'd user can only vote
+ 		if(isset($_SESSION['id'])){
+ 		echo'
+ 		<div class="vote">
+ 			<div id="up-'.$id.'" value="'.$id.'" onclick="upvotepost(this)" class="upvote">';
+			
+ 			if(!$upvote){
+				echo'<i class="fas fa-sort-up"></i>';
+ 			}else{
+ 				echo'<font color="magenta"><i class="fas fa-sort-up"></i></font>';
+ 			}
+			
+
+			echo'</div>
+			<div id="score-'.$id.'">'.$score.'</div>
+			<div id="down-'.$id.'" value="'.$id.'" onclick="downvotepost(this)" class="downvote">';
+			if(!$downvote){
+				echo'<i class="fas fa-sort-down"></i>';
+			}else{
+				echo'<font color="cyan"><i class="fas fa-sort-down"></i></font>';
+			}
+
+			echo'</div>
+		</div>';
+
+		}else{
+			echo'
 		<div class="vote">
-			<div class="upvote">
+ 			<div class="upvote">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
 			<div class="downvote">
 			<i class="fas fa-sort-down"></i>
-			</div>
 		</div>
-		<div class="post-right">
+		</div>';
+		}
+		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
 		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>

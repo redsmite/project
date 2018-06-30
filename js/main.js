@@ -1162,17 +1162,17 @@ function upvotepost(clicked){
 	let val = clicked.getAttribute('value');
 	
 	let upvoteid = 'up-'+val;
-	let upvote = document.getElementById(upvoteid);	
+	let upvote = document.getElementById(upvoteid);
 
 	let downvoteid = 'down-'+val;
 	let downvote = document.getElementById(downvoteid);
 	
-	
 	if(upvote.style.color=='magenta'){
 		upvote.style.color='black';
-	}else{
-		upvote.style.color='magenta';
 		downvote.style.color='black';
+	}else{
+		downvote.style.color='black';
+		upvote.style.color='magenta';
 	}
 
 	var myRequest = new XMLHttpRequest();
@@ -1208,6 +1208,7 @@ function downvotepost(clicked){
 	
 	if(downvote.style.color=='cyan'){
 		downvote.style.color='black';
+		upvote.style.color='black';
 	}else{
 		downvote.style.color='cyan';
 		upvote.style.color='black';

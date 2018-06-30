@@ -9,6 +9,7 @@ if(!isset($_GET['id'])){
 
 //Get forum information
 $forums = $_GET['id'];
+$uid = $_SESSION['id'];
 
 $sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
 $result = $conn->query($sql);	
@@ -71,18 +72,54 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		$datep = $row->datecreated;
 		$score = $row->score;
 
+		$sql2 = "SELECT upvoteid FROM tblupvotepost WHERE user='$uid' and post='$id'";
+		$result2 = $conn->query($sql2);
+		$upvote = $result2->num_rows;
+
+		$sql3 = "SELECT downvoteid FROM tbldownvotepost WHERE user='$uid' and post='$id'";
+		$result3 = $conn->query($sql3);
+		$downvote = $result3->num_rows;
+
 		echo '<li value="'.$id.'">
-		<div class="forum-post-grid">
+ 		<div class="forum-post-grid">';
+//login'd user can only vote
+ 		if(isset($_SESSION['id'])){
+ 		echo'
+ 		<div class="vote">
+ 			<div id="up-'.$id.'" value="'.$id.'" onclick="upvotepost(this)" class="upvote">';
+			
+ 			if(!$upvote){
+				echo'<i class="fas fa-sort-up"></i>';
+ 			}else{
+ 				echo'<font color="magenta"><i class="fas fa-sort-up"></i></font>';
+ 			}
+			
+
+			echo'</div>
+			<div id="score-'.$id.'">'.$score.'</div>
+			<div id="down-'.$id.'" value="'.$id.'" onclick="downvotepost(this)" class="downvote">';
+			if(!$downvote){
+				echo'<i class="fas fa-sort-down"></i>';
+			}else{
+				echo'<font color="cyan"><i class="fas fa-sort-down"></i></font>';
+			}
+
+			echo'</div>
+		</div>';
+
+		}else{
+			echo'
 		<div class="vote">
-			<div class="upvote">
+ 			<div class="upvote">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
 			<div class="downvote">
 			<i class="fas fa-sort-down"></i>
-			</div>
 		</div>
-		<div class="post-right">
+		</div>';
+		}
+		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
 		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($datep).'</p>
 		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
