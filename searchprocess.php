@@ -7,7 +7,7 @@ if(isset($_POST['search'])){
 	$search=$_POST['search'];
 
 	$data='';
-	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '%$search%' ORDER BY lastonline DESC LIMIT 10";
+	$sql="SELECT username,imgpath,datecreated FROM tbluser WHERE username LIKE '%$search%' ORDER BY lastonline  DESC LIMIT 10";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
 
@@ -28,7 +28,7 @@ if(isset($_POST['search2'])){
 
 	$data='';
 
-	$sql = "SELECT forumid,name FROM tblforum WHERE name LIKE '%$search%' LIMIT 10";
+	$sql = "SELECT forumid,name,(views+subscriber) AS popular FROM tblforum WHERE name LIKE '%$search%' ORDER BY popular DESC LIMIT 10";
 	$result = $conn->query($sql);
 	while($row = $result->fetch_object()){
 		$id = $row->forumid;

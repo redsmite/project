@@ -1,67 +1,50 @@
 <?php
 session_start();
 include'functions.php';
-require_once('connection.php');
-
-if(!isset($_GET['id'])){
-	die('This forum doesn\'t exists.');
-}
-
-//Get forum information
-$forums = $_GET['id'];
-if(isset($_SESSION['id'])){
-$uid = $_SESSION['id'];
-}
-
-$sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
-$result = $conn->query($sql);	
-$fetch = $result->fetch_object();
-
-$fid = $fetch->forumid;
-$title = $fetch->title;
-$name = $fetch->name;
-$desc = $fetch->description;
-$subcount = $fetch->subscriber;
-$date = date("M j, Y", strtotime($fetch->datecreated));
-
-//forum views
-
-$sql = "UPDATE tblforum SET views=views+1 WHERE forumid='$forums'";
-$result= $conn->query($sql);
-
 addSidebar();
 addLogin();
 setupCookie();
 updateStatus();
-
-
+require_once'connection.php';
+$name=$_GET['name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<meta charset="UTF-8">
-	<title><?php echo $title?></title>
+	<title><?php companytitle()?></title>
 </head>
 <body>
 	<div class="main-container">
+	<!-- Header -->
 	<?php
 		addheader();
 	?>
-	<div class="other-content">
-		<div class="forum-grid">
-			<div class="main-forum">
-				<h1><?php echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>' ?></h1>
-				<ul id="forum-list">
+	<!-- Main Content -->
+		<div class="other-content">
+			<h1><a class="btp" href="profile.php?name=<?php echo $name ?>">Back to <?php echo $name ?>'s Profile</a></h1>
+
+<ul id="forum-list">
 <?php
+$uid = $_SESSION['id'];
+
+$sql="SELECT userid FROM tbluser WHERE username='$name'";
+$result=$conn->query($sql);
+$row=$result->fetch_object();
+$rid=$row->userid;
+
 $sql = "SELECT postid FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
 		ON userid = starter
-	WHERE tblpost.forumid='$forums'
+	WHERE starter='$rid'
 	ORDER BY postid DESC";
+
 $result=$conn->query($sql);
 
 $rows=$result->num_rows;
@@ -87,34 +70,35 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
 		ON userid = starter
-	WHERE tblpost.forumid='$forums'
-	ORDER BY postid DESC $limit";
+	WHERE starter='$rid'
+	ORDER BY postid DESC
+	$limit";
 	$result = $conn->query($sql);
 
-$textline1 = "</i>Post (<b>$rows</b>)";
+$textline1 = "</i>Post created by ".$_GET['name']." (<b>$rows</b>)";
 $textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 $paginationCtrls = '';
 if($last != 1){
 	if ($pagenum > 1) {
         $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?id='.$forums.'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
 		// Render clickable number links that should appear on the left of the target page number
 		for($i = $pagenum-4; $i < $pagenum; $i++){
 			if($i > 0){
-		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?id='.$forums.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$i.'">'.$i.'</a> &nbsp; ';
 			}
 	    }
     }
     $paginationCtrls .= ''.$pagenum.' &nbsp; ';
 	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?id='.$forums.'&pn='.$i.'">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$i.'">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
 			break;
 		}
 	}
 	    if ($pagenum != $last) {
         $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?id='.$forums.'&pn='.$next.'">Next</a> ';
+        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?name='.$_GET['name'].'&pn='.$next.'">Next</a> ';
     }
 }
  echo'<h2>  '.$textline1.'</h2>
@@ -194,30 +178,15 @@ if($last != 1){
 	}
 ?>
 			</ul>
-			</div>
-			<div class="forum-sidebar">
-				<?php
-					forumcontrols();
-				?>
-				<div class="forum-panel">
-					<h2 id="forum-name"><?php echo $title?></h2>
-					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
-					<p id="description"><?php echo $desc ?></p>
-					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
-					<p id="users-count">1 Users here now.</p>
-				</div>
-			</div>
 		</div>
+	<!-- Footer -->
+		<?php
+			addfooter();
+		?>
+	<!-- End of Container -->
 	</div>
-	<?php
-		addfooter();
-	?>
-	</div>
-	<?php if(!isset($_SESSION['id'])){echo'<div id="create-forum-form"></div><div id="create-post-form"></div>';}?>
 	<script src="js/main.js"></script>
 	<script>
-		newForumForm();
-		newPostForm();
 		modal();
 		ajaxLogin();
 	</script>

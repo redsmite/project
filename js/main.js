@@ -625,7 +625,7 @@ function botreply(message,name){
 			}
 		}
 		myRequest.send(formData);
-	}else if(message=='!sing'){
+	}else if(message=='!music'){
 		var myRequest = new XMLHttpRequest();
 		var url = 'inboxprocess.php';
 
@@ -1019,7 +1019,7 @@ function reportuser(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			if(response){
-				alert('This user has been reported, thank you.');
+				alert('Your report has been sent for review, thank you.');
 				removeSpinners();
 				hidereport();
 			}

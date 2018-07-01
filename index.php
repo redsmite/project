@@ -46,7 +46,7 @@
 					<p>None...</p>
 				</div>
 				<div class="content-body">
-					<h2>Newest Posts</h2>
+					<h2>Recent Posts</h2>
 					<ul id="forum-list">
 <?php
 $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost

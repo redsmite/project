@@ -62,7 +62,7 @@ if(isset($_GET['search-text'])){
 	}
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 
-	$sql = "SELECT forumid,name FROM tblforum WHERE name LIKE '%$search%' $limit";
+	$sql = "SELECT forumid,name,(views+subscriber) AS popular FROM tblforum WHERE name LIKE '%$search%' ORDER BY popular DESC $limit";
 	
 	$textline1 = "Forums (<b>$rows</b>)";
 	$textline2 = "Page <b>$pagenum</b> of <b>$last</b>";

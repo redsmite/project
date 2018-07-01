@@ -194,6 +194,27 @@ if($testR->num_rows!=0){
 							}
 						}
 						echo'<table id="profilestats">';
+						// Score Count
+						$sql = "SELECT upvoteid FROM tblupvotepost 
+						LEFT JOIN tblpost
+							ON post = postid 
+						WHERE starter='$id'";
+						$result = $conn->query($sql);
+						$upcount = $result->num_rows;
+
+						$sql = "SELECT downvoteid FROM tbldownvotepost 
+						LEFT JOIN tblpost
+							ON post = postid
+						WHERE starter='$id'";
+						$result = $conn->query($sql);
+						$downcount = $result->num_rows;
+						
+						$score =  $upcount - $downcount;
+
+						echo '<tr>
+						<th><a href="profilepost.php?name='.$name.'"><i class="fas fa-star"></i> Post Score:</a></th>
+						<th><a href="profilepost.php?name='.$name.'">'.$score.'</a></th>
+						</tr>';
 						// Comment Count
 						$sql="SELECT commentid FROM tblcomment WHERE userid = '$id'";
 						$result=$conn->query($sql);
@@ -347,6 +368,8 @@ if($testR->num_rows!=0){
 				</div>
 				</div>
 		</div>
+		<!-- Escaping Report User function -->
+		<div id="reportform"></div>
 	<!-- Footer -->
 		<?php
 			addfooter();

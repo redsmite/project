@@ -1488,10 +1488,6 @@ body{
 	cursor: pointer;
 }
 
-#fetch a:hover{
-	color: var(--primary-color);
-}
-
 .banned{
 	color: red;
 }
@@ -1505,7 +1501,7 @@ body{
 	margin: 0 auto;
 	text-align: center;
 	width: 80vw;
-	background: var(--orangered);
+	background: var(--lightblue);
 	color: var(--dark-color);
 	margin-bottom: 10px;
 	border: 1px solid var(--darkgray);
@@ -1533,13 +1529,13 @@ body{
 
 .newreport{
 	float: right;
-	color: red;
+	color: var(--primary-color);
 	margin-right: 5px;
 }
 
 .checkreport{
 	float: right;
-	color: green;
+	color: var(--lime);
 	margin-right: 5px;
 }
 
