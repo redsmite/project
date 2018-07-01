@@ -319,7 +319,7 @@ function reportuser(){
 					<option value="5">Scammer</option>
 				</select>
 				<p>Other reasons:</p>
-				<textarea id="report-reasons" placeholder="State reasons..."></textarea>
+				<textarea id="report-reasons" placeholder="State other reasons..."></textarea>
 				<br>
 				<input type="hidden" id="report-username" value="'.$_GET['name'].'">
 				<input type="submit">

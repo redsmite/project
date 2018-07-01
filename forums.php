@@ -62,7 +62,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 		ON userid = starter
 	WHERE tblpost.forumid='$forums'
 	ORDER BY postid DESC
-	LIMIT 50";
+	LIMIT 25";
 	$result = $conn->query($sql);
 	while($row=$result->fetch_object()){
 		$id = $row->postid;

@@ -60,7 +60,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		ON postid = tbldownvotepost.post
 	GROUP BY postid
 	ORDER BY postid DESC
-	LIMIT 50";
+	LIMIT 25";
 	$result = $conn->query($sql);
 	while($row=$result->fetch_object()){
 		$id = $row->postid;
