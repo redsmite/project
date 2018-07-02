@@ -772,6 +772,7 @@ body{
     padding:10px 20px;
     border-radius: 8px;
     border: 1px solid var(--dark-color);
+    text-align:center;
 }
 
 #edit-bio{
@@ -1781,6 +1782,7 @@ body{
 }
 
 .forum-panel{
+	font-style: normal;
 	text-align: center;
 	line-height: 1.5em;
 	padding-left: 30px;
@@ -1788,6 +1790,40 @@ body{
 
 .forum-panel p{
 	margin-bottom: 10px;
+}
+
+#subscriber-count{
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 2px;
+	background: var(--facebookblue);
+	color:var(--light-color);
+}
+
+#users-count{
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 2px;
+	background: var(--lime);
+	color:var(--light-color);
+}
+
+.creator{
+	text-decoration: none;
+	color: var(--primary-color);
+}
+
+.forum-panel-button{
+	text-decoration: none;
+	padding: 5px 8px;
+	border-radius: 2px;
+	background: var(--primary-color);
+	color:var(--light-color);
+}
+
+#forum-desc{
+	height:150px;
+	width:80%;
 }
 
 /* Footer */

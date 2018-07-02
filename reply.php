@@ -18,7 +18,10 @@ if(isset($_SESSION['id'])){
 $forums = $_GET['id'];
 $thread = $_GET['thread'];
 
-$sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblforum WHERE forumid='$forums'";
+$sql = "SELECT forumid,title,name,description,t1.datecreated,subscriber,username FROM tblforum AS t1
+LEFT JOIN tbluser
+	ON userid = creator
+WHERE forumid='$forums'";
 $result = $conn->query($sql);	
 $fetch = $result->fetch_object();
 
@@ -29,6 +32,7 @@ $name = $fetch->name;
 $desc = $fetch->description;
 $subcount = $fetch->subscriber;
 $date = date("M j, Y", strtotime($fetch->datecreated));
+$creator = $fetch->username;
 }
 //forum views
 
@@ -63,7 +67,7 @@ updateStatus();
 	<div class="other-content">
 		<div class="forum-grid">
 			<div class="main-forum">
-				<h1><?php if($fetch){echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>';} ?></h1>
+				<h1><?php if($fetch){echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$name.'</a>';} ?></h1>
 				<ul id="forum-list">
 <?php
 	$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,tblpost.description,tblpost.score ,username,comments FROM tblpost
@@ -196,10 +200,19 @@ updateStatus();
 					<hr>
 					<h2 id="forum-name"><?php if($fetch){echo $title;}?></h2>
 					<div class="" id="forum-date"><?php if($fetch){echo 'Created: '.$date;} ?></div>
-					<p id="description"><?php if($fetch){echo $desc;} ?></p>
-					<p id="subscriber-count"><?php if($fetch){echo $subcount;} ?> Subscribers.</p>
-					<p id="users-count">1 Users here now.</p>
-					<p>
+					<p id="description"><?php if($fetch){echo nl2br($desc);} ?></p>
+					<p id="subscriber-count"><?php if($fetch){echo $subcount;} ?> Subscribers</p>
+					<p id="users-count">1 Users here now</p>
+					<?php
+						if($fetch){
+
+							echo'Creator: <a class="creator" href=
+							profile.php?='.$creator.'">'.$creator.'</a>';
+							if($creator==$_SESSION['name']){
+								echo'<br><a class="forum-panel-button" href="forumpanel.php?id='.$forums.'">Forum Panel</a>';
+							}
+						}
+					?>
 				</div>
 			</div>
 		</div>

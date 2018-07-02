@@ -359,15 +359,18 @@ function forumcontrols(){
 					<div>
 						<p>Forum Name:</p>
 						<small><i>*Must not contain spaces or special characters</i></small><br>
-						<small><i>*Must not be longer than 25 characters</i></small>
+						<small><i>*Must not exceed 25 characters</i></small><br>
+						<small><i>*You cannot changed the name of this forum once submitted.</i></small>
 						<input id="forum-name" required type="text">
 					</div>
 					<div>
 						<p>Title:</p>
+						<small><i>*This will appear on the browser toolbar.</i></small>
 						<input id="forum-title" required type="text">
 					</div>
 					<div>
 						<p>Forum Description:</p>
+						<small><i>*Brief description about the forum or set some rules here.</i></small>
 						<textarea id="forum-desc" required></textarea>
 					</div>
 					<div>

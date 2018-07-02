@@ -7,7 +7,7 @@ if(isset($_POST['username'])){
 	
 	if(strlen($_POST['username']) > 20)
 	{
-	    $error.='<i class="fas fa-exclamation-circle"></i>Username must not be longer than 20 characters<br>';
+	    $error.='<i class="fas fa-exclamation-circle"></i>Username must not exceed 20 characters<br>';
 	}
 
 	if (preg_match('/[^A-Z]/i',$_POST['username']))
