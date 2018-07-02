@@ -22,13 +22,14 @@ $sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblfor
 $result = $conn->query($sql);	
 $fetch = $result->fetch_object();
 
+if($fetch){
 $fid = $fetch->forumid;
 $title = $fetch->title;
 $name = $fetch->name;
 $desc = $fetch->description;
 $subcount = $fetch->subscriber;
 $date = date("M j, Y", strtotime($fetch->datecreated));
-
+}
 //forum views
 
 $sql = "UPDATE tblforum SET views=views+1 WHERE forumid='$thread'";
@@ -52,7 +53,7 @@ updateStatus();
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
 	<meta charset="UTF-8">
-	<title><?php echo $title?></title>
+	<title><?php if($fetch){echo $title;}else{ companytitle();}?></title>
 </head>
 <body>
 	<div class="main-container">
@@ -62,7 +63,7 @@ updateStatus();
 	<div class="other-content">
 		<div class="forum-grid">
 			<div class="main-forum">
-				<h1><?php echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>' ?></h1>
+				<h1><?php if($fetch){echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>';} ?></h1>
 				<ul id="forum-list">
 <?php
 	$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,tblpost.description,tblpost.score ,username,comments FROM tblpost
@@ -73,6 +74,7 @@ updateStatus();
  	WHERE tblforum.forumid = '$forums' AND postid='$thread'";
  	$result = $conn->query($sql);
  	$row=$result->fetch_object();
+ 		if($row){
  		$id = $row->postid;
  		$forumid = $row->forumid;
  		$forum = $row->name;
@@ -143,6 +145,7 @@ updateStatus();
  		<div class="text-content">'.nl2br($pdesc).'</div>
  		<p>Submitted by: <a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($pdate).'
  		</li>';
+ 	}
 ?>
 			</ul>
 			<div class="reply-form">
@@ -162,8 +165,10 @@ updateStatus();
 				?>
 				<div class="forum-panel">
 					<p>This Post was submitted on: 
-					<b><?php echo date("M j, Y", strtotime($pdate))?></b></p>
+					<b><?php if($fetch){echo date("M j, Y", strtotime($pdate));}?></b></p>
 					<?php
+	// Getting post score
+	if($fetch){
 	$sql = "SELECT upvoteid FROM tblupvotepost WHERE post='$id'";
 	$result = $conn->query($sql);
 	$upvotecount = $result->num_rows;
@@ -185,13 +190,14 @@ updateStatus();
 	$percent = round($upvotecount/$total * 100);
 
 	echo '('.$percent.'% Upvoted)';
+	}
 ?>
 					</p>
 					<hr>
-					<h2 id="forum-name"><?php echo $title?></h2>
-					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
-					<p id="description"><?php echo $desc ?></p>
-					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
+					<h2 id="forum-name"><?php if($fetch){echo $title;}?></h2>
+					<div class="" id="forum-date"><?php if($fetch){echo 'Created: '.$date;} ?></div>
+					<p id="description"><?php if($fetch){echo $desc;} ?></p>
+					<p id="subscriber-count"><?php if($fetch){echo $subcount;} ?> Subscribers.</p>
 					<p id="users-count">1 Users here now.</p>
 					<p>
 				</div>

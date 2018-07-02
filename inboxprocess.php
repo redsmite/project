@@ -101,12 +101,7 @@ if(isset($_POST['hellobot'])){
 
 if(isset($_POST['song'])){
 	$name=$_SESSION['name'];
-	$message='♪ (se~ no!)
-
-	♪ demo  sonnan ja  dame
-	♪ mou  sonnan ja  hora
-	♪ kokoro wa shinka suru yo 
-	♪ motto motto';
+	$message='(♪ Jazz music playing...)';
 
 	sendmessage(71,$name,$message);
 }

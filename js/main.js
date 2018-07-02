@@ -630,7 +630,7 @@ function botreply(message,name){
 		var url = 'inboxprocess.php';
 
 		//form data variables
-		var song = 'renai-circulation';
+		var song = 'bgmusic';
 		
 		
 		var formData = "song="+song;
@@ -644,8 +644,8 @@ function botreply(message,name){
 			if(response){
 
 				form.reset();
-				var renaicirculation = document.getElementById("mySong"); 
-				renaicirculation.play(); 
+				var bgmusic = document.getElementById("mySong"); 
+				bgmusic.play(); 
 				document.querySelector('.right-inbox').innerHTML=response;
 				var messageBody = document.querySelector(".right-inbox");
 				messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
@@ -654,9 +654,9 @@ function botreply(message,name){
 		myRequest.send(formData);
 	}else if(message=='!stop'){
 			form.reset();
-			var renaicirculation = document.getElementById("mySong"); 
-			renaicirculation.pause();
-			renaicirculation.currentTime = 0;
+			var bgmusic = document.getElementById("mySong"); 
+			bgmusic.pause();
+			bgmusic.currentTime = 0;
 	}else if(message=='!time'){
 		var myRequest = new XMLHttpRequest();
 		var url = 'inboxprocess.php';

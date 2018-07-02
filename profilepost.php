@@ -75,7 +75,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 	$limit";
 	$result = $conn->query($sql);
 
-$textline1 = "</i>Post created by ".$_GET['name']." (<b>$rows</b>)";
+$textline1 = "<i class='fas fa-comments'></i> Post by ".$_GET['name']." (<b>$rows</b>)";
 $textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 $paginationCtrls = '';
 if($last != 1){

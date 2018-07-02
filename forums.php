@@ -17,13 +17,14 @@ $sql = "SELECT forumid,title,name,description,datecreated,subscriber FROM tblfor
 $result = $conn->query($sql);	
 $fetch = $result->fetch_object();
 
+if($fetch){
 $fid = $fetch->forumid;
 $title = $fetch->title;
 $name = $fetch->name;
 $desc = $fetch->description;
 $subcount = $fetch->subscriber;
 $date = date("M j, Y", strtotime($fetch->datecreated));
-
+}
 //forum views
 
 $sql = "UPDATE tblforum SET views=views+1 WHERE forumid='$forums'";
@@ -42,7 +43,7 @@ updateStatus();
     <link rel="stylesheet" href="css/style.css">
   	<link rel="stylesheet" href="css/fontawesome-all.css">
 	<meta charset="UTF-8">
-	<title><?php echo $title?></title>
+	<title><?php if($fetch){echo $title;}else{ companytitle();}?></title>
 </head>
 <body>
 	<div class="main-container">
@@ -52,7 +53,10 @@ updateStatus();
 	<div class="other-content">
 		<div class="forum-grid">
 			<div class="main-forum">
-				<h1><?php echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>' ?></h1>
+				<h1><?php 
+				if($fetch){
+				echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$title.'</a>';} ?></h1>
+
 				<ul id="forum-list">
 <?php
 $sql = "SELECT postid FROM tblpost
@@ -91,7 +95,7 @@ $sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,use
 	ORDER BY postid DESC $limit";
 	$result = $conn->query($sql);
 
-$textline1 = "</i>Post (<b>$rows</b>)";
+$textline1 = "<i class='fas fa-comments'></i> Post (<b>$rows</b>)";
 $textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
 $paginationCtrls = '';
 if($last != 1){
@@ -200,10 +204,10 @@ if($last != 1){
 					forumcontrols();
 				?>
 				<div class="forum-panel">
-					<h2 id="forum-name"><?php echo $title?></h2>
-					<div class="" id="forum-date"><?php echo 'Created: '.$date ?></div>
-					<p id="description"><?php echo $desc ?></p>
-					<p id="subscriber-count"><?php echo $subcount ?> Subscribers.</p>
+					<h2 id="forum-name"><?php if($fetch){ echo $title;}?></h2>
+					<div class="" id="forum-date"><?php if($fetch){echo 'Created: '.$date;} ?></div>
+					<p id="description"><?php if($fetch){echo $desc;} ?></p>
+					<p id="subscriber-count"><?php if($fetch){echo $subcount;} ?> Subscribers.</p>
 					<p id="users-count">1 Users here now.</p>
 				</div>
 			</div>
