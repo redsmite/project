@@ -5,6 +5,7 @@ addSidebar();
 addLogin();
 setupCookie();
 updateStatus();
+chattab();
 require_once'connection.php';
 $name=$_GET['name'];
 ?>
@@ -90,7 +91,7 @@ $page_rows = 8;
 
 
 
-$sql="SELECT user1,user2,friendsince,username,imgpath,lastonline FROM tblfriend
+$sql="SELECT friendsince,username,imgpath,lastonline FROM tblfriend
 LEFT JOIN tbluser
 	ON userid=user1 or userid=user2
  WHERE (user1='$id' or user2='$id') AND accepted=2 AND userid!='$id'
@@ -98,8 +99,6 @@ LEFT JOIN tbluser
 
 $result=$conn->query($sql);
 while($rows=$result->fetch_object()){
-$user1=$rows->user1;
-$user2=$rows->user2;
 $since=date("M j, Y", strtotime($rows->friendsince));
 $online=$rows->lastonline;
 $time=time();

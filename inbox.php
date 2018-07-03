@@ -11,6 +11,7 @@ if(isset($_GET['name'])){
 }
 addSidebar();
 setupCookie();
+chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,11 +210,6 @@ while($row=$result->fetch_object()){
 	<!-- End of Container -->
 	</div>
 	<script src="js/main.js"></script>
-	<script>
-		modal();
-		ajaxLogin();
-		ajaxinbox();
-	</script>
 </body>
 </html>
 <?php

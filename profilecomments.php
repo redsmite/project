@@ -5,6 +5,7 @@ addSidebar();
 addLogin();
 setupCookie();
 updateStatus();
+chattab();
 require_once'connection.php';
 $name=$_GET['name'];
 ?>

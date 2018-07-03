@@ -5,6 +5,7 @@ require_once'connection.php';
 user_access();
 adminaccess();
 admingoback();
+chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">

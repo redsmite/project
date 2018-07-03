@@ -36,6 +36,7 @@
 	addSidebar();
 	addLogin();
 	setupCookie();
+	chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -294,6 +294,60 @@ function search_function(){
 	';
 }
 
+function chattab(){
+	if(isset($_SESSION['id'])){
+	$id=$_SESSION['id'];
+
+	$conn = new mysqli('localhost','root','','itsproject');
+	
+
+	$sql="SELECT username,imgpath,lastonline FROM tblfriend
+	LEFT JOIN tbluser
+		ON userid=user1 or userid=user2
+	WHERE (user1='$id' or user2='$id') AND accepted=2 AND userid!='$id'
+ 	ORDER BY lastonline DESC";
+ 	$result=$conn->query($sql);
+
+		echo'
+		<div id="chat-tab" onclick="showChatPanel()">
+			<div class="online"></div>
+			<span>Chat</span>
+		</div>
+		<div id="chat-modal" onclick="hideChatPanel()">
+		</div>
+		<div id="chat-panel">
+			<div id="chat-panel-body">
+				<ul>';
+	while($row=$result->fetch_object()){
+ 		$name=$row->username;
+ 		$img=$row->imgpath;
+ 		$online=$row->lastonline;
+ 		$time=time();
+
+ 		echo '<a href="inbox.php?name='.$name.'"><li>
+ 		<div class="chat-panel-tn">
+ 			<img src="'.$img.'">
+ 		</div>';
+ 		if($time-strtotime($online)< 300){
+			echo'<div class="online"></div>';
+		} else{
+			echo'<div class="offline"></div>';
+		}
+ 		echo $name
+ 		.'</li></a>';
+ 	}
+			echo'
+				</ul>
+			</div>
+			<div id="chat-bottom">
+				<form id="chat-search-form">
+					<i class="fas fa-search"></i><input type="text" id="chat-search" onkeyup="searchChat()" autocomplete="off" placeholder="Search friend...">
+				</form>
+			</div>
+		</div>';
+	}
+}
+
 function reportuser(){
 	if(isset($_SESSION['id'])){
 	echo'

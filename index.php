@@ -6,6 +6,7 @@
 	addLogin();
 	setupCookie();
 	updateStatus();
+	chattab();
 	if(isset($_SESSION['id'])){
 		$uid = $_SESSION['id'];
 	}
@@ -57,7 +58,7 @@
 						?>
 					</div><br>
 					<div id="list-container">
-						<h2>Recent Posts</h2>
+						<h2>All Forum Posts</h2>
 						<ul id="forum-list">
 <?php
 $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost

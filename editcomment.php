@@ -11,6 +11,7 @@ if($_GET['this']!=$_SESSION['id']){
 addSidebar();
 addLogin();
 setupCookie();
+chattab();
 	
 $id= $_GET['id'];
 $name= $_GET['name'];

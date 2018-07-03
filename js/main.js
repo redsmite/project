@@ -869,6 +869,47 @@ function botreply(message,name){
 	}
 }
 
+function showChatPanel(){
+	let modal = document.getElementById('chat-modal');
+	let panel = document.getElementById('chat-panel');
+
+	modal.style.display='block';
+	panel.style.display='block';
+}
+
+function hideChatPanel(){
+	let modal = document.getElementById('chat-modal');
+	let panel = document.getElementById('chat-panel');
+
+	modal.style.display='none';
+	panel.style.display='none';
+}
+
+function searchChat(){
+	let form = document.getElementById('chat-search-form');
+	form.addEventListener('submit', stop);
+
+	var myRequest = new XMLHttpRequest();
+	var url = 'searchprocess.php';
+	var search = document.getElementById('chat-search').value;
+
+	var formData = "chatsearch="+search;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		document.getElementById('chat-panel-body').innerHTML = response;			
+		
+	}
+	myRequest.send(formData);
+
+	function stop(e){
+		e.preventDefault();		
+	}
+}
+
 // Admin Panel
 
 function sendAllUser(){

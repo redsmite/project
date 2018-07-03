@@ -7,6 +7,7 @@ addLogin();
 setupCookie();
 updateStatus();
 adminpanelAccess();
+chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">

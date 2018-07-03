@@ -48,7 +48,7 @@ addSidebar();
 addLogin();
 setupCookie();
 updateStatus();
-
+chattab();
 
 ?>
 <!DOCTYPE html>

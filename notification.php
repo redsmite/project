@@ -6,6 +6,7 @@ addSidebar();
 setupCookie();
 user_access();
 updateStatus();
+chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">

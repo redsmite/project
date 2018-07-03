@@ -64,6 +64,7 @@
 	addLogin();
 	setupCookie();
 	reportuser();
+	chattab();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,9 +103,9 @@
 							</h1>
 							<h3>Joined: '.$datecreated.'</h3>';
 							if($time-strtotime($online)< 300){
-								echo'<h5><font color="green"><div id="online"></div>Online</font></h5>';
+								echo'<h5><font color="green"><div class="online"></div>Online</font></h5>';
 							} else{
-								echo'<h3><div id="offline"></div>Last Online: '.time_elapsed_string($online).'</h3>';
+								echo'<h3><div class="offline"></div>Last Online: '.time_elapsed_string($online).'</h3>';
 							}
 
 							if($usertype==1){

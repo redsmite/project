@@ -899,7 +899,7 @@ body{
 	border-bottom:1px solid var(--darkgray);
 }
 
-#online{
+.online{
 	display: inline-block;
 	padding:5px;
 	margin-right: 2px;
@@ -908,7 +908,7 @@ body{
 	background: green;
 }
 
-#offline{
+.offline{
 	display: inline-block;
 	padding:5px;
 	margin-right: 2px;
@@ -1408,6 +1408,65 @@ body{
 	color:var(--primary-color);
 }
 
+#chat-tab{
+	position:fixed;
+	z-index: 2;
+	right: 0;
+	bottom: 0;
+	width: 150px;
+	height: 25px;
+	background: var(--gray);
+	border: 1px solid var(--dark-color);
+	cursor: pointer;
+	padding: 2px 10px;
+}
+
+#chat-panel{
+	display: none;
+	position:fixed;
+	z-index: 2;
+	right: 0;
+	bottom: 30px;
+	width: 250px;
+	height: 75%;
+	background: var(--gray);
+	border: 1px solid var(--dark-color);
+	padding: 1px 2px;
+}
+
+#chat-panel-body{
+	height: 92%;
+	overflow-y: auto;
+}
+
+#chat-panel-body li{
+	list-style: none;
+}
+
+#chat-panel-body a{
+	font-size: 20px;
+	color: var(--dark-color);
+	text-decoration: none;
+	padding-right: 20px;
+}
+
+.chat-panel-tn{
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	overflow:hidden;
+	float: left;
+}
+
+.chat-panel-tn img{
+	max-width:100%;
+}
+
+#chat-bottom input{
+	width: 90%;
+	height: 30px;
+}
+
 /* Search */
 
 .search-ul li{
@@ -1753,7 +1812,7 @@ body{
 	padding: 10px;
 }
 
-#new-forum-modal,#new-post-modal{
+#new-forum-modal,#new-post-modal,#chat-modal{
 	display:none;
 	position: fixed;
 	top:0;

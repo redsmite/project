@@ -4,6 +4,7 @@ include'connection.php';
 include'functions.php';
 user_access();
 updateStatus();
+chattab();
 
 if(!isset($_GET['id'])){
 	die('This forum doesn\'t exists.');

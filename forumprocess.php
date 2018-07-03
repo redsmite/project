@@ -212,7 +212,7 @@ if(isset($_POST['taball'])){
 	$uid = $_SESSION['id'];
 	}
 
-	echo '<h2>Recent Posts</h2>
+	echo '<h2>All Forum Posts</h2>
 	<ul id="forum-list">';
 
 	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
