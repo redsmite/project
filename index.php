@@ -46,8 +46,19 @@
 					<p>None...</p>
 				</div>
 				<div class="content-body">
-					<h2>Recent Posts</h2>
-					<ul id="forum-list">
+					<div class="tab-control">
+						<a id="tab1" onclick="showallforum()">All</a>
+						<?php
+						if(isset($_SESSION['id'])){
+							echo'<a id="tab2" onclick="showsubforum()">Subscribed</a>';
+							}else{
+							echo'<a id="tab2" onclick="showlogin()">Subscribed</a>';
+							}
+						?>
+					</div><br>
+					<div id="list-container">
+						<h2>Recent Posts</h2>
+						<ul id="forum-list">
 <?php
 $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
 	LEFT JOIN tblforum
@@ -115,11 +126,11 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		}else{
 			echo'
 		<div class="vote">
- 			<div class="upvote">
+ 			<div class="upvote" onclick="showlogin()">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
-			<div class="downvote">
+			<div class="downvote" onclick="showlogin()">
 			<i class="fas fa-sort-down"></i>
 		</div>
 		</div>';
@@ -133,7 +144,8 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		</li>';
 	}
 ?>
-				</ul>
+					</ul>
+				</div>
 				</div>
 				<div class="sidebar">
 					<h3>Newest Users</h3>
@@ -223,6 +235,9 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 	</div>
 	<script src="js/main.js"></script>
 	<script>
+		let tab1 = document.getElementById('tab1');
+		tab1.classList.add('style-tab');
+
 		modal();
 		ajaxLogin();
 	</script>

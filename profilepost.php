@@ -30,7 +30,9 @@ $name=$_GET['name'];
 
 <ul id="forum-list">
 <?php
-$uid = $_SESSION['id'];
+if(isset($_SESSION['id'])){
+	$uid = $_SESSION['id'];
+}
 
 $sql="SELECT userid FROM tbluser WHERE username='$name'";
 $result=$conn->query($sql);
@@ -159,11 +161,11 @@ if($last != 1){
 		}else{
 			echo'
 		<div class="vote">
- 			<div class="upvote">
+ 			<div class="upvote" onclick="showlogin()">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
-			<div class="downvote">
+			<div class="downvote" onclick="showlogin()">
 			<i class="fas fa-sort-down"></i>
 		</div>
 		</div>';

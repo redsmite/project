@@ -348,9 +348,9 @@ function forumcontrols(){
 			<div id="subscribe" value="'.$forums.'" onclick="subscribeForum(this)">';
 				
 				if($count==0){
-					echo'<h3>Subscribe</h3>';
+					echo'<h3><i class="far fa-heart"></i> Subscribe</h3>';
 				}else{
-					echo'<h3>Unsubscribe</h3>';
+					echo'<h3><i class="fas fa-heart"></i> Unsubscribe</h3>';
 				}
 			echo'</div>
 			<div id="new-forum-modal" onclick="closeNewForum()"></div>

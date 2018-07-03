@@ -1046,12 +1046,68 @@ function checkedreport(clicked){
 
 	myRequest.onload = function(){
 		var response= this.responseText;
-		console.log(response);
 	}
 	myRequest.send(formData);
 }
 
 // Forums
+
+function showlogin(){
+	let login = document.getElementById('simpleModal');
+	login.style.display='block';
+}
+
+function showallforum(){
+	let tab1 = document.getElementById('tab1');
+	let tab2 = document.getElementById('tab2');
+	let body = document.getElementById('list-container');
+	
+	tab1.classList.add('style-tab');
+	tab2.classList.remove('style-tab');
+
+	var myRequest = new XMLHttpRequest();
+
+	var url = 'forumprocess.php';
+
+	let taball = 'all';
+
+	var formData = "taball="+taball;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		body.innerHTML = response;
+	}
+	myRequest.send(formData);
+}
+
+function showsubforum(){
+	let tab1 = document.getElementById('tab1');
+	let tab2 = document.getElementById('tab2');	
+	let body = document.getElementById('list-container');
+
+	tab1.classList.remove('style-tab');
+	tab2.classList.add('style-tab');
+
+	var myRequest = new XMLHttpRequest();
+
+	var url = 'forumprocess.php';
+
+	let tabsub = 'sub';
+
+	var formData = "tabsub="+tabsub;
+	
+	myRequest.open('POST', url ,true);
+	myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+	myRequest.onload = function(){
+		var response= this.responseText;
+		body.innerHTML = response;
+	}
+	myRequest.send(formData);
+}
 
 function createNewForum(){
 	let modal = document.getElementById('new-forum-modal');
@@ -1155,10 +1211,10 @@ function newPostForm(){
 
 function subscribeForum(clicked){
 	let subscribe = document.getElementById('subscribe');
-	if (subscribe.innerHTML=='<h3>Subscribe</h3>'){
-		subscribe.innerHTML='<h3>Unsubscribe</h3>';
+	if (subscribe.innerHTML=='<h3><i class="far fa-heart"></i> Subscribe</h3>'){
+		subscribe.innerHTML='<h3><i class="fas fa-heart"></i> Unsubscribe</h3>';
 	}else{
-		subscribe.innerHTML='<h3>Subscribe</h3>'
+		subscribe.innerHTML='<h3><i class="far fa-heart"></i> Subscribe</h3>'
 	}
 
 	var myRequest = new XMLHttpRequest();

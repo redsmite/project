@@ -67,7 +67,7 @@ if($creator!=$uid){
 						<textarea name="forum-desc" id="forum-desc" required><?php echo $desc ?></textarea>
 					</div>
 					<div>
-						<input type="submit" name="forum-submit">
+						<input type="submit" value="submit" name="forum-submit">
 <?php
 	if(isset($_POST['forum-submit'])){
 		$title = $_POST['forum-title'];

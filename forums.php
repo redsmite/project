@@ -180,14 +180,14 @@ if($last != 1){
 			echo'
 		</div>';
 
-		}else{
+		}else{		
 			echo'
 		<div class="vote">
- 			<div class="upvote">
+ 			<div class="upvote" onclick="showlogin()">
 			<i class="fas fa-sort-up"></i>
 			</div>
 			<div>'.$score.'</div>
-			<div class="downvote">
+			<div class="downvote" onclick="showlogin()">
 			<i class="fas fa-sort-down"></i>
 		</div>
 		</div>';
@@ -218,8 +218,10 @@ if($last != 1){
 
 							echo'Creator: <a class="creator" href=
 							profile.php?='.$creator.'">'.$creator.'</a>';
-							if($creator==$_SESSION['name']){
-								echo'<br><a class="forum-panel-button" href="forumpanel.php?id='.$forums.'">Forum Panel</a>';
+							if(isset($_SESSION['id'])){
+								if($creator==$_SESSION['name']){
+									echo'<br><a class="forum-panel-button" href="forumpanel.php?id='.$forums.'">Forum Panel</a>';
+								}
 							}
 						}
 					?>
