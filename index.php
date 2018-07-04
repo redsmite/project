@@ -33,7 +33,7 @@
 				<div class="showcase-content">
 					<div class="showcase-container">
 						<h1>Welcome to RainbowDream</h1>
-						<p>This is a website where farmers, breeders or craftsman sell their goods and stuff.</p><br>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet omnis ut qui, aspernatur neque unde velit officia molestias nostrum?</p><br>
 						<p><a href="about.php">Read More</a></p>
 					</div>
 				</div>
@@ -43,8 +43,25 @@
 		<div class="main-content">
 			<div class="main-content-grid">
 				<div class="announcement">
-					<h2>Announcements</h2>
-					<p>None...</p>
+					<h2><i class="fas fa-bullhorn"></i> Announcement</h2>
+<?php
+$sql="SELECT title,content,t1.datecreated,username FROM tblannouncement AS t1
+LEFT JOIN tbluser
+	ON userid = author
+ORDER BY announceid DESC
+LIMIT 1";
+$result= $conn->query($sql);
+while($row=$result->fetch_object()){
+	$title = $row->title;
+	$content = $row->content;
+	$date = date('D, F j Y g:i A',strtotime($row->datecreated));
+	$author = $row->username;
+
+	echo '<h1>'.$title.'</h1>
+	<p>Posted on: '.$date.' by: <a href="profile.php?name='.$author.'">'.$author.'</a></p>
+	<div class="announce-content">'.nl2br($content).'</div>';
+}
+?>
 				</div>
 				<div class="content-body">
 					<div class="tab-control">

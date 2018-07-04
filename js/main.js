@@ -987,9 +987,6 @@ function showSendAllTab(){
 	body3.style.display='block';
 }
 
-tab1.classList.add('style-tab');
-tab2.classList.remove('style-tab');
-
 function sendAllUser(){
 	var form = document.getElementById('sendtoallform');
 	form.addEventListener('submit', postName);
@@ -1138,7 +1135,7 @@ function reportuser(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			if(response){
-				alert('Your report is sent for review, thank you.');
+				alert('Your report has been sent for review, thank you.');
 				removeSpinners();
 				hidereport();
 			}
@@ -1167,6 +1164,36 @@ function checkedreport(clicked){
 		var response= this.responseText;
 	}
 	myRequest.send(formData);
+}
+
+function sendAnnounce(){
+	let form = document.getElementById('announce-form');
+	form.addEventListener('submit',sendthis);
+
+	function sendthis(e){
+		e.preventDefault();
+
+		var myRequest = new XMLHttpRequest();
+
+		var url = 'adminprocess.php';
+
+		let title = document.getElementById('announce-title').value;
+		let content = document.getElementById('announce-content').value;
+		let author = document.getElementById('announce-author').value;
+
+		var formData = "title="+title+"&content="+content+"&author="+author;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			console.log(response);
+			form.reset();
+			alert('Your announcement has been sent to the home page');
+		}
+		myRequest.send(formData);		
+	}
 }
 
 // Forums

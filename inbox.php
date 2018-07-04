@@ -69,7 +69,6 @@ if($Rimage==''){
 
 			echo'<div class="right-inbox" style="background:url('.$Rimage.');
 	background-position:center;
-	background-size:cover;
 	background-repeat:no-repeat;
 	background-attachment: fixed;">';
 
@@ -206,8 +205,9 @@ while($row=$result->fetch_object()){
 			</div>
 		<div class="inbox-div"> <p class="inbxmsg">'.createlink(nl2br($message)).'</p></div>
 		<a class="reply" href="inbox.php?name='.$Sname.'#main-footer">Show Conversation</a>
-		</div>';
+		</div>
 
+		<script src="js/main.js"></script>';
 	}
 }
 		?>
@@ -218,7 +218,6 @@ while($row=$result->fetch_object()){
 		?>
 	<!-- End of Container -->
 	</div>
-	<script src="js/main.js"></script>
 </body>
 </html>
 <?php

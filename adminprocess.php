@@ -109,4 +109,15 @@ if(isset($_POST['check'])){
 
 	echo 'oke-oke-okay';
 }
+
+if(isset($_POST['title'])){
+	$title = $conn->real_escape_string($_POST['title']);
+	$content = $conn->real_escape_string($_POST['content']);
+	$author = $_POST['author'];
+
+	$sql = "INSERT INTO tblannouncement (title,content,author,datecreated) VALUES ('$title','$content','$author',NOW())";
+	$result = $conn->query($sql);
+	echo $sql;
+
+}
 ?>

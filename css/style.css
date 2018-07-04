@@ -605,8 +605,25 @@ body{
 	grid-area:announcement;
 	min-height: 50vh;
 	border-bottom: 1px solid var(--darkgray);
-	padding: 10px;
-	background: var(--gray);
+	text-align: center;
+}
+
+.announcement a{
+	background: var(--primary-color);
+	color: var(--light-color);
+	padding: 2px 5px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.announce-content{
+	display: block;
+	margin: 0 auto;
+	width: 95%;
+	background: var(--light-color);
+	color: var(--dark-color);
+	border: 1px solid var(--dark-color);
+	border-radius: 8px;
 }
 
 .content-body{
@@ -1639,6 +1656,11 @@ body{
 
 #announcement-div{
 	display: none;
+}
+
+#announce-content{
+	width:80%;
+	height:300px;
 }
 
 /* Report User */

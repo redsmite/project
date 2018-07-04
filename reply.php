@@ -168,7 +168,7 @@ chattab();
 					forumcontrols();
 				?>
 				<div class="forum-panel">
-					<p>This Post was submitted on: 
+					<p>This Post was submitted on:<br>
 					<b><?php if($fetch){echo date("M j, Y", strtotime($pdate));}?></b></p>
 					<?php
 	// Getting post score

@@ -157,6 +157,22 @@ if($last != 1){
 			</div>
 			<div id="announcement-div">
 				<h3>Announcement</h3>
+				<div class="edit-form">
+					<form id="announce-form">
+						<div>
+							<p>Title:</p>
+							<input required type="text" id="announce-title">
+						</div>
+						<div>
+							<p>Content:</p>
+							<textarea required id="announce-content"></textarea>
+						</div>
+						<div>
+							<input type="submit" value="submit">
+						</div>
+						<input type="hidden" id="announce-author" value="<?php echo $_SESSION['id']?>">
+					</form>
+				</div>
 			</div>
 			</div>
 		</div>
@@ -170,6 +186,7 @@ if($last != 1){
 	<script>
 		sendAllUser();
 		showReportTab();
+		sendAnnounce();
 	</script>
 </body>
 </html>
