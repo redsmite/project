@@ -56,13 +56,22 @@ if($name!=$_SESSION['name']){
 			</div>';
 
 //Show Conversation
-			echo'<div class="right-inbox">';
 $id=$_SESSION['id'];
 
-$Rquery="SELECT userid FROM tbluser WHERE username='$name'";
+$Rquery="SELECT userid,imgpath FROM tbluser WHERE username='$name'";
 $result=$conn->query($Rquery);
 $row=$result->fetch_object();
 $Rid=$row->userid;
+$Rimage=$row->imgpath;
+if($Rimage==''){
+	$Rimage='img/default.png';
+}
+
+			echo'<div class="right-inbox" style="background:url('.$Rimage.');
+	background-position:center;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-attachment: fixed;">';
 
 $sql="SELECT username,imgpath,message,pmdate FROM tblpm
 LEFT JOIN tbluser

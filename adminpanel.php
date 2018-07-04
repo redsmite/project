@@ -26,10 +26,15 @@ chattab();
 	?>
 	<!-- Admin Panel -->
 		<div class="other-content">
-			<h3>Admin Panel</h3>
 			<h1><i class="fas fa-unlock-alt"></i> Hello <?php echo $_SESSION['name']?></h1>
-
-			<div class="edit-form">
+			<div id="admin-tab">
+				<a id="report-tab" onclick="showReportTab()">Reports</a>
+				<a id="announcement-tab" onclick="showAnnouncementTab()">Announcement</a>
+				<a id="sendall-tab" onclick="showSendAllTab()">Message</a>
+			</div>
+			<div id="admin-body">
+			<div id="sendall-div">
+				<div class="edit-form">
 				<form id='sendtoallform'>
 					<center>
 					<h3>Send message to all users</h3>
@@ -41,15 +46,9 @@ chattab();
 					</div>
 					</center>
 				</form>
+				</div>
 			</div>
-			<div class="get-users-div">
-				<h1>Get User</h1>
-				<input type="text" onkeyup="fetchUser()" id="get-user">
-			</div>
-			<div id="fetch">
-				<div onclick="resetfetch()" class="closethis"><a><i class="fas fa-times"></i></a></div>
-			</div>
-			<div class="admin-reports">
+			<div id="admin-reports">
 			<ul class="reportlist">
 <?php
 	$sql = "SELECT reportid FROM tblreport";
@@ -85,24 +84,24 @@ $paginationCtrls = '';
 if($last != 1){
 	if ($pagenum > 1) {
         $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';
 		// Render clickable number links that should appear on the left of the target page number
 		for($i = $pagenum-4; $i < $pagenum; $i++){
 			if($i > 0){
-		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'pn='.$i.'">'.$i.'</a> &nbsp; ';
+		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'">'.$i.'</a> &nbsp; ';
 			}
 	    }
     }
     $paginationCtrls .= ''.$pagenum.' &nbsp; ';
 	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'pn='.$i.'">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
 			break;
 		}
 	}
 	    if ($pagenum != $last) {
         $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'pn='.$next.'">Next</a> ';
+        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'">Next</a> ';
     }
 }
  echo'<h2>  '.$textline1.'</h2>
@@ -148,6 +147,18 @@ if($last != 1){
 ?>
 			</ul>
 		</div>
+
+			<div id="get-users-div">
+				<h1>Get User</h1>
+				<input type="text" onkeyup="fetchUser()" id="get-user">
+			</div>
+			<div id="fetch">
+				<div onclick="resetfetch()" class="closethis"><a><i class="fas fa-times"></i></a></div>
+			</div>
+			<div id="announcement-div">
+				<h3>Announcement</h3>
+			</div>
+			</div>
 		</div>
 	<!-- Footer -->
 		<?php
@@ -158,6 +169,7 @@ if($last != 1){
 	<script src="js/main.js"></script>
 	<script>
 		sendAllUser();
+		showReportTab();
 	</script>
 </body>
 </html>

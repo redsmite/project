@@ -917,7 +917,7 @@ body{
 	background: var(--darkgray);
 }
 
-#user-mod{
+#user-bot{
 	padding: 5px;
 	background: coral;
 	color:var(--light-color);
@@ -1493,8 +1493,32 @@ body{
 
 /* Admin */
 
-.get-users-div{
-	display: block;
+#admin-tab{
+	margin-top: 10px;
+}
+
+#admin-tab a{
+	padding:5px 10px;
+	border: 1px solid var(--dark-color);
+	font-weight: bold;
+	margin: 5px;
+	cursor: pointer;
+}
+
+#admin-body{
+	margin-top: 20px;
+	border:1px solid var(--dark-color);
+	border-radius: 8px;
+	padding: 5px;
+	min-height: 80vh;
+}
+
+#sendall-div{
+	display: none;
+}
+
+#get-users-div{
+	display: none;
 	margin-left: auto;
 	margin-right: auto;
 	background: var(--lime);
@@ -1505,14 +1529,14 @@ body{
 	border-radius: 8px;
 }
 
-.get-users-div input{
+#get-users-div input{
 	height:30px;
 	width: 80%;
 	border-radius: 5px;
 }
 
 #fetch{
-	display:block;
+	display: none;
 	margin-left: auto;
 	margin-right: auto;
 	background: var(--facebookblue);
@@ -1565,8 +1589,8 @@ body{
 	color: green;
 }
 
-.admin-reports{
-	display: block;
+#admin-reports{
+	display: none;
 	margin: 0 auto;
 	text-align: center;
 	width: 80vw;
@@ -1611,6 +1635,10 @@ body{
 .reportlist li:hover{
 	background: var(--darkgray);
 	color: var(--light-color);
+}
+
+#announcement-div{
+	display: none;
 }
 
 /* Report User */
@@ -1995,7 +2023,7 @@ body{
 		width:100%;
 	}
 
-	.get-users-div{
+	#get-users-div{
 		width:80%;
 	}
 
@@ -2079,7 +2107,7 @@ body{
 		width:280px;
 	}
 
-	.get-users-div{
+	#get-users-div{
 		width:95%;
 	}
 }

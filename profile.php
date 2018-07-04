@@ -111,7 +111,7 @@
 							if($usertype==1){
 								//Nothing
 							}else if ($usertype==2){
-								echo'<p id="user-mod">Moderator</p>';
+								echo'<p id="user-bot">Bot</p>';
 							}else if ($usertype==3){
 								echo'<p id="user-dbadmin">DB Admin</p>';
 							}else if ($usertype==4){

@@ -873,8 +873,13 @@ function showChatPanel(){
 	let modal = document.getElementById('chat-modal');
 	let panel = document.getElementById('chat-panel');
 
-	modal.style.display='block';
-	panel.style.display='block';
+	if(panel.style.display=='block'){
+		modal.style.display='none';
+		panel.style.display='none';
+	}else{
+		modal.style.display='block';
+		panel.style.display='block';
+	}
 }
 
 function hideChatPanel(){
@@ -911,6 +916,79 @@ function searchChat(){
 }
 
 // Admin Panel
+
+function showReportTab(){
+	let tab1 = document.getElementById('report-tab');
+	let tab2 = document.getElementById('announcement-tab');
+	let tab3 = document.getElementById('sendall-tab');
+
+	let body1 = document.getElementById('admin-reports');
+	let body1a = document.getElementById('get-users-div');
+	let body1b = document.getElementById('fetch');
+	let body2 = document.getElementById('announcement-div');
+	let body3 = document.getElementById('sendall-div');
+
+
+	tab1.classList.add('style-tab');
+	tab2.classList.remove('style-tab');	
+	tab3.classList.remove('style-tab');
+
+	body1.style.display='block';
+	body1a.style.display='block';
+	body1b.style.display='block';
+	body2.style.display='none';
+	body3.style.display='none';
+}
+
+function showAnnouncementTab(){
+	let tab1 = document.getElementById('report-tab');
+	let tab2 = document.getElementById('announcement-tab');
+	let tab3 = document.getElementById('sendall-tab');
+
+	let body1 = document.getElementById('admin-reports');
+	let body1a = document.getElementById('get-users-div');
+	let body1b = document.getElementById('fetch');
+	let body2 = document.getElementById('announcement-div');
+	let body3 = document.getElementById('sendall-div');
+
+
+	tab1.classList.remove('style-tab');
+	tab2.classList.add('style-tab');	
+	tab3.classList.remove('style-tab');
+
+	body1.style.display='none';
+	body1a.style.display='none';
+	body1b.style.display='none';
+	body2.style.display='block';
+	body3.style.display='none';
+}
+
+function showSendAllTab(){
+	let tab1 = document.getElementById('report-tab');
+	let tab2 = document.getElementById('announcement-tab');
+	let tab3 = document.getElementById('sendall-tab');
+
+	let body1 = document.getElementById('admin-reports');
+	let body1a = document.getElementById('get-users-div');
+	let body1b = document.getElementById('fetch');
+	let body2 = document.getElementById('announcement-div');
+	let body3 = document.getElementById('sendall-div');
+
+
+	tab1.classList.remove('style-tab');
+	tab2.classList.remove('style-tab');	
+	tab3.classList.add('style-tab');
+
+
+	body1.style.display='none';
+	body1a.style.display='none';
+	body1b.style.display='none';
+	body2.style.display='none';
+	body3.style.display='block';
+}
+
+tab1.classList.add('style-tab');
+tab2.classList.remove('style-tab');
 
 function sendAllUser(){
 	var form = document.getElementById('sendtoallform');
@@ -1060,7 +1138,7 @@ function reportuser(){
 		myRequest.onload = function(){
 			var response= this.responseText;
 			if(response){
-				alert('Your report has been sent for review, thank you.');
+				alert('Your report is sent for review, thank you.');
 				removeSpinners();
 				hidereport();
 			}
