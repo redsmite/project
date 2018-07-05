@@ -203,6 +203,11 @@ if(isset($_POST['downvote'])){
 		$result= $conn->query($sql);
 		$row = $result->fetch_object();
 		$score = $row->score;
+
+		if($score<0){
+ 			$score=0;
+ 		}
+
 		echo $score;
 	}
 }
@@ -215,7 +220,7 @@ if(isset($_POST['taball'])){
 	echo '<h2>All Forum Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -239,7 +244,10 @@ if(isset($_POST['taball'])){
 		$score = $row->score;
 		$upvote = $row->upvoteid;
 		$downvote = $row->downvoteid;
-
+		$flair= $row->imgpath;
+		if(!$flair){
+			$flair='img/default.png';
+		}
 
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
@@ -256,22 +264,25 @@ if(isset($_POST['taball'])){
  		<div class="vote">';
  			
  			if(!$upvote){
- 			echo'<div id="up-'.$id.'" style="color:black;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:gray;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}else{
- 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}
 			
-
+ 			if($score<0){
+ 				$score=0;
+ 			}
 			echo'
 			<div id="score-'.$id.'">'.$score.'</div>';
 			
+
 			if(!$downvote){
 			echo'
-			<div id="down-'.$id.'" style="color:black;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			<div id="down-'.$id.'" style="color:gray;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}else{
 			echo'
-			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}
 
@@ -281,19 +292,44 @@ if(isset($_POST['taball'])){
 		}else{
 			echo'
 		<div class="vote">
- 			<div class="upvote" onclick="showlogin()">
-			<i class="fas fa-sort-up"></i>
-			</div>
-			<div>'.$score.'</div>
-			<div class="downvote" onclick="showlogin()">
-			<i class="fas fa-sort-down"></i>
+ 			<div class="upvote" style="color:gray;" onclick="showlogin()">
+			<i class="far fa-thumbs-up"></i>
+			</div>';
+			
+ 			if($score<0){
+ 				$score=0;
+ 			}
+			echo'<div>'.$score.'</div>
+			<div class="downvote" style="color:gray;" onclick="showlogin()">
+			<i class="far fa-thumbs-down"></i>
 		</div>
 		</div>';
 		}
 		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
-		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
-		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		
+		<div class="second-line">
+
+			<div class="from">
+				From: <a href="forums.php?id='.$forumid.'">
+				'.$forum.'</a> By: 
+			</div>
+
+			<div class="by">
+				<a href="profile.php?name='.$name.'">
+				<p><div class="flair">
+					<img src="'.$flair.'">
+				</div>'.$name.'</a> 
+			</div>
+
+			<div class="when">
+				'.time_elapsed_string($date).'
+			</div>
+
+		</div>
+		<div class="com">
+			<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		</div>
 		</div>
 		</div>
 		</li>';
@@ -307,7 +343,7 @@ if(isset($_POST['tabsub'])){
 	echo '<h2>Subscribed Forum Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -333,8 +369,10 @@ if(isset($_POST['tabsub'])){
 		$score = $row->score;
 		$upvote = $row->upvoteid;
 		$downvote = $row->downvoteid;
-
-
+		$flair= $row->imgpath;
+		if(!$flair){
+			$flair='img/default.png';
+		}
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
 //login'd user can only vote
@@ -350,22 +388,25 @@ if(isset($_POST['tabsub'])){
  		<div class="vote">';
  			
  			if(!$upvote){
- 			echo'<div id="up-'.$id.'" style="color:black;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:gray;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}else{
- 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="fas fa-sort-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}
 			
-
+ 			if($score<0){
+ 				$score=0;
+ 			}
 			echo'
 			<div id="score-'.$id.'">'.$score.'</div>';
 			
+
 			if(!$downvote){
 			echo'
-			<div id="down-'.$id.'" style="color:black;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			<div id="down-'.$id.'" style="color:gray;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}else{
 			echo'
-			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="fas fa-sort-down"></i>
+			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}
 
@@ -375,19 +416,44 @@ if(isset($_POST['tabsub'])){
 		}else{
 			echo'
 		<div class="vote">
- 			<div class="upvote" onclick="showlogin()">
-			<i class="fas fa-sort-up"></i>
-			</div>
-			<div>'.$score.'</div>
-			<div class="downvote" onclick="showlogin()">
-			<i class="fas fa-sort-down"></i>
+ 			<div class="upvote" style="color:gray;" onclick="showlogin()">
+			<i class="far fa-thumbs-up"></i>
+			</div>';
+			
+ 			if($score<0){
+ 				$score=0;
+ 			}
+			echo'<div>'.$score.'</div>
+			<div class="downvote" style="color:gray;" onclick="showlogin()">
+			<i class="far fa-thumbs-down"></i>
 		</div>
 		</div>';
 		}
 		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
-		<p>From: <a href="forums.php?id='.$forumid.'">'.$forum.'</a> By:<a href="profile.php?name='.$name.'">'.$name.'</a> '.time_elapsed_string($date).'</p>
-		<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		
+		<div class="second-line">
+
+			<div class="from">
+				From: <a href="forums.php?id='.$forumid.'">
+				'.$forum.'</a> By: 
+			</div>
+
+			<div class="by">
+				<a href="profile.php?name='.$name.'">
+				<p><div class="flair">
+					<img src="'.$flair.'">
+				</div>'.$name.'</a> 
+			</div>
+
+			<div class="when">
+				'.time_elapsed_string($date).'
+			</div>
+
+		</div>
+		<div class="com">
+			<p>(<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$comments.' Comments</a>)</p>
+		</div>
 		</div>
 		</div>
 		</li>';

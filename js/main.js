@@ -1394,10 +1394,10 @@ function upvotepost(clicked){
 	let downvote = document.getElementById(downvoteid);
 	
 	if(upvote.style.color=='magenta'){
-		upvote.style.color='black';
-		downvote.style.color='black';
+		upvote.style.color='gray';
+		downvote.style.color='gray';
 	}else{
-		downvote.style.color='black';
+		downvote.style.color='gray';
 		upvote.style.color='magenta';
 	}
 
@@ -1433,11 +1433,11 @@ function downvotepost(clicked){
 	let downvote = document.getElementById(downvoteid);
 	
 	if(downvote.style.color=='cyan'){
-		downvote.style.color='black';
-		upvote.style.color='black';
+		downvote.style.color='gray';
+		upvote.style.color='gray';
 	}else{
 		downvote.style.color='cyan';
-		upvote.style.color='black';
+		upvote.style.color='gray';
 	}
 
 	var myRequest = new XMLHttpRequest();

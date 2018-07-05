@@ -14,6 +14,8 @@
 	--magenta:#ff00ff;
 	--lime:#32CD32;
 	--palegreen:#98fb98;
+	--maroon:#800000;
+	--blood-red:#8B0000;
 	/*	Blue-Orangered	*/
 	/*--primary-color:#FF4500;
 	--secondary-color:#778899;
@@ -592,7 +594,7 @@ body{
 	display:grid;
 	grid-template-columns: 3fr 1fr;
 	grid-template-areas: 
-	"announcement announcement"
+	"announcement advertisement"
 	"main sidebar2"
 	"main sidebar"
 	"main sidebar3";
@@ -603,13 +605,20 @@ body{
 
 .announcement{
 	grid-area:announcement;
-	min-height: 50vh;
-	border-bottom: 1px solid var(--darkgray);
+	border: 3px solid var(--dark-color);
 	text-align: center;
+	background: var(--primary-color);
+	box-shadow: 5px 10px var(--darkgray);
+	margin: 20px 5px 20px 5px;
+	border-radius: 8px;
+	width: 60%;
+	display: block;
+	margin: 0 auto;
+	padding:10px;
 }
 
 .announcement a{
-	background: var(--primary-color);
+	background: var(--dark-color);
 	color: var(--light-color);
 	padding: 2px 5px;
 	text-decoration: none;
@@ -624,12 +633,35 @@ body{
 	color: var(--dark-color);
 	border: 1px solid var(--dark-color);
 	border-radius: 8px;
+	padding:5px;
+}
+
+.advertisement{
+	grid-area:advertisement;
+}
+
+.advertisement-inner{
+	border: 1px solid var(--darkgray);
+	background: var(--dark-color);
+	color: var(--light-color);
+	height: 50vh;
+	width: 95%;
+	text-align: center;
+	padding-left:2px;
+	margin:10px;
+	overflow:hidden;
+	cursor:pointer;
+}
+
+.advertisement-inner img{
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .content-body{
 	grid-area: main;
 	padding:10px;
-	background: var(--light-color);
+	background: var(--gray);
 	border-left: 1px solid var(--darkgray);
 	border-right: 1px solid var(--darkgray);
 	border-bottom: 1px solid var(--darkgray);
@@ -648,7 +680,7 @@ body{
 	color: var(--light-color);
 }
 
-.announcement h2,.content-body h2{
+.content-body h2{
 	color:var(--primary-color);
 	margin:2px;
 }
@@ -1773,6 +1805,9 @@ body{
 	grid-area: vote;
 	width: 40px;
 	text-align: center;
+	border: 1px solid var(--darkgray);
+	padding:2px;
+	border-radius: 8px;
 }
 
 .vote i{
@@ -1785,6 +1820,27 @@ body{
 
 .post-right{
 	grid-area: post-right;
+}
+
+.from,.by,.when{
+	float:left;
+	padding-right: 5px;
+}
+
+.com{
+	clear:both;
+	float:left;
+}
+
+.flair{
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	overflow:hidden;
+}
+
+.flair img{
+	max-width: 100%;
 }
 
 .text-content{
@@ -1933,7 +1989,8 @@ body{
 
 .creator{
 	text-decoration: none;
-	color: var(--primary-color);
+	color: var(--dark-color);
+	font-weight: bold;
 }
 
 .forum-panel-button{
@@ -1947,6 +2004,11 @@ body{
 #forum-desc{
 	height:150px;
 	width:80%;
+}
+
+.star-system{
+	color: gold;
+	cursor: default;
 }
 
 /* Footer */
@@ -1997,7 +2059,12 @@ body{
 	}
 
 	.grid-header{
-		grid-template-columns: 2fr 2fr 1fr;
+		display: block;
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+		"title"
+		"login";
+		align-self: center;
 	}
 
 	.modal-content{
@@ -2018,6 +2085,7 @@ body{
 		grid-template-columns: 1fr;
 		grid-template-areas: 
 		"announcement"
+		"advertisement"
 		"main"
 		"sidebar2"
 		"sidebar"
@@ -2081,15 +2149,6 @@ body{
 		width:auto;
 		top:73px;
 		left:15px;
-	}
-	.grid-header{
-		display: block;
-		grid-template-columns: 1fr;
-		grid-template-areas: 
-		"title"
-		"nav"
-		"login";
-		align-self: center;
 	}
 	.subgrid{
 		display: block;
