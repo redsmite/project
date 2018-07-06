@@ -130,7 +130,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
  			if(!$upvote){
  			echo'<div id="up-'.$id.'" style="color:gray;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}else{
- 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:orangered;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}
 			
  			if($score<0){
@@ -146,7 +146,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 			</div>';
 			}else{
 			echo'
-			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
+			<div id="down-'.$id.'" style="color:blue;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}
 
@@ -170,9 +170,27 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		</div>';
 		}
 		echo'<div class="post-right">
-		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
+		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
-		<div class="second-line">
+			$sql3 = "SELECT upvoteid FROM tblupvotepost WHERE post='$id'";
+			$result3 = $conn->query($sql3);
+			$upvotecount = $result3->num_rows;
+
+			$sql4 = "SELECT downvoteid FROM tbldownvotepost WHERE post='$id'";
+			$result4 = $conn->query($sql4);
+			$downvotecount = $result4->num_rows;
+			
+			$total = $upvotecount + $downvotecount;
+			if ($total==0){
+				$upvotecount = 1;
+				$total = 2;
+			}
+			$percent = round($upvotecount/$total * 100);
+
+			starsystem($percent);
+
+
+		echo'<div class="second-line">
 
 			<div class="from">
 				From: <a href="forums.php?id='.$forumid.'">

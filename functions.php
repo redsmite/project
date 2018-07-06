@@ -456,6 +456,101 @@ function forumcontrols(){
 		}
 }
 
+function starsystem($percent){
+	echo'<div class="star-system" title="'.$percent.'% of voters likes this">';
+
+	if($percent>=98){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+	';
+	}else if($percent>=85 & $percent<98){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star-half"></i>
+	';
+	}else if($percent>=75 & $percent<85){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>	
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=65 & $percent<75){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star-half"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=55 & $percent<65){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=45 & $percent<55){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star-half"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=35 & $percent<45){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=25 & $percent<35){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="fas fa-star-half"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=15 & $percent<25){
+	echo'
+		<i class="fas fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent>=4 & $percent<15){
+	echo'
+		<i class="fas fa-star-half"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}else if($percent<4){
+	echo'
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+		<i class="far fa-star"></i>
+	';
+	}
+	echo'</div>';
+}
+
 function setupCookie(){
 	if(isset($_COOKIE['id'])){
 		$_SESSION['id'] = $_COOKIE['id'];

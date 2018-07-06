@@ -212,6 +212,9 @@ if($testR->num_rows!=0){
 						
 						$score =  $upcount - $downcount;
 
+						if($score<0){
+							$score = 0;
+						}
 						echo '<tr>
 						<th><a href="profilepost.php?name='.$name.'"><i class="fas fa-star"></i> Post Score:</a></th>
 						<th><a href="profilepost.php?name='.$name.'">'.$score.'</a></th>

@@ -605,16 +605,16 @@ body{
 
 .announcement{
 	grid-area:announcement;
-	border: 3px solid var(--dark-color);
 	text-align: center;
-	background: var(--primary-color);
+	border: 1px solid var(--dark-color);
 	box-shadow: 5px 10px var(--darkgray);
 	margin: 20px 5px 20px 5px;
 	border-radius: 8px;
-	width: 60%;
 	display: block;
 	margin: 0 auto;
 	padding:10px;
+	max-height: 280px;
+	overflow-y: auto;
 }
 
 .announcement a{
@@ -2008,7 +2008,13 @@ body{
 
 .star-system{
 	color: gold;
+	background: blue;
+	border: 1px solid var(--dark-color);
+	padding:2px;
+	border-radius: 8px;
 	cursor: default;
+	width: 120px;
+	text-align: center;
 }
 
 /* Footer */

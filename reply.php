@@ -113,7 +113,7 @@ chattab();
  			if(!$upvote){
  			echo'<div id="up-'.$id.'" style="color:gray;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}else{
- 			echo'<div id="up-'.$id.'" style="color:magenta;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:orangered;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}
 			
  			if($score<0){
@@ -129,7 +129,7 @@ chattab();
 			</div>';
 			}else{
 			echo'
-			<div id="down-'.$id.'" style="color:cyan;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
+			<div id="down-'.$id.'" style="color:blue;" value="'.$id.'" onclick="downvotepost(this)" class="downvote"><i class="far fa-thumbs-down"></i>
 			</div>';
 			}
 
@@ -184,7 +184,7 @@ chattab();
 ?>
 			</ul>
 			<div class="text-content">
-				<?php echo $pdesc ?>
+				<?php echo nl2br($pdesc) ?>
 			</div>
 			<div class="reply-form">
 				<form id="reply-submit">
@@ -226,102 +226,9 @@ chattab();
 		$total = 2;
 	}
 	$percent = round($upvotecount/$total * 100);
-
-	//5 Star System
-
-
-	echo'<div class="star-system" title="'.$percent.'% of voters likes this">';
-
-	if($percent>=98){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-	';
-	}else if($percent>=85 & $percent<98){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star-half"></i>
-	';
-	}else if($percent>=75 & $percent<85){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>	
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=65 & $percent<75){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star-half"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=55 & $percent<65){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=45 & $percent<55){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star-half"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=35 & $percent<45){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=25 & $percent<35){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="fas fa-star-half"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=15 & $percent<25){
-	echo'
-		<i class="fas fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent>=4 & $percent<15){
-	echo'
-		<i class="fas fa-star-half"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	';
-	}else if($percent<4){
-	echo'
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-		<i class="far fa-star"></i>
-	>';
-	}
-	echo'</div>
+	echo'<center>';
+	starsystem($percent);
+	echo'</center>
 	('.$percent.'% Liked)';
 	}
 ?>
