@@ -70,7 +70,7 @@ chattab();
 				<h1><?php if($fetch){echo '<a id="top-title" href="forums.php?id='.$fid.'">'.$name.'</a>';} ?></h1>
 				<ul id="forum-list">
 <?php
-	$sql = "SELECT postid,tblpost.forumid,name,imgpath,tblpost.title,tblpost.datecreated,tblpost.description,tblpost.score ,username,comments FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,name,imgpath,tblpost.title,tblpost.datecreated,tblpost.description,tblpost.score ,username,img,price,comments FROM tblpost
  	LEFT JOIN tblforum
  		ON tblpost.forumid = tblforum.forumid
  	LEFT JOIN tbluser
@@ -92,6 +92,11 @@ chattab();
 		if(!$flair){
 			$flair='img/default.png';
 		}
+		$pimg=$row->img;
+		if(!$pimg){
+			$pimg='img/noimage.png';
+		}
+		$price = $row->price;
 
  		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
@@ -152,10 +157,14 @@ chattab();
 		</div>
 		</div>';
 		}
+		echo '<div class="post-image">
+			<img src='.$pimg.'>
+		</div>';
 		echo'<div class="post-right">
-		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
+		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
-		<div class="second-line">
+		echo'<div class="price">PHP: '.number_format($price,2).'</div>';
+		echo'<div class="second-line">
 
 			<div class="from">
 				From: <a href="forums.php?id='.$forumid.'">
@@ -185,6 +194,9 @@ chattab();
 			</ul>
 			<div class="text-content">
 				<?php echo nl2br($pdesc) ?>
+			</div>
+			<div class="showcase-item">
+				<img src="<?php echo $pimg?>">
 			</div>
 			<div class="reply-form">
 				<form id="reply-submit">

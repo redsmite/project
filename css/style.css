@@ -1805,8 +1805,8 @@ body{
 
 .forum-post-grid{
 	display: grid;
-	grid-template-columns: 1fr 10fr;
-	grid-template-areas: "vote post-right"
+	grid-template-columns: 1fr 2fr 10fr;
+	grid-template-areas: "vote pimg post-right"
 }
 
 .forum-post-grid a{
@@ -1831,8 +1831,28 @@ body{
 	cursor: pointer;
 }
 
+.post-image{
+	grid-area: pimg;
+	display: grid;
+	align-items:center;
+	overflow:hidden;
+	width:125px;
+	height:125px;
+}
+
+.post-image img{
+	max-width: 100%;
+	max-height: 100%;
+}
+
 .post-right{
 	grid-area: post-right;
+}
+
+.price{
+	padding:2px 10px;
+	border-radius: 8px;
+	color: var(--primary-color);
 }
 
 .from,.by,.when{
@@ -1865,6 +1885,17 @@ body{
 	border-radius: 8px;
 	margin-bottom: 10px;
 	line-height: 1.5em;
+}
+
+.showcase-item{
+	display: block;
+	margin: 10px auto;
+	width: 100%;
+	text-align: center;
+}
+
+.showcase-item img{
+	max-width: 100%;
 }
 
 .reply-form{
@@ -1951,7 +1982,7 @@ body{
 	text-align: center;
 }
 
-#new-forum-form input[type="text"], #new-post-form input[type="text"]{
+#new-forum-form input[type="text"], #new-post-form input[type="text"],#new-post-form input[type="number"]{
 	width: 80%;
 	height: 30px;
 	border-radius: 5px;

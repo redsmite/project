@@ -51,6 +51,7 @@ if(isset($_POST['newpost'])){
 	$text = $conn->real_escape_string($_POST['text']);
 	$forum = $_POST['forum'];
 	$user = $_POST['user'];
+	$price = $_POST['price'];
 
 	$error="";
 
@@ -58,11 +59,14 @@ if(isset($_POST['newpost'])){
 	{
 	    $error.='<i class="fas fa-exclamation-circle"></i>Text must be atleast 30 characters<br>';
 	}
+	if($price<0){
+		$error.='<i class="fas fa-exclamation-circle"></i>You cannot set price to negative<br>';
+	}
 
 
 	if(!$error){
 
-	$sql = "INSERT INTO tblpost(forumid,title,datecreated,description,starter) VALUES ('$forum','$title',NOW(),'$text','$user')";
+	$sql = "INSERT INTO tblpost(forumid,title,datecreated,description,starter,price) VALUES ('$forum','$title',NOW(),'$text','$user','$price')";
 	$result = $conn->query($sql);
 	echo 'success';
 
@@ -229,7 +233,7 @@ if(isset($_POST['taball'])){
 	echo '<h2>Trending Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,img,price,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -257,6 +261,11 @@ if(isset($_POST['taball'])){
 		if(!$flair){
 			$flair='img/default.png';
 		}
+		$pimg=$row->img;
+		if(!$pimg){
+			$pimg='img/noimage.png';
+		}
+		$price = $row->price;
 
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
@@ -314,6 +323,9 @@ if(isset($_POST['taball'])){
 		</div>
 		</div>';
 		}
+		echo '<div class="post-image">
+			<img src='.$pimg.'>
+		</div>';
 		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
@@ -334,6 +346,7 @@ if(isset($_POST['taball'])){
 
 			starsystem($percent);
 
+		echo'<div class="price">PHP: '.number_format($price,2).'</div>';
 
 		echo'<div class="second-line">
 
@@ -370,7 +383,7 @@ if(isset($_POST['tabsub'])){
 	echo '<h2>Subscribed Forum Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,img,price,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -400,6 +413,11 @@ if(isset($_POST['tabsub'])){
 		if(!$flair){
 			$flair='img/default.png';
 		}
+		$pimg=$row->img;
+		if(!$pimg){
+			$pimg='img/noimage.png';
+		}
+		$price = $row->price;
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
 //login'd user can only vote
@@ -456,6 +474,9 @@ if(isset($_POST['tabsub'])){
 		</div>
 		</div>';
 		}
+		echo '<div class="post-image">
+			<img src='.$pimg.'>
+		</div>';
 		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
@@ -475,8 +496,8 @@ if(isset($_POST['tabsub'])){
 			$percent = round($upvotecount/$total * 100);
 
 			starsystem($percent);
-
-
+			
+		echo'<div class="price">PHP: '.number_format($price,2).'</div>';
 		echo'<div class="second-line">
 
 			<div class="from">

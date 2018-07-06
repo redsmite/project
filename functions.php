@@ -445,6 +445,15 @@ function forumcontrols(){
 						<p>Text</p>
 						<small><i>*Required 30 characters.<i></small>
 						<textarea id="post-text" required></textarea>
+
+					</div>
+					<div>
+						<p>Price per unit (php)</p>
+						<input type="number" step="any" id="post-price">
+					</div>
+					<div>
+						<p>Attach Image</p>
+						<input type="file" id="post-image">
 					</div>
 					<div>
 						<input type="submit" value="Submit">

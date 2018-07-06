@@ -1336,8 +1336,9 @@ function newPostForm(){
 		var text = document.getElementById('post-text').value;
 		var forum = document.getElementById('post-forum').value;
 		var user = document.getElementById('post-user').value;
+		var price = document.getElementById('post-price').value;
 
-		var formData = "newpost="+newpost+"&text="+text+"&forum="+forum+"&user="+user;
+		var formData = "newpost="+newpost+"&text="+text+"&forum="+forum+"&user="+user+"&price="+price;
 		
 		myRequest.open('POST', url ,true);
 		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');

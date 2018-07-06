@@ -68,7 +68,7 @@ if ($pagenum < 1) {
 $limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 
 
-$sql = "SELECT postid,tblpost.forumid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,name,imgpath,tblpost.title,tblpost.datecreated,username,img,price,comments,score FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -123,6 +123,11 @@ if($last != 1){
 		if(!$flair){
 			$flair='img/default.png';
 		}
+		$pimg=$row->img;
+		if(!$pimg){
+			$pimg='img/noimage.png';
+		}
+		$price = $row->price;
 
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
@@ -182,10 +187,15 @@ if($last != 1){
 		</div>
 		</div>';
 		}
+		echo '<div class="post-image">
+			<img src='.$pimg.'>
+		</div>';
 		echo'<div class="post-right">
-		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>
+		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
-		<div class="second-line">
+		echo'<div class="price">PHP: '.number_format($price,2).'</div>';
+		
+		echo'<div class="second-line">
 
 			<div class="from">
 				From: <a href="forums.php?id='.$forumid.'">

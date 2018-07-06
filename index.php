@@ -83,7 +83,7 @@ while($row=$result->fetch_object()){
 						<h2>Trending Posts</h2>
 						<ul id="forum-list">
 <?php
-$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,imgpath,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,img,tblpost.title,tblpost.datecreated,username,imgpath,price,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -111,7 +111,11 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		if(!$flair){
 			$flair='img/default.png';
 		}
-
+		$pimg=$row->img;
+		if(!$pimg){
+			$pimg='img/noimage.png';
+		}
+		$price = $row->price;
 
 		echo '<li value="'.$id.'">
  		<div class="forum-post-grid">';
@@ -169,6 +173,10 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 		</div>
 		</div>';
 		}
+		echo '<div class="post-image">
+			<img src='.$pimg.'>
+		</div>';
+
 		echo'<div class="post-right">
 		<p class="main-forum-title"><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$ptitle.'</a></p>';
 		
@@ -189,7 +197,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 
 			starsystem($percent);
 
-
+		echo'<div class="price">PHP: '.number_format($price,2).'</div>';
 		echo'<div class="second-line">
 
 			<div class="from">
