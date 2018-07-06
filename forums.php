@@ -90,13 +90,13 @@ if ($pagenum < 1) {
 $limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 
 
-$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,imgpath,comments,score FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,name,tblpost.title,tblpost.datecreated,username,imgpath,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
 		ON userid = starter
 	WHERE tblpost.forumid='$forums'
-	ORDER BY postid DESC $limit";
+	ORDER BY trending DESC $limit";
 	$result = $conn->query($sql);
 
 $textline1 = "<i class='fas fa-comments'></i> Post (<b>$rows</b>)";
@@ -239,7 +239,7 @@ if($last != 1){
 			</div>
 
 			<div class="when">
-				'.time_elapsed_string($date).'
+				'.time_elapsed_string($datep).'
 			</div>
 
 		</div>

@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="showcase-content">
 					<div class="showcase-container">
-						<h1>Welcome to RainbowDream</h1>
+						<h1>Welcome to CropRotation</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet omnis ut qui, aspernatur neque unde velit officia molestias nostrum?</p><br>
 						<p><a href="about.php">Read More</a></p>
 					</div>
@@ -80,10 +80,10 @@ while($row=$result->fetch_object()){
 						?>
 					</div><br>
 					<div id="list-container">
-						<h2>All Forum Posts</h2>
+						<h2>Trending Posts</h2>
 						<ul id="forum-list">
 <?php
-$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,imgpath,comments,score FROM tblpost
+$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tblpost.datecreated,username,imgpath,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -93,7 +93,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,tblpost.title,tbl
 	LEFT JOIN tbldownvotepost
 		ON postid = tbldownvotepost.post
 	GROUP BY postid
-	ORDER BY postid DESC
+	ORDER BY trending DESC
 	LIMIT 25";
 	$result = $conn->query($sql);
 	while($row=$result->fetch_object()){

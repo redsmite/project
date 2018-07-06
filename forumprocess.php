@@ -226,10 +226,10 @@ if(isset($_POST['taball'])){
 	$uid = $_SESSION['id'];
 	}
 
-	echo '<h2>All Forum Posts</h2>
+	echo '<h2>Trending Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -239,7 +239,7 @@ if(isset($_POST['taball'])){
 	LEFT JOIN tbldownvotepost
 		ON postid = tbldownvotepost.post
 	GROUP BY postid
-	ORDER BY postid DESC
+	ORDER BY trending DESC
 	LIMIT 25";
 	$result = $conn->query($sql);
 	while($row=$result->fetch_object()){
@@ -370,7 +370,7 @@ if(isset($_POST['tabsub'])){
 	echo '<h2>Subscribed Forum Posts</h2>
 	<ul id="forum-list">';
 
-	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score FROM tblpost
+	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost
 	LEFT JOIN tblforum
 		ON tblpost.forumid = tblforum.forumid
 	LEFT JOIN tbluser
@@ -381,7 +381,7 @@ if(isset($_POST['tabsub'])){
 		ON postid = tbldownvotepost.post
 	WHERE tblforum.forumid IN(SELECT forum FROM tblsubscribe WHERE subscriber='$uid')
 	GROUP BY postid
-	ORDER BY postid DESC
+	ORDER BY trending DESC
 	LIMIT 25";
 	$result = $conn->query($sql);
 	$count = $result->num_rows;
@@ -417,7 +417,7 @@ if(isset($_POST['tabsub'])){
  			if(!$upvote){
  			echo'<div id="up-'.$id.'" style="color:gray;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}else{
- 			echo'<div id="up-'.$id.'" style="color:blue;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
+ 			echo'<div id="up-'.$id.'" style="color:orangered;" value="'.$id.'" onclick="upvotepost(this)" class="upvote"><i class="far fa-thumbs-up"></i></div>';
  			}
 			
  			if($score<0){

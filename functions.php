@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Manila');
 
 function companytitle(){
-	echo'RainbowDream';
+	echo'CropRotation';
 }
 
 function updateStatus(){
@@ -19,7 +19,7 @@ function addheader(){
 	echo'<header id="main-header">
 			<div class="grid-header">
 				<div class="box1">
-					<h1 id="header-text"><a href="index.php"><span id="first-text">Rainbow</span><span id="second-text">Dream</span></a></h1>
+					<h1 id="header-text"><a href="index.php"><span id="first-text">Crop</span><span id="second-text">Rotation</span></a></h1>
 				</div>
 				<div class="box2">';
 					
@@ -61,7 +61,7 @@ function addfooter(){
 				<a target="_blank" title="Like us on Facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
 				<a target="_blank" title="Follow us on Twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
 				<a target="_blank" title="Follow us on Instagram" href="https://www.instagram.com/?hl=ens"><i class="fab fa-instagram"></i></a>
-				<p>Copyright &copy; <span id="company">RainbowDream</span> | 2018</p>
+				<p>Copyright &copy; <span id="company">CropRotation</span> | 2018</p>
 			</div>
 		</footer>';
 }
@@ -414,7 +414,8 @@ function forumcontrols(){
 						<p>Forum Name:</p>
 						<small><i>*Must not contain spaces or special characters</i></small><br>
 						<small><i>*Must not exceed 25 characters</i></small><br>
-						<small><i>*You cannot changed the name of this forum once submitted.</i></small>
+						<small><i>*You cannot changed the name of this forum once submitted.</i></small><br>
+						<small><i><b>*Please be related to agricultural products or services.</b></i></small><br>
 						<input id="forum-name" required type="text">
 					</div>
 					<div>
