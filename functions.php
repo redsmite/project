@@ -286,10 +286,11 @@ function search_function(){
 			<i class="fas fa-search"></i>
 			<label>Search</label>
 			<select name="criteria" id="criteria">
+				<option value="3">Post</option>
 				<option value="1">Forum</option>
 				<option value="2">User</option>
 			</select>
-			<input type="text" onkeyup="searchdropdown()" required name="search-text" id="search-text" autocomplete="off">
+			<input type="text" onkeyup="searchdropdown()" required name="search-text" placeholder="Search..." id="search-text" autocomplete="off">
 		</form>
 	';
 }
@@ -436,7 +437,7 @@ function forumcontrols(){
 			</div>
 			<div id="new-post-modal" onclick="closeNewPost()"></div>
 			<div id="new-post-form">
-				<form id="create-post-form">
+				<form id="create-post-form" enctype="multipart/form-data">
 					<div>
 						<p>Title</p>
 						<input type="text" id="post-title" required>
@@ -449,10 +450,10 @@ function forumcontrols(){
 					</div>
 					<div>
 						<p>Price per unit (php)</p>
-						<input type="number" step="any" id="post-price">
+						<input type="number" required step="any" id="post-price">
 					</div>
 					<div>
-						<p>Attach Image</p>
+						<p>Attach Image <font style="color:red">(Under construction)</font></p>
 						<input type="file" id="post-image">
 					</div>
 					<div>

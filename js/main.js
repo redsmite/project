@@ -148,6 +148,28 @@ function searchdropdown(){
 			
 		}
 		myRequest.send(formData);		
+	} else if (crit==3){
+		modal.style.display='block';
+		src.style.display='block';
+
+		var myRequest = new XMLHttpRequest();
+		var url = 'searchprocess.php';
+		var search = document.getElementById('search-text').value;
+
+		var formData = "search3="+search;
+		
+		myRequest.open('POST', url ,true);
+		myRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		myRequest.onload = function(){
+			var response= this.responseText;
+			
+			document.getElementById('search-dropdown').innerHTML = response;			
+			
+		}
+		myRequest.send(formData);
+
+	
 	}
 	}
 

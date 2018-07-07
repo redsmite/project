@@ -39,6 +39,23 @@ if(isset($_POST['search2'])){
 	echo $data;
 }
 
+if(isset($_POST['search3'])){
+	$search = $conn->real_escape_string($_POST['search3']);
+
+	$data='';
+
+	$sql = "SELECT postid,forumid,title,(((views*0.2) + (score*0.8))/((NOW()-datecreated)/331536000)) AS trending FROM tblpost WHERE title LIKE '%$search%' ORDER BY trending DESC LIMIT 10";
+	$result = $conn->query($sql);
+	while($row = $result->fetch_object()){
+		$id = $row->postid;
+		$forumid = $row->forumid;
+		$title = $row->title;
+
+		$data.= '<ul class="drop-ul2"><li><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$title.'</a></li></ul>';
+	}
+	echo $data;
+}
+
 if(isset($_POST['chatsearch'])){
 	$search = $_POST['chatsearch'];
 	$id = $_SESSION['id'];
