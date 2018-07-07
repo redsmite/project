@@ -454,7 +454,8 @@ function forumcontrols(){
 					</div>
 					<div>
 						<p>Attach Image <font style="color:red">(Under construction)</font></p>
-						<input type="file" id="post-image">
+						<input type="file" id="post-image"><br>
+						<progress id="progressBar" value="0" max="100">
 					</div>
 					<div>
 						<input type="submit" value="Submit">

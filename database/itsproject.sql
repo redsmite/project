@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2018 at 02:42 PM
+-- Generation Time: Jul 07, 2018 at 03:43 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -270,19 +270,19 @@ CREATE TABLE `tblforum` (
 
 INSERT INTO `tblforum` (`forumid`, `title`, `name`, `datecreated`, `description`, `creator`, `views`, `subscriber`) VALUES
 (2, 'Fish', 'Fish', '2018-06-28 17:59:03', 'We sell fish here\r\nRules.\r\nOnly Post Fish here.', 1, 58, 3),
-(3, 'Vegetable', 'Vegetable', '2018-06-28 18:19:53', 'We sell vegetables here.\r\nRules:\r\nOnly Post about Vegetables here.', 1, 19, 1),
-(4, 'Pigs', 'Pigs', '2018-06-28 18:22:38', 'We sell porks/pigs here\r\nRules.\r\nOnly Post porks/pigs here.', 1, 21, 0),
+(3, 'Vegetable', 'Vegetable', '2018-06-28 18:19:53', 'We sell vegetables here.\r\nRules:\r\nOnly Post about Vegetables here.', 1, 29, 2),
+(4, 'Pigs', 'Pigs', '2018-06-28 18:22:38', 'We sell porks/pigs here\r\nRules.\r\nOnly Post porks/pigs here.', 1, 23, 0),
 (5, 'Chicken', 'Chicken', '2018-06-28 18:24:46', 'We sell chicken here.\r\nRules\r\nOnly Post Chicken here.', 1, 11, 1),
 (6, 'Pineapple', 'Pineapple', '2018-06-28 18:28:34', 'We sell Pineapple here.\r\nRules\r\nOnly Post Pineapple here.', 1, 1, 0),
 (7, 'Tomato', 'Tomato', '2018-06-28 18:31:56', 'We sell tomatoes here.\r\nRules\r\nOnly Post about tomotoes here.', 1, 7, 0),
 (8, 'Apple', 'Apple', '2018-06-28 18:32:27', 'We Sell Apples here.\r\nRules\r\nOnly sell about apples here.\r\n', 1, 71, 3),
 (9, 'Cabbage', 'Cabbage', '2018-06-28 18:40:56', 'We Sell Apples here.\r\nRules\r\nOnly sell about apples here.', 1, 55, 0),
-(10, 'Orange', 'Orange', '2018-06-28 18:43:30', 'We sell oranges here.We Sell Apples here.\r\nRules\r\nOnly sell about orange here.', 1, 42, 0),
-(11, 'Beef', 'Beef', '2018-06-28 18:44:42', 'We sell cow/beef here.\r\nRules\r\nOnly sell about cow / beef here.', 1, 103, 1),
+(10, 'Orange', 'Orange', '2018-06-28 18:43:30', 'We sell oranges here.We Sell Apples here.\r\nRules\r\nOnly sell about orange here.', 1, 44, 0),
+(11, 'Cow', 'Cow', '2018-06-28 18:44:42', 'We sell cow here.\r\nRules\r\nOnly sell about cow here.', 1, 103, 1),
 (12, 'Fireworks', 'Fireworks', '2018-06-28 18:45:53', 'We sell fireworks here.\r\nRules\r\nOnly sell about fireworks here.', 1, 4, 1),
 (13, 'Clock', 'Clock', '2018-06-28 19:54:42', 'We sell clocks here.\r\nRules\r\nOnly sell about clocks here.', 1, 7, 0),
 (14, 'Corn', 'Corn', '2018-06-29 18:52:38', 'We sell corns here\r\nRules\r\nBe friendly.\r\nOnly post about corns here.', 80, 164, 5),
-(15, 'Chocolate', 'Chocolate', '2018-07-02 18:23:27', 'We sell cocoa here.\r\nRules.\r\n1. Be friendly.\r\n2. Be honest.', 2, 86, 3),
+(15, 'Chocolate', 'Chocolate', '2018-07-02 18:23:27', 'We sell cocoa here.\r\nRules.\r\n1. Be friendly.\r\n2. Be honest.', 2, 87, 3),
 (16, 'Rice', 'Rice', '2018-07-06 12:19:03', 'We sell rice here.\n\nRules.\n1. Only sell rice here.', 54, 72, 4),
 (17, 'Flowers', 'Flowers', '2018-07-06 19:27:28', 'Rules\nPost about flowers here.', 13, 1, 0);
 
@@ -2169,37 +2169,37 @@ CREATE TABLE `tblpost` (
 --
 
 INSERT INTO `tblpost` (`postid`, `forumid`, `title`, `datecreated`, `description`, `price`, `img`, `starter`, `score`, `views`, `comments`) VALUES
-(1, 11, 'Cow', '2018-06-28 21:25:56', 'Cow for sale!\r\n\r\nCow for sale!\r\n\r\nCow for sale!', '100000.00', '0', 1, 0, 7, 0),
-(2, 2, 'Tilapia', '2018-06-28 22:03:56', 'Tilapia for sale!', '125.00', '0', 1, 0, 28, 0),
+(1, 11, 'Cow', '2018-06-28 21:25:56', 'Cow for sale!\r\n\r\nCow for sale!\r\n\r\nCow for sale!', '100000.00', 'post/pexels-photo-422218.jpeg', 1, 0, 7, 0),
+(2, 2, 'Tilapia', '2018-06-28 22:03:56', 'Tilapia for sale!', '125.00', 'post/pexels-photo-1058295.jpeg', 1, 0, 28, 0),
 (3, 9, 'Baguio Cabbage', '2018-06-28 22:07:54', 'Cabbage for Sale', '45.50', '0', 1, -1, 2, 0),
-(4, 5, 'Chickens', '2018-06-28 22:14:20', 'Chickens for Sale', '6000.00', '0', 1, 2, 4, 0),
-(7, 10, 'Yuzu Orange', '2018-06-29 15:05:22', 'Orange for sale.\r\nhttps://en.wikipedia.org/wiki/Citrus_junos', '20.00', '0', 10, 1, 0, 0),
-(8, 14, 'Corns', '2018-06-29 20:04:37', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '20.50', '0', 80, 2, 0, 0),
-(9, 14, 'Corns', '2018-06-30 09:57:55', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '18.00', '0', 2, 7, 11, 0),
-(10, 14, 'Corns', '2018-06-30 14:56:48', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '27.50', '0', 10, 4, 3, 0),
-(11, 14, 'Corns', '2018-06-30 15:10:39', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '20.00', '0', 6, 8, 11, 0),
-(12, 8, 'Apples', '2018-06-30 16:53:36', 'Apples for sale\n\nApples for sale\n\nApples for sale\n\nApples for sale', '22.00', '0', 8, 1, 13, 0),
-(13, 2, 'Fish', '2018-06-30 16:55:16', 'Fish for sale!\n\nFish for sale!\n\nFish for sale!', '50.00', '0', 8, 1, 0, 0),
-(14, 2, 'Eel', '2018-06-30 17:21:06', 'Another fish for sale!\n\nAnother fish for sale!\n\nAnother fish for sale!', '75.00', '0', 1, 1, 33, 0),
-(15, 2, 'Bangus', '2018-06-30 17:24:19', 'Bangus for sale\n\nBangus for sale\n\nBangus for sale\n', '150.75', '0', 1, -2, 72, 0),
-(16, 11, 'Imported Beef', '2018-06-30 17:29:10', 'Imported Beef\n\nImported Beef\n\nImported Beef', '200.00', '0', 13, 2, 23, 0),
-(17, 14, 'Corn', '2018-07-01 20:54:06', 'Corn for sale!\r\n\r\nCorn for sale!\r\n\r\nCorn for sale!', '32.00', '0', 76, 6, 0, 0),
-(18, 14, 'Corn', '2018-07-02 08:04:01', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '22.00', '0', 75, -2, 0, 0),
-(19, 15, 'Chocolate Bar', '2018-07-02 18:23:51', 'Cocoa for sale\n\nCocoa for sale\n\nCocoa for sale', '80.00', '0', 2, 3, 0, 0),
-(20, 15, 'Cocoa powder', '2018-07-05 12:14:21', 'Cocoa powder for sale!\n\nCocoa powder for sale!\n\nCocoa powder for sale!', '80.00', '0', 2, 3, 0, 0),
-(21, 12, 'Dragon Firework', '2018-07-05 16:56:00', 'Fireworks for sale!\r\n\r\nFireworks for sale!\r\n\r\nFireworks for sale!', '3000.00', '0', 2, 1, 0, 0),
-(22, 4, 'Pig', '2018-07-06 09:36:57', 'Pig for sale!\n\nPig for sale!\n\nPig for sale!', '20000.00', '0', 14, 0, 0, 0),
-(23, 16, 'Rice', '2018-07-06 12:20:57', 'Rice for sale!\n\nRice for sale!\n\nRice for sale!', '45.00', '0', 54, 4, 0, 0),
-(24, 16, 'Rice', '2018-07-06 13:21:21', 'Another Rice for sale!\n\nAnother Rice for sale!\n\nAnother Rice for sale!', '47.50', '0', 2, 3, 0, 0),
-(25, 14, 'High Quality Corn', '2018-07-06 13:25:20', 'High Quality Corn\r\n\r\nHigh Quality Corn\r\n\r\nHigh Quality Corn', '40.00', '0', 1, 1, 0, 0),
-(26, 16, 'Imported Rice', '2018-07-06 19:25:22', 'Rice for sale!\n\nRice for sale!\n\nRice for sale!\n\nRice for sale!', '50.00', '', 12, 1, 0, 0),
-(27, 14, 'Corn', '2018-07-06 19:26:15', 'Corn for sale!\n\nCorn for sale!\n\nCorn for sale!', '50.00', '', 12, 1, 0, 0),
-(28, 2, 'Tuna', '2018-07-06 19:32:21', 'Tuna\nTuna\nTuna\nTuna\nTuna\nTuna\nTuna', '575.00', '', 12, 1, 0, 0),
-(29, 10, 'Orange', '2018-07-06 19:48:17', 'Orange\nOrange\nOrange\nOrange\nOrange\nOrange', '25.00', '', 12, 0, 0, 0),
-(30, 8, 'Apple', '2018-07-06 19:48:42', 'Apple\nApple\nApple\nApple\nApple', '30.50', '', 12, 0, 0, 0),
-(31, 3, 'Baguio Beans', '2018-07-07 18:58:33', 'Baguio Beans\n\nBaguio Beans\n\nBaguio Beans', '35.50', '', 12, 6, 0, 0),
-(32, 11, 'Holstein Cow', '2018-07-07 19:04:31', 'Holstein Cow\n\nHolstein Cow\n\nHolstein Cow\n', '125000.00', '', 7, 2, 0, 0),
-(33, 15, 'Chocolate Bar', '2018-07-02 18:23:51', 'Chocolate for sale\r\n\r\nChocolate for sale\r\n\r\nChocolate for sale', '80.00', '0', 2, 3, 0, 0);
+(4, 5, 'Chickens', '2018-06-28 22:14:20', 'Chickens for Sale', '6000.00', 'post/pexels-photo-375510.jpeg', 1, 2, 4, 0),
+(7, 10, 'Yuzu Orange', '2018-06-29 15:05:22', 'Orange for sale.\r\nhttps://en.wikipedia.org/wiki/Citrus_junos', '20.00', 'post/citrus-diet-food-fresh-42059.jpeg', 10, 1, 0, 0),
+(8, 14, 'Corns', '2018-06-29 20:04:37', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '20.50', 'post/pexels-photo-547263.jpeg', 80, 2, 0, 0),
+(9, 14, 'Corns', '2018-06-30 09:57:55', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '18.00', 'post/pexels-photo-547263.jpeg', 2, 7, 11, 0),
+(10, 14, 'Corns', '2018-06-30 14:56:48', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '27.50', 'post/pexels-photo-547263.jpeg', 10, 4, 3, 0),
+(11, 14, 'Corns', '2018-06-30 15:10:39', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '20.00', 'post/pexels-photo-547263.jpeg', 6, 8, 11, 0),
+(12, 8, 'Apples', '2018-06-30 16:53:36', 'Apples for sale\n\nApples for sale\n\nApples for sale\n\nApples for sale', '22.00', 'post/pexels-photo-39803.jpeg', 8, 1, 13, 0),
+(13, 2, 'Fish', '2018-06-30 16:55:16', 'Fish for sale!\n\nFish for sale!\n\nFish for sale!', '50.00', 'post/pexels-photo-1058295.jpeg', 8, 1, 0, 0),
+(14, 2, 'Eel', '2018-06-30 17:21:06', 'Another fish for sale!\n\nAnother fish for sale!\n\nAnother fish for sale!', '75.00', 'post/pexels-photo-1058295.jpeg', 1, 1, 34, 0),
+(15, 2, 'Bangus', '2018-06-30 17:24:19', 'Bangus for sale\n\nBangus for sale\n\nBangus for sale\n', '150.75', 'post/pexels-photo-1058295.jpeg', 1, -2, 72, 0),
+(16, 11, 'Imported Cow', '2018-06-30 17:29:10', 'Imported Cow\r\n\r\nImported Cow\r\n\r\nImported Cow', '75000.00', 'post/pexels-photo-422218.jpeg', 13, 2, 23, 0),
+(17, 14, 'Corn', '2018-07-01 20:54:06', 'Corn for sale!\r\n\r\nCorn for sale!\r\n\r\nCorn for sale!', '32.00', 'post/pexels-photo-547263.jpeg', 76, 6, 0, 0),
+(18, 14, 'Corn', '2018-07-02 08:04:01', 'Corns for sale!\r\n\r\nCorns for sale!\r\n\r\nCorns for sale!', '22.00', 'post/pexels-photo-547263.jpeg', 75, -2, 0, 0),
+(19, 15, 'Chocolate Bar', '2018-07-02 18:23:51', 'Cocoa for sale\n\nCocoa for sale\n\nCocoa for sale', '80.00', 'post/pexels-photo-209331.jpeg', 2, 3, 0, 0),
+(20, 15, 'Belgian Chocolate', '2018-07-05 12:14:21', 'Belgian Chocolate for sale!\r\n\r\nBelgian Chocolate for sale!\r\n\r\nBelgian Chocolate for sale!', '150.00', 'post/pexels-photo-209331.jpeg', 2, 3, 0, 0),
+(21, 12, 'Pyrotechnic', '2018-07-05 16:56:00', 'Fireworks for sale!\r\n\r\nFireworks for sale!\r\n\r\nFireworks for sale!', '3000.00', 'post/pexels-photo-949592.jpeg', 2, 1, 0, 0),
+(22, 4, 'Pig', '2018-07-06 09:36:57', 'Pig for sale!\n\nPig for sale!\n\nPig for sale!', '20000.00', 'post/pexels-photo-110820.jpeg', 14, 0, 0, 0),
+(23, 16, 'Rice', '2018-07-06 12:20:57', 'Rice for sale!\n\nRice for sale!\n\nRice for sale!', '45.00', 'post/pexels-photo-236474.jpeg', 54, 4, 0, 0),
+(24, 16, 'Rice', '2018-07-06 13:21:21', 'Another Rice for sale!\n\nAnother Rice for sale!\n\nAnother Rice for sale!', '47.50', 'post/pexels-photo-236474.jpeg', 2, 3, 0, 0),
+(25, 14, 'High Quality Corn', '2018-07-06 13:25:20', 'High Quality Corn\r\n\r\nHigh Quality Corn\r\n\r\nHigh Quality Corn', '40.00', 'post/pexels-photo-547263.jpeg', 1, 1, 0, 0),
+(26, 16, 'Imported Rice', '2018-07-06 19:25:22', 'Rice for sale!\n\nRice for sale!\n\nRice for sale!\n\nRice for sale!', '50.00', 'post/pexels-photo-236474.jpeg', 12, 1, 0, 0),
+(27, 14, 'Corn', '2018-07-06 19:26:15', 'Corn for sale!\n\nCorn for sale!\n\nCorn for sale!', '50.00', 'post/pexels-photo-547263.jpeg', 12, 1, 0, 0),
+(28, 2, 'Tuna', '2018-07-06 19:32:21', 'Tuna\nTuna\nTuna\nTuna\nTuna\nTuna\nTuna', '575.00', 'post/pexels-photo-1058295.jpeg', 12, 1, 0, 0),
+(29, 10, 'Orange', '2018-07-06 19:48:17', 'Orange\nOrange\nOrange\nOrange\nOrange\nOrange', '25.00', 'post/citrus-diet-food-fresh-42059.jpeg', 12, 0, 0, 0),
+(30, 8, 'Apple', '2018-07-06 19:48:42', 'Apple\nApple\nApple\nApple\nApple', '30.50', 'post/pexels-photo-39803.jpeg', 12, 0, 0, 0),
+(31, 3, 'Baguio Beans', '2018-07-07 18:58:33', 'Baguio Beans\n\nBaguio Beans\n\nBaguio Beans', '35.50', 'post/food-healthy-summer-green.jpeg', 12, 6, 0, 0),
+(32, 11, 'Holstein Cow', '2018-07-07 19:04:31', 'Holstein Cow\n\nHolstein Cow\n\nHolstein Cow\n', '125000.00', 'post/pexels-photo-422218.jpeg', 7, 2, 0, 0),
+(33, 15, 'Chocolate Bar', '2018-07-02 18:23:51', 'Chocolate for sale\r\n\r\nChocolate for sale\r\n\r\nChocolate for sale', '80.00', 'post/pexels-photo-209331.jpeg', 2, 3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2287,7 +2287,8 @@ INSERT INTO `tblsubscribe` (`subid`, `subscriber`, `forum`) VALUES
 (35, 12, 15),
 (36, 4, 16),
 (37, 12, 14),
-(38, 57, 3);
+(38, 57, 3),
+(39, 12, 3);
 
 -- --------------------------------------------------------
 
@@ -2422,7 +2423,7 @@ INSERT INTO `tbluser` (`userid`, `username`, `password`, `firstname`, `middlenam
 (9, 'Ran', '5f4dcc3b5aa765d61d8327deb882cf99', 'Ran', 'Beautiful Blade', 'Shibuki', '2000-08-03', '2018-06-07 01:56:37', 'shibukiranganbarimasu@gmail.com', 'http://aikatsu.wikia.com/wiki/Ran_Shibuki', 'Starlight Academy', 1, 1, '9ec6bde697e049015430f33c4144271f.jpg', 'image/jpeg', 'upload/9ec6bde697e049015430f33c4144271f.jpg', 'Ran is a quiet, independent girl with a professional air about her. She is multi-talented and mature but she has a short tether and does not like being pestered. Despite this, Ran is a kind person. She is humble about who she is as a person and idol, despite her popularity. She dislikes being nicknamed \"Ran-chan\" (è˜­ã¡ã‚ƒã‚“) and prefers to just be known as \"Ran.\" She doesn\'t eat sweets as she is concerned they will ruin her image.', 1, 2, '0000-00-00 00:00:00', '2018-06-27 06:08:30', 2),
 (10, 'Akari', '5f4dcc3b5aa765d61d8327deb882cf99', 'Akari', 'Shino', 'Oozora', '2004-04-01', '2018-06-07 15:29:14', 'akarioozora@gmail.com', 'http://aikatsu.wikia.com/wiki/Akari_%C5%8Czora', 'Starlight Academy ', 1, 1, '09318d25046e70dcb16a546a4bcc665a.jpg', 'image/jpeg', 'upload/09318d25046e70dcb16a546a4bcc665a.jpg', 'Akari is a clumsy, somewhat nervous, yet cheerful girl. She highly admires Ichigo to the point of wanting to be an idol like her. She appears to cry and get frustrated easily, but is determined nonetheless. Akari is also quite resilient and is able to quickly recover from her mistakes.\r\n\r\nIn Episode 96, Akari has grown into someone who wants to shine with her own light. She has become a hard-working and an even more determined idol who no longer aspires to be like Ichigo. She is no longer clumsy and is still energetic and cheerful, but can be prone comedic antics from time to time, much like her mentor and predecessor.', 1, 2, '0000-00-00 00:00:00', '2018-06-30 08:48:26', 6),
 (11, 'Umimori', '5f4dcc3b5aa765d61d8327deb882cf99', 'Umi', 'Mimori', 'Sonoda', '1998-03-15', '2018-06-07 15:24:03', 'sonodaumi@gmail.com', 'http://love-live.wikia.com/wiki/Umi_Sonoda', 'Otonokizaka Gakuen ', 1, 1, '17807279_1124621264330204_5581380540949475648_o.jpg', 'image/jpeg', 'upload/17807279_1124621264330204_5581380540949475648_o.jpg', 'Umi is normally a shy girl, but she has a strong will and some qualities of a leader. Despite this, she is content to stay reserved and always thinks logically. Umi is uncomfortable with wearing short skirts but gets used to it after their first live. Although Umi tends to be hard on others, as seen in Season 2 Episode 7 when she forces Honoka and Hanayo to do long training hours after they gain a bit of weight, she is especially hard on herself. She doesn\'t do anything remotely criminal and despises laziness.\r\n\r\nUmi gets angry when her sleep is disrupted, as seen in Season 1 Episode 10. However, despite her calm and collected appearance, when it comes to playing Old Maid or something that requires the player to stay calm, she cannot hold back emotions: She panics out when her opponent takes the non-Joker, according to Season 2 Episode 5.\r\n\r\nUmi always speaks politely, using \"ã§ã™\" (desu), \"ã¾ã™\" (masu), and other polite forms of speaking in her speech.', 1, 2, '2018-06-10 00:36:50', '2018-07-04 08:59:25', 12),
-(12, 'Yume', '5f4dcc3b5aa765d61d8327deb882cf99', 'Yume', 'Miyu', 'Nijino', '2002-03-03', '2018-06-07 15:21:12', 'nijinoyume@gmail.com', 'http://aikatsustars.wikia.com/wiki/Yume_Nijino', 'Four Star Academy ', 1, 1, '__nijino_yume_aikatsu_series_and_aikatsu_stars_drawn_by_sekina__sample-6116b266b664c8e006fdab518a60a', 'image/jpeg', 'upload/__nijino_yume_aikatsu_series_and_aikatsu_stars_drawn_by_sekina__sample-6116b266b664c8e006fdab518a60a0e0.jpg', 'Appearance\r\nYume is a fair-skinned girl with gradient orange eyes. She has long blonde hair with a pink ombre coloring towards the end, and is tied into curled pigtails, its tie-off section wrapped with hair. She also has forelocks and parted bangs, and is often seen with her pink ribbon worn on her left-side.\r\n\r\nIn Season 2, Yume\'s hair has grown longer and wavier, with an increase in pink ombre at her hair\'s ends. Her pigtails are now tied higher from the back of her head. As a student at Four Star Academy and a member of S4, she wears a specialized uniform for the S4 members.\r\n\r\nPersonality\r\nYume is known to be cheerful and full of curiosity but cries easily when touched. She is also a person with a strong will and can be impulsive with a mischievous streak.She wants everyone will be happy of her song. At times she can be bold but is slightly oblivious and gets embarrassed really easily. She never gives up no matter what happens and is always determined to help her friends or those she cares about. When Koharu moved to Italy, she volunteered to put on a show for her so that Koharu wouldn\'t be sad about leaving. She also never gave up on her dream of joining S4, and when she did it, she felt as if she had to work harder, as she said in Episode 51', 1, 2, '0000-00-00 00:00:00', '2018-07-07 12:40:42', 13),
+(12, 'Yume', '5f4dcc3b5aa765d61d8327deb882cf99', 'Yume', 'Miyu', 'Nijino', '2002-03-03', '2018-06-07 15:21:12', 'nijinoyume@gmail.com', 'http://aikatsustars.wikia.com/wiki/Yume_Nijino', 'Four Star Academy ', 1, 1, '__nijino_yume_aikatsu_series_and_aikatsu_stars_drawn_by_sekina__sample-6116b266b664c8e006fdab518a60a', 'image/jpeg', 'upload/__nijino_yume_aikatsu_series_and_aikatsu_stars_drawn_by_sekina__sample-6116b266b664c8e006fdab518a60a0e0.jpg', 'Appearance\r\nYume is a fair-skinned girl with gradient orange eyes. She has long blonde hair with a pink ombre coloring towards the end, and is tied into curled pigtails, its tie-off section wrapped with hair. She also has forelocks and parted bangs, and is often seen with her pink ribbon worn on her left-side.\r\n\r\nIn Season 2, Yume\'s hair has grown longer and wavier, with an increase in pink ombre at her hair\'s ends. Her pigtails are now tied higher from the back of her head. As a student at Four Star Academy and a member of S4, she wears a specialized uniform for the S4 members.\r\n\r\nPersonality\r\nYume is known to be cheerful and full of curiosity but cries easily when touched. She is also a person with a strong will and can be impulsive with a mischievous streak.She wants everyone will be happy of her song. At times she can be bold but is slightly oblivious and gets embarrassed really easily. She never gives up no matter what happens and is always determined to help her friends or those she cares about. When Koharu moved to Italy, she volunteered to put on a show for her so that Koharu wouldn\'t be sad about leaving. She also never gave up on her dream of joining S4, and when she did it, she felt as if she had to work harder, as she said in Episode 51', 1, 2, '0000-00-00 00:00:00', '2018-07-07 13:41:49', 13),
 (13, 'Nico', '5f4dcc3b5aa765d61d8327deb882cf99', 'Nico', 'Nico-Nico-Nii', 'Yazawa', '1998-07-22', '2018-06-07 14:51:46', 'niconiconii@gmail.com', 'http://love-live.wikia.com/wiki/Nico_Yazawa', 'Otonokizaka Gakuen', 1, 1, '__yazawa_nico_love_live_and_love_live_school_idol_project_drawn_by_eileen_artist__880017fa6a925e1850', 'image/png', 'upload/__yazawa_nico_love_live_and_love_live_school_idol_project_drawn_by_eileen_artist__880017fa6a925e18509d1b7ca29b9549.png', 'Normally, Nico has quite an abrasive personality, but when she takes on her alternate personality, she becomes a happy, upbeat character who is always smiling, often saying her catchphrase, \"Nico Nico Nii!\" (ã«ã£ã“ã«ã£ã“ã«ãƒ¼), accompanied with a pose. She usually thinks a bit highly of herself but, despite that, she is also caring.\r\n\r\nA common joke in the series is that she\'s often ignored by the other members of Î¼\'s when she claims that she is the better idol. An example of her trying to make the others believe she is the better idol is in Season 1 Episode 10, when Nico claims that she has a personal chef like Maki and has never cooked before. Kotori falls for the lie unknowingly. However, she accidentally forgot about her lie when it was dinner time, and ended up cooking for everyone to reveal the truth.\r\n\r\nNico often gets annoyed with the former student council president, Eli Ayase, for taking away the spotlight from her with her beauty and maturity.', 1, 2, '0000-00-00 00:00:00', '2018-07-07 11:19:22', 21),
 (14, 'Honoka', '5f4dcc3b5aa765d61d8327deb882cf99', 'Honoka', 'Honk', 'Kousaka', '1998-08-03', '2018-06-07 15:12:55', 'kousaka-honoka@gmail.com', 'http://love-live.wikia.com/wiki/Honoka_Kosaka', 'Otonokizaka Gakuen ', 1, 1, '36224265_1714157965337956_2929014387014369280_n.jpg', 'image/jpeg', 'upload/36224265_1714157965337956_2929014387014369280_n.jpg', 'Honoka\'s family owns a Japanese sweets shop named Homura. She lives at the back of the shop with her mother, father, and little sister.\r\n\r\nSince she was young, she has been friends with Kotori Minami, and she befriended Umi Sonoda after inviting her to a game of hide-and-seek. She is also friends with Fumiko, Hideko and Mika at school. Her grandmother and her mother are both graduates from Otonokizaka.\r\n\r\nHonoka is an optimist who is never afraid to take risks. She is always in a good mood and likes to look at the bright side of things. She is determined and once her mind is set on something, nothing can stop her. This is believed to be the driving force behind Î¼\'s formation and success. But because of her persistent personality, she often overexerts herself.\r\n\r\nHer personality is similar to Rin Hoshizora\'s because they are both determined and hard-working. For example, in Season 1 Episode 7, Honoka, Rin and Nico Yazawa had to work hard to pass exams in order to enter Love Live!, and are known as the \'Three Idiots\'.\r\n\r\nShe likes to eat bread, but she does not enjoy eating red bean paste or white bean paste despite working at her family\'s Japanese sweets shop.', 1, 2, '0000-00-00 00:00:00', '2018-07-07 11:19:43', 47),
 (15, 'Maki', '5f4dcc3b5aa765d61d8327deb882cf99', 'Maki', 'Tomato', 'Nishikino', '1999-04-19', '2018-06-07 15:20:30', 'nishikino-maki@gmail.com', 'http://love-live.wikia.com/wiki/Maki_Nishikino', 'Otonokizaka Gakuen  ', 1, 1, 'Nishikino.Maki.600.2043577.jpg', 'image/jpeg', 'upload/Nishikino.Maki.600.2043577.jpg', 'Maki has the qualities of a tsundere, and she has a hard time admitting her true feelings to her peers. She also has somewhat childish beliefs, as demonstrated by the group finding out that she still believes in Santa Claus.\r\n\r\nMaki is also quite stubborn. This was shown when she was invited to play at the beach, as she was withdrawn from the group and not interested in playing with them.\r\n\r\nMaki was initially portrayed as a loner in the first few episodes, and spent her time alone in the music room.\r\n\r\nHer personality often clashes with Nico Yazawa, such as when she called Nico stubborn during Season 2 Episode 4. Rin, however, tells her \"You\'re one to talk\", implying that Maki is stubborn as well.', 1, 2, '0000-00-00 00:00:00', '2018-06-24 08:18:43', 6),
@@ -2655,7 +2656,7 @@ ALTER TABLE `tblreport`
 -- AUTO_INCREMENT for table `tblsubscribe`
 --
 ALTER TABLE `tblsubscribe`
-  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tblupvotepost`

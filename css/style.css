@@ -1849,6 +1849,7 @@ body{
 	overflow:hidden;
 	width:125px;
 	height:125px;
+	margin-right: 5px;
 }
 
 .post-image img{
@@ -2015,6 +2016,11 @@ body{
 	border-radius: 5px;
 	background: var(--dark-color);
 	color: var(--light-color); 
+}
+
+#progressBar{
+	width:90%;
+	margin:5px;
 }
 
 .forum-panel{
