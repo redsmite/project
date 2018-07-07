@@ -368,6 +368,10 @@ body{
 	overflow:hidden;
 }
 
+.drop-ul li:hover,.drop-ul2 li:hover{
+	background: #bfbfbf;
+}
+
 .drop-ul2 li a{
 	text-decoration: none;
 	font-size: 25px;
