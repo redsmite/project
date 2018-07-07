@@ -232,7 +232,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,img,tblpost.title
 					<h3>Newest Users</h3>
 <?php
 //newest users
-	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY userid DESC LIMIT 5";
+	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY userid DESC LIMIT 10";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
 
@@ -255,11 +255,11 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,img,tblpost.title
 ?>
 				</div>
 				<div class="sidebar2">
-					<h3>Popular Forums</h3>
+					<h3>Popular Market</h3>
 					<ul id="forum-list">
 <?php
 //Popular Forums
-	$sql = "SELECT forumid,name, (views+subscriber) AS popular FROM tblforum ORDER BY popular DESC LIMIT 10";
+	$sql = "SELECT forumid,name, (views+subscriber) AS popular FROM tblforum ORDER BY popular DESC LIMIT 15";
 	$result = $conn->query($sql);
 	while($row=$result->fetch_object()){
 		$id = $row->forumid;
@@ -275,7 +275,7 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,img,tblpost.title
 <?php
 //Popular Users
 	$count=1;
-	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY profileviews DESC LIMIT 5";
+	$sql="SELECT username,imgpath,datecreated FROM tbluser ORDER BY profileviews DESC LIMIT 10";
 	$result=$conn->query($sql);
 	while($row=$result->fetch_object()){
 
@@ -296,6 +296,8 @@ $sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,img,tblpost.title
 			echo'<i class="fas fa-trophy silver"></i>';
 		}else if ($count==3){
 			echo'<i class="fas fa-trophy bronze"></i>';
+		}else{
+			echo '#'.$count.' ';
 		}
 		echo ' '.$name.'</a></p><small>Joined: '.$date.'</small><br>
 			<small>'.$time.'</small>

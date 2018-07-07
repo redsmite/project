@@ -13,21 +13,21 @@ if(isset($_POST['title'])){
 
 
 	if (preg_match('/[^A-Z]/i',$name)){
-		$error.='<p><i class="fas fa-exclamation-circle"></i>Forum name must not contain special characters or spaces</p>';
+		$error.='<p><i class="fas fa-exclamation-circle"></i>Market name must not contain special characters or spaces</p>';
 	}
 
 	if(strlen($name) > 25)
 	{
-	    $error.='<i class="fas fa-exclamation-circle"></i>Forum name length is too long.<br>';
+	    $error.='<i class="fas fa-exclamation-circle"></i>Market name length is too long.<br>';
 	}
 
-// Test if forum name exists
+// Test if market name exists
 	$sql= "SELECT forumid FROM tblforum WHERE name = '$name'";
 	$result = $conn->query($sql);
 	$exist = $result->num_rows;
 	
 	if($exist!=0){
-		$error.='<p><i class="fas fa-exclamation-circle"></i>Forum name already exists';
+		$error.='<p><i class="fas fa-exclamation-circle"></i>Market name already exists';
 	}
 
 	if(!$error){
@@ -380,7 +380,7 @@ if(isset($_POST['taball'])){
 if(isset($_POST['tabsub'])){
 	$uid = $_SESSION['id'];
 
-	echo '<h2>Subscribed Forum Posts</h2>
+	echo '<h2>Subscribed Market Posts</h2>
 	<ul id="forum-list">';
 
 	$sql = "SELECT postid,tblpost.forumid,upvoteid,downvoteid,name,imgpath,tblpost.title,tblpost.datecreated,username,img,price,comments,score,(((tblpost.views*0.2) + (score*0.8))/((NOW()-tblpost.datecreated)/331536000)) AS trending FROM tblpost

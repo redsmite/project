@@ -44,14 +44,22 @@ if(isset($_POST['search3'])){
 
 	$data='';
 
-	$sql = "SELECT postid,forumid,title,(((views*0.2) + (score*0.8))/((NOW()-datecreated)/331536000)) AS trending FROM tblpost WHERE title LIKE '%$search%' ORDER BY trending DESC LIMIT 10";
+	$sql = "SELECT postid,forumid,title,img,(((views*0.2) + (score*0.8))/((NOW()-datecreated)/331536000)) AS trending FROM tblpost WHERE title LIKE '%$search%' ORDER BY trending DESC LIMIT 10";
 	$result = $conn->query($sql);
 	while($row = $result->fetch_object()){
 		$id = $row->postid;
 		$forumid = $row->forumid;
 		$title = $row->title;
+		$img = $row->img;
+		if(!$img){
+			$img='img/noimage.png';
+		}
 
-		$data.= '<ul class="drop-ul2"><li><a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$title.'</a></li></ul>';
+		$data.= '<ul class="drop-ul2"><li>
+		<div class="drop-tn">
+			<img src="'.$img.'">
+		</div>
+		<a href="reply.php?id='.$forumid.'&thread='.$id.'">'.$title.'</a></li></ul>';
 	}
 	echo $data;
 }

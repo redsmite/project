@@ -287,7 +287,7 @@ function search_function(){
 			<label>Search</label>
 			<select name="criteria" id="criteria">
 				<option value="3">Post</option>
-				<option value="1">Forum</option>
+				<option value="1">Market</option>
 				<option value="2">User</option>
 			</select>
 			<input type="text" onkeyup="searchdropdown()" required name="search-text" placeholder="Search..." id="search-text" autocomplete="off">
@@ -398,7 +398,7 @@ function forumcontrols(){
 				<h3><i class="fas fa-plus-square"></i> Create New Post</h3>
 			</div>
 			<div id="create-new-forum" class="sidebar-button" onclick="createNewForum()">
-				<h3><i class="fas fa-plus-square"></i> Create Your Own Forum</h3>
+				<h3><i class="fas fa-plus-square"></i> Create Your Own Market</h3>
 			</div>
 			<div id="subscribe" value="'.$forums.'" onclick="subscribeForum(this)">';
 				
@@ -412,10 +412,10 @@ function forumcontrols(){
 			<div id="new-forum-form">
 				<form id="create-forum-form">
 					<div>
-						<p>Forum Name:</p>
+						<p>Market Name:</p>
 						<small><i>*Must not contain spaces or special characters</i></small><br>
 						<small><i>*Must not exceed 25 characters</i></small><br>
-						<small><i>*You cannot changed the name of this forum once submitted.</i></small><br>
+						<small><i>*You cannot changed the name of this market once submitted.</i></small><br>
 						<small><i><b>*Please be related to agricultural products or services.</b></i></small><br>
 						<input id="forum-name" required type="text">
 					</div>
@@ -425,8 +425,8 @@ function forumcontrols(){
 						<input id="forum-title" required type="text">
 					</div>
 					<div>
-						<p>Forum Description:</p>
-						<small><i>*Brief description about the forum or set some rules here.</i></small>
+						<p>Market Description:</p>
+						<small><i>*Brief description about this market or set some rules here.</i></small>
 						<textarea id="forum-desc" required></textarea>
 					</div>
 					<div>

@@ -618,6 +618,7 @@ body{
 	grid-area:announcement;
 	text-align: center;
 	background: var(--twitterlogo);
+	color: var(--light-color);
 	border: 1px solid var(--dark-color);
 	box-shadow: 5px 10px var(--darkgray);
 	margin: 20px 5px 20px 5px;
@@ -641,8 +642,7 @@ body{
 	margin: 0 auto;
 	width: 95%;
 	min-height: 100px;
-	color: var(--dark-color);
-	border: 1px solid var(--dark-color);
+	border: 1px solid var(--light-color);
 	border-radius: 8px;
 	padding:5px;
 }
