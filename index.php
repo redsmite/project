@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="showcase-content">
 					<div class="showcase-container">
-						<h1>Welcome to CropRotation</h1>
+						<h1>Welcome to BahayKubo</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet omnis ut qui, aspernatur neque unde velit officia molestias nostrum?</p><br>
 						<p><a href="about.php">Read More</a></p>
 					</div>
