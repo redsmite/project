@@ -28,7 +28,7 @@
 	--darkgray:#888888;*/
 
 	/* Magenta-Cyan*/ 
-	/*--primary-color:#ff00ff;
+	--primary-color:#ff00ff;
 	--secondary-color:#ff69b4;
 	--contrast:	#00ffff;
 	--secondary-contrast:#ADD8E6;
@@ -36,7 +36,7 @@
 	--dark-color:#222;
 	--gray:#eee;
 	--darkgray:#999;
-	*/
+	
 	/*Facebook-like*/
 	/*--primary-color:#fff;
 	--secondary-color:#fff;
@@ -58,14 +58,14 @@
 	--darkgray:#888888;*/
 	
 	/*Lime-Orangered*/
-	--primary-color:#FF4500;
+	/*--primary-color:#FF4500;
 	--secondary-color:#FFAE42;
 	--contrast:	#32CD32;
 	--secondary-contrast:#98fb98;
 	--light-color:#fafafa;
 	--dark-color:#222;
 	--gray:#eee;
-	--darkgray:#999;
+	--darkgray:#999;*/
 }
 
 body{
@@ -88,7 +88,7 @@ body{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--darkgray); 
+    background: var(--secondary-color); 
     border-radius: 10px;
 }
 
