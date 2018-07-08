@@ -34,12 +34,12 @@ if(isset($_POST['search2'])){
 		$id = $row->forumid;
 		$name = $row->name;
 
-		$data.= '<ul class="drop-ul2"><li>
-		<a href="forums.php?id='.$id.'">
+		$data.= '<ul class="drop-ul2">
+		<a href="forums.php?id='.$id.'"><li>
 		<div class="drop-tn">
 			<img src="img/marketicon.png">
 		</div>
-		'.$name.'</a></li></ul>';
+		'.$name.'</li></a></ul>';
 	}
 	echo $data;
 }
@@ -60,12 +60,12 @@ if(isset($_POST['search3'])){
 			$img='img/noimage.png';
 		}
 
-		$data.= '<ul class="drop-ul2"><li>
-		<a href="reply.php?id='.$forumid.'&thread='.$id.'">
+		$data.= '<ul class="drop-ul2">
+		<a href="reply.php?id='.$forumid.'&thread='.$id.'"><li>
 		<div class="drop-tn">
 			<img src="'.$img.'">
 		</div>
-		'.$title.'</a></li></ul>';
+		'.$title.'</li></a></ul>';
 	}
 	echo $data;
 }

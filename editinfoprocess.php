@@ -1,5 +1,7 @@
 <?php
 session_start();
+include'functions.php';
+user_access();
 require_once'connection.php';
 if(isset($_POST['edit-button'])){
 	$username=$_SESSION['name'];

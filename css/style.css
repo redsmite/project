@@ -372,7 +372,7 @@ body{
 	background: #bfbfbf;
 }
 
-.drop-ul2 li a{
+.drop-ul2 a{
 	text-decoration: none;
 	font-size: 25px;
 	color:var(--dark-color);
@@ -2081,6 +2081,45 @@ body{
 	border-radius: 8px;
 	cursor: default;
 	width: 120px;
+	text-align: center;
+}
+
+/* Shopping Cart */
+.add-to-cart{
+	padding:10px 20px;
+	font-size:30px;
+	display:block;
+	margin: 10px auto;
+	background: var(--lime);
+	color: var(--light-color);
+	width: 200px;
+	text-align: center;
+	cursor:pointer;
+	border-radius: 8px;
+	border: 2px solid var(--light-color);
+}
+
+#cart-modal{
+	display:none;
+	position:fixed;
+	z-index:3;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+}
+
+#cart-panel{
+	display: none;
+	position:fixed;
+	z-index: 4;
+	right:0;
+	top: 0;
+	width: 300px;
+	height: 500px;
+	background: var(--gray);
+	border: 1px solid var(--dark-color);
+	color: var(--dark-color);
 	text-align: center;
 }
 

@@ -191,8 +191,9 @@ if(isset($_GET['search-text'])){
 }else if($crit==3){
 
 //if criteria is product
-
+if(isset($_SESSION['id'])){
 $uid = $_SESSION['id'];
+}
 
 if(isset($_GET['search-text'])){
 	$search= $_GET['search-text'];

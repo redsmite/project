@@ -192,6 +192,7 @@ chattab();
  	}
 ?>
 			</ul>
+			<div class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</div>
 			<div class="text-content">
 				<?php echo nl2br($pdesc) ?>
 			</div>

@@ -176,7 +176,11 @@ function session_button(){
 		if($tn_image==''){
 			$tn_image='img/default.png';
 		}
-
+echo'<i class="fas fa-shopping-cart button" onclick="showCartPanel()"></i>
+	<div id="cart-panel">
+		<h1>Shopping Cart</h1>
+	</div>
+	<div id="cart-modal" onclick="hideCartPanel()"></div>';
 //PM Count
 $sql="SELECT pmid FROM tblpm WHERE receiverid='$id' AND checked=0 GROUP BY senderid";
 $result=$conn->query($sql);
